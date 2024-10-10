@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import arrow from "../../assets/svg/icon.svg"
 
 interface Props {
   title: string | JSX.Element;
@@ -25,7 +25,7 @@ const Button: React.FC<Props> = ({
   withArrows
 }) => {
   return (
-    <div className={disabled ? "opacity-75 " : ""}>
+    <div className={disabled ? "opacity-75 w-full" : "w-full"}>
       <button
         className={
           altClassName ||
@@ -41,8 +41,8 @@ const Button: React.FC<Props> = ({
         {isBusy ? (
           "loading"
         ) : (
-          <span className='flex gap-x-3 items-center'>
-            {title} {withArrows && <MdKeyboardDoubleArrowRight className='text-white text-lg'/>}
+          <span className='flex justify-center gap-x-3 items-center'>
+            {title} {withArrows && <img src={arrow} alt='arrow-icon'/>}
           </span>
         )}
       </button>

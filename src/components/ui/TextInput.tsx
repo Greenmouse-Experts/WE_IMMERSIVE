@@ -150,7 +150,7 @@ const TextInput: React.FC<Props> = ({
             className={
               altClassName ||
               classNames(
-                fullWidth ? 'w-full' : 'text-black lg:p-3 rounded-[4px]',
+                fullWidth ? 'w-full bg-transparent' : 'text-black bg-transparent lg:p-3 rounded-[4px] placeholder:text-[13px] placeholder:text-[#999797]',
                 className
               )
             }
@@ -185,7 +185,7 @@ const TextInput: React.FC<Props> = ({
       <div>
         <>
           {label && (
-            <label className={labelClassName ? labelClassName : ''}>
+            <label className={labelClassName ? labelClassName : 'inter pl-[1px] fs-500 text-[#343333]'}>
               {label}
               {required && <span className="text-red-600 fw-600 pl-1">*</span>}
             </label>
@@ -197,20 +197,20 @@ const TextInput: React.FC<Props> = ({
           type === InputType.checkbox
             ? 'mt-2'
             : error
-            ? 'border-red-400 border'
-            : 'border border-gray-400',
-          'flex items-center bg-white  mt-1 rounded-[4px]'
+            ? 'border-red-200 border'
+            : '',
+          'flex items-center bg-[#E9EBFB]  mt-2 rounded-[6px]'
         )}
       >
         {icon && icon}
         {renderInputType()}
-        {customRightElement && customRightElement}
+        {/* {customRightElement && customRightElement} */}
         {type === InputType.password && (
           <div onClick={() => togglePassword(!isPasswordType)} className="px-3">
             {!isPasswordType ? (
-              <FaRegEyeSlash className="text-xl text-black" />
+              <FaRegEyeSlash className="text-lg text-black cursor-pointer" />
             ) : (
-              <FaRegEye className="text-xl text-black" />
+              <FaRegEye className="text-lg text-black cursor-pointer" />
             )}
           </div>
         )}
@@ -218,7 +218,7 @@ const TextInput: React.FC<Props> = ({
 
       <>
         {error && (
-          <span className="fs-500 fw-500 text-red-500">{error.toString()}</span>
+          <span className="fs-500 fw-500 text-red-300">{error.toString()}</span>
         )}
       </>
     </div>

@@ -10,19 +10,21 @@ const LandingHeader = () => {
       {/* large screens */}
       <div className="box py-3">
         <div className="flex items-center justify-between">
-          <div className="w-5/12 flex items-center gap-x-8">
+          <div className="w-[44%] flex items-center gap-x-8">
             <div className="w-[111px] shrink-0">
               <img src="/logo.svg" alt="logo" className="w-full" />
             </div>
             <div className="w-full">
               <ul className="flex justify-between">
                 {headerRoutes.map((item) => (
-                  <li key={item.route}>{item.name}</li>
+                  <li key={item.route}>
+                    <Link to={''}>{item.name}</Link>
+                  </li>
                 ))}
               </ul>
             </div>
           </div>
-          <div className="w-5/12 flex items-center gap-x-4">
+          <div className="w-[44%] flex items-center gap-x-4">
             <div className="w-[300px]">
               <HeaderSearchBox />
             </div>
