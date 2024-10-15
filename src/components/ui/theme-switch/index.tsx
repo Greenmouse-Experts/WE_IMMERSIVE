@@ -24,7 +24,7 @@ const ThemeSwitch = () => {
   }
   return (
     <div onClick={toggleDarkMode} className="cursor-pointer">
-      {!isDarkMode ? <FiSun className="text-xl"/> : <FaCloudMoon className="text-xl text-white"/>}
+      {!isDarkMode ? <FiSun className="text-xl"/> : <FaCloudMoon className="text-xl !text-white"/>}
     </div>
   );
 };

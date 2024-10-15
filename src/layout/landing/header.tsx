@@ -6,7 +6,7 @@ import ThemeSwitch from "../../components/ui/theme-switch";
 
 const LandingHeader = () => {
   return (
-    <div>
+    <div className="dark:bg-black">
       {/* large screens */}
       <div className="box py-3">
         <div className="flex items-center justify-between">
@@ -18,7 +18,7 @@ const LandingHeader = () => {
               <ul className="flex justify-between">
                 {headerRoutes.map((item) => (
                   <li key={item.route}>
-                    <Link to={''}>{item.name}</Link>
+                    <Link to={''} className="dark:text-white">{item.name}</Link>
                   </li>
                 ))}
               </ul>

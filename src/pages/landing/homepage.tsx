@@ -1,4 +1,5 @@
 import CommunityUpdate from "../../modules/landing/community-update"
+import DifferentWorld from "../../modules/landing/different-world"
 import ExperienceMore from "../../modules/landing/experience"
 import HeroBanner from "../../modules/landing/herobanner"
 import JoinUs from "../../modules/landing/join-us"
@@ -11,6 +12,7 @@ const LandingHomepage = () => {
       <HeroBanner/>
       <RobustCommunity/>
       <MarketPlace/>
+      <DifferentWorld/>
       <JoinUs/>
       <CommunityUpdate/>
       <ExperienceMore/>

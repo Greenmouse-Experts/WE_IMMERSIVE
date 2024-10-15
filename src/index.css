@@ -18,6 +18,13 @@
   font-family: "Inter", sans-serif;
 }
 
+.dark body {
+  background: #0e1624 !important;
+}
+.dark p {
+  color: white;
+}
+
 /* remove default input color */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
@@ -25,6 +32,21 @@ input:-webkit-autofill:focus {
 }
 input[data-autocompleted] {
     background-color: transparent !important;
+}
+
+.roller .swiper-slide-active{
+  width: 350px !important;
+  height: 440px;
+}
+.roller .swiper-slide-prev{
+  width: 230px !important;
+  height: 380px;
+  padding-top: 50px !important;
+}
+.roller .swiper-slide-next{
+  width: 230px !important;
+  height: 380px;
+  padding-top: 50px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -316,4 +338,9 @@ input[data-autocompleted] {
   .exp-gradient-bg {
     background: url("https://res.cloudinary.com/do2kojulq/image/upload/v1728557312/WE%20Immersive/153f82.png_1_gmpy5i.png");
   }
+
+  .cover-gradient{
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 73.1%, rgba(0, 0, 0, 0.75) 79.75%);
+  }
+
 }

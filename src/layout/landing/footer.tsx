@@ -35,6 +35,10 @@ const LandingFooter = () => {
           </div>
         </div>
       </div>
+      <div className="pt-3 pb-6 text-center bg-black relative">
+        <p className="text-[#FFFFFF0D] absolute top-0 left-0 fw-600 text-5xl">We dream. We create. We Inspire</p>
+        <p className="text-[#9A9999] text-center">© 2024, WEimmersive. All rights reserved</p>
+      </div>
     </div>
   )
 }

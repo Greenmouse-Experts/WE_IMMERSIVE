@@ -31,10 +31,10 @@ const JoinUs = () => {
               </div>
             </div>
             <div className="lg:w-[55%] grid grid-cols-2 gap-5 lg:gap-10">
-              <div className="bg-white h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
+              <div className="bg-white dark:bg-gray-800 h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
                 <div>
-                    <p className="text-[#696767]">- 01</p>
-                    <p className="mt-4">Easy to build with </p>
+                  <p className="text-[#696767]">- 01</p>
+                  <p className="mt-4">Easy to build with </p>
                 </div>
                 <img
                   src="https://res.cloudinary.com/do2kojulq/image/upload/v1728916186/WE%20Immersive/Frame_4_z8x2xr.png"
@@ -42,10 +42,10 @@ const JoinUs = () => {
                   className="absolute bottom-0 right-0"
                 />
               </div>
-              <div className="bg-white h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
+              <div className="bg-white dark:bg-gray-800 h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
                 <div>
-                    <p className="text-[#696767]">- 02</p>
-                    <p className="mt-4">Purchase assets swiftly</p>
+                  <p className="text-[#696767]">- 02</p>
+                  <p className="mt-4">Purchase assets swiftly</p>
                 </div>
                 <img
                   src="https://res.cloudinary.com/do2kojulq/image/upload/v1728916186/WE%20Immersive/Frame_3_mdz9co.png"
@@ -53,10 +53,10 @@ const JoinUs = () => {
                   className="absolute bottom-0 right-0"
                 />
               </div>
-              <div className="bg-white h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
+              <div className="bg-white dark:bg-gray-800 h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
                 <div>
-                    <p className="text-[#696767]">- 03</p>
-                    <p className="mt-4">VR gear enabled</p>
+                  <p className="text-[#696767]">- 03</p>
+                  <p className="mt-4">VR gear enabled</p>
                 </div>
                 <img
                   src="https://res.cloudinary.com/do2kojulq/image/upload/v1728916187/WE%20Immersive/Frame_14_dijgwe.png"
@@ -64,10 +64,12 @@ const JoinUs = () => {
                   className="absolute bottom-0 right-0"
                 />
               </div>
-              <div className="bg-white h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
+              <div className="bg-white dark:bg-gray-800 h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
                 <div>
-                    <p className="text-[#696767]">- 04</p>
-                    <p className="mt-4">Global accessibility to talent and tutors </p>
+                  <p className="text-[#696767]">- 04</p>
+                  <p className="mt-4">
+                    Global accessibility to talent and tutors{" "}
+                  </p>
                 </div>
                 <img
                   src="https://res.cloudinary.com/do2kojulq/image/upload/v1728916186/WE%20Immersive/Frame_11_eeckul.png"
