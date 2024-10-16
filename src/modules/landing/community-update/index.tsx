@@ -7,7 +7,7 @@ const CommunityUpdate = () => {
     <div>
       <div className="section">
         <div className="box">
-          <div className="flex justify-between items-end">
+          <div className="lg:flex justify-between items-end">
             <div className="lg:w-5/12">
               <div className="flex">
                 <Tag text="Blog" />
@@ -17,13 +17,13 @@ const CommunityUpdate = () => {
                   Updates from the <br /> community
                 </p>
                 <p className="text-[#9A9999] mt-5">
-                  Be the first to know about latest news and happenings <br />{" "}
+                  Be the first to know about latest news and happenings <br className="hidden lg:block"/>{" "}
                   in the community 📩
                 </p>
               </div>
             </div>
-            <div className="lg:w-5/12 pb-2">
-              <div className="div-shadow p-[6px] rounded-[10px] flex gap-x-2 items-center w-full">
+            <div className="lg:w-5/12 pb-2 mt-12 lg:mt-0">
+              <div className="div-shadow bg-white p-[6px] rounded-[10px] flex gap-x-2 items-center w-full">
                 <input
                   type="text"
                   placeholder="Enter your email to recieve cool stuff "

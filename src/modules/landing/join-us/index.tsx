@@ -22,7 +22,7 @@ const JoinUs = () => {
                   <MdKeyboardDoubleArrowRight />
                 </button>
               </div>
-              <div className="flex pl-12 mt-6">
+              <div className="hidden lg:flex pl-12 mt-6">
                 <img
                   src="https://res.cloudinary.com/do2kojulq/image/upload/v1728572607/WE%20Immersive/Property_1_Component_5_avshi2.png"
                   alt="banner-icon-2"
@@ -30,8 +30,8 @@ const JoinUs = () => {
                 />
               </div>
             </div>
-            <div className="lg:w-[55%] grid grid-cols-2 gap-5 lg:gap-10">
-              <div className="bg-white dark:bg-gray-800 h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
+            <div className="lg:w-[55%] mt-12 lg:mt-0 grid grid-cols-2 gap-5 lg:gap-10">
+              <div className="bg-white dark:bg-[#010B18] h-[150px] lg:h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
                 <div>
                   <p className="text-[#696767]">- 01</p>
                   <p className="mt-4">Easy to build with </p>
@@ -39,10 +39,10 @@ const JoinUs = () => {
                 <img
                   src="https://res.cloudinary.com/do2kojulq/image/upload/v1728916186/WE%20Immersive/Frame_4_z8x2xr.png"
                   alt="build"
-                  className="absolute bottom-0 right-0"
+                  className="absolute w-[100px] lg:w-auto bottom-0 right-0"
                 />
               </div>
-              <div className="bg-white dark:bg-gray-800 h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
+              <div className="bg-white dark:bg-[#010B18] h-[150px] lg:h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
                 <div>
                   <p className="text-[#696767]">- 02</p>
                   <p className="mt-4">Purchase assets swiftly</p>
@@ -50,10 +50,10 @@ const JoinUs = () => {
                 <img
                   src="https://res.cloudinary.com/do2kojulq/image/upload/v1728916186/WE%20Immersive/Frame_3_mdz9co.png"
                   alt="build"
-                  className="absolute bottom-0 right-0"
+                  className="absolute w-[100px] lg:w-auto bottom-0 right-0"
                 />
               </div>
-              <div className="bg-white dark:bg-gray-800 h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
+              <div className="bg-white dark:bg-[#010B18] h-[150px] lg:h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
                 <div>
                   <p className="text-[#696767]">- 03</p>
                   <p className="mt-4">VR gear enabled</p>
@@ -61,10 +61,10 @@ const JoinUs = () => {
                 <img
                   src="https://res.cloudinary.com/do2kojulq/image/upload/v1728916187/WE%20Immersive/Frame_14_dijgwe.png"
                   alt="build"
-                  className="absolute bottom-0 right-0"
+                  className="absolute w-[100px] lg:w-auto bottom-0 right-0"
                 />
               </div>
-              <div className="bg-white dark:bg-gray-800 h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
+              <div className="bg-white dark:bg-[#010B18] h-[150px] lg:h-[260px] relative p-3 lg:p-4 rounded-[20px] overflow-hidden">
                 <div>
                   <p className="text-[#696767]">- 04</p>
                   <p className="mt-4">
@@ -74,7 +74,7 @@ const JoinUs = () => {
                 <img
                   src="https://res.cloudinary.com/do2kojulq/image/upload/v1728916186/WE%20Immersive/Frame_11_eeckul.png"
                   alt="build"
-                  className="absolute bottom-0 right-0"
+                  className="absolute w-[100px] lg:w-auto bottom-0 right-0"
                 />
               </div>
             </div>

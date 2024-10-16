@@ -8,7 +8,7 @@ const HeaderSection = () => {
       </div>
       <div className="relative flex">
         {/* left side */}
-        <div className="relative w-3/12">
+        <div className="hidden lg:block relative lg:w-3/12">
           <div className="absolute right-0 top-9">
             <img
               src="https://res.cloudinary.com/do2kojulq/image/upload/v1728997588/WE%20Immersive/Vector_1_e60zzk.png"
@@ -24,13 +24,13 @@ const HeaderSection = () => {
             />
           </div>
         </div>
-        <div className="lg:w-6/12 mx-auto mt-4">
-          <p className="unbound fw-500 lg:text-[36px]">
+        <div className="w-10/12 lg:w-6/12 mx-auto mt-4">
+          <p className="unbound fw-500 text-2xl lg:text-[36px]">
             Step into a different world, anytime, anywhere
           </p>
         </div>
         {/* right side */}
-        <div className="relative w-3/12">
+        <div className="relative hidden lg:block lg:w-3/12">
           <div className="absolute left-0 -top-6">
             <img
               src="https://res.cloudinary.com/do2kojulq/image/upload/v1728997588/WE%20Immersive/Vector_2_ncyd3a.png"
@@ -47,7 +47,7 @@ const HeaderSection = () => {
           </div>
         </div>
       </div>
-      <div className="w-4/12 mx-auto mt-3">
+      <div className="w-9/12 lg:w-4/12 mx-auto mt-3">
         <p className="text-[#9A9999] fs-500">
           Explore, engage, and experience our virtual tours and spaces by
           creators on here

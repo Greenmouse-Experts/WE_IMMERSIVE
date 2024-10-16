@@ -17,7 +17,7 @@ const DifferentWorld = () => {
           </div>
           {/* center background */}
           <div className="absolute top-0 left-0 w-full h-full">
-            <div className="w-[55%] mx-auto h-full bg-[#F7F8FD] dark:bg-gray-800 rounded-[30px]"></div>
+            <div className="w-[80%] lg:w-[55%] mx-auto h-full bg-[#F7F8FD] dark:bg-[#010B18] rounded-[30px]"></div>
           </div>
         </div>
       </div>

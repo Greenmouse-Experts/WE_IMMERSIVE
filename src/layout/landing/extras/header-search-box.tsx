@@ -5,7 +5,7 @@ const HeaderSearchBox = () => {
   const [value, setValue] = useState<string>("");
 
   return (
-    <div>
+    <div className="w-full flex justify-end">
       <ReusableSearchBox params={value} setParams={setValue} />
     </div>
   );

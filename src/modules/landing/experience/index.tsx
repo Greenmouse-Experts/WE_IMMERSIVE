@@ -13,11 +13,11 @@ const ExperienceMore = () => {
               <Tag text="Download the App" />
             </div>
             <div className="lg:w-6/12 mx-auto mt-4">
-              <p className="unbound text-white fw-500 text-[42px]">
+              <p className="unbound text-white fw-500 text-2xl lg:text-[42px]">
                 Experience more with the WEImmersive App
               </p>
             </div>
-            <div className="w-4/12 mx-auto mt-3">
+            <div className="w-9/12 lg:w-4/12 mx-auto mt-3">
               <p className="text-[#9A9999] fs-500">
                 Download the WEImmersive App Today! Create, sell, learn and do
                 more with our app today

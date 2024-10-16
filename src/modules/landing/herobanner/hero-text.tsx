@@ -11,9 +11,9 @@ const HeroText = () => {
           <span className="unbound fw-500 text-[42px]">
             Your one stop destination for
           </span>{" "}
-          <div className="relative inline-block unbound fw-500 text-[42px] mr-4">
-            <img src={container} className="absolute w-auto scale-x-[1.06]" />
-            immersive
+          <div className="relative inline-block unbound fw-500 text-[42px] ml-4 lg:ml-0 mr-4">
+            <img src={container} className="absolute top-[3px] w-auto scale-x-[1.06]" />
+            creative
           </div>{" "}
           <span className="unbound fw-500 text-[42px]">technology</span>
         </div>

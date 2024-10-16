@@ -6,8 +6,8 @@ import google from "../../../assets/svg/google-icon.svg";
 const RobustGrid = () => {
   return (
     <div className="mt-16 lg:mt-32">
-      <div className="grid grid-cols-3 gap-6">
-        <div className="row-span-2 text-white p-5 bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575678/WE%20Immersive/Group_1000005668_fwfmnp.png')] bg-fit">
+      <div className="grid lg:grid-cols-3 gap-6">
+        <div className="lg:row-span-2 h-[430px] lg:h-auto text-white p-5 bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575678/WE%20Immersive/Group_1000005668_fwfmnp.png')] bg-fit">
           <div className="flex justify-between items-center">
             <p className="roboto text-xl lg:text-3xl fw-400">Store</p>
             <Link to={""}>
@@ -59,7 +59,7 @@ const RobustGrid = () => {
             </p>
           </div>
         </div>
-        <div className="col-span-2 p-5 text-white h-[330px] bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575653/WE%20Immersive/Group_1000005674_1_s1pify.png')] bg-fit">
+        <div className="lg:col-span-2 p-5 rounded-[20px] lg:rounded-none text-white h-[330px] bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575653/WE%20Immersive/Group_1000005674_1_s1pify.png')] bg-cover bg-center lg:bg-fit">
           <div className="flex justify-between items-center">
             <p className="roboto text-xl lg:text-3xl fw-400">Create & Sell Content</p>
             <Link to={""}>

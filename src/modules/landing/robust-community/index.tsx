@@ -11,9 +11,9 @@ const RobustCommunity = () => {
                     <Tag text="WEimmersive"/>
                 </div>
                 {/* header text */}
-                <div className="relative lg:w-[60rem] h-[149px] mx-auto mt-7 bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728573494/WE%20Immersive/Group_1000005667_sn1xek.png')] bg-fit">
+                <div className="relative lg:w-[60rem] lg:h-[149px] mx-auto mt-7 bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728573494/WE%20Immersive/Group_1000005667_sn1xek.png')] lg:bg-fit">
                     <div className="lg:w-10/12 mx-auto text-center">
-                        <p className="unbound fw-500 text-4xl">Creating a robust community of Creators and Consumers</p>
+                        <p className="unbound fw-500 text-2xl lg:text-4xl">Creating a robust community of Creators and Consumers</p>
                     </div>
                     <div className="mt-6 lg:mt-9 flex items-center justify-center gap-x-3">
                         <img src="https://res.cloudinary.com/do2kojulq/image/upload/v1728573711/WE%20Immersive/Group_48097562_1_q13xbc.png" alt="profiles" className="w-[95px]" />
