@@ -21,8 +21,11 @@ const FaqContent = () => {
               onClick={() => handleOpen(index + 1)}
             >
               <div className="flex justify-between items-center w-full">
-              <p className="!text-black unbound fw-400 fs-600 pl-3"> {item.question}</p>
-              <MdOutlineKeyboardArrowDown />
+                <p className="!text-black unbound fw-400 fs-600 pl-3">
+                  {" "}
+                  {item.question}
+                </p>
+                <MdOutlineKeyboardArrowDown />
               </div>
             </AccordionHeader>
             <AccordionBody>{item.answer}</AccordionBody>
