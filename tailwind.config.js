@@ -1,5 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+
+const withMT = require("@material-tailwind/react/utils/withMT");
+
+ 
+module.exports = withMT({
   darkMode: "selector",
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -11,5 +15,6 @@ export default {
     extend: {},
   },
   plugins: [],
-};
+});
+
 

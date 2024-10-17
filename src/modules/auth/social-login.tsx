@@ -2,7 +2,7 @@ const SocialLogin = () => {
   return (
     <div className="mb-3 mt-5">
       <div className="flex relative justify-center">
-        <p className="text-[#666464] relative z-10 bg-white w-[150px] text-center">
+        <p className="text-[#666464] relative z-10 bg-white dark:bg-[#010B18] w-[150px] text-center">
           Or Join with
         </p>
         <p className="p-[0.5px] w-full absolute left-0 top-3 bg-[#D9D9D9]"></p>

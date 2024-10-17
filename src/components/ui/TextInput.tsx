@@ -185,7 +185,7 @@ const TextInput: React.FC<Props> = ({
       <div>
         <>
           {label && (
-            <label className={labelClassName ? labelClassName : 'inter pl-[1px] fs-500 text-[#343333]'}>
+            <label className={labelClassName ? labelClassName : 'inter pl-[1px] fs-500 text-[#343333] dark:text-white'}>
               {label}
               {required && <span className="text-red-600 fw-600 pl-1">*</span>}
             </label>

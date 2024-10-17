@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import LandingHeader from "./header";
 import ScrollToTop from "../../components/utils/scrollTop";
 import LandingFooter from "./footer";
+import CookieModal from "../../components/utils/cookie-modal";
 
 const LandingLayout = () => {
   return (
@@ -9,6 +10,7 @@ const LandingLayout = () => {
       <ScrollToTop />
       <LandingHeader />
       <Outlet />
+      <CookieModal/>
       <LandingFooter />
     </div>
   );

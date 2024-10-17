@@ -1,18 +1,14 @@
 export const headerRoutes = [
   {
-    name: "Home",
-    route: "/",
-  },
-  {
-    name: "About Us",
+    name: "Learn",
     route: "/about",
   },
   {
-    name: "Store",
+    name: "Shop",
     route: "/store",
   },
   {
-    name: "Courses",
+    name: "Explore",
     route: "/courses",
   },
   {

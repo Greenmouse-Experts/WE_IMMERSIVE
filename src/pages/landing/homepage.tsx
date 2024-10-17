@@ -1,10 +1,9 @@
-import CommunityUpdate from "../../modules/landing/community-update"
-import DifferentWorld from "../../modules/landing/different-world"
-import ExperienceMore from "../../modules/landing/experience"
-import HeroBanner from "../../modules/landing/herobanner"
-import JoinUs from "../../modules/landing/join-us"
-import MarketPlace from "../../modules/landing/marketplace"
-import RobustCommunity from "../../modules/landing/robust-community"
+import CommunityUpdate from "../../modules/landing/homepage/community-update"
+import DifferentWorld from "../../modules/landing/homepage/different-world"
+import HeroBanner from "../../modules/landing/homepage/herobanner"
+import JoinUs from "../../modules/landing/homepage/join-us"
+import MarketPlace from "../../modules/landing/homepage/marketplace"
+import RobustCommunity from "../../modules/landing/homepage/robust-community"
 
 const LandingHomepage = () => {
   return (
@@ -15,7 +14,6 @@ const LandingHomepage = () => {
       <DifferentWorld/>
       <JoinUs/>
       <CommunityUpdate/>
-      <ExperienceMore/>
     </div>
   )
 }

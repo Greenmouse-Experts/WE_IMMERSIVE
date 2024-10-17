@@ -1,9 +1,12 @@
 import { contactLink, coursesLink, policyLink, quickLinks, socails } from "../../components/hard-data/footer-links"
+import ExperienceMore from "../../modules/landing/homepage/experience"
 import FooterLinks from "./extras/footer-links"
 
 const LandingFooter = () => {
   return (
-    <div className="bg-[#010B18]">
+   <div>
+    <ExperienceMore/>
+     <div className="bg-[#010B18]">
       <div className="box">
         <div className="border-t border-[#C4C4C44D] pt-12 pb-8">
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-0">
@@ -56,6 +59,7 @@ const LandingFooter = () => {
         </p>
       </div>
     </div>
+   </div>
   );
 }
 

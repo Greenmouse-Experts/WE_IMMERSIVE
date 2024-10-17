@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { headerRoutes } from "./extras/header-routes";
 import HeaderSearchBox from "./extras/header-search-box";
 import Button from "../../components/ui/Button";
@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { BsMenuButtonWideFill } from "react-icons/bs";
 
 const LandingHeader = () => {
+  const navigate = useNavigate()
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
 
   useEffect(() => {
@@ -33,8 +34,8 @@ const LandingHeader = () => {
         {/* large screens */}
         <div className="box py-3">
           <div className="flex items-center justify-between">
-            <div className="w-[44%] flex items-center gap-x-8">
-              <div className="w-[97px] lg:w-[111px] shrink-0">
+            <div className="w-[35%] flex items-center gap-x-8">
+              <div className="w-[97px] lg:w-[111px] shrink-0 cursor-pointer" onClick={() => navigate('/')}>
                 <img
                   src="/logo.svg"
                   alt="logo"
@@ -50,7 +51,7 @@ const LandingHeader = () => {
                 <ul className="flex justify-between">
                   {headerRoutes.map((item) => (
                     <li key={item.route}>
-                      <Link to={""} className="dark:text-white">
+                      <Link to={item.route} className="dark:text-white">
                         {item.name}
                       </Link>
                     </li>

@@ -28,7 +28,7 @@ export const quickLinks = [
     },
     {
         name: "Contact Us",
-        route: ""
+        route: "/contact"
     },
     {
         name: "FAQs",
@@ -40,7 +40,7 @@ export const quickLinks = [
     },
     {
         name: "Blog",
-        route: ""
+        route: "/blog"
     },
 ]
 

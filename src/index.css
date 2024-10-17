@@ -290,6 +290,10 @@ input[data-autocompleted] {
     background-size: 100% 100%;
   }
 
+  .bg-gradient{
+    background: linear-gradient(94.42deg, #6f0aff 0.92%, #1d9cd7 101.98%);
+  }
+
   .btn-primary {
     background: linear-gradient(94.42deg, #6f0aff 0.92%, #1d9cd7 101.98%);
     color: white;
@@ -380,5 +384,19 @@ input[data-autocompleted] {
       rgba(0, 0, 0, 0) 73.1%,
       rgba(0, 0, 0, 0.75) 79.75%
     );
+  }
+
+  .store-banner{
+    background: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.6)), url("https://res.cloudinary.com/do2kojulq/image/upload/v1729163186/WE%20Immersive/bg-hero_1_1_g0s4rv.png");
+  }
+
+  .bg-contact-1{
+    background: linear-gradient(180deg, #1D9CD7 0%, #206B8E 100%);
+  }
+  .bg-contact-2{
+    background: linear-gradient(180deg, #E8F8FF 0%, #F5FAFF 100%);
+  }
+  .bg-contact-3{
+    background: linear-gradient(180deg, #6F0AFF 0%, #6F32C7 100%);
   }
 }
