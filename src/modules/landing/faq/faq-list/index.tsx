@@ -18,7 +18,7 @@ const FaqList = () => {
   return (
     <div className="section dark:bg-black">
       <div className="box">
-        <div className="lg:w-11/12 mx-auto flex gap-x-12">
+        <div className="lg:w-11/12 mx-auto lg:flex gap-x-12">
           <div className="lg:w-[35%]">
             <FaqSidebar
               searchValue={searchValue}
@@ -28,7 +28,7 @@ const FaqList = () => {
               categories={categories}
             />
           </div>
-          <div className="lg:w-[65%]">
+          <div className="lg:w-[65%] mt-8 lg:mt-0">
             <FaqContent />
           </div>
         </div>

@@ -5,10 +5,16 @@ import Button from "../../components/ui/Button";
 import ThemeSwitch from "../../components/ui/theme-switch";
 import { useEffect, useState } from "react";
 import { BsMenuButtonWideFill } from "react-icons/bs";
+import { Drawer } from "@material-tailwind/react";
+import CalloutMenu from "./extras/callout-menu";
 
 const LandingHeader = () => {
   const navigate = useNavigate()
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
+  const [open, setOpen] = useState(false);
+ 
+  const openDrawer = () => setOpen(true);
+  const closeDrawer = () => setOpen(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,12 +86,15 @@ const LandingHeader = () => {
                 <ThemeSwitch />
               </div>
               <div className="pl-3 lg:pl-0 lg:hidden">
-                <BsMenuButtonWideFill className="dark:text-white text-3xl" />
+                <BsMenuButtonWideFill className="dark:text-white text-3xl" onClick={openDrawer} />
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Drawer open={open} onClose={closeDrawer} className="p-4">
+        <CalloutMenu/>
+      </Drawer>
     </div>
   );
 };

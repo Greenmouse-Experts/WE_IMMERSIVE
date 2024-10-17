@@ -13,7 +13,7 @@ const FaqContent = () => {
   const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
   return (
     <div>
-      <div className="grid grid-cols-2 gap-3 gap-y-6 items-start">
+      <div className="grid lg:grid-cols-2 gap-3 gap-y-6 items-start">
         {faqData.map((item, index) => (
           <Accordion open={open === index + 1}>
             <AccordionHeader
