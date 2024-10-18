@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../../components/ui/TextInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
@@ -9,6 +9,8 @@ import { HiOutlineLockClosed } from "react-icons/hi";
 
 const LoginForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
+  const navigate = useNavigate()
+
   const {
     control,
     handleSubmit,
@@ -23,6 +25,7 @@ const LoginForm = () => {
 
   const onSubmit = () => {
     setIsBusy(false);
+    navigate('/user')
   };
   return (
     <div className="mt-3">

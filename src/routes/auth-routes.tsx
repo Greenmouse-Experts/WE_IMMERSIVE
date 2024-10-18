@@ -3,7 +3,7 @@ import ForgotPassword from "../pages/auth/forget-password";
 import UserLogin from "../pages/auth/login";
 import UserRegister from "../pages/auth/register";
 
-export const authRooutes = [
+export const authRoutes = [
   {
     path: "/auth",
     element: <AuthLayout />,

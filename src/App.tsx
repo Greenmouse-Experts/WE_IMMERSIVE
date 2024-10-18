@@ -1,10 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { landingRooutes } from './routes/landing-routes';
-import { authRooutes } from './routes/auth-routes';
+import { landingRoutes } from './routes/landing-routes';
+import { authRoutes } from './routes/auth-routes';
+import { userRoutes } from './routes/user-routes';
+
 
 const router = createBrowserRouter([
-  ...landingRooutes,
-  ...authRooutes
+  ...landingRoutes,
+  ...authRoutes,
+  ...userRoutes,
 ]);
 
 function App() {

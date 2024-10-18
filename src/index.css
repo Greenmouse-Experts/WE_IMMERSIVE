@@ -87,6 +87,13 @@ input[data-autocompleted] {
     color: #a58686 !important;
   }
 }
+.css-1t8x7v1 >.ps-menu-button{
+  padding: 0px 20px 0px 0px !important;
+}
+
+.css-16jesut >.ps-menu-button{
+  padding: 0px 20px 0px 0px !important;
+}
 
 /* swipper switch duration */
 .swiper-wrapper {
@@ -398,5 +405,9 @@ input[data-autocompleted] {
   }
   .bg-contact-3{
     background: linear-gradient(180deg, #6F0AFF 0%, #6F32C7 100%);
+  }
+
+  .auth-shadow{
+    box-shadow: 0px 4px 10px 2px #0000000D;
   }
 }

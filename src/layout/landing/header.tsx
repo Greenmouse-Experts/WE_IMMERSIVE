@@ -7,12 +7,15 @@ import { useEffect, useState } from "react";
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import { Drawer } from "@material-tailwind/react";
 import CalloutMenu from "./extras/callout-menu";
+import useDialog from "../../hooks/useDialog";
+import LoginPopup from "./extras/login-popup";
 
 const LandingHeader = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
   const [open, setOpen] = useState(false);
- 
+  const { Dialog, setShowDialog } = useDialog();
+
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
 
@@ -41,7 +44,10 @@ const LandingHeader = () => {
         <div className="box py-3">
           <div className="flex items-center justify-between">
             <div className="w-[35%] flex items-center gap-x-8">
-              <div className="w-[97px] lg:w-[111px] shrink-0 cursor-pointer" onClick={() => navigate('/')}>
+              <div
+                className="w-[97px] lg:w-[111px] shrink-0 cursor-pointer"
+                onClick={() => navigate("/")}
+              >
                 <img
                   src="/logo.svg"
                   alt="logo"
@@ -70,12 +76,11 @@ const LandingHeader = () => {
                 <HeaderSearchBox />
               </div>
               <div className="hidden lg:flex items-center gap-x-4 lg:gap-x-7 min-w-[220px]">
-                <Link
-                  to={"/auth/login"}
-                  className="fw-600 lg:text-lg dark:text-white"
-                >
-                  Login
-                </Link>
+                <Button
+                  title={"Login"}
+                  altClassName="w-600 lg:text-lg dark:text-white"
+                  onClick={() => setShowDialog(true)}
+                />
                 <Button
                   title={"Get Started"}
                   withArrows
@@ -86,15 +91,22 @@ const LandingHeader = () => {
                 <ThemeSwitch />
               </div>
               <div className="pl-3 lg:pl-0 lg:hidden">
-                <BsMenuButtonWideFill className="dark:text-white text-3xl" onClick={openDrawer} />
+                <BsMenuButtonWideFill
+                  className="dark:text-white text-3xl"
+                  onClick={openDrawer}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <Drawer open={open} onClose={closeDrawer} className="p-4">
-        <CalloutMenu/>
+        <CalloutMenu />
       </Drawer>
+      <Dialog title="" size="md">
+        <LoginPopup close={() => setShowDialog(false)} />
+      </Dialog>
     </div>
   );
 };

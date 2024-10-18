@@ -4,7 +4,7 @@ import FaqPage from "../pages/landing/faq";
 import LandingHomepage from "../pages/landing/homepage";
 import StorePage from "../pages/landing/store";
 
-export const landingRooutes = [
+export const landingRoutes = [
   {
     path: "/",
     element: <LandingLayout />,
