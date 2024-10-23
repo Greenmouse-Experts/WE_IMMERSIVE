@@ -83,6 +83,7 @@ const LandingHeader = () => {
                 />
                 <Button
                   title={"Get Started"}
+                  onClick={() => setShowDialog(true)}
                   withArrows
                   altClassName="btn-primary whitespace-nowrap px-5 py-3"
                 />
@@ -101,7 +102,11 @@ const LandingHeader = () => {
         </div>
       </div>
 
-      <Drawer open={open} onClose={closeDrawer} className="p-4">
+      <Drawer
+        open={open}
+        onClose={closeDrawer}
+        className="dark:bg-[#131313] p-4"
+      >
         <CalloutMenu />
       </Drawer>
       <Dialog title="" size="md">

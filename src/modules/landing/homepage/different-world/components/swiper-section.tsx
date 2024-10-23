@@ -116,16 +116,18 @@ const SwiperSection = () => {
           modules={[Navigation]}
           centeredSlides={true}
           preventInteractionOnTransition
-          slidesPerView={5}
           initialSlide={2}
           breakpoints={{
             375: {
+              slidesPerView: 2,
               spaceBetween: 6,
             },
             475: {
+              slidesPerView: 3,
               spaceBetween: 6,
             },
             960: {
+              slidesPerView: 5,
               spaceBetween: 20,
             },
           }}

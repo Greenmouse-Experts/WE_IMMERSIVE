@@ -9,7 +9,7 @@ export const headerRoutes = [
   },
   {
     name: "Explore",
-    route: "/courses",
+    route: "/explore",
   },
   {
     name: "FAQs",

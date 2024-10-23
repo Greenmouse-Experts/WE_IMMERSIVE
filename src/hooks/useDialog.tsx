@@ -41,9 +41,9 @@ const useDialog = () => {
               className="fixed inset-0 z-10 w-screen overflow-y-auto"
               onClick={closeModal}
             >
-              <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
                 <div
-                  className={`relative transform overflow-hidden rounded-[20px] bg-white text-left form-shadow transition-all p-6 sm:my-8 ${
+                  className={`relative transform overflow-hidden rounded-[20px] bg-white dark:bg-[#131313] text-left form-shadow transition-all p-6 sm:my-8 ${
                     formatWidth[size as keyof typeof formatWidth]
                   }`}
                   onClick={(e) => e.stopPropagation()}

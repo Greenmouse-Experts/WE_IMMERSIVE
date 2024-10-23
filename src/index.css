@@ -397,6 +397,10 @@ input[data-autocompleted] {
     background: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.6)), url("https://res.cloudinary.com/do2kojulq/image/upload/v1729163186/WE%20Immersive/bg-hero_1_1_g0s4rv.png");
   }
 
+  .asset-banner{
+    background: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.6)), url("https://res.cloudinary.com/do2kojulq/image/upload/v1729699058/WE%20Immersive/cubes_jnb1fg.png");
+  }
+
   .bg-contact-1{
     background: linear-gradient(180deg, #1D9CD7 0%, #206B8E 100%);
   }
@@ -409,5 +413,13 @@ input[data-autocompleted] {
 
   .auth-shadow{
     box-shadow: 0px 4px 10px 2px #0000000D;
+  }
+
+  .btn-shadow{
+    box-shadow: 0px 4px 28px 0px #0000001A;
+  }
+
+  .box-drop{
+    box-shadow: 0px 2px 20px 5px #0523BC08;
   }
 }
