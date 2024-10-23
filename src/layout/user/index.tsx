@@ -1,11 +1,11 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import SidebarLayout from "./components/sidebar";
-import Button from "../../components/ui/Button";
+// import Button from "../../components/ui/Button";
 
 const UserDashboardLayout = () => {
   //   const token = sessionStorage.getItem("weim_token");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   //   useEffect(() => {
   //     if (!token) {
   //       navigate("/login");
@@ -34,6 +34,7 @@ const UserDashboardLayout = () => {
           <div className="">
             <div className="px-3 lg:px-7">
               <Outlet />
+              <p onClick={() => setCollapsed(true)}></p>
             </div>
           </div>
         </div>
