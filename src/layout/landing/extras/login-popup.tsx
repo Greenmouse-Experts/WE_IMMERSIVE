@@ -5,9 +5,17 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   close: () => void;
+  type: string;
 }
-const LoginPopup: FC<Props> = ({ close }) => {
+const LoginPopup: FC<Props> = ({ close, type }) => {
   const navigate = useNavigate();
+  const handleNavigate = () => {
+    if(type === 'login'){
+      navigate("/auth/login")
+    }else{
+      navigate("/auth/register")
+    }
+  }
   return (
     <div>
       {/* header */}
@@ -30,7 +38,7 @@ const LoginPopup: FC<Props> = ({ close }) => {
       {/* body */}
       <div className="grid gap-4 lg:gap-6 mt-9 mb-6 px-3">
         <div
-          onClick={() => navigate("/auth/login")}
+          onClick={handleNavigate}
           className="border border-[#C4C4C4] py-[15px] cursor-pointer flex justify-center auth-shadow rounded-[10px] hover:shadow-md hover:scale-105 duration-150"
         >
           <div className="text-[#06052A] flex gap-x-4 items-center">

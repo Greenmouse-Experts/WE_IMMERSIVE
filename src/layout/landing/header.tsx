@@ -13,7 +13,8 @@ import LoginPopup from "./extras/login-popup";
 const LandingHeader = () => {
   const navigate = useNavigate();
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string>('')
   const { Dialog, setShowDialog } = useDialog();
 
   const openDrawer = () => setOpen(true);
@@ -32,6 +33,11 @@ const LandingHeader = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const openAuth = (type:string) => {
+    setSelected(type)
+    setShowDialog(true)
+  }
 
   return (
     <div>
@@ -79,11 +85,11 @@ const LandingHeader = () => {
                 <Button
                   title={"Login"}
                   altClassName="w-600 lg:text-lg dark:text-white"
-                  onClick={() => setShowDialog(true)}
+                  onClick={() => openAuth('login')}
                 />
                 <Button
                   title={"Get Started"}
-                  onClick={() => setShowDialog(true)}
+                  onClick={() => openAuth('register')}
                   withArrows
                   altClassName="btn-primary whitespace-nowrap px-5 py-3"
                 />
@@ -110,7 +116,7 @@ const LandingHeader = () => {
         <CalloutMenu />
       </Drawer>
       <Dialog title="" size="md">
-        <LoginPopup close={() => setShowDialog(false)} />
+        <LoginPopup close={() => setShowDialog(false)} type={selected}/>
       </Dialog>
     </div>
   );

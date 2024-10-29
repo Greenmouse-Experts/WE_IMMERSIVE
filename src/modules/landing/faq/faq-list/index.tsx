@@ -11,8 +11,8 @@ const FaqList = () => {
     "Buying Assets",
     "Selling Assets",
     "E-Learning",
-    "Privacy Policy",
-    "Terms & Conditions",
+    "Data Policy",
+    "Terms of Use",
   ];
 
   return (
