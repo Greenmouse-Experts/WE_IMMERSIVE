@@ -4,9 +4,16 @@ import { Link } from "react-router-dom";
 import Button from "../../../components/ui/Button";
 import useDialog from "../../../hooks/useDialog";
 import LoginPopup from "./login-popup";
+import { useState } from "react";
 
 const CalloutMenu = () => {
   const { Dialog, setShowDialog } = useDialog();
+    const [selected, setSelected] = useState<string>("");
+
+  const openAuth = (type: string) => {
+    setSelected(type);
+    setShowDialog(true);
+  };
 
   return (
     <div className="p-4">
@@ -35,18 +42,18 @@ const CalloutMenu = () => {
           <Button
             title={"Login"}
             altClassName="w-600 lg:text-lg dark:text-white"
-            onClick={() => setShowDialog(true)}
+            onClick={() => openAuth("login")}
           />
           <Button
             title={"Get Started"}
-            onClick={() => setShowDialog(true)}
+            onClick={() => openAuth("register")}
             withArrows
             altClassName="btn-primary whitespace-nowrap px-5 py-3"
           />
         </div>
       </div>
       <Dialog title="" size="md">
-        <LoginPopup close={() => setShowDialog(false)} />
+        <LoginPopup close={() => setShowDialog(false)} type={selected} />
       </Dialog>
     </div>
   );
