@@ -7,7 +7,7 @@ import AssetList from "../../homepage/marketplace/components/asset-list";
 
 const StoreContent = () => {
   return (
-    <div className="bg-[#000000]">
+    <div className="dark:bg-[#000000]">
       <div className="section">
         <div className="box grid gap-12">
           {/* assets categories */}

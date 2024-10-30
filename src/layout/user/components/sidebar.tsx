@@ -1,12 +1,12 @@
 import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import { Link, useLocation } from "react-router-dom";
 import logo from "/logo.svg";
+import logo2 from "/logo-white.svg";
 import { FC } from "react";
 import { Routes, RouteType } from "./routes";
 import { PiGear } from "react-icons/pi";
 import { LuArrowRightCircle } from "react-icons/lu";
-import { MdOutlineWbSunny } from "react-icons/md";
-import { BsMoon } from "react-icons/bs";
+import ThemeSwitch from "../../../components/ui/theme-switch";
 interface Props {
   toggled: boolean;
   collapsed: boolean;
@@ -19,7 +19,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
     <div className="left-3 top-3  fixed overflow-y-hidden">
       <Sidebar
         customBreakPoint="1024px"
-        className="h-[calc(100vh_-_30px)] overflow-y-hidden bg-white rounded-2xl !border-none scroll-pro p-3"
+        className="h-[calc(100vh_-_30px)] overflow-y-hidden bg-white dark:bg-[#15171E] rounded-2xl !border-none scroll-pro p-3"
         collapsed={collapsed}
         width="256px"
         backgroundColor=""
@@ -30,7 +30,8 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
       >
         <div className="py-1 pt-2 mb-4 border-b border-[#B2B7B7] items-center">
           <Link to="/" className="pl-2 block">
-            <img src={logo} alt="logo" className="w-[90px]" />
+            <img src={logo} alt="logo" className="w-[90px] dark:hidden" />
+            <img src={logo2} alt="logo" className="w-[90px] hidden dark:block" />
           </Link>
         </div>
         <Menu
@@ -42,14 +43,14 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
               <div key={item.name} className="">
                 {!!item.submenu.length ? (
                   <SubMenu
-                    className="[&>a]:dark:!bg-[#131313] dark:text-white"
+                    className="[&>a]:dark:!bg-[#15171E] dark:text-white"
                     label={item.name}
                     icon={item.icon}
                     key={item.name}
                   >
                     {item.submenu.map((item: RouteType, i) => (
                       <MenuItem
-                        className="[&>a]:dark:!bg-[#131313] dark:!text-white"
+                        className="[&>a]:dark:!bg-[#15171E] dark:!text-white"
                         component={<Link to={item.route} />}
                         active={path.pathname === item.route && true}
                         key={i}
@@ -60,7 +61,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
                   </SubMenu>
                 ) : (
                   <MenuItem
-                    className="[&>a]:dark:!bg-[#131313] dark:!text-white"
+                    className="[&>a]:dark:!bg-[#15171E] dark:!text-white"
                     component={<Link to={item.route} />}
                     icon={item.icon}
                     active={path.pathname === item.route && true}
@@ -88,15 +89,8 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
           </ul>
         </div>
         <div className="mt-6">
-          <div className="m-2 mt-1 h-[180px] rounded-2xl bg-[#D9D9D9]"></div>
-          <div className="mt-2 grid grid-cols-2 gap-2 p-2 bg-[#E9EBFB] rounded-lg">
-            <div className="flex justify-center bg-gradient py-2 rounded-lg text-white">
-              <MdOutlineWbSunny/>
-            </div>
-            <div className="flex justify-center py-2">
-              <BsMoon className="text-primary"/>
-            </div>
-          </div>
+          <div className="m-2 mt-1 h-[180px] rounded-2xl bg-[#D9D9D9] dark:bg-black"></div>
+          <ThemeSwitch sidebar />
         </div>
       </Sidebar>
     </div>

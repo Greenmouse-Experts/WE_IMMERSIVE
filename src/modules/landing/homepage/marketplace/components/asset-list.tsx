@@ -13,14 +13,14 @@ const AssetList: FC<Props> = ({ name, data, addFilter }) => {
     <div>
       {addFilter ? (
         <div className="flex items-center gap-x-5">
-          <p className="unbound fw-500 text-white">{name}</p>
+          <p className="unbound fw-500 dark:text-white">{name}</p>
           <div className="bg-[#EFEFEF] text-[#757171] whitespace-nowrap cursor-pointer flex item-center gap-x-2 px-2 py-[4px] rounded-[6px] items-center">
             Best Sellers <IoCaretDown />
           </div>
         </div>
       ) : (
         <div className="flex items-center justify-between">
-          <p className="unbound fw-500 text-white">{name}</p>
+          <p className="unbound fw-500 darK:text-white">{name}</p>
           <Link to={""} className="text-[#5E2AF7] fs-500 underline">
             See More
           </Link>
@@ -32,7 +32,7 @@ const AssetList: FC<Props> = ({ name, data, addFilter }) => {
             <div>
               <img src={item.image} alt="image-banner" />
               <div className="mt-4">
-                <p className="text-white">{item.name}</p>
+                <p className="dark:text-white">{item.name}</p>
                 {item.creator && (
                   <p className="text-[#696767] fs-500">{item.creator}</p>
                 )}
