@@ -11,7 +11,7 @@ interface Props {
   className?: string;
   altClassName?: string;
   isBusy?: boolean;
-  type?: 'int' | "link" | "normal";
+  type?: 'int' | "link" | "normal" | "submit";
   withArrows?: boolean
 }
 
