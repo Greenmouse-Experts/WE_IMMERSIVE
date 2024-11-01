@@ -4,7 +4,7 @@ export const headerRoutes = [
     route: "/learn",
   },
   {
-    name: "Shop",
+    name: "Marketplace",
     route: "/store",
   },
   {

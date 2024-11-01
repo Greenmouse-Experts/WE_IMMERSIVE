@@ -2,9 +2,11 @@ import React, { FC, useState } from "react";
 import Button from "../../components/ui/Button";
 
 interface Props {
-  setActiveForm: React.Dispatch<React.SetStateAction<number>>;
+  setActiveForm?: React.Dispatch<React.SetStateAction<number>>;
+  setAccountType: React.Dispatch<React.SetStateAction<string>>;
+  handleProceed:() => void;
 }
-const RegisterProfile: FC<Props> = ({ setActiveForm }) => {
+const RegisterProfile: FC<Props> = ({ setAccountType, handleProceed }) => {
   const [selected, setSelected] = useState(0);
   const options = [
     {
@@ -13,6 +15,7 @@ const RegisterProfile: FC<Props> = ({ setActiveForm }) => {
       image:
         "https://res.cloudinary.com/do2kojulq/image/upload/v1730216023/WE%20Immersive/Group_1000005676_6_j6wgwy.png",
       index: 101,
+      slug:"general_user"
     },
     {
       name: "Creators",
@@ -20,6 +23,7 @@ const RegisterProfile: FC<Props> = ({ setActiveForm }) => {
       image:
         "https://res.cloudinary.com/do2kojulq/image/upload/v1730216023/WE%20Immersive/Group_1000005676_5_lkyqgp.png",
       index: 102,
+       slug:"creators"
     },
     {
       name: "Student",
@@ -27,6 +31,7 @@ const RegisterProfile: FC<Props> = ({ setActiveForm }) => {
       image:
         "https://res.cloudinary.com/do2kojulq/image/upload/v1730216023/WE%20Immersive/Group_1000005676_7_kk8g2t.png",
       index: 103,
+       slug:"student"
     },
     {
       name: "Institution",
@@ -34,6 +39,7 @@ const RegisterProfile: FC<Props> = ({ setActiveForm }) => {
       image:
         "https://res.cloudinary.com/do2kojulq/image/upload/v1730216023/WE%20Immersive/Group_1000005676_4_wdpzwi.png",
       index: 104,
+       slug:"institution"
     },
   ];
   return (
@@ -46,7 +52,10 @@ const RegisterProfile: FC<Props> = ({ setActiveForm }) => {
           <div
             className={`border p-3 px-[10px] cursor-pointer rounded-[10px] bg-[#F7F8FD] dark:bg-[#15171E] flex items-center gap-x-2 ${item.index === selected? "border-[#1D9CD7]" : "border-transparent"}`}
             key={i}
-            onClick={() => setSelected(item.index)}
+            onClick={() => {
+              setSelected(item.index)
+              setAccountType(item.slug)
+            }}
           >
             <img
               src={item.image}
@@ -65,7 +74,7 @@ const RegisterProfile: FC<Props> = ({ setActiveForm }) => {
       </div>
       <div className="flex justify-center mt-10">
         <div className="w-7/12">
-          <Button title={"Proceed"} withArrows onClick={() => setActiveForm(1)}/>
+          <Button title={"Proceed"} withArrows onClick={handleProceed}/>
         </div>
       </div>
     </div>
