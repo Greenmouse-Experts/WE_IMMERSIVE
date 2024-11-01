@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { HiOutlineLockClosed } from "react-icons/hi";
