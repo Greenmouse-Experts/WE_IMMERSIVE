@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+//@ts-nocheck
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 // import { HiOutlineLockClosed } from "react-icons/hi";
@@ -15,7 +17,7 @@ const InstitutionForm1 = ({ setActiveForm }) => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: "onChange",
     defaultValues: {

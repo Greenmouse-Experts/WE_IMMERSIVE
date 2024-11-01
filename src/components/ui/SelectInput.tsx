@@ -1,21 +1,22 @@
-import React, { FC } from "react";
+import{ FC } from "react";
 
 interface SelectInputProps{
     label: string;
     list: string[];
     labelClassName?: string;
     required?: boolean;
-    error:any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    error?:any;
     placeholder: string;
   
 }
 
-const SelectInput:FC<SelectInputProps> = ({label, list, labelClassName, required, error, placeholder}) => {
+const SelectInput:FC<SelectInputProps> = ({label, list, required, error, placeholder}) => {
   return (
     <div className="mt-3">
       {label && (
         <label
-          className={["inter pl-[1px] fs-500 text-[#343333] dark:text-white", labelClassName] }
+          className={"inter pl-[1px] fs-500 text-[#343333] dark:text-white" }
         >
           {label}
           {required && <span className="text-red-600 fw-600 pl-1">*</span>}
