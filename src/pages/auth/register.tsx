@@ -23,8 +23,8 @@ const UserRegister = () => {
             {activeForm === 0 && <RegisterProfile setActiveForm={setActiveForm} setAccountType={setAccountType} handleProceed={handleProceed}/> }
             {activeForm === 1 && (
               <div>
-                <p className="unbound fw-500 lg:text-lg mb-4">Get Started 🚀</p>
-                <RegisterForm />
+                 <p className="unbound fw-500 lg:text-lg mb-4">You are signing up a <br/>General User 🚀</p>
+                 <RegisterForm />
                 <div>
                   <SocialLogin />
                 </div>
@@ -32,8 +32,11 @@ const UserRegister = () => {
             )}
              {accountType === "general_user" && activeForm === 3  && (
               <div>
-                 <p className="unbound fw-500 lg:text-lg mb-4">Get Started 🚀</p>
+                 <p className="unbound fw-500 lg:text-lg mb-4">You are signing up a <br/>General User 🚀</p>
                 <RegisterForm />
+                <div>
+                  <SocialLogin />
+                </div>
               </div>
             )}
             {accountType === "student" && activeForm === 3  && (

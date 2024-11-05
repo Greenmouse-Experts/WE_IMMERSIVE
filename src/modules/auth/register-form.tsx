@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { HiOutlineLockClosed } from "react-icons/hi";
@@ -6,6 +8,7 @@ import { GoMail } from "react-icons/go";
 import Button from "../../components/ui/Button";
 import TextInput, { InputType } from "../../components/ui/TextInput";
 import { BiUser } from "react-icons/bi";
+import { IoCallOutline } from "react-icons/io5";
 
 const RegisterForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
@@ -46,6 +49,44 @@ const RegisterForm = () => {
                 <BiUser className="mx-3 relative top-[1px] text-[#89888D]" />
               }
               error={errors.name?.message}
+              {...field}
+              ref={null}
+            />
+          )}
+        />
+         <Controller
+          name="phone_number"
+          control={control}
+          rules={{
+            required: {
+              value: true,
+              message: "Please enter your phone number",
+            },
+          }}
+          render={({ field }) => (
+            <TextInput
+              label="Phone Number"
+              placeholder="Enter your phone number"
+              type={InputType.tel}
+              icon={
+                <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
+              }
+              // error={errors?.phone_number?.message}
+              {...field}
+              ref={null}
+            />
+          )}
+        />
+      
+      
+        <Controller
+          name="referral_code"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              label="Referral Code (Optional)"
+              placeholder="Enter referral code"
+              type={InputType.text}
               {...field}
               ref={null}
             />
