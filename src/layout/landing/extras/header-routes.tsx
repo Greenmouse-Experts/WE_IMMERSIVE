@@ -15,4 +15,8 @@ export const headerRoutes = [
     name: "FAQs",
     route: "/faqs",
   },
+  {
+    name: "Jobs",
+    route: "/jobs",
+  },
 ];

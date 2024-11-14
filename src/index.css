@@ -377,6 +377,7 @@ input[data-autocompleted] {
     box-shadow: 0px 4px 28px 0px #0000001a;
   }
 
+
   .div-shadow {
     box-shadow: 0px 12px 33.4px 0px #00000024;
   }
@@ -399,6 +400,9 @@ input[data-autocompleted] {
 
   .asset-banner{
     background: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.6)), url("https://res.cloudinary.com/do2kojulq/image/upload/v1729699058/WE%20Immersive/cubes_jnb1fg.png");
+  }
+  .jobs-banner{
+    background: url("https://res.cloudinary.com/do2kojulq/image/upload/v1731318409/image_pciho5.png");
   }
 
    .learn-banner{

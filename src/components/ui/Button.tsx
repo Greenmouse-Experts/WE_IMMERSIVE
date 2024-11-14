@@ -12,7 +12,8 @@ interface Props {
   altClassName?: string;
   isBusy?: boolean;
   type?: 'int' | "link" | "normal" | "submit";
-  withArrows?: boolean
+  withArrows?: boolean;
+  style?: React.CSSProperties; 
 }
 
 const Button: React.FC<Props> = ({
@@ -22,10 +23,11 @@ const Button: React.FC<Props> = ({
   altClassName,
   isBusy,
   type,
-  withArrows
+  withArrows,
+  style,
 }) => {
   return (
-    <div className={disabled ? "opacity-75 w-full" : "w-full"}>
+    <div className={disabled ? "opacity-75 w-full" : "w-full"} style={style}>
       <button
         className={
           altClassName ||
