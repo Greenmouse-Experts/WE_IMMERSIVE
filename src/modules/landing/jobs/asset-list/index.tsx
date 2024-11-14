@@ -12,7 +12,7 @@ const AllJobsList = () => {
           ))}
         </div>
 
-        <div className="bg-[#F7F8FD] rounded-[30px] h-fit p-4 lg:block hidden">
+        <div className="bg-[#F7F8FD] dark:bg-black rounded-[30px] h-fit p-4 lg:block hidden">
           <JobFilter />
         </div>
       </div>

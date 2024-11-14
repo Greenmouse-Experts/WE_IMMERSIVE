@@ -60,6 +60,7 @@ const JobFilter = () => {
                         placeholder="City, country, location"
                         type={InputType.text}
                         ref={null}
+                        className='dark:bg-[#2E2F36] w-full'
                     />
                     <label className='items-center flex gap-3 mt-4 text-[#696767]' htmlFor="checkbox"><input className='h-4 w-4' type="checkbox" name="checkbox" id="checkbox" /> Work Remotely</label>
                 </div>}
