@@ -1,9 +1,10 @@
 import { GrLocation } from "react-icons/gr"
 
 
-const JobItem = () => {
+const JobItem = ({item, i}:any) => {
+    console.log(item)
     return (
-        <div className='form-shadow  rounded-[30px] p-6 '>
+        <div className='form-shadow  rounded-[30px] p-6' key={i}>
             <div className='flex items-center gap-3'>
                 <img src="https://res.cloudinary.com/do2kojulq/image/upload/v1731573969/D6696853-14FC-467D-A319-F71EAEF7C8CF_kpiduu.png" className='rounded-full w-[106px] h-[106px] border border-[#C4C4C4] object-cover' alt="" />
                 <div>

@@ -1,5 +1,4 @@
 import Button from "../../../../components/ui/Button";
-import MarketSearch from "../../homepage/marketplace/components/market-search";
 
 const JobsBanner = () => {
   return (

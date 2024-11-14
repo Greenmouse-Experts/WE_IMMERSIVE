@@ -8,7 +8,7 @@ const AllJobsList = () => {
       <div className="box grid xl:grid-cols-4  gap-x-6 gap-y-10">
         <div className="xl:col-span-3 col-span-4 grid lg:grid-cols-2  gap-6">
           {[...Array(6)].map((item, i) => (
-            <JobItem />
+            <JobItem item={item} key={i}/>
           ))}
         </div>
 
