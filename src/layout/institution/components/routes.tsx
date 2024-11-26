@@ -1,6 +1,6 @@
 
 import { GrHomeRounded } from "react-icons/gr";
-import { HiOutlineShoppingBag } from "react-icons/hi";
+// import { HiOutlineShoppingBag } from "react-icons/hi";
 import { LuCreditCard } from "react-icons/lu";
 // import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { PiBookBookmark} from "react-icons/pi";
