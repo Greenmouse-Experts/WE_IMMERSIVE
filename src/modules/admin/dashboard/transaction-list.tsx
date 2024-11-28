@@ -45,7 +45,7 @@ const TransactionList = () => {
     <div>
       <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
         <div className="flex justify-between items-center">
-          <p className="unbound text-[#06052A]">Newly Added Students</p>
+          <p className="unbound text-[#06052A]">New Users</p>
           <div className="flex items-center gap-x-4">
             <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
               <p className="text-[#2C3E50] fs-300">Export As</p>
@@ -68,7 +68,7 @@ const TransactionList = () => {
                 <td className="unbound p-1 pb-2">Name</td>
                 {/* <td className="unbound p-1 pb-2">Image</td> */}
                 <td className="unbound p-1 pb-2">Email</td>
-                <td className="unbound p-1 pb-2">Student ID</td>
+                <td className="unbound p-1 pb-2">User Type </td>
                 <td className="unbound p-1 pb-2">Date</td>
                 <td className="unbound p-1 pb-2">Action</td>
               </tr>
@@ -82,7 +82,7 @@ const TransactionList = () => {
                   {/* <td className="pl-1 p-2 py-4">
                     <img src={item.img} alt="purchase-image" className="w-[70px]" />
                   </td> */}
-                  <td className="p-2 py-4">GRE-198832</td>
+                  <td className="p-2 py-4 text-[#F03CE0]">Student</td>
                   <td className="p-2 py-4">1-11-24</td>
                   <td className="p-2 py-4 pl-4">
                     <PiDotsThreeOutlineFill className="cursor-pointer"/>

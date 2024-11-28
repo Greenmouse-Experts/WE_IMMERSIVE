@@ -3,13 +3,15 @@ import { landingRoutes } from './routes/landing-routes';
 import { authRoutes } from './routes/auth-routes';
 import { userRoutes } from './routes/user-routes';
 import { institutionRoutes } from './routes/institution-routes';
+import { adminRoutes } from './routes/admin-routes';
 
 
 const router = createBrowserRouter([
   ...landingRoutes,
   ...authRoutes,
   ...userRoutes,
-  ...institutionRoutes
+  ...institutionRoutes,
+  ...adminRoutes,
 ]);
 
 function App() {
