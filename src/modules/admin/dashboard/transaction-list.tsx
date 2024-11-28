@@ -33,12 +33,7 @@ const TransactionList = () => {
         category: "Space",
         creators: "WEimmersive",
       },
-      {
-        name: "Iwa Tay",
-        img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/Rectangle_19409_j4mzhx.png",
-        category: "Space",
-        creators: "WEimmersive",
-      },
+    
     ];
 
   return (

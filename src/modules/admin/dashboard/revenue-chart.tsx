@@ -2,7 +2,7 @@ import { MdArrowOutward, MdOutlineArrowDropDown } from "react-icons/md";
 import Chart from "react-apexcharts";
 
 const RevenueChart = () => {
-  const options = {
+  const options: ApexCharts.ApexOptions  = {
     chart: {
       type: "area",
       toolbar: { show: false },
@@ -23,6 +23,7 @@ const RevenueChart = () => {
     grid: { borderColor: "#e7e7e7" },
     markers: { size: 5 },
     tooltip: {
+      theme:"dark",
       shared: true,
       intersect: false,
       y: {

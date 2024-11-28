@@ -1,20 +1,19 @@
-import React from "react";
 import Chart from "react-apexcharts";
 
 const SalesCommissionChart = () => {
-  const options = {
+  const options:ApexCharts.ApexOptions  = {
     chart: {
       type: "line",
       toolbar: { show: false },
     },
-    colors: ["#6366F1"], // Set the line color
+    colors: ["#6366F1"], 
     dataLabels: { enabled: false },
-    stroke: { curve: "straight", width: 2 }, // Smooth line and thickness
+    stroke: { curve: "straight", width: 2 }, 
     grid: {
       borderColor: "#e7e7e7",
     },
     xaxis: {
-      categories: ["Q1", "Q2", "Q3", "Q4"], // Quarterly data
+      categories: ["Q1", "Q2", "Q3", "Q4"], 
       labels: { style: { colors: "#4B5563", fontSize: "12px" } },
     },
     yaxis: {
@@ -25,6 +24,7 @@ const SalesCommissionChart = () => {
       },
     },
     tooltip: {
+      theme:"dark",
       enabled: true,
       shared: true,
       intersect: false,

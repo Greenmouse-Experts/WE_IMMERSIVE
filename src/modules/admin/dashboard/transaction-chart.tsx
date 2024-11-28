@@ -1,74 +1,92 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import Chart from "react-apexcharts";
+import React from "react";
 
-const TransactionChart = () => {
-  const options = {
+const TransactionChart: React.FC = () => {
+  // Define chart options
+  const options: ApexCharts.ApexOptions = {
     chart: {
-      width: 380,
       type: "donut",
     },
-    colors: ["#7353FF", "#FF5353", "#7BFF53"],
-    legend: {
-      position: "bottom",
-    },
-    labels: ["Digital Assets", "Tours & Spaces", "Physical Products"],
+    colors: ["#A78BFA", "#38BDF8", "#F472B6", "#4ADE80", "#FBBF24"], // Colors for the chart
+    labels: ["General User", "Creator", "Student", "Professional", "Institution"], // Labels for the legend
     plotOptions: {
       pie: {
-        startAngle: -90,
-        endAngle: 270,
+        donut: {
+          size: "60%", // Adjusting the donut size
+        },
       },
     },
-    dataLabels: {
-      enabled: false,
+    legend: {
+      show: false, // Hiding the default legend
     },
-    fill: {
-      type: "gradient",
+    dataLabels: {
+      enabled: false, // Disabling data labels
     },
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 768,
         options: {
           chart: {
-            width: 200,
-          },
-          legend: {
-            position: "bottom",
+            width: "100%",
           },
         },
       },
     ],
-  } as ApexCharts.ApexOptions;;
+  };
 
-  const series = [4315, 3200, 1200,]
+  
+  const series: number[] = [615, 315, 3200, 200, 94]; // Values corresponding to each label
 
   return (
-    <div>
-      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
-        <div className="">
-          <p className="unbound text-[#06052A]">Expenses Analysis</p>
-          <div className="flex items-center gap-x-4 mt-2">
-            <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
-              <p className="text-[#2C3E50] fs-300">Export As</p>
-              <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-            </div>
-          </div>
+    <div className="bg-white dark:bg-[#15171E] rounded-[20px] p-6">
+      
+      <div className="flex items-center justify-between mb-4">
+        <p className="font-semibold text-gray-800 text-lg">User Analysis</p>
+        <div className="flex items-center gap-x-2 px-3 py-1 bg-gray-100 rounded-full cursor-pointer w-fit">
+          <span className="text-sm text-gray-600">Monthly</span>
+          <MdOutlineArrowDropDown className="text-gray-600" />
         </div>
-        <div className="mt-6">
-          <div className="mt-6">
-            {typeof window !== "undefined" && (
-              <Chart
-                options={options}
-                series={series}
-                type="donut"
-                width="100%"
-                height="300px"
-              />
-            )}
-          </div>
+      </div>
+
+      
+      <div className="flex flex-col gap-6 items-center">
+        
+        <div className="w-full lg:w-1/2">
+          {typeof window !== "undefined" && (
+            <Chart
+              options={options}
+              series={series}
+              type="donut"
+              width="100%"
+              height="300px"
+            />
+          )}
+        </div>
+
+        {/* Custom Legend */}
+        <div className="flex flex-col gap-3 w-full">
+          {options.labels?.map((label, index) => (
+            <div
+              key={index}
+              className="flex justify-between items-center text-sm"
+            >
+              <div className="flex items-center gap-2">
+                {/* Color indicator */}
+                <span
+                  className="w-3 h-3"
+                  style={{ backgroundColor: options.colors![index] }}
+                ></span>
+                <span className="text-gray-700">{label}</span>
+              </div>
+              {/* Value */}
+              <span className="text-gray-600">{series[index]}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default TransactionChart
+export default TransactionChart;

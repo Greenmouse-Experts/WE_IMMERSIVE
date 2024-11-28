@@ -23,14 +23,7 @@ export const Routes = [
     submenu: [],
   },
   {
-    name: "Students",
-    icon: <RiHeart2Line className="text-xl" />,
-    route: "/area",
-    submenu: [
-    ],
-  },
-  {
-    name: "Tutors",
+    name: "Users",
     icon: <RiHeart2Line className="text-xl" />,
     route: "/area",
     submenu: [
@@ -38,30 +31,19 @@ export const Routes = [
   },
   {
     name: "Courses",
+    icon: <RiHeart2Line className="text-xl" />,
+    route: "/area",
+    submenu: [
+    ],
+  },
+  {
+    name: "Products`",
     icon: <PiBookBookmark className="text-xl" />,
     route: "/",
     submenu: [],
   },
   {
-    name: "Assets",
-    icon: <PiBookBookmark className="text-xl" />,
-    route: "/",
-    submenu: [],
-  },
-  {
-    name: "Cart",
-    icon: <PiBookBookmark className="text-xl" />,
-    route: "/",
-    submenu: [],
-  },
-  {
-    name: "Messages",
-    icon: <LuCreditCard className="text-lg" />,
-    route: "/",
-    submenu: [],
-  },
-  {
-    name: "Notifications",
+    name: "Jobs",
     icon: <LuCreditCard className="text-lg" />,
     route: "/",
     submenu: [],
@@ -73,7 +55,7 @@ export const Routes = [
     submenu: [],
   },
   {
-    name: "Transactions",
+    name: "Reports/Analysis",
     icon: <LuCreditCard className="text-lg" />,
     route: "/",
     submenu: [],
