@@ -2,26 +2,26 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { getOrdinalSuffix } from "../../../hooks";
 
 export const PerformanceBoard = () => {
-  const activities = [
-    {
-      title: "New post from Eviola & Co",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279183/WE%20Immersive/image_3_mu6rxn.png",
-      date: "13-14-24",
-      time: "5:00pm",
-    },
-    {
-      title: "Purchase Completed 🎊",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279183/WE%20Immersive/image_4_hwdpua.png",
-      date: "13-14-24",
-      time: "10:00pm",
-    },
-    {
-      title: "You finished XR Course",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279182/WE%20Immersive/image_5_slbtqp.png",
-      date: "13-14-24",
-      time: "3:45pm",
-    },
-  ];
+  // const activities = [
+  //   {
+  //     title: "New post from Eviola & Co",
+  //     img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279183/WE%20Immersive/image_3_mu6rxn.png",
+  //     date: "13-14-24",
+  //     time: "5:00pm",
+  //   },
+  //   {
+  //     title: "Purchase Completed 🎊",
+  //     img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279183/WE%20Immersive/image_4_hwdpua.png",
+  //     date: "13-14-24",
+  //     time: "10:00pm",
+  //   },
+  //   {
+  //     title: "You finished XR Course",
+  //     img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279182/WE%20Immersive/image_5_slbtqp.png",
+  //     date: "13-14-24",
+  //     time: "3:45pm",
+  //   },
+  // ];
 
   return (
     <div>
@@ -63,9 +63,9 @@ export const PerformanceBoard = () => {
               <tbody className="">
                 {[...Array(4)].map((item, i) => (
                   <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
-                    <td className={`p-2 text-xs  pl-4`}> <p className="border border-[#FFD154] bg-[#FFCA281A] px-3 w-fit rounded-[5px]  ">{ getOrdinalSuffix(i + 1)}</p></td>
+                    <td className={`p-2 text-xs  pl-4`}> <p className="border border-[#FFD154] bg-[#FFCA281A] px-3 w-fit rounded-[5px]  ">{getOrdinalSuffix(i + 1)}</p></td>
                     <td className="p-2 text-xs ">Chukka Uzo</td>
-                    <td className="p-2 text-xs ">100,050</td>
+                    <td className="p-2 text-xs ">100,050 {item}</td>
                   </tr>
                 ))}
               </tbody>

@@ -27,11 +27,11 @@ const MapChart = () => {
       })
     );
 
-    let polygonSeries = chart.series.push(
-      am5map.MapPolygonSeries.new(root, {
-        geoJSON: am5geodata_worldLow,
-      })
-    );
+    // let polygonSeries = chart.series.push(
+    //   am5map.MapPolygonSeries.new(root, {
+    //     geoJSON: am5geodata_worldLow,
+    //   })
+    // );
 
     let pointSeries = chart.series.push(
       am5map.MapPointSeries.new(root, {
