@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../../components/ui/TextInput";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
