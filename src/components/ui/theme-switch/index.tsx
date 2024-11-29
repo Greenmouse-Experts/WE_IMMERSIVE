@@ -37,7 +37,7 @@ const ThemeSwitch:FC<Props> = ({sidebar}) => {
                 isDarkMode ? "" : "bg-gradient text-white"
               }`}
             >
-              <MdOutlineWbSunny />
+              <MdOutlineWbSunny className="dark:text-white" />
             </div>
             <div
               className={`flex justify-center py-2 cursor-pointer  rounded-lg ${
@@ -53,7 +53,7 @@ const ThemeSwitch:FC<Props> = ({sidebar}) => {
           {!isDarkMode ? (
             <div className="text-center">
               <div className="flex justify-center">
-                <FiSun className="text-xl" />
+                <FiSun className="text-xl " />
               </div>
               <p className="fs-400 fw-500 leading-[17px]">Light</p>
             </div>

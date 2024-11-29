@@ -37,7 +37,7 @@ export const Routes = [
     ],
   },
   {
-    name: "Products`",
+    name: "Products",
     icon: <PiBookBookmark className="text-xl" />,
     route: "/",
     submenu: [],
