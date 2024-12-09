@@ -4,6 +4,7 @@ import { authRoutes } from './routes/auth-routes';
 import { userRoutes } from './routes/user-routes';
 import { institutionRoutes } from './routes/institution-routes';
 import { adminRoutes } from './routes/admin-routes';
+import { creatorRoutes } from './routes/creator-routes';
 
 
 const router = createBrowserRouter([
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
   ...userRoutes,
   ...institutionRoutes,
   ...adminRoutes,
+  ...creatorRoutes
 ]);
 
 function App() {

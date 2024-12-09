@@ -14,6 +14,7 @@ interface Props {
   type?: 'int' | "link" | "normal" | "submit";
   withArrows?: boolean;
   style?: React.CSSProperties; 
+  size?: number;
 }
 
 const Button: React.FC<Props> = ({
@@ -25,6 +26,7 @@ const Button: React.FC<Props> = ({
   type,
   withArrows,
   style,
+  size = 18,
 }) => {
   return (
     <div className={disabled ? "opacity-75 w-full" : "w-full"} style={style}>
@@ -43,7 +45,7 @@ const Button: React.FC<Props> = ({
         {isBusy ? (
           "loading"
         ) : (
-          <span className='flex justify-center gap-x-3 items-center'>
+          <span className='flex justify-center gap-x-3 items-center' style={{fontSize: size}}>
             {title} {withArrows && <img src={arrow} alt='arrow-icon'/>}
           </span>
         )}
