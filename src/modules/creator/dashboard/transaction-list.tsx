@@ -2,34 +2,32 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 
 const TransactionList = () => {
-    const data = [
-      {
-        name: "Franka Yusuf",
-        img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_10_hsicwi.png",
-        category: "Physical Product",
-        creators: "Samsung",
-      },
-      {
-        name: "Zeb Phoebe",
-        img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_11_vzeysg.png",
-        category: "Courses",
-        creators: "ProLab",
-      },
-      {
-        name: "Chukka Uzo",
-        img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_12_c53ldv.png",
-        category: "Digital Asset",
-        creators: "Chukka",
-      },
-      {
-        name: "Frank Hamzy",
-        img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/Rectangle_19409_j4mzhx.png",
-        category: "Tour",
-        creators: "WEimmersive",
-      },
-   
-    
-    ];
+  const data = [
+    {
+      name: "Franka Yusuf",
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_10_hsicwi.png",
+      category: "Physical Product",
+      creators: "Samsung",
+    },
+    {
+      name: "Zeb Phoebe",
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_11_vzeysg.png",
+      category: "Courses",
+      creators: "ProLab",
+    },
+    {
+      name: "Chukka Uzo",
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_12_c53ldv.png",
+      category: "Digital Asset",
+      creators: "Chukka",
+    },
+    {
+      name: "Frank Hamzy",
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/Rectangle_19409_j4mzhx.png",
+      category: "Tour",
+      creators: "WEimmersive",
+    },
+  ];
 
   return (
     <div>
@@ -64,21 +62,24 @@ const TransactionList = () => {
               </tr>
             </thead>
             <tbody className="">
-              {data.map((item, i) => (
-                <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
-                  <td className={`p-2 py-4 pl-4`}>{`0${i + 1}`}</td>
-                  <td className="p-2 py-4">Tesla Model Y</td>
-                  <td className="p-2 py-4">testmail@gmail.com</td>
-                  {/* <td className="pl-1 p-2 py-4">
+              {data.map((item, i) => {
+                console.log(item);
+                return (
+                  <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
+                    <td className={`p-2 py-4 pl-4`}>{`0${i + 1}`}</td>
+                    <td className="p-2 py-4">Tesla Model Y</td>
+                    <td className="p-2 py-4">testmail@gmail.com</td>
+                    {/* <td className="pl-1 p-2 py-4">
                     <img src={item.img} alt="purchase-image" className="w-[70px]" />
                   </td> */}
-                  <td className="p-2 py-4 text-[#4FCC36]">Completed</td>
-                  <td className="p-2 py-4">1-11-24</td>
-                  <td className="p-2 py-4 pl-4">
-                    <PiDotsThreeOutlineFill className="cursor-pointer"/>
-                  </td>
-                </tr>
-              ))}
+                    <td className="p-2 py-4 text-[#4FCC36]">Completed</td>
+                    <td className="p-2 py-4">1-11-24</td>
+                    <td className="p-2 py-4 pl-4">
+                      <PiDotsThreeOutlineFill className="cursor-pointer" />
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
