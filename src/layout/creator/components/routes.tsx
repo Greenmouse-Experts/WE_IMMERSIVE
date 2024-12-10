@@ -45,7 +45,7 @@ export const Routes = [
   {
     name: "Jobs",
     icon: <PiBookBookmark className="text-xl text-grey" />,
-    route: "/",
+    route: "/creator/jobs",
     submenu: [],
   },
   {
@@ -57,7 +57,7 @@ export const Routes = [
   {
     name: "Portfolio",
     icon: <LuCreditCard className="text-lg text-grey" />,
-    route: "/",
+    route: "/creator/portfolio",
     submenu: [],
   },
   {
