@@ -21,20 +21,26 @@ const InstitutionForm1 = ({ setActiveForm }) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
+      institutionName: "",
+      institutionEmail: "",
+      institutionPhoneNumber: "",
+      institutionType: "",
+      institutionIndustry: "",
+      institutionSize: "",
+      institutionLocation: "",
     },
   });
 
-  const onSubmit = () => {
+  const onSubmit = (formData: any) => {
     setIsBusy(false);
+    localStorage.setItem("institutionPayload", JSON.stringify(formData));
+    setActiveForm(4);
   };
   return (
     <div className="mt-3">
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
         <Controller
-          name="name"
+          name="institutionName"
           control={control}
           rules={{
             required: {
@@ -50,14 +56,14 @@ const InstitutionForm1 = ({ setActiveForm }) => {
               icon={
                 <HiOutlineBuildingOffice2 className="mx-3 relative top-[1px] text-[#89888D]" />
               }
-              error={errors.name?.message}
+              error={errors.institutionName?.message}
               {...field}
               ref={null}
             />
           )}
         />
         <Controller
-          name="email"
+          name="institutionEmail"
           control={control}
           rules={{
             required: {
@@ -73,14 +79,14 @@ const InstitutionForm1 = ({ setActiveForm }) => {
               icon={
                 <GoMail className="mx-3 relative top-[1px] text-[#89888D]" />
               }
-              error={errors.email?.message}
+              error={errors.institutionEmail?.message}
               {...field}
               ref={null}
             />
           )}
         />
         <Controller
-          name="professional_skill"
+          name="institutionType"
           control={control}
           rules={{
             required: {
@@ -96,13 +102,13 @@ const InstitutionForm1 = ({ setActiveForm }) => {
               // icon={
               //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
               // }
-              error={""}
+              error={errors.institutionType?.message}
               {...field}
             />
           )}
         />
         <Controller
-          name="industry"
+          name="institutionIndustry"
           control={control}
           rules={{
             required: {
@@ -113,23 +119,23 @@ const InstitutionForm1 = ({ setActiveForm }) => {
           render={({ field }) => (
             <SelectInput
               label="Industry"
-              list={["School"]}
+              list={["Education"]}
               placeholder="Choose your industry"
               // icon={
               //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
               // }
-              error={""}
+              error={errors.institutionIndustry?.message}
               {...field}
             />
           )}
         />
         <Controller
-          name="industry"
+          name="institutionSize"
           control={control}
           rules={{
             required: {
               value: true,
-              message: "This field is required",
+              message: "Size of Institution is required",
             },
           }}
           render={({ field }) => (
@@ -140,19 +146,19 @@ const InstitutionForm1 = ({ setActiveForm }) => {
               // icon={
               //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
               // }
-              error={""}
+              error={errors.institutionSize?.message}
               {...field}
             />
           )}
         />
 
         <Controller
-          name="phone_number"
+          name="institutionPhoneNumber"
           control={control}
           rules={{
             required: {
               value: true,
-              message: "Please enter your email",
+              message: "Please enter your phone number",
             },
           }}
           render={({ field }) => (
@@ -163,19 +169,19 @@ const InstitutionForm1 = ({ setActiveForm }) => {
               icon={
                 <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
               }
-              // error={errors?.phone_number?.message}
+              error={errors.institutionPhoneNumber?.message}
               {...field}
               ref={null}
             />
           )}
         />
         <Controller
-          name="location"
+          name="institutionLocation"
           control={control}
           rules={{
             required: {
               value: true,
-              message: "Please enter your email",
+              message: "Please enter your institution address",
             },
           }}
           render={({ field }) => (
@@ -186,7 +192,7 @@ const InstitutionForm1 = ({ setActiveForm }) => {
               icon={
                 <CiLocationOn className="mx-3 relative top-[1px] text-[#89888D]" />
               }
-              // error={errors?.phone_number?.message}
+              error={errors.institutionLocation?.message}
               {...field}
               ref={null}
             />
@@ -247,7 +253,6 @@ const InstitutionForm1 = ({ setActiveForm }) => {
             title={isBusy ? <BeatLoader size={12} color="white" /> : "Next"}
             altClassName="btn-primary unbound !fw-600 w-full py-3"
             // disabled={!isValid || isBusy}
-            onClick={() => setActiveForm(4)}
           />
         </div>
       </form>

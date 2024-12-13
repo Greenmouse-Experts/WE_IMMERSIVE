@@ -10,9 +10,15 @@ import Button from "../../components/ui/Button";
 import TextInput, { InputType } from "../../components/ui/TextInput";
 import { BiUser } from "react-icons/bi";
 import SelectInput from "../../components/ui/SelectInput";
+import { useMutation } from "@tanstack/react-query"; // React Query import
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { registerCreator } from "../../api";
 
 const CreatorForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
+  const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
@@ -23,12 +29,33 @@ const CreatorForm = () => {
       name: "",
       email: "",
       password: "",
+      phoneNumber: "",
+      industry: "",
+      professionalSkill: "",
     },
   });
 
-  const onSubmit = () => {
-    setIsBusy(false);
+  // React Query: Define mutation
+  const mutation = useMutation({
+    mutationFn: registerCreator,
+    onSuccess: (data: any) => {
+      toast.success(data.message);
+      navigate("/auth/verify-email");
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+      setIsBusy(false); // Hide loader
+    },
+    onSettled: () => {
+      setIsBusy(false); // Hide loader
+    },
+  });
+
+  const onSubmit = (formData: any) => {
+    setIsBusy(true);
+    mutation.mutate(formData);
   };
+
   return (
     <div className="mt-3">
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
@@ -55,13 +82,13 @@ const CreatorForm = () => {
             />
           )}
         />
-         <Controller
-          name="professional_skill"
+        <Controller
+          name="professionalSkill"
           control={control}
           rules={{
             required: {
               value: true,
-              message: "This field is required",
+              message: "Professional Skill is required",
             },
           }}
           render={({ field }) => (
@@ -72,8 +99,9 @@ const CreatorForm = () => {
               // icon={
               //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
               // }
-              error={""}
+              error={errors.professionalSkill?.message}
               {...field}
+              ref={null}
             />
           )}
         />
@@ -83,7 +111,7 @@ const CreatorForm = () => {
           rules={{
             required: {
               value: true,
-              message: "This field is required",
+              message: "Industry is required",
             },
           }}
           render={({ field }) => (
@@ -96,12 +124,13 @@ const CreatorForm = () => {
               // }
               error={""}
               {...field}
+              ref={null}
             />
           )}
         />
-        
+
         <Controller
-          name="phone_number"
+          name="phoneNumber"
           control={control}
           rules={{
             required: {
@@ -117,14 +146,13 @@ const CreatorForm = () => {
               icon={
                 <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
               }
-              // error={errors?.phone_number?.message}
+              error={errors?.phoneNumber?.message}
               {...field}
               ref={null}
             />
           )}
         />
-      
-      
+
         <Controller
           name="referral_code"
           control={control}

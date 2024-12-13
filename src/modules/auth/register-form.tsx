@@ -1,17 +1,21 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-nocheck
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { HiOutlineLockClosed } from "react-icons/hi";
 import { Controller, useForm } from "react-hook-form";
 import { GoMail } from "react-icons/go";
-import Button from "../../components/ui/Button";
-import TextInput, { InputType } from "../../components/ui/TextInput";
 import { BiUser } from "react-icons/bi";
 import { IoCallOutline } from "react-icons/io5";
+import { useMutation } from "@tanstack/react-query"; // React Query import
+import Button from "../../components/ui/Button";
+import TextInput, { InputType } from "../../components/ui/TextInput";
+import { registerUser } from "../../api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
+  const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
@@ -20,14 +24,35 @@ const RegisterForm = () => {
     mode: "onChange",
     defaultValues: {
       name: "",
+      phoneNumber: "",
+      referral_code: "",
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = () => {
-    setIsBusy(false);
+  // React Query: Define mutation
+  const mutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data: any) => {
+      toast.success(data.message);
+      navigate("/auth/verify-email");
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+      setIsBusy(false); // Hide loader
+    },
+    onSettled: () => {
+      setIsBusy(false); // Hide loader
+    },
+  });
+
+  // Submit handler
+  const onSubmit = (formData: any) => {
+    setIsBusy(true); // Show loader
+    mutation.mutate(formData);
   };
+
   return (
     <div className="mt-3">
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
@@ -54,8 +79,8 @@ const RegisterForm = () => {
             />
           )}
         />
-         <Controller
-          name="phone_number"
+        <Controller
+          name="phoneNumber"
           control={control}
           rules={{
             required: {
@@ -71,14 +96,12 @@ const RegisterForm = () => {
               icon={
                 <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
               }
-              // error={errors?.phone_number?.message}
+              error={errors.phoneNumber?.message}
               {...field}
               ref={null}
             />
           )}
         />
-      
-      
         <Controller
           name="referral_code"
           control={control}
@@ -115,35 +138,33 @@ const RegisterForm = () => {
             />
           )}
         />
-        <div className="relative">
-          <Controller
-            name="password"
-            control={control}
-            rules={{
-              required: {
-                value: true,
-                message: "Please enter your password",
-              },
-              minLength: {
-                value: 5,
-                message: "Password is too short",
-              },
-            }}
-            render={({ field }) => (
-              <TextInput
-                label="Password"
-                placeholder="Password"
-                type={InputType.password}
-                icon={
-                  <HiOutlineLockClosed className="mx-3 relative top-[1px] text-[18px] text-[#89888D]" />
-                }
-                error={errors.password?.message}
-                {...field}
-                ref={null}
-              />
-            )}
-          />
-        </div>
+        <Controller
+          name="password"
+          control={control}
+          rules={{
+            required: {
+              value: true,
+              message: "Please enter your password",
+            },
+            minLength: {
+              value: 5,
+              message: "Password is too short",
+            },
+          }}
+          render={({ field }) => (
+            <TextInput
+              label="Password"
+              placeholder="Password"
+              type={InputType.password}
+              icon={
+                <HiOutlineLockClosed className="mx-3 relative top-[1px] text-[18px] text-[#89888D]" />
+              }
+              error={errors.password?.message}
+              {...field}
+              ref={null}
+            />
+          )}
+        />
         <div className="mt-4">
           <Button
             withArrows

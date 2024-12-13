@@ -8,9 +8,18 @@ import { GoMail } from "react-icons/go";
 import Button from "../../components/ui/Button";
 import TextInput, { InputType } from "../../components/ui/TextInput";
 import { BiUser } from "react-icons/bi";
+import { useMutation } from "@tanstack/react-query"; // React Query import
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { registerInstitution } from "../../api";
 
 const InstitutionForm2 = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
+  const institutionPayload = JSON.parse(
+    localStorage.getItem("institutionPayload")
+  );
+  const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
@@ -21,11 +30,30 @@ const InstitutionForm2 = () => {
       name: "",
       email: "",
       password: "",
+      jobTitle: "",
     },
   });
 
-  const onSubmit = () => {
+  // React Query: Define mutation
+  const mutation = useMutation({
+    mutationFn: registerInstitution,
+    onSuccess: (data: any) => {
+      toast.success(data.message);
+      navigate("/auth/verify-email");
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+      setIsBusy(false); // Hide loader
+    },
+    onSettled: () => {
+      setIsBusy(false); // Hide loader
+    },
+  });
+
+  const onSubmit = (formData: any) => {
     setIsBusy(false);
+    const payload = { ...institutionPayload, ...formData };
+    mutation.mutate(payload);
   };
   return (
     <div className="mt-3">
@@ -53,13 +81,13 @@ const InstitutionForm2 = () => {
             />
           )}
         />
-           <Controller
-          name="job_title"
+        <Controller
+          name="jobTitle"
           control={control}
           rules={{
             required: {
               value: true,
-              message: "This field is required",
+              message: "Job Title is required",
             },
           }}
           render={({ field }) => (
@@ -67,7 +95,7 @@ const InstitutionForm2 = () => {
               label="Job Title"
               placeholder="Enter your role"
               type={InputType.text}
-              error={""}
+              error={errors.jobTitle?.message}
               {...field}
               ref={null}
             />

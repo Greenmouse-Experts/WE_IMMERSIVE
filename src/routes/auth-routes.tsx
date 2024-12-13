@@ -1,4 +1,5 @@
 import AuthLayout from "../layout/auth";
+import EmailValidate from "../pages/auth/verifyEmail";
 import AdminLogin from "../pages/auth/admin-login";
 import ForgotPassword from "../pages/auth/forget-password";
 import UserLogin from "../pages/auth/login";
@@ -10,20 +11,24 @@ export const authRoutes = [
     element: <AuthLayout />,
     children: [
       {
-        path: 'login',
+        path: "login",
         element: <UserLogin />,
       },
       {
-        path: 'admin/login',
+        path: "admin/login",
         element: <AdminLogin />,
       },
       {
-        path: 'register',
+        path: "register",
         element: <UserRegister />,
       },
       {
-        path: 'forget-password',
+        path: "forget-password",
         element: <ForgotPassword />,
+      },
+      {
+        path: "verify-email",
+        element: <EmailValidate />,
       },
     ],
   },
