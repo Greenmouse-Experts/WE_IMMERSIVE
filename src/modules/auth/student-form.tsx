@@ -10,9 +10,17 @@ import Button from "../../components/ui/Button";
 import TextInput, { InputType } from "../../components/ui/TextInput";
 import { BiUser } from "react-icons/bi";
 import SelectInput from "../../components/ui/SelectInput";
+import { useDispatch } from "react-redux";
+import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
+import "react-phone-number-input/style.css";
+import { useMutation } from "@tanstack/react-query";
+import { registerStudent } from "../../api";
+import { payloadEmail } from "../../reducers/usersSlice";
+import { toast } from "react-toastify";
 
 const StudentForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -23,12 +31,35 @@ const StudentForm = () => {
       name: "",
       email: "",
       password: "",
+      phoneNumber: "",
+      educationalLevel: "",
+      schoolId: "",
+      referralCode: "",
     },
   });
 
-  const onSubmit = () => {
-    setIsBusy(false);
+  // React Query: Define mutation
+  const mutation = useMutation({
+    mutationFn: registerStudent,
+    onSuccess: (data: any) => {
+      toast.success(data.message);
+      navigate("/auth/verify-email");
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+      setIsBusy(false); // Hide loader
+    },
+    onSettled: () => {
+      setIsBusy(false); // Hide loader
+    },
+  });
+
+  const onSubmit = (formData: any) => {
+    setIsBusy(true);
+    mutation.mutate(formData);
+    dispatch(payloadEmail(formData.email));
   };
+
   return (
     <div className="mt-3">
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
@@ -78,74 +109,84 @@ const StudentForm = () => {
             />
           )}
         />
-        <Controller
-          name="phone_number"
-          control={control}
-          rules={{
-            required: {
-              value: true,
-              message: "Please enter your phone number",
-            },
-          }}
-          render={({ field }) => (
-            <TextInput
-              label="Phone Number"
-              placeholder="Enter your phone number"
-              type={InputType.tel}
-              icon={
-                <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
-              }
-              error={""}
-              {...field}
-              ref={null}
-            />
+        <div className="mt-[5px]">
+          <label className="mb-1 block fw-500 text-[#343333] dark:text-white">
+            Phone Number
+          </label>
+          <PhoneInputWithCountry
+            international
+            defaultCountry="NG"
+            countries={["US", "NG", "GB"]}
+            name="phoneNumber"
+            control={control}
+            rules={{
+              required: true,
+              pattern: {
+                value:
+                  /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/,
+                message: "Please Enter A Valid Number",
+              },
+            }}
+            className="flex items-center bg-[#E9EBFB]  mt-2 rounded-[6px] text-black lg:p-3 rounded-[4px] placeholder:text-[13px] placeholder:text-[#999797] w-full border-0  outline-none py-2 px-2 rounded"
+          />
+          {errors.phoneNumber && (
+            <p className="error text-red-400 text-sm">Invalid Phone Number</p>
           )}
-        />
+        </div>
         <Controller
-          name="educational_level"
+          name="educationalLevel"
           control={control}
           rules={{
             required: {
               value: true,
-              message: "This field is required",
+              message: "Educational Level is required",
             },
           }}
           render={({ field }) => (
             <SelectInput
               label="Educational Level"
               placeholder="Choose your educational level"
-              list={["Primary", "Secondary", "Tertiary"]}
-              type={InputType.tel}
+              list={[
+                "High School",
+                "HND",
+                "ND",
+                "Bachelor's",
+                "Master's",
+                "PhD",
+                "Diploma",
+              ]}
+              type={InputType.text}
               icon={
                 <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
               }
-              error={errors.email?.message}
+              error={errors.educationalLevel?.message}
               {...field}
               ref={null}
             />
           )}
         />
         <Controller
-          name="school_id"
+          name="schoolId"
           control={control}
           render={({ field }) => (
             <TextInput
-              label="School ID (optional)"
+              label="School ID"
               placeholder="Enter ID provided by your school"
               type={InputType.tel}
+              error={errors.schoolId?.message}
               {...field}
               ref={null}
             />
           )}
         />
         <Controller
-          name="referral_code"
+          name="referralCode"
           control={control}
           render={({ field }) => (
             <TextInput
               label="Referral Code (Optional)"
               placeholder="Enter referral code"
-              type={InputType.tel}
+              type={InputType.text}
               {...field}
               ref={null}
             />

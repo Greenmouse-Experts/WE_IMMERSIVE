@@ -7,13 +7,24 @@ import { Routes, RouteType } from "./routes";
 import { PiGear } from "react-icons/pi";
 import { LuArrowRightCircle } from "react-icons/lu";
 import ThemeSwitch from "../../../components/ui/theme-switch";
+import { useLogOut } from "../../../hooks/useLogOut";
+
 interface Props {
   toggled: boolean;
   collapsed: boolean;
   setToggled: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+const useHandleLogOut = () => {
+  const logOut = useLogOut();
+  return () => {
+    logOut();
+  };
+};
+
 const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
   const path = useLocation();
+  const handleLogOut = useHandleLogOut();
 
   return (
     <div className="left-3 top-3  fixed overflow-y-hidden">
@@ -31,7 +42,11 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
         <div className="py-1 pt-2 mb-4 border-b border-[#B2B7B7] items-center">
           <Link to="/" className="pl-2 block">
             <img src={logo} alt="logo" className="w-[90px] dark:hidden" />
-            <img src={logo2} alt="logo" className="w-[90px] hidden dark:block" />
+            <img
+              src={logo2}
+              alt="logo"
+              className="w-[90px] hidden dark:block"
+            />
           </Link>
         </div>
         <Menu
@@ -61,9 +76,9 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
                   </SubMenu>
                 ) : (
                   <MenuItem
-                  className={`[&>a]:dark:!bg-[#15171E] dark:!text-white ${
-                    path.pathname === item.route ? 'active-class' : ''
-                  }`}
+                    className={`[&>a]:dark:!bg-[#15171E] dark:!text-white ${
+                      path.pathname === item.route ? "active-class" : ""
+                    }`}
                     component={<Link to={item.route} />}
                     icon={item.icon}
                     active={path.pathname === item.route && true}
@@ -84,7 +99,10 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
               <PiGear />
               <span>Settings</span>
             </li>
-            <li className="flex items-center p-2 gap-x-3 text-red-500">
+            <li
+              className="flex items-center p-2 gap-x-3 text-red-500 cursor-pointer"
+              onClick={handleLogOut}
+            >
               <LuArrowRightCircle />
               <span>Log out</span>
             </li>

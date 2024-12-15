@@ -4,9 +4,12 @@ import { CiSearch } from "react-icons/ci";
 import { BsCalendarFill, BsGear } from "react-icons/bs";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { todayDate } from "../../../helpers/dateHelper";
 
 const HeaderSection = () => {
   const navigate = useNavigate();
+  const user = useSelector((state: any) => state.userData.data);
   return (
     <div>
       <div className="flex items-stretch gap-x-5">
@@ -45,11 +48,13 @@ const HeaderSection = () => {
             <div className="flex">
               <div className="bg-gray-50 bg-opacity-15 rounded-lg backdrop-blur-sm flex items-center gap-x-2 py-1 text-white px-3">
                 <BsCalendarFill />
-                <span>Oct 14, 2024</span>
+                <span>{todayDate()}</span>
               </div>
             </div>
             <div>
-              <p className="unbound text-white text-lg">Welcome, Chukka 👋</p>
+              <p className="unbound text-white text-lg">
+                Welcome, {user.name} 👋
+              </p>
               <p className="fs-300 text-white">Have a great day!</p>
             </div>
           </div>
@@ -60,19 +65,27 @@ const HeaderSection = () => {
               Individual Account
             </p>
             <img
-              src="https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005705_c9ddis.png"
+              src={`${
+                user.photo
+                  ? user.photo
+                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005705_c9ddis.png"
+              }`}
               alt="profile"
               className="w-6"
             />
           </div>
           <div className="mt-5 grid text-center">
             <img
-              src="https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005834_ohgzc2.png"
+              src={`${
+                user.photo
+                  ? user.photo
+                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005834_ohgzc2.png"
+              }`}
               alt="profile"
               className="size-[110px] aspect-square mx-auto"
             />
-            <p className="text-[#06052A] unbound pt-2">Chukka Uzo</p>
-            <p className="fs-300 text-[#7F7F7F]">chukauzo@gmail.com</p>
+            <p className="text-[#06052A] unbound pt-2">{user.name}</p>
+            <p className="fs-300 text-[#7F7F7F]">{user.email}</p>
           </div>
         </div>
       </div>

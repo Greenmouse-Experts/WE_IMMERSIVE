@@ -14,6 +14,12 @@ export const registerCreator = async (payload: any) => {
     .then((response) => response.data);
 };
 
+export const registerStudent = async (payload: any) => {
+  return axios
+    .post(`${baseURL}/auth/register/student`, payload)
+    .then((response) => response.data);
+};
+
 export const registerInstitution = async (payload: any) => {
   return axios
     .post(`${baseURL}/auth/register/institution`, payload)

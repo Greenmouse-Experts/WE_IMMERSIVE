@@ -122,7 +122,7 @@ const EmailValidate = () => {
             <div className="mt-4 flex justify-end">
               <span
                 className="text-[#5B32F2] inter underline cursor-pointer"
-                onClick={() => resendOTPCode}
+                onClick={() => resendOTPCode()}
               >
                 Resend OTP Code
               </span>

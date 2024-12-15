@@ -9,10 +9,13 @@ import { HiOutlineLockClosed } from "react-icons/hi";
 import { useMutation } from "@tanstack/react-query"; // React Query import
 import { toast } from "react-toastify";
 import { login } from "../../api";
+import { useDispatch } from "react-redux";
+import { weImmersiveUser } from "../../reducers/usersSlice";
 
 const LoginForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     control,
@@ -33,6 +36,9 @@ const LoginForm = () => {
       localStorage.setItem("we-immersiveUser", data.data.token);
       delete data.data.password;
       delete data.data.token;
+
+      dispatch(weImmersiveUser(data.data));
+
       if (data.data.accountType === "user") {
         navigate("/user");
       }

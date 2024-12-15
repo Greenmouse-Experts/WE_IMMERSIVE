@@ -1,4 +1,3 @@
-import StudentsDashboardLayout from "../layout/students";
 import AllCourses from "../pages/students/allCourses";
 import StudentsDashboard from "../pages/students/dashboard";
 import StudentsNotificationScreen from "../pages/students/notifications";
@@ -9,7 +8,6 @@ import TransactionList from "../pages/students/transactions";
 export const studentRoutes = [
   {
     path: "/students",
-    element: <StudentsDashboardLayout />,
     children: [
       {
         index: true,

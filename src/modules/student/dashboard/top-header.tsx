@@ -1,8 +1,11 @@
 import { BsGear } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 const TopHeader = () => {
+  const user = useSelector((state: any) => state.userData.data);
+
   return (
     <div className="flex items-center  gap-x-5 mb-8">
       <div className="w-[65%]">
@@ -37,7 +40,11 @@ const TopHeader = () => {
             Students Account
           </p>
           <img
-            src="https://res.cloudinary.com/do2kojulq/image/upload/v1733743882/F16CB5E3-D175-4ADA-AC99-272BB7542F01_z67l0h.png"
+            src={`${
+              user.photo
+                ? user.photo
+                : "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005705_c9ddis.png"
+            }`}
             alt="profile"
             className="w-8 h-8 rounded-lg"
           />
