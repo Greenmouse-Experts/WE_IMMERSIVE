@@ -34,7 +34,7 @@ const TopHeader = () => {
       <div className="w-[35%] bg-white dark:bg-[#15171E] rounded-[14px] p-4 py-2">
         <div className="flex items-center justify-between bg-[#E9EBFB] dark:bg-black rounded-[14px] px-4 py-2">
           <p className="unbound fw-400 text-[#06052A] fs-500">
-            Creators Account
+            Students Account
           </p>
           <img
             src="https://res.cloudinary.com/do2kojulq/image/upload/v1733743882/F16CB5E3-D175-4ADA-AC99-272BB7542F01_z67l0h.png"
