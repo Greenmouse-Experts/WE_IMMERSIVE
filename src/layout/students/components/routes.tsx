@@ -1,10 +1,8 @@
-
-import React from "react";
 import { GrHomeRounded } from "react-icons/gr";
 // import { HiOutlineShoppingBag } from "react-icons/hi";
 import { LuCreditCard } from "react-icons/lu";
 // import { MdOutlineFeaturedPlayList } from "react-icons/md";
-import { PiBookBookmark} from "react-icons/pi";
+import { PiBookBookmark } from "react-icons/pi";
 import { RiHeart2Line } from "react-icons/ri";
 export interface RouteType {
   name: string;
@@ -27,15 +25,13 @@ export const Routes = [
     name: "Create",
     icon: <RiHeart2Line className="text-xl text-grey" />,
     route: "/creator/asset/create",
-    submenu: [
-    ],
+    submenu: [],
   },
   {
     name: "Assets",
     icon: <RiHeart2Line className="text-xl text-grey" />,
     route: "/creator/assets",
-    submenu: [
-    ],
+    submenu: [],
   },
   {
     name: "Courses",
