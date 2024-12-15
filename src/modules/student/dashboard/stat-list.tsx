@@ -1,35 +1,27 @@
-import { formatAsNgnMoney } from "../../../components/utils/formatHelp";
-
 const StatisticList = () => {
-     const list = [
-       {
-         name: "Ongoing Courses",
-         count: 7,
-         img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716454/WE%20Immersive/learning-2_xy21e0.png",
-         color: "#FFC7F0",
-       },
-       {
-         name: "All Courses",
-         count: 22,
-         img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716404/WE%20Immersive/books_hkqetx.png",
-         color: "#C7C8FF",
-       },
-       {
-         name: "Purchased Assets",
-         count: 37,
-         img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716112/WE%20Immersive/3d-modeling_hbesow.png",
-         color: "#FFD7C7",
-       },
-       {
-         name: "Total Spend",
-         count: `$${formatAsNgnMoney(107000)}`,
-         img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/coin-2_qcugc2.png",
-         color: "#D0FFC7",
-       },
-     ];
+  const list = [
+    {
+      name: "Ongoing Courses",
+      count: 7,
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716454/WE%20Immersive/learning-2_xy21e0.png",
+      color: "#FFC7F0",
+    },
+    {
+      name: "All Courses",
+      count: 22,
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716404/WE%20Immersive/books_hkqetx.png",
+      color: "#C7C8FF",
+    },
+    {
+      name: "Completed Courses",
+      count: 37,
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1734263437/WE%20Immersive/Group_1171275333_v5nnqw.png",
+      color: "#FFD7C7",
+    },
+  ];
   return (
-    <div>
-      <div className="grid grid-cols-4 gap-6 mt-10">
+    <div className="w-full">
+      <div className="grid grid-cols-3 gap-6 mt-10">
         {list.map((item) => (
           <div className="relative h-[120px]">
             <div className="box-drop rounded-[20px] p-4 h-full bg-white dark:bg-[#15171E] flex items-center">
@@ -53,6 +45,6 @@ const StatisticList = () => {
       </div>
     </div>
   );
-}
+};
 
-export default StatisticList
+export default StatisticList;

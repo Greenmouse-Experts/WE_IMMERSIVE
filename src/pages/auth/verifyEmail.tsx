@@ -4,16 +4,18 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { GoMail } from "react-icons/go";
 import { HiOutlineLockClosed } from "react-icons/hi";
 import FormContainer from "../../modules/auth/form-container";
 import { useMutation } from "@tanstack/react-query"; // React Query import
 import { toast } from "react-toastify";
 import { resendOTP, verifyEmail } from "../../api";
+import { useSelector } from "react-redux";
 
 const EmailValidate = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const email = useSelector((state: any) => state.userData.email);
 
   const {
     control,
@@ -22,7 +24,7 @@ const EmailValidate = () => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      email: "",
+      email: email,
       otpCode: "",
     },
   });
@@ -65,9 +67,9 @@ const EmailValidate = () => {
     },
   });
 
-  const resendOTPCode = (formData: any) => {
+  const resendOTPCode = () => {
     const payload = {
-      email: formData.email,
+      email: email,
     };
     OtpMutation.mutate(payload);
   };
@@ -81,29 +83,6 @@ const EmailValidate = () => {
               Verify your account
             </p>
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-              <Controller
-                name="email"
-                control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Please enter your email",
-                  },
-                }}
-                render={({ field }) => (
-                  <TextInput
-                    label="Email"
-                    placeholder="Enter your email address"
-                    type={InputType.email}
-                    icon={
-                      <GoMail className="mx-3 relative top-[1px] text-[#89888D]" />
-                    }
-                    error={errors.email?.message}
-                    {...field}
-                    ref={null}
-                  />
-                )}
-              />
               <div className="relative">
                 <Controller
                   name="otpCode"

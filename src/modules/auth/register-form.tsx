@@ -4,13 +4,14 @@ import { HiOutlineLockClosed } from "react-icons/hi";
 import { Controller, useForm } from "react-hook-form";
 import { GoMail } from "react-icons/go";
 import { BiUser } from "react-icons/bi";
-import { IoCallOutline } from "react-icons/io5";
 import { useMutation } from "@tanstack/react-query"; // React Query import
 import Button from "../../components/ui/Button";
 import TextInput, { InputType } from "../../components/ui/TextInput";
 import { registerUser } from "../../api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
+import "react-phone-number-input/style.css";
 
 const RegisterForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
@@ -79,7 +80,7 @@ const RegisterForm = () => {
             />
           )}
         />
-        <Controller
+        {/* <Controller
           name="phoneNumber"
           control={control}
           rules={{
@@ -101,7 +102,31 @@ const RegisterForm = () => {
               ref={null}
             />
           )}
-        />
+            /> */}
+        <div className="mt-[5px]">
+          <label className="mb-1 block fw-500 text-[#343333] dark:text-white">
+            Phone Number
+          </label>
+          <PhoneInputWithCountry
+            international
+            defaultCountry="NG"
+            countries={["US", "NG", "GB"]}
+            name="phoneNumber"
+            control={control}
+            rules={{
+              required: true,
+              pattern: {
+                value:
+                  /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$/,
+                message: "Please Enter A Valid Number",
+              },
+            }}
+            className="flex items-center bg-[#E9EBFB]  mt-2 rounded-[6px] text-black lg:p-3 rounded-[4px] placeholder:text-[13px] placeholder:text-[#999797] w-full border-0  outline-none py-2 px-2 rounded"
+          />
+          {errors.phoneNumber && (
+            <p className="error text-red-400 text-sm">Invalid Phone Number</p>
+          )}
+        </div>
         <Controller
           name="referral_code"
           control={control}

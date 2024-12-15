@@ -87,11 +87,11 @@ input[data-autocompleted] {
     color: #a58686 !important;
   }
 }
-.css-1t8x7v1 >.ps-menu-button{
+.css-1t8x7v1 > .ps-menu-button {
   padding: 0px 20px 0px 0px !important;
 }
 
-.css-16jesut >.ps-menu-button{
+.css-16jesut > .ps-menu-button {
   padding: 0px 20px 0px 0px !important;
 }
 
@@ -133,6 +133,15 @@ input[data-autocompleted] {
   100% {
     width: 30%;
   }
+}
+
+input.PhoneInputInput {
+  background-color: transparent !important;
+  outline: none !important;
+}
+
+.PhoneInput--focus {
+  outline: none !important;
 }
 
 @layer components {
@@ -297,7 +306,7 @@ input[data-autocompleted] {
     background-size: 100% 100%;
   }
 
-  .bg-gradient{
+  .bg-gradient {
     background: linear-gradient(94.42deg, #6f0aff 0.92%, #1d9cd7 101.98%);
   }
 
@@ -377,7 +386,6 @@ input[data-autocompleted] {
     box-shadow: 0px 4px 28px 0px #0000001a;
   }
 
-
   .div-shadow {
     box-shadow: 0px 12px 33.4px 0px #00000024;
   }
@@ -394,46 +402,61 @@ input[data-autocompleted] {
     );
   }
 
-  .store-banner{
-    background: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.6)), url("https://res.cloudinary.com/do2kojulq/image/upload/v1729163186/WE%20Immersive/bg-hero_1_1_g0s4rv.png");
+  .store-banner {
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6)
+      ),
+      url("https://res.cloudinary.com/do2kojulq/image/upload/v1729163186/WE%20Immersive/bg-hero_1_1_g0s4rv.png");
   }
 
-  .asset-banner{
-    background: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.6)), url("https://res.cloudinary.com/do2kojulq/image/upload/v1729699058/WE%20Immersive/cubes_jnb1fg.png");
+  .asset-banner {
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6)
+      ),
+      url("https://res.cloudinary.com/do2kojulq/image/upload/v1729699058/WE%20Immersive/cubes_jnb1fg.png");
   }
-  .jobs-banner{
+  .jobs-banner {
     background: url("https://res.cloudinary.com/do2kojulq/image/upload/v1731318409/image_pciho5.png");
   }
 
-   .learn-banner{
-    background: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.6)), url("https://res.cloudinary.com/do2kojulq/image/upload/v1730293565/WE%20Immersive/learn_1_odmix3.png");
+  .learn-banner {
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6)
+      ),
+      url("https://res.cloudinary.com/do2kojulq/image/upload/v1730293565/WE%20Immersive/learn_1_odmix3.png");
   }
 
-  .bg-contact-1{
-    background: linear-gradient(180deg, #1D9CD7 0%, #206B8E 100%);
+  .bg-contact-1 {
+    background: linear-gradient(180deg, #1d9cd7 0%, #206b8e 100%);
   }
-  .bg-contact-2{
-    background: linear-gradient(180deg, #E8F8FF 0%, #F5FAFF 100%);
+  .bg-contact-2 {
+    background: linear-gradient(180deg, #e8f8ff 0%, #f5faff 100%);
   }
-  .bg-contact-3{
-    background: linear-gradient(180deg, #6F0AFF 0%, #6F32C7 100%);
-  }
-
-  .auth-shadow{
-    box-shadow: 0px 4px 10px 2px #0000000D;
+  .bg-contact-3 {
+    background: linear-gradient(180deg, #6f0aff 0%, #6f32c7 100%);
   }
 
-  .btn-shadow{
-    box-shadow: 0px 4px 28px 0px #0000001A;
+  .auth-shadow {
+    box-shadow: 0px 4px 10px 2px #0000000d;
   }
 
-  .box-drop{
-    box-shadow: 0px 2px 20px 5px #0523BC08;
+  .btn-shadow {
+    box-shadow: 0px 4px 28px 0px #0000001a;
+  }
+
+  .box-drop {
+    box-shadow: 0px 2px 20px 5px #0523bc08;
   }
 
   .active-class {
-    background-color: #242EF21A;
-    border-left:3px solid #242EF2;
+    background-color: #242ef21a;
+    border-left: 3px solid #242ef2;
   }
   .ps-menu-button .ps-active {
     padding-left: 0 !important;

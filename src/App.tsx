@@ -7,6 +7,7 @@ import { adminRoutes } from "./routes/admin-routes";
 import { creatorRoutes } from "./routes/creator-routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { studentRoutes } from "./routes/student-routes";
 
 const router = createBrowserRouter([
   ...landingRoutes,
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
   ...institutionRoutes,
   ...adminRoutes,
   ...creatorRoutes,
+  ...studentRoutes,
 ]);
 
 function App() {
