@@ -9,13 +9,15 @@ import { Drawer } from "@material-tailwind/react";
 import CalloutMenu from "./extras/callout-menu";
 import useDialog from "../../hooks/useDialog";
 import LoginPopup from "./extras/login-popup";
+import { useSelector } from "react-redux";
 
 const LandingHeader = () => {
-  const navigate = useNavigate();
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
   const [open, setOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string>('')
+  const [selected, setSelected] = useState<string>("");
   const { Dialog, setShowDialog } = useDialog();
+  const user = useSelector((state: any) => state.userData.data);
+  const navigate = useNavigate();
 
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
@@ -34,10 +36,22 @@ const LandingHeader = () => {
     };
   }, []);
 
-  const openAuth = (type:string) => {
-    setSelected(type)
-    setShowDialog(true)
-  }
+  const openAuth = (type: string) => {
+    setSelected(type);
+    setShowDialog(true);
+  };
+
+  const openDashboard = (accountType: any) => {
+    if (accountType === "user") {
+      navigate("/user");
+    } else if (accountType === "creator") {
+      navigate("/creator");
+    } else if (accountType === "students") {
+      navigate("/students");
+    } else if (accountType === "institution") {
+      navigate("/institution");
+    }
+  };
 
   return (
     <div>
@@ -82,17 +96,28 @@ const LandingHeader = () => {
                 <HeaderSearchBox />
               </div>
               <div className="hidden lg:flex items-center gap-x-4 lg:gap-x-7 min-w-[220px]">
-                <Button
-                  title={"Login"}
-                  altClassName="w-600 lg:text-lg dark:text-white"
-                  onClick={() => openAuth('login')}
-                />
-                <Button
-                  title={"Get Started"}
-                  onClick={() => openAuth('register')}
-                  withArrows
-                  altClassName="btn-primary whitespace-nowrap px-5 py-3"
-                />
+                {!user ? (
+                  <>
+                    <Button
+                      title={"Login"}
+                      altClassName="w-600 lg:text-lg dark:text-white"
+                      onClick={() => openAuth("login")}
+                    />
+                    <Button
+                      title={"Get Started"}
+                      onClick={() => openAuth("register")}
+                      withArrows
+                      altClassName="btn-primary whitespace-nowrap px-5 py-3"
+                    />
+                  </>
+                ) : (
+                  <Button
+                    title={"Dashboard"}
+                    onClick={() => openDashboard(user.accountType)}
+                    withArrows
+                    altClassName="btn-primary whitespace-nowrap px-5 py-3"
+                  />
+                )}
               </div>
               <div>
                 <ThemeSwitch />
@@ -116,7 +141,7 @@ const LandingHeader = () => {
         <CalloutMenu />
       </Drawer>
       <Dialog title="" size="md">
-        <LoginPopup close={() => setShowDialog(false)} type={selected}/>
+        <LoginPopup close={() => setShowDialog(false)} type={selected} />
       </Dialog>
     </div>
   );

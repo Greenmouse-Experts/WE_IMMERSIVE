@@ -52,7 +52,7 @@ const App = () => {
     {
       path: "/students",
       element: (
-        <AuthMiddleware role={user?.accountType} allowedRoles={["institution"]}>
+        <AuthMiddleware role={user?.accountType} allowedRoles={["students"]}>
           <StudentsDashboardLayout />
         </AuthMiddleware>
       ),

@@ -8,7 +8,7 @@ export function useLogOut() {
 
   // Return a callable function for logout
   return () => {
-    dispatch(weImmersiveUser({})); // Clear user data
+    dispatch(weImmersiveUser(null)); // Clear user data
     localStorage.removeItem("we-immersiveUser"); // Clear local storage
     navigate("/"); // Redirect to home or login
   };
