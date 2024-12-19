@@ -74,8 +74,6 @@ const CreateAsset = () => {
     setAssetPayload(data);
   };
 
-  console.log(assetPayload);
-
   return (
     <div className="rounded-[20px] p-5 bg-white dark:bg-black">
       {stepper === 1 && (
@@ -113,7 +111,12 @@ const CreateAsset = () => {
       {stepper === 2 && (
         <AboutAsset handleStepper={handleStepper} payload={setPayload} />
       )}
-      {stepper === 3 && <AssetSpecification handleStepper={handleStepper} />}
+      {stepper === 3 && (
+        <AssetSpecification
+          handleSteeper={handleStepper}
+          payload={assetPayload}
+        />
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
+const token = localStorage.getItem("we-immersiveUser");
 
 export const registerUser = async (payload: any) => {
   return axios
@@ -41,5 +42,17 @@ export const resendOTP = async (payload: any) => {
 export const login = async (payload: any) => {
   return axios
     .post(`${baseURL}/auth/login`, payload)
+    .then((response) => response.data);
+};
+
+export const createDigitalAsset = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/creator/digital/asset/create`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
     .then((response) => response.data);
 };
