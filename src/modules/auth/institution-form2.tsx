@@ -55,6 +55,7 @@ const InstitutionForm2 = ({ setActiveForm }) => {
     setIsBusy(false);
     const payload = { ...institutionPayload, ...formData };
     mutation.mutate(payload);
+    dispatch(payloadEmail(formData.email));
   };
   return (
     <div className="mt-3">

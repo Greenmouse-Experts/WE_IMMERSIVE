@@ -9,11 +9,13 @@ import FormContainer from "../../modules/auth/form-container";
 import { useMutation } from "@tanstack/react-query"; // React Query import
 import { toast } from "react-toastify";
 import { resendOTP, verifyEmail } from "../../api";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { payloadEmail } from "../../reducers/usersSlice";
 
 const EmailValidate = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const email = useSelector((state: any) => state.userData.email);
 
@@ -35,6 +37,7 @@ const EmailValidate = () => {
     onSuccess: (data: any) => {
       toast.success(data.message);
       navigate("/auth/login");
+      dispatch(payloadEmail(null));
     },
     onError: (error: any) => {
       toast.error(error.response.data.message);
