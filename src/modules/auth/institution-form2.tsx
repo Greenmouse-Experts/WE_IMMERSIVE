@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { registerInstitution } from "../../api";
 
-const InstitutionForm2 = () => {
+const InstitutionForm2 = ({ setActiveForm }) => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const institutionPayload = JSON.parse(
     localStorage.getItem("institutionPayload")
@@ -153,12 +153,20 @@ const InstitutionForm2 = () => {
             )}
           />
         </div>
-        <div className="mt-4">
+        <div className="mt-4 flex w-full gap-5 justify-between">
           <Button
             withArrows
+            size={14}
             title={isBusy ? <BeatLoader size={12} color="white" /> : "Sign Up"}
-            altClassName="btn-primary unbound !fw-600 w-full py-3"
+            altClassName="btn-primary px-10 py-3 flex flex-grow whitespace-nowrap"
             disabled={!isValid || isBusy}
+          />
+          <Button
+            style={{ width: "fit-content" }}
+            size={14}
+            onClick={() => setActiveForm(3)}
+            title={"Go Back"}
+            altClassName="btn-primary px-10 py-3 flex flex-grow whitespace-nowrap"
           />
         </div>
       </form>

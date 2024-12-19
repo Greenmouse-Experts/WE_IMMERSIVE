@@ -16,6 +16,11 @@ import "react-phone-number-input/style.css";
 
 const InstitutionForm1 = ({ setActiveForm }) => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
+  const institutionPayload = JSON.parse(
+    localStorage.getItem("institutionPayload")
+  );
+
+  console.log(institutionPayload);
   const {
     control,
     handleSubmit,
@@ -23,13 +28,24 @@ const InstitutionForm1 = ({ setActiveForm }) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      institutionName: "",
-      institutionEmail: "",
-      institutionPhoneNumber: "",
-      institutionType: "",
-      institutionIndustry: "",
-      institutionSize: "",
-      institutionLocation: "",
+      institutionName: institutionPayload
+        ? institutionPayload.institutionName
+        : "",
+      institutionEmail: institutionPayload
+        ? institutionPayload.institutionEmail
+        : "",
+      institutionPhoneNumber: institutionPayload
+        ? institutionPayload.institutionPhoneNumber
+        : "",
+      institutionType: institutionPayload
+        ? institutionPayload.institutionType
+        : "",
+      institutionIndustry: institutionPayload
+        ? institutionPayload.institutionIndustry
+        : "",
+      institutionLocation: institutionPayload
+        ? institutionPayload.institutionLocation
+        : "",
     },
   });
 
@@ -140,7 +156,7 @@ const InstitutionForm1 = ({ setActiveForm }) => {
             international
             defaultCountry="NG"
             countries={["US", "NG", "GB"]}
-            name="phoneNumber"
+            name="institutionPhoneNumber"
             control={control}
             rules={{
               required: true,
@@ -152,8 +168,10 @@ const InstitutionForm1 = ({ setActiveForm }) => {
             }}
             className="flex items-center bg-[#E9EBFB]  mt-2 rounded-[6px] text-black lg:p-3 rounded-[4px] placeholder:text-[13px] placeholder:text-[#999797] w-full border-0  outline-none py-2 px-2 rounded"
           />
-          {errors.phoneNumber && (
-            <p className="error text-red-400 text-sm">Invalid Phone Number</p>
+          {errors.institutionPhoneNumber && (
+            <span className="error text-red-400 text-sm">
+              Invalid Phone Number
+            </span>
           )}
         </div>
 
