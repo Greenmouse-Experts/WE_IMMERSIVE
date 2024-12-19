@@ -38,12 +38,12 @@ const CreateAsset = () => {
   };
 
   const createList = [
-    {
+    /*{
       title: "Course",
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1733823284/Group_1000005676_vjz8ip.png",
       desc: "Choose this if you want to up load a course or educational materials",
       selected: false,
-    },
+    },*/
     {
       title: "Digital Asset",
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1733823284/Group_1000005676_1_lm9e6n.png",
@@ -115,6 +115,7 @@ const CreateAsset = () => {
         <AssetSpecification
           handleSteeper={handleStepper}
           payload={assetPayload}
+          category={selectedAsset}
         />
       )}
     </div>

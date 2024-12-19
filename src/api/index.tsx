@@ -56,3 +56,15 @@ export const createDigitalAsset = async (payload: any, headers = {}) => {
     })
     .then((response) => response.data);
 };
+
+export const createPhysicalAsset = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/creator/physical/asset/create`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};

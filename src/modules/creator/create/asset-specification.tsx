@@ -6,15 +6,17 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { createDigitalAsset } from "../../../api";
+import { createDigitalAsset, createPhysicalAsset } from "../../../api";
 
 interface AssetSpecificationProps {
   payload: any;
   handleSteeper: any;
+  category: any;
 }
 const AssetSpecification = ({
   handleSteeper,
   payload,
+  category,
 }: AssetSpecificationProps) => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
 
@@ -41,7 +43,8 @@ const AssetSpecification = ({
 
   // React Query: Define mutation
   const mutation = useMutation({
-    mutationFn: createDigitalAsset,
+    mutationFn:
+      category === "Digital Asset" ? createDigitalAsset : createPhysicalAsset,
     onSuccess: (data: any) => {
       toast.success(data.message);
       setIsBusy(false); // Hide loader
@@ -249,7 +252,7 @@ const AssetSpecification = ({
             size={14}
             onClick={() => handleSteeper("previous")}
             title={"Go Back"}
-            altClassName="btn-primary px-10 py-2 flex whitespace-nowrap"
+            altClassName="btn-primary px-10 py-2 flex flex-grow whitespace-nowrap"
           />
         </div>
       </form>

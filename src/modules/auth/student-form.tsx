@@ -17,6 +17,7 @@ import { useMutation } from "@tanstack/react-query";
 import { registerStudent } from "../../api";
 import { payloadEmail } from "../../reducers/usersSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const StudentForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
