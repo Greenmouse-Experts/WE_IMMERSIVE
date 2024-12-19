@@ -69,8 +69,12 @@ export const createPhysicalAsset = async (payload: any, headers = {}) => {
     .then((response) => response.data);
 };
 
-export const getPhysicalAsset = async () => {
-  return axios
-    .get(`${baseURL}/fetch/digital/assets`)
-    .then((response) => response.data);
+export const getDigitalAssets = async () => {
+  const response = await axios.get(`${baseURL}/fetch/digital/assets`); // Replace with your API endpoint
+  return response.data;
+};
+
+export const getPhysicalAssets = async () => {
+  const response = await axios.get(`${baseURL}/fetch/physical/assets`); // Replace with your API endpoint
+  return response.data;
 };

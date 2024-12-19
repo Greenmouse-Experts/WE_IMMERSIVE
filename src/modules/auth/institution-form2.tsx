@@ -12,6 +12,8 @@ import { useMutation } from "@tanstack/react-query"; // React Query import
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { registerInstitution } from "../../api";
+import { useDispatch } from "react-redux";
+import { payloadEmail } from "../../reducers/usersSlice";
 
 const InstitutionForm2 = ({ setActiveForm }) => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
@@ -19,6 +21,7 @@ const InstitutionForm2 = ({ setActiveForm }) => {
     localStorage.getItem("institutionPayload")
   );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     control,
