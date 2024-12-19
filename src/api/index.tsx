@@ -68,3 +68,9 @@ export const createPhysicalAsset = async (payload: any, headers = {}) => {
     })
     .then((response) => response.data);
 };
+
+export const getPhysicalAsset = async () => {
+  return axios
+    .get(`${baseURL}/fetch/digital/assets`)
+    .then((response) => response.data);
+};

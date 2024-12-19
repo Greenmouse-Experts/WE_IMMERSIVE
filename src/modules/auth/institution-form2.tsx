@@ -40,6 +40,7 @@ const InstitutionForm2 = ({ setActiveForm }) => {
     onSuccess: (data: any) => {
       toast.success(data.message);
       navigate("/auth/verify-email");
+      localStorage.removeItem("institutionPayload");
     },
     onError: (error: any) => {
       toast.error(error.response.data.message);
