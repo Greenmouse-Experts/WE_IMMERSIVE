@@ -46,7 +46,7 @@ const LandingHeader = () => {
       navigate("/user");
     } else if (accountType === "creator") {
       navigate("/creator");
-    } else if (accountType === "students") {
+    } else if (accountType === "student") {
       navigate("/students");
     } else if (accountType === "institution") {
       navigate("/institution");

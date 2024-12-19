@@ -1,11 +1,11 @@
-import HeroImage from "./hero-image"
-import HeroText from "./hero-text"
+import HeroImage from "./hero-image";
+import HeroText from "./hero-text";
 
 const HeroBanner = () => {
   return (
     <div className="">
       <div className="auth-gradient bg-cover lg:h-[590px] w-full">
-        <div className="auth-gradient-bg bg-cover h-full py-12 lg:py-0">
+        <div className="auth-gradient-bg bg-cover w-full h-full py-12 lg:py-0">
           <div className="box lg:flex justify-between flex-row-reverse items-center h-full">
             {/* hero images */}
             <div className="lg:w-[42%] h-full">
@@ -20,6 +20,6 @@ const HeroBanner = () => {
       </div>
     </div>
   );
-}
+};
 
-export default HeroBanner
+export default HeroBanner;

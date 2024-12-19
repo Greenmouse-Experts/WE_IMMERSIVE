@@ -6,26 +6,50 @@ import StatisticList from "./stat-list";
 import { useSelector } from "react-redux";
 import { todayDate } from "../../../helpers/dateHelper";
 
-const HeaderSection = () => {
+const HeaderSection = ({ openBar }: any) => {
   const user = useSelector((state: any) => state.userData.data);
 
+  const openSideBar = () => {
+    openBar(true);
+  };
+
   return (
-    <div>
-      <div className="flex items-stretch gap-x-5">
-        <div className="w-[65%]">
+    <div className="w-full flex">
+      <div className="flex items-stretch w-full gap-x-5">
+        <div className="md:w-[65%] w-full">
           <div className="flex items-center justify-between">
-            <div className="">
-              <div className="flex items-center h-[44px] 2xl:w-[481px] px-4  bg-white rounded-[14px] overflow-hidden">
+            <div className="md:flex hidden">
+              <div className="flex items-center h-[44px] 2xl:w-[481px] px-4 bg-white dark:bg-[#15171E] rounded-[14px] overflow-hidden">
                 <CiSearch size={20} />
                 <input
                   type="text"
-                  className="h-full w-full  px-2 placeholder:text-sm ]"
+                  className="h-full w-full bg-transparent px-2 placeholder:text-sm"
                   placeholder="Search with keyword"
                 />
               </div>
               {/* <TextInput type={InputType.text} icon={<CiSearch />} placeholder="Search with keyword" style={{backgroundColor:"#fff"}}/> */}
             </div>
             <div className="flex gap-x-2 items-center">
+              <div
+                onClick={() => openSideBar()}
+                className="size-[44px] md:hidden flex cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E]"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              </div>
               <div className="size-[44px] cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E]">
                 <CiSearch />
               </div>
@@ -35,10 +59,24 @@ const HeaderSection = () => {
               <div className="size-[44px] cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E]">
                 <IoMdNotificationsOutline className="text-[#A324F2]" />
               </div>
+              <div className="flex md:hidden items-center justify-between bg-[#E9EBFB] dark:bg-black rounded-[14px] px-4 py-1">
+                <p className="unbound fw-400 text-[#06052A] text-xs">
+                  Student Account
+                </p>
+                <img
+                  src={`${
+                    user.photo
+                      ? user.photo
+                      : "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005705_c9ddis.png"
+                  }`}
+                  alt="profile"
+                  className="w-6"
+                />
+              </div>
             </div>
           </div>
           <div className="mt-4 p-4 h-[200px] grid content-between w-full relative rounded-[14px] bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Frame_2_1_t4ktg0.png')] bg-cover">
-            <div className="absolute right-6 -top-10">
+            <div className="absolute md:block hidden right-6 -top-10">
               <img
                 src="https://res.cloudinary.com/do2kojulq/image/upload/v1734261115/WE%20Immersive/student-image_cpnig5.png"
                 width={300}
@@ -62,7 +100,7 @@ const HeaderSection = () => {
             <StatisticList />
           </div>
         </div>
-        <div className="w-[35%] bg-white dark:bg-[#15171E] rounded-[14px] p-4">
+        <div className="w-[35%] bg-white dark:bg-[#15171E] rounded-[14px] p-4 md:block hidden">
           <div className="flex items-center justify-between bg-[#E9EBFB] dark:bg-black rounded-[14px] px-4 py-1">
             <p className="unbound fw-400 text-[#06052A] fs-500">
               Student Account

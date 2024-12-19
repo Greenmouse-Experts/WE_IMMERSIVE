@@ -26,15 +26,15 @@ const StatisticList = () => {
   ];
   return (
     <div className="w-full">
-      <div className="grid grid-cols-3 gap-6 mt-10">
+      <div className="grid md:grid-cols-3 grid-cols-1 gap-6 mt-10">
         {list.map((item) => (
           <div className="relative h-[120px]">
-            <div className="box-drop rounded-[20px] p-4 h-full bg-white dark:bg-[#15171E] flex items-center">
+            <div className="box-drop rounded-[20px] p-4 h-full w-full bg-white dark:bg-[#15171E] flex items-center">
               <Link to={`${item.route}`}>
-                <p className="text monts text-[#7F7F7F] fw-600 text-lg">
+                <p className="text monts text-[#7F7F7F] fw-600 md:text-lg text-base">
                   {item.count}
                 </p>
-                <p className="unbound fs-500 fw-400 text-[#06052A] pt-1">
+                <p className="unbound md:text-base text-sm fw-400 text-[#06052A] pt-1">
                   {item.name}
                 </p>
               </Link>

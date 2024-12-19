@@ -12,10 +12,13 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
+import { payloadEmail } from "../../reducers/usersSlice";
+import { useDispatch } from "react-redux";
 
 const RegisterForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     control,
@@ -52,6 +55,7 @@ const RegisterForm = () => {
   const onSubmit = (formData: any) => {
     setIsBusy(true); // Show loader
     mutation.mutate(formData);
+    dispatch(payloadEmail(formData.email));
   };
 
   return (

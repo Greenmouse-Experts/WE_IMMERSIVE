@@ -37,7 +37,7 @@ const StackedBarChart = () => {
   return (
     <>
       <h2 className="font-bold mb-2">Hours Spent</h2>
-      <div className="w-full h-96 border bg-white text-xs rounded-lg">
+      <div className="w-full h-96 bg-white dark:bg-[#15171E] text-xs rounded-lg">
         <div className="flex py-2 px-8 mt-1 gap-6">
           <div className="flex gap-1">
             <span className="w-3 h-3 rounded-sm bg-[rgba(111,10,255,1)]"></span>

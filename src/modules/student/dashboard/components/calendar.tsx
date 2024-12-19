@@ -65,11 +65,11 @@ const Calendar = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-2 bg-white rounded-lg">
+    <div className="w-full mx-auto p-2 bg-white dark:bg-[#15171E] rounded-lg">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <div className="flex w-auto">
-          <h2 className="text-lg font-bold text-gray-900">
+          <h2 className="text-lg font-bold">
             {currentDate.toLocaleString("default", { month: "long" })},{" "}
             {currentDate.getFullYear()}
           </h2>

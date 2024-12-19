@@ -21,8 +21,8 @@ const Notifications = () => {
   ];
 
   return (
-    <div>
-      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
+    <div className="mt-7">
+      <div className="bg-white dark:bg-[#15171E] w-full px-4 lg:py-6 py-3 rounded-[20px]">
         <p className="unbound text-[#06052A]">Notifications </p>
         <div className="mt-6 grid gap-4">
           {activities.map((item, i) => (

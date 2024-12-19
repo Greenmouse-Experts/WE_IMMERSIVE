@@ -6,11 +6,11 @@ import CookieModal from "../../components/utils/cookie-modal";
 
 const LandingLayout = () => {
   return (
-    <div>
+    <div className="w-full">
       <ScrollToTop />
       <LandingHeader />
       <Outlet />
-      <CookieModal/>
+      <CookieModal />
       <LandingFooter />
     </div>
   );

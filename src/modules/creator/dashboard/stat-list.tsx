@@ -1,35 +1,35 @@
 import { formatAsNgnMoney } from "../../../components/utils/formatHelp";
 
 const StatisticList = () => {
-     const list = [
-       {
-         name: "Created Asset",
-         count: 7,
-         img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716454/WE%20Immersive/learning-2_xy21e0.png",
-         color: "#FFC7F0",
-       },
-       {
-         name: "Created Courses",
-         count: `37`,
-         img: "https://res.cloudinary.com/do2kojulq/image/upload/v1732618852/Group_1171275331_lcfrkq.png",
-         color: "#FFD7C7",
-       },
-       {
-         name: "Total Orders",
-         count: 37,
-         img: "https://res.cloudinary.com/do2kojulq/image/upload/v1732618852/Group_1171275331_lcfrkq.png",
-         color: "#FFD7C7",
-       },
-       {
-         name: "Subscriptions",
-         count: `$${formatAsNgnMoney(107000)}`,
-         img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/coin-2_qcugc2.png",
-         color: "#D0FFC7",
-       },
-     ];
+  const list = [
+    {
+      name: "Created Asset",
+      count: 7,
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716454/WE%20Immersive/learning-2_xy21e0.png",
+      color: "#FFC7F0",
+    },
+    {
+      name: "Created Courses",
+      count: `37`,
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1732618852/Group_1171275331_lcfrkq.png",
+      color: "#FFD7C7",
+    },
+    {
+      name: "Total Orders",
+      count: 37,
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1732618852/Group_1171275331_lcfrkq.png",
+      color: "#FFD7C7",
+    },
+    {
+      name: "Subscriptions",
+      count: `$${formatAsNgnMoney(107000)}`,
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/coin-2_qcugc2.png",
+      color: "#D0FFC7",
+    },
+  ];
   return (
     <div>
-      <div className="grid grid-cols-4 gap-6 mt-10">
+      <div className="grid md:grid-cols-4 grid-cols-1 gap-6 mt-10">
         {list.map((item) => (
           <div className="relative h-[120px]">
             <div className="box-drop rounded-[20px] p-4 h-full bg-white dark:bg-[#15171E] flex items-center">
@@ -53,6 +53,6 @@ const StatisticList = () => {
       </div>
     </div>
   );
-}
+};
 
-export default StatisticList
+export default StatisticList;

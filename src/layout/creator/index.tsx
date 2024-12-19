@@ -17,6 +17,11 @@ const CreatorDashboardLayout = () => {
   //   }
   const [toggled, setToggled] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+
+  const toggleBar = () => {
+    setToggled(!toggled);
+  };
+
   return (
     <>
       <div className="flex bg-[#F6F7FB] dark:bg-[#0D0D0D] dark:text-white">
@@ -34,7 +39,7 @@ const CreatorDashboardLayout = () => {
         >
           <div className="">
             <div className="px-3 lg:px-7">
-              <TopHeader/>
+              <TopHeader openBar={toggleBar} />
               <Outlet />
               <p onClick={() => setCollapsed(true)}></p>
             </div>

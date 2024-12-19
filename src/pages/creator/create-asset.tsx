@@ -4,14 +4,17 @@ import Button from "../../components/ui/Button";
 import AboutAsset from "../../modules/creator/create/about-asset";
 import AssetSpecification from "../../modules/creator/create/asset-specification";
 
-interface  CreateAssetItemProps{
+interface CreateAssetItemProps {
   item: { title: string; img: string; desc: string; selected: boolean };
   handleSelect: (title: string) => void;
   isSelected: boolean;
 }
 const CreateAsset = () => {
-
-  const CreateAssetItem = ({ item, handleSelect, isSelected }: CreateAssetItemProps) => {
+  const CreateAssetItem = ({
+    item,
+    handleSelect,
+    isSelected,
+  }: CreateAssetItemProps) => {
     return (
       <div
         onClick={() => handleSelect(item.title)}
@@ -57,6 +60,7 @@ const CreateAsset = () => {
 
   const [selectedAsset, setSelectedAsset] = useState("Course");
   const [stepper, setStepper] = useState(1);
+  const [assetPayload, setAssetPayload] = useState(null);
 
   const handleSelect = (itemName: string) => {
     setSelectedAsset(itemName);
@@ -66,40 +70,50 @@ const CreateAsset = () => {
     setStepper((prev) => prev + (direction === "next" ? 1 : -1));
   };
 
+  const setPayload = (data: any) => {
+    setAssetPayload(data);
+  };
+
+  console.log(assetPayload);
+
   return (
     <div className="rounded-[20px] p-5 bg-white dark:bg-black">
-     {stepper === 1 && <div>
-        <p className="unbound text-[#06052A] fw-600">Create </p>
-        <div className="mt-2">
-          <p className="text-base ">
-            Choose the category of what you want to upload
-          </p>
-        </div>
+      {stepper === 1 && (
+        <div>
+          <p className="unbound text-[#06052A] fw-600">Create </p>
+          <div className="mt-2">
+            <p className="text-base ">
+              Choose the category of what you want to upload
+            </p>
+          </div>
 
-        <div className="mt-10 flex justify-between gap-5 ">
-          {createList.map((item, index) => (
-            <CreateAssetItem
-              handleSelect={handleSelect}
-              key={index}
-              item={item}
-              isSelected={selectedAsset === item.title}
+          <div className="mt-10 flex flex-col md:flex-row justify-between gap-5 ">
+            {createList.map((item, index) => (
+              <CreateAssetItem
+                handleSelect={handleSelect}
+                key={index}
+                item={item}
+                isSelected={selectedAsset === item.title}
+              />
+            ))}
+            {/* <CreateAssetItem /> */}
+          </div>
+          <div className=" mt-16 flex justify-center">
+            <Button
+              onClick={() => handleStepper("next")}
+              style={{ width: "fit-content" }}
+              title="Proceed"
+              withArrows
+              size={14}
+              altClassName="btn-primary px-10 py-2 whitespace-nowrap"
             />
-          ))}
-          {/* <CreateAssetItem /> */}
+          </div>
         </div>
-        <div className=" mt-16 flex justify-center">
-          <Button
-            onClick={() => handleStepper("next")}
-            style={{ width: "fit-content" }}
-            title="Proceed"
-            withArrows
-            size={14}
-            altClassName="btn-primary px-10 py-2 whitespace-nowrap"
-          />
-        </div>
-      </div>}
-      {stepper === 2 && <AboutAsset  handleStepper={handleStepper}/>}
-      {stepper === 3 && <AssetSpecification  handleStepper={handleStepper}/>}
+      )}
+      {stepper === 2 && (
+        <AboutAsset handleStepper={handleStepper} payload={setPayload} />
+      )}
+      {stepper === 3 && <AssetSpecification handleStepper={handleStepper} />}
     </div>
   );
 };

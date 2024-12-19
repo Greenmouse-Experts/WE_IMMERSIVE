@@ -25,6 +25,11 @@
   color: white;
 }
 
+body {
+  margin: 0;
+  width: 100%;
+}
+
 /* remove default input color */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
@@ -156,7 +161,7 @@ input.PhoneInputInput {
 
   @media (min-width: 576px) {
     .box {
-      width: 540px;
+      width: 500px;
     }
   }
 

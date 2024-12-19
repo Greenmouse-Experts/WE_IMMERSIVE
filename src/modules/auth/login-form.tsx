@@ -47,6 +47,10 @@ const LoginForm = () => {
         navigate("/creator");
       }
 
+      if (data.data.accountType === "student") {
+        navigate("/students");
+      }
+
       if (data.data.accountType === "institution") {
         navigate("/institution");
       }
@@ -54,6 +58,12 @@ const LoginForm = () => {
     },
     onError: (error: any) => {
       toast.error(error.response.data.message);
+      if (
+        error.response.data.message ===
+        "Your email is not verified. A verification email has been sent to your email address."
+      ) {
+        navigate("/auth/verify-email");
+      }
       setIsBusy(false); // Hide loader
     },
     onSettled: () => {

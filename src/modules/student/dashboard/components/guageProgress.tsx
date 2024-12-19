@@ -4,7 +4,7 @@ const GaugeProgress = () => {
   return (
     <>
       <h2 className="font-bold mb-2">Performance</h2>
-      <div className="w-72 h-96 rounded-lg p-4 flex border flex-col items-center">
+      <div className="w-72 h-96 rounded-lg p-4 flex bg-white dark:bg-[#15171E] flex-col items-center">
         {/* Title */}
         <div className="flex justify-between w-full mb-4">
           <span className="text-sm flex items-center">
@@ -14,8 +14,8 @@ const GaugeProgress = () => {
             ></div>
             Point Progress
           </span>
-          <div className="text-sm bg-gray-300 px-2 py-1 rounded-lg cursor-pointer">
-            Monthly ⌄
+          <div className="text-sm dark:bg-white bg-[#15171E] text-white dark:text-[#15171E] px-2 py-1 rounded-lg cursor-pointer">
+            Monthly
           </div>
         </div>
 

@@ -32,9 +32,11 @@ const Orders = () => {
   return (
     <div>
       <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
-        <div className="flex justify-between items-center">
-          <p className="unbound text-[#06052A]">All Orders</p>
-          <div className="flex items-center gap-x-4">
+        <div className="flex w-full justify-between md:py-1 py-4 items-center">
+          <p className="unbound flex flex-grow text-sm md:text-base text-[#06052A]">
+            All Orders
+          </p>
+          <div className="md:flex hidden items-center gap-x-2">
             <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
               <p className="text-[#2C3E50] fs-300">Export As</p>
               <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
@@ -48,23 +50,22 @@ const Orders = () => {
             </div>
           </div>
         </div>
-        <div className="mt-6">
-          <table className="table-auto w-full">
-            <thead>
-              <tr>
-                <td className="unbound pl-4 p-1 pb-2">#</td>
-                <td className="unbound p-1 pb-2">Name</td>
-                <td className="unbound p-1 pb-2">Image</td>
-                <td className="unbound p-1 pb-2">Category</td>
-                <td className="unbound p-1 pb-2">Price</td>
-                <td className="unbound p-1 pb-2">Status </td>
-                <td className="unbound p-1 pb-2">Action</td>
-              </tr>
-            </thead>
-            <tbody className="">
-              {data.map((item, i) => {
-                console.log(item);
-                return (
+        <div className="mt-2">
+          <div className="overflow-x-auto">
+            <table className="table-auto md:w-full w-[1000px] text-sm">
+              <thead>
+                <tr className="bg-gray-100 dark:bg-gray-800">
+                  <td className="unbound pl-4 p-1 pb-2">#</td>
+                  <td className="unbound p-1 pb-2">Name</td>
+                  <td className="unbound p-1 pb-2">Image</td>
+                  <td className="unbound p-1 pb-2">Category</td>
+                  <td className="unbound p-1 pb-2">Price</td>
+                  <td className="unbound p-1 pb-2">Status</td>
+                  <td className="unbound p-1 pb-2">Action</td>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item, i) => (
                   <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
                     <td className={`p-2 py-4 pl-4`}>{`0${i + 1}`}</td>
                     <td className="p-2 py-4">{item.name}</td>
@@ -72,7 +73,7 @@ const Orders = () => {
                       <img
                         src={item.img}
                         alt="purchase-image"
-                        className="w-[70px]"
+                        className="w-[70px] h-auto"
                       />
                     </td>
                     <td className="p-2 py-4">{item.category}</td>
@@ -82,10 +83,10 @@ const Orders = () => {
                       <PiDotsThreeOutlineFill className="cursor-pointer" />
                     </td>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

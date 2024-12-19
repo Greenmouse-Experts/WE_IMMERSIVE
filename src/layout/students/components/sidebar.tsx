@@ -30,7 +30,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
     <div className="left-3 top-3  fixed overflow-y-hidden">
       <Sidebar
         customBreakPoint="1024px"
-        className="h-[calc(100vh_-_30px)] overflow-y-hidden bg-white dark:bg-[#15171E] rounded-2xl !border-none scroll-pro p-3"
+        className="h-[calc(100vh_-_30px)] overflow-y-hidden z-[9999] bg-white dark:bg-[#15171E] rounded-2xl !border-none scroll-pro p-3"
         collapsed={collapsed}
         width="256px"
         backgroundColor=""
@@ -70,7 +70,12 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
                         active={path.pathname === item.route && true}
                         key={i}
                       >
-                        <p className="fs-400 text-grey">{item.name}</p>
+                        <p
+                          className="fs-400 text-grey"
+                          onClick={() => setToggled(false)}
+                        >
+                          {item.name}
+                        </p>
                       </MenuItem>
                     ))}
                   </SubMenu>
@@ -85,7 +90,12 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
                     key={item.name}
                   >
                     <div className="flex pr-4 justify-between items-center">
-                      <p className="fs-400 text-grey">{item.name}</p>
+                      <p
+                        className="fs-400 text-grey"
+                        onClick={() => setToggled(false)}
+                      >
+                        {item.name}
+                      </p>
                     </div>
                   </MenuItem>
                 )}

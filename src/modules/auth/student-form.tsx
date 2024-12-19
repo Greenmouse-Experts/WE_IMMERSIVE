@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 const StudentForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
