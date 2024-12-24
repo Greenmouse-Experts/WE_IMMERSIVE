@@ -467,3 +467,18 @@ input.PhoneInputInput {
     padding-left: 0 !important;
   }
 }
+
+.loader {
+  border: 4px solid transparent;
+  border-top-color: #00aafd;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

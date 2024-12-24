@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "/logo.svg";
 import logo2 from "/logo-white.svg";
 import { FC } from "react";
-import { Routes, RouteType } from "./routes";
+import { Routes } from "./routes";
 import { PiGear } from "react-icons/pi";
 import { LuArrowRightCircle } from "react-icons/lu";
 import ThemeSwitch from "../../../components/ui/theme-switch";
@@ -16,10 +16,10 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
   const path = useLocation();
 
   return (
-    <div className="left-3 top-3  fixed overflow-y-hidden">
+    <div className="left-3 top-3 fixed z-[50] overflow-y-hidden">
       <Sidebar
         customBreakPoint="1024px"
-        className="h-[calc(100vh_-_30px)] overflow-y-hidden bg-white dark:bg-[#15171E] rounded-2xl !border-none scroll-pro p-3"
+        className="h-[calc(100vh_-_30px)] overflow-y-hidden z-[9999] bg-white dark:bg-[#15171E] rounded-2xl !border-none scroll-pro p-3"
         collapsed={collapsed}
         width="256px"
         backgroundColor=""
@@ -31,7 +31,11 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
         <div className="py-1 pt-2 mb-4 border-b border-[#B2B7B7] items-center">
           <Link to="/" className="pl-2 block">
             <img src={logo} alt="logo" className="w-[90px] dark:hidden" />
-            <img src={logo2} alt="logo" className="w-[90px] hidden dark:block" />
+            <img
+              src={logo2}
+              alt="logo"
+              className="w-[90px] hidden dark:block"
+            />
           </Link>
         </div>
         <Menu
@@ -48,7 +52,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
                     icon={item.icon}
                     key={item.name}
                   >
-                    {item.submenu.map((item: RouteType, i) => (
+                    {item.submenu.map((item: any, i) => (
                       <MenuItem
                         className="[&>a]:dark:!bg-[#15171E] dark:!text-white"
                         component={<Link to={item.route} />}

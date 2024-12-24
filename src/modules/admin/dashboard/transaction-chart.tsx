@@ -9,7 +9,13 @@ const TransactionChart: React.FC = () => {
       type: "donut",
     },
     colors: ["#A78BFA", "#38BDF8", "#F472B6", "#4ADE80", "#FBBF24"], // Colors for the chart
-    labels: ["General User", "Creator", "Student", "Professional", "Institution"], // Labels for the legend
+    labels: [
+      "General User",
+      "Creator",
+      "Student",
+      "Professional",
+      "Institution",
+    ], // Labels for the legend
     plotOptions: {
       pie: {
         donut: {
@@ -35,12 +41,10 @@ const TransactionChart: React.FC = () => {
     ],
   };
 
-  
   const series: number[] = [615, 315, 3200, 200, 94]; // Values corresponding to each label
 
   return (
-    <div className="bg-white dark:bg-[#15171E] rounded-[20px] p-6">
-      
+    <div className="bg-white dark:bg-[#15171E] w-full rounded-[20px] p-6">
       <div className="flex items-center justify-between mb-4">
         <p className="font-semibold text-gray-800 text-lg">User Analysis</p>
         <div className="flex items-center gap-x-2 px-3 py-1 bg-gray-100 rounded-full cursor-pointer w-fit">
@@ -49,9 +53,7 @@ const TransactionChart: React.FC = () => {
         </div>
       </div>
 
-      
       <div className="flex flex-col gap-6 items-center">
-        
         <div className="w-full lg:w-1/2">
           {typeof window !== "undefined" && (
             <Chart

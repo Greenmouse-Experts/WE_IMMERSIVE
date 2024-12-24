@@ -1,9 +1,12 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
 import SidebarLayout from "./components/sidebar";
+import HeaderSection from "../../modules/admin/dashboard/header-section";
+import TopHeader from "../../modules/admin/dashboard/top-header";
 // import Button from "../../components/ui/Button";
 
 const AdminDashboardLayout = () => {
+  const location = useLocation();
   //   const token = sessionStorage.getItem("weim_token");
   // const navigate = useNavigate();
   //   useEffect(() => {
@@ -16,6 +19,11 @@ const AdminDashboardLayout = () => {
   //   }
   const [toggled, setToggled] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+
+  const toggleBar = () => {
+    setToggled(!toggled);
+  };
+
   return (
     <>
       <div className="flex bg-[#F6F7FB] dark:bg-[#0D0D0D] dark:text-white">
@@ -33,6 +41,11 @@ const AdminDashboardLayout = () => {
         >
           <div className="">
             <div className="px-3 lg:px-7">
+              {location.pathname !== "/super-admin" ? (
+                <TopHeader openBar={toggleBar} />
+              ) : (
+                <HeaderSection openBar={toggleBar} />
+              )}
               <Outlet />
               <p onClick={() => setCollapsed(true)}></p>
             </div>

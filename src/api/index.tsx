@@ -69,6 +69,18 @@ export const createPhysicalAsset = async (payload: any, headers = {}) => {
     .then((response) => response.data);
 };
 
+export const createAssetCategory = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/admin/asset/category/create`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
 export const getDigitalAssets = async () => {
   const response = await axios.get(`${baseURL}/fetch/digital/assets`); // Replace with your API endpoint
   return response.data;
@@ -76,5 +88,55 @@ export const getDigitalAssets = async () => {
 
 export const getPhysicalAssets = async () => {
   const response = await axios.get(`${baseURL}/fetch/physical/assets`); // Replace with your API endpoint
+  return response.data;
+};
+
+export const loginAdmin = async (payload: any) => {
+  return axios
+    .post(`${baseURL}/auth/admin/login`, payload)
+    .then((response) => response.data);
+};
+
+export const getGeneralUsers = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/admin/users`, {
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data;
+};
+
+export const getStudents = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/admin/students`, {
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data;
+};
+
+export const getCreators = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/admin/creators`, {
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data;
+};
+
+export const getInstitutions = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/admin/institutions`, {
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
   return response.data;
 };

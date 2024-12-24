@@ -6,10 +6,15 @@ import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { GoMail } from "react-icons/go";
 import { HiOutlineLockClosed } from "react-icons/hi";
+import { useDispatch } from "react-redux";
+import { useMutation } from "@tanstack/react-query";
+import { weImmersiveUser } from "../../reducers/usersSlice";
+import { loginAdmin } from "../../api";
 
 const AdminLoginForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     control,
@@ -23,9 +28,20 @@ const AdminLoginForm = () => {
     },
   });
 
-  const onSubmit = () => {
+  const mutation = useMutation({
+    mutationFn: loginAdmin,
+    onSuccess: (data: any) => {
+      localStorage.setItem("we-immersiveUser", data.token);
+      delete data.data.password;
+
+      dispatch(weImmersiveUser(data.data));
+      navigate("/super-admin");
+    },
+  });
+
+  const onSubmit = (formData: any) => {
     setIsBusy(false);
-    navigate('/super-admin')
+    mutation.mutate(formData);
   };
   return (
     <div className="mt-3">
@@ -44,7 +60,9 @@ const AdminLoginForm = () => {
               label="Email"
               placeholder="Enter your email address"
               type={InputType.email}
-              icon={<GoMail className="mx-3 relative top-[1px] text-[#89888D]"/>}
+              icon={
+                <GoMail className="mx-3 relative top-[1px] text-[#89888D]" />
+              }
               error={errors.email?.message}
               {...field}
               ref={null}
@@ -70,15 +88,17 @@ const AdminLoginForm = () => {
                 label="Password"
                 placeholder="Password"
                 type={InputType.password}
-                icon={<HiOutlineLockClosed className="mx-3 relative top-[1px] text-[18px] text-[#89888D]"/>}
+                icon={
+                  <HiOutlineLockClosed className="mx-3 relative top-[1px] text-[18px] text-[#89888D]" />
+                }
                 error={errors.password?.message}
                 {...field}
                 ref={null}
               />
             )}
-          /> 
+          />
         </div>
-        
+
         <div className="mt-4">
           <Button
             withArrows

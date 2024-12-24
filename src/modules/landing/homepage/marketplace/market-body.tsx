@@ -19,20 +19,24 @@ const MarketBody = () => {
       <div className="grid gap-4 lg:gap-7 mt-6">
         {/* assets categories */}
         <div>{/* <AssetList name="Hot Trending 🔥" data={hotTrends}/> */}</div>
-        <div className="md:px-20 px-4">
-          <AssetList
-            name="Explore Digital Assets 📈"
-            data={digitalAssetsQuery.data.data}
-            classStyle={"text-black dark:text-white"}
-          />
-        </div>
-        <div className="mt-5 md:px-20 px-4 py-7 dark:bg-[rgba(233,235,251,1)] bg-[#000000]">
-          <AssetList
-            name="Explore Physical Assets 📈"
-            data={physicalAssetsQuery.data.data}
-            classStyle={"text-white dark:text-black"}
-          />
-        </div>
+        {digitalAssetsQuery.data.data.length > 0 && (
+          <div className="md:px-20 px-4">
+            <AssetList
+              name="Explore Digital Assets 📈"
+              data={digitalAssetsQuery.data.data}
+              classStyle={"text-black dark:text-white"}
+            />
+          </div>
+        )}
+        {physicalAssetsQuery.data.data.length > 0 && (
+          <div className="mt-5 md:px-20 px-4 py-7 dark:bg-[rgba(233,235,251,1)] bg-[#000000]">
+            <AssetList
+              name="Explore Physical Assets 📈"
+              data={physicalAssetsQuery.data.data}
+              classStyle={"text-white dark:text-black"}
+            />
+          </div>
+        )}
         {/*<div>
           <AssetList name="Trending Courses 🧑‍🏫" data={trendsCourses} />
   </div>*/}
