@@ -1,65 +1,57 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
-import { useGetData } from "../../../hooks/useGetData";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Loader from "../../../components/reusables/loader";
 import { dateFormat } from "../../../helpers/dateHelper";
-import { getCreators } from "../../../api";
 import Button from "../../../components/ui/Button";
 import { Dialog } from "@material-tailwind/react";
-import AssetCategory from "./assetCategory";
-import { useNavigate } from "react-router-dom";
-import { getApprovedDigitalAssets } from "../../../api/admin";
+import JobCategory from "./jobCategory";
 
-interface DataItem {
-  createdAt: string; // ISO 8601 date string
-  // Other properties as needed
-}
-
-const DigitalAssets = () => {
-  // Fetch data for each group
-  const digitalAssetsQuery = useGetData(["digitalAssets"], getApprovedDigitalAssets);
-  const creators = useGetData(["creators"], getCreators);
-  const navigate = useNavigate
-  ();
-
-  const [data, setData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+const Jobs = () => {
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
 
-  useEffect(() => {
-    // Check if all data is available before merging
-    if (digitalAssetsQuery.data && creators.data) {
-      const mergedData: DataItem[] = digitalAssetsQuery.data.data.map(
-        (asset: { creatorId: any }) => {
-          // Find the corresponding creator by ID
-          const creator = creators.data?.data.find(
-            (creator: { id: any }) => creator.id === asset.creatorId
-          );
-          return {
-            ...asset,
-            creatorName: creator ? creator.name : "Unknown", // Add creator name or default to "Unknown"
-          };
-        }
-      );
-
-      const sortedData = mergedData.sort(
-        (a: DataItem, b: DataItem) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-      setData(sortedData);
-      setLoading(false);
+  const data = [
+    {
+        assetName: "2D/3D Designer",
+        description: "Looking for a 2D Designer to create designs for an upcoming ...",
+        postedBy: "Chukka Ude",
+        createdAt: "2022-10-10T00:00:00Z",
+    },
+    {
+        assetName: "2D/3D Designer",
+        description: "Looking for a 2D Designer to create designs for an upcoming ...",
+        postedBy: "Chukka Ude",
+        createdAt: "2022-10-10T00:00:00Z",
+    },
+    {
+        assetName: "2D/3D Designer",
+        description: "Looking for a 2D Designer to create designs for an upcoming ...",
+        postedBy: "Chukka Ude",
+        createdAt: "2022-10-10T00:00:00Z",
+    },
+    {
+        assetName: "2D/3D Designer",
+        description: "Looking for a 2D Designer to create designs for an upcoming ...",
+        postedBy: "Chukka Ude",
+        createdAt: "2022-10-10T00:00:00Z",
+    },
+    {
+        assetName: "2D/3D Designer",
+        description: "Looking for a 2D Designer to create designs for an upcoming ...",
+        postedBy: "Chukka Ude",
+        createdAt: "2022-10-10T00:00:00Z",
     }
-  }, [digitalAssetsQuery.data, creators.data]); // Dependency array ensures this runs when data updates
+  ]
 
   return (
     <div>
       <div className="bg-white dark:bg-[#15171E] mt-10 px-4 lg:py-6 rounded-[20px]">
         <div className="flex w-full justify-between md:py-1 py-4 items-center">
           <p className="unbound flex flex-grow text-sm md:text-base text-[#06052A]">
-            All Digital Assets
+            All Posted Jobs
           </p>
           <div className="md:flex hidden items-center gap-x-2">
             <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
@@ -76,8 +68,7 @@ const DigitalAssets = () => {
             <div className="flex items-center gap-x-1 px-2 py-1">
               <Button
                 size={14}
-                onClick={() => navigate('/super-admin/assets/create?slug=digital')}
-                title="Create New Asset"
+                title="Post New Job"
                 altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
               />
             </div>
@@ -85,7 +76,7 @@ const DigitalAssets = () => {
               <Button
                 size={14}
                 onClick={handleOpen}
-                title="Create Asset Category"
+                title="Create Job Category"
                 altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
               />
             </div>
@@ -101,12 +92,10 @@ const DigitalAssets = () => {
                 <thead>
                   <tr className="bg-gray-100 dark:bg-gray-800">
                     <td className="unbound pl-4 p-1 pb-2">#</td>
-                    <td className="unbound p-1 pb-2">Asset Name</td>
-                    <td className="unbound p-1 pb-2">Image</td>
-                    <td className="unbound p-1 pb-2">Price</td>
-                    <td className="unbound p-1 pb-2">Published On</td>
-                    <td className="unbound p-1 pb-2">Copies Sold</td>
-                    <td className="unbound p-1 pb-2">Created By</td>
+                    <td className="unbound p-1 pb-2">Job Title</td>
+                    <td className="unbound p-1 pb-2">Job Description</td>
+                    <td className="unbound p-1 pb-2">Posted By</td>
+                    <td className="unbound p-1 pb-2">Date</td>
                     <td className="unbound p-1 pb-2">Action</td>
                   </tr>
                 </thead>
@@ -119,20 +108,15 @@ const DigitalAssets = () => {
                         >
                           <td className={`p-2 py-4 pl-4`}>{`${i + 1}`}</td>
                           <td className="p-2 py-4">{item.assetName}</td>
-                          <td className="pl-1 p-2 py-4">
-                            <img
-                              src={item.assetThumbnail}
-                              className="w-[50px]"
-                            />
+                          <td className="p-2 py-4">
+                            {item.description}
                           </td>
                           <td className="p-2 py-4">
-                            {`${item?.currency} ${item?.amount}` || "---"}
+                            {item.postedBy}
                           </td>
                           <td className="p-2 py-4 capitalize">
                             {dateFormat(item?.createdAt, "dd-MM-yyyy")}
                           </td>
-                          <td className="p-2 py-4 capitalize">---</td>
-                          <td className="p-2 py-4">{item?.creatorName}</td>
                           <td className="p-2 py-4 pl-4">
                             <PiDotsThreeOutlineFill className="cursor-pointer" />
                           </td>
@@ -152,10 +136,10 @@ const DigitalAssets = () => {
         handler={handleOpen}
         size="md"
       >
-        <AssetCategory onClose={handleOpen} />
+        <JobCategory onClose={handleOpen} />
       </Dialog>
     </div>
   );
 };
 
-export default DigitalAssets;
+export default Jobs;

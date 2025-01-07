@@ -8,6 +8,8 @@ import DigitalAssets from "../pages/admin/assets/digitalAssets";
 import PhysicalAssets from "../pages/admin/assets/physicalAssets";
 import SuperAdminDashboard from "../pages/admin/dashboard";
 import GeneralUsers from "../pages/admin/generalUsers";
+import Jobs from "../pages/admin/jobs";
+import UploadRequests from "../pages/admin/uploadRequests";
 
 export const adminRoutes = [
   {
@@ -50,6 +52,14 @@ export const adminRoutes = [
         path: "physicalAssets",
         element: <PhysicalAssets />,
       },
+      {
+        path: "jobs",
+        element: <Jobs />,
+      },
+      {
+        path: "upload-requests",
+        element: <UploadRequests />,
+      }
     ],
   },
 ];

@@ -1,6 +1,6 @@
 import { GrHomeRounded } from "react-icons/gr";
 // import { HiOutlineShoppingBag } from "react-icons/hi";
-import { LuCreditCard } from "react-icons/lu";
+import { LuCreditCard, LuUpload } from "react-icons/lu";
 // import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { PiBookBookmark } from "react-icons/pi";
 import { RiHeart2Line } from "react-icons/ri";
@@ -72,19 +72,19 @@ export const Routes = [
     ],
   },
   {
+    name: "Upload Requests",
+    icon: <LuUpload className="text-lg" />,
+    route: "/super-admin/upload-requests",
+    submenu: [],
+  },
+  {
     name: "Jobs",
     icon: <LuCreditCard className="text-lg" />,
-    route: "",
+    route: "/super-admin/jobs",
     submenu: [],
   },
   {
     name: "Subscription",
-    icon: <LuCreditCard className="text-lg" />,
-    route: "/",
-    submenu: [],
-  },
-  {
-    name: "Reports/Analysis",
     icon: <LuCreditCard className="text-lg" />,
     route: "/",
     submenu: [],

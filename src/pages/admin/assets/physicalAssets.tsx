@@ -4,11 +4,12 @@ import { useGetData } from "../../../hooks/useGetData";
 import { useEffect, useState } from "react";
 import Loader from "../../../components/reusables/loader";
 import { dateFormat } from "../../../helpers/dateHelper";
-import { getCreators, getPhysicalAssets } from "../../../api";
+import { getCreators } from "../../../api";
 import Button from "../../../components/ui/Button";
 import { Dialog } from "@material-tailwind/react";
 import AssetCategory from "./assetCategory";
 import { useNavigate } from "react-router-dom";
+import { getApprovedPhysicalAssets } from "../../../api/admin";
 
 interface DataItem {
   createdAt: string; // ISO 8601 date string
@@ -17,7 +18,7 @@ interface DataItem {
 
 const PhysicalAssets = () => {
   // Fetch data for each group
-  const physicalAssetsQuery = useGetData(["physicalAssets"], getPhysicalAssets);
+  const physicalAssetsQuery = useGetData(["physicalAssets"], getApprovedPhysicalAssets);
   const creators = useGetData(["creators"], getCreators);
   const navigate = useNavigate();
 
