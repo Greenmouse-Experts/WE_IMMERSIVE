@@ -100,7 +100,10 @@ const CreatorForm = () => {
           render={({ field }) => (
             <SelectInput
               label="Professional Skill"
-              list={["Java", "Machine Learning", "Frontend"]}
+              list={[
+                { id: "Java", name: "Java" },
+                { id: "Machine Learning", name: "Machine Learning" },
+                { id: "Frontend", name: "Frontend" }]}
               placeholder="Choose your skill"
               // icon={
               //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
@@ -123,7 +126,10 @@ const CreatorForm = () => {
           render={({ field }) => (
             <SelectInput
               label="Industry"
-              list={["Private", "Public"]}
+              list={[
+                {id: "Private", name: "Private"},
+                {id: "Public", name: "Public"}
+              ]}
               placeholder="Choose your industry"
               // icon={
               //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />

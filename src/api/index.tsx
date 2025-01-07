@@ -140,3 +140,39 @@ export const getInstitutions = async (headers = {}) => {
   });
   return response.data;
 };
+
+export const createAdminDigitalAsset = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/admin/digital/asset/create`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const createAdminPhysicalAsset = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/admin/physical/asset/create`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const getAssetCategory = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/admin/asset/categories`, {
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data;
+};
+

@@ -149,13 +149,13 @@ const StudentForm = () => {
               label="Educational Level"
               placeholder="Choose your educational level"
               list={[
-                "High School",
-                "HND",
-                "ND",
-                "Bachelor's",
-                "Master's",
-                "PhD",
-                "Diploma",
+                { id: "High School", name: "High School" },
+                { id: "HND", name: "HND" },
+                { id: "ND", name: "ND" },
+                { id: "Bachelor's", name: "Bachelor's" },
+                { id: "Master's", name: "Master's" },
+                { id: "PhD", name: "PhD" },
+                { id: "Diploma", name: "Diploma" },
               ]}
               type={InputType.text}
               icon={

@@ -8,6 +8,7 @@ import { getDigitalAssets, getCreators } from "../../../api";
 import Button from "../../../components/ui/Button";
 import { Dialog } from "@material-tailwind/react";
 import AssetCategory from "./assetCategory";
+import { useNavigate } from "react-router-dom";
 
 interface DataItem {
   createdAt: string; // ISO 8601 date string
@@ -18,6 +19,8 @@ const DigitalAssets = () => {
   // Fetch data for each group
   const digitalAssetsQuery = useGetData(["digitalAssets"], getDigitalAssets);
   const creators = useGetData(["creators"], getCreators);
+  const navigate = useNavigate
+  ();
 
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -72,6 +75,7 @@ const DigitalAssets = () => {
             <div className="flex items-center gap-x-1 px-2 py-1">
               <Button
                 size={14}
+                onClick={() => navigate('/super-admin/assets/create?slug=digital')}
                 title="Create New Asset"
                 altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
               />

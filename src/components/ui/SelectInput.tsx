@@ -2,7 +2,7 @@ import { FC, forwardRef } from "react";
 
 interface SelectInputProps {
   label: string;
-  list: string[];
+  list: any;
   labelClassName?: string;
   required?: boolean;
   error?: any;
@@ -35,11 +35,11 @@ const SelectInput: FC<SelectInputProps> = forwardRef<
           >
             {placeholder}
           </option>
-          {list?.map((item) => (
-            <option key={item} value={item}>
-              {item}
+            {list?.map((item: { id: string; name: string }) => (
+            <option key={item.id} value={item.id}>
+              {item.name}
             </option>
-          ))}
+            ))}
         </select>
       </div>
       {error && (

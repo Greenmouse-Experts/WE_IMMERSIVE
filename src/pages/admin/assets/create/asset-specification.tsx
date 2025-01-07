@@ -1,12 +1,13 @@
 import { Controller, useForm } from "react-hook-form";
-import Button from "../../../components/ui/Button";
-import SelectInput from "../../../components/ui/SelectInput";
-import TextInput, { InputType } from "../../../components/ui/TextInput";
+import Button from "../../../../components/ui/Button";
+import SelectInput from "../../../../components/ui/SelectInput";
+import TextInput, { InputType } from "../../../../components/ui/TextInput";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { createDigitalAsset, createPhysicalAsset } from "../../../api";
+import { createAdminDigitalAsset, createAdminPhysicalAsset } from "../../../../api";
+
 
 interface AssetSpecificationProps {
   payload: any;
@@ -44,7 +45,7 @@ const AssetSpecification = ({
   // React Query: Define mutation
   const mutation = useMutation({
     mutationFn:
-      category === "Digital Asset" ? createDigitalAsset : createPhysicalAsset,
+      category === "digital" ? createAdminDigitalAsset : createAdminPhysicalAsset,
     onSuccess: (data: any) => {
       toast.success(data.message);
       setIsBusy(false); // Hide loader
