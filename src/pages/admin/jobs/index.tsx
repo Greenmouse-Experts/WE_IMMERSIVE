@@ -8,7 +8,7 @@ import { Dialog } from "@material-tailwind/react";
 import JobCategory from "./jobCategory";
 
 const Jobs = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
