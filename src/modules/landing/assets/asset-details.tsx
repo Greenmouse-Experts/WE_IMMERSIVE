@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Loader from "../../../components/reusables/loader";
 
 // Replace modelUrl with a sample URL of a 3D model
 const modelUrl =
@@ -16,7 +17,7 @@ function Model({ url }) {
 }
 
 // Loader Component
-const Loader = () => (
+const ModelLoader = () => (
   <div
     style={{
       display: "flex",
