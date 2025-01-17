@@ -1,4 +1,5 @@
 import LandingLayout from "../layout/landing";
+import AssetDetailsPage from "../pages/landing/asset-details";
 import AssetsPage from "../pages/landing/assets";
 import BlogPage from "../pages/landing/blog";
 import ContactPage from "../pages/landing/contact";
@@ -32,6 +33,10 @@ export const landingRoutes = [
       {
         path: "/explore",
         element: <AssetsPage />,
+      },
+      {
+        path: "/asset/:id",
+        element: <AssetDetailsPage />,
       },
       {
         path: "/learn",

@@ -19,7 +19,7 @@ const MarketBody = () => {
       <div className="grid gap-4 lg:gap-7 mt-6">
         {/* assets categories */}
         <div>{/* <AssetList name="Hot Trending 🔥" data={hotTrends}/> */}</div>
-        {digitalAssetsQuery.data.data.length > 0 && (
+        {digitalAssetsQuery?.data?.data?.length > 0 && (
           <div className="md:px-20 px-4">
             <AssetList
               name="Explore Digital Assets 📈"
@@ -28,7 +28,7 @@ const MarketBody = () => {
             />
           </div>
         )}
-        {physicalAssetsQuery.data.data.length > 0 && (
+        {physicalAssetsQuery?.data?.data?.length > 0 && (
           <div className="mt-5 md:px-20 px-4 py-7 dark:bg-[rgba(233,235,251,1)] bg-[#000000]">
             <AssetList
               name="Explore Physical Assets 📈"
