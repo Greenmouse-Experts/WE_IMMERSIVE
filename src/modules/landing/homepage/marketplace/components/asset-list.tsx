@@ -29,7 +29,7 @@ const AssetList: FC<Props> = ({ name, data, addFilter, classStyle }) => {
       )}
       <div className="mt-6">
         <div className="grid lg:grid-cols-4 gap-10 lg:gap-6">
-          {data.map((item: any) => (
+          {data?.map((item: any) => (
             <div>
               <img
                 src={item?.assetThumbnail}
