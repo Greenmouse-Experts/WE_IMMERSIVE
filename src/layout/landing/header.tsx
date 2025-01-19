@@ -51,6 +51,9 @@ const LandingHeader = () => {
     } else if (accountType === "institution") {
       navigate("/institution");
     }
+    else {
+      navigate("/super-admin");
+    }
   };
 
   return (
