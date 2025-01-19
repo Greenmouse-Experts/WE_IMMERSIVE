@@ -61,12 +61,13 @@ const HeroBanner = () => {
         <Swiper
           modules={[Autoplay]}
           autoplay={{
-            delay: 21000, // 20 seconds autoplay delay
+            delay: 20000, // 20 seconds autoplay delay
             disableOnInteraction: false,
+            waitForTransition: true,
           }}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           slidesPerView={1}
-          loop
+          loop={true}
           className="md:w-3/4 w-full relative"
         >
           {slides.map((slide, index) => (

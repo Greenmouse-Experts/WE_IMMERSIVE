@@ -6,10 +6,12 @@ import { dateFormat } from "../../../helpers/dateHelper";
 import Button from "../../../components/ui/Button";
 import { Dialog } from "@material-tailwind/react";
 import JobCategory from "./jobCategory";
+import { useNavigate } from "react-router-dom";
 
 const Jobs = () => {
   const [loading] = useState(false);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpen = () => setOpen(!open);
 
@@ -64,13 +66,6 @@ const Jobs = () => {
                 First
               </p>
               <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-            </div>
-            <div className="flex items-center gap-x-1 px-2 py-1">
-              <Button
-                size={14}
-                title="Post New Job"
-                altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
-              />
             </div>
             <div className="flex items-center gap-x-1 px-2 py-1">
               <Button
