@@ -10,6 +10,8 @@ import SuperAdminDashboard from "../pages/admin/dashboard";
 import GeneralUsers from "../pages/admin/generalUsers";
 import Jobs from "../pages/admin/jobs";
 import CreateJob from "../pages/admin/jobs/create";
+import Subscription from "../pages/admin/subscription";
+import CreateSubscription from "../pages/admin/subscription/createSubscription";
 import UploadRequests from "../pages/admin/uploadRequests";
 
 export const adminRoutes = [
@@ -64,6 +66,14 @@ export const adminRoutes = [
       {
         path: "upload-requests",
         element: <UploadRequests />,
+      },
+      {
+        path: "subscription",
+        element: <Subscription />
+      },
+      {
+        path: "subscription/create",
+        element: <CreateSubscription />
       }
     ],
   },

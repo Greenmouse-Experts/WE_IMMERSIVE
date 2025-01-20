@@ -86,7 +86,7 @@ export const Routes = [
   {
     name: "Subscription",
     icon: <LuCreditCard className="text-lg" />,
-    route: "/",
+    route: "/super-admin/subscription",
     submenu: [],
   },
 ];

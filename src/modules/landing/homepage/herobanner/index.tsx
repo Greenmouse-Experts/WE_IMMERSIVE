@@ -136,7 +136,7 @@ const HeroBanner = () => {
                 }`}
             >
               <h4 className="font-bold text-sm uppercase">{slide.mode}</h4>
-              <p className="text-xs my-2">{slide.title}</p>
+              <h6 className="text-xs my-2 text-black">{slide.title}</h6>
             </div>
           ))}
         </div>

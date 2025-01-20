@@ -6,12 +6,10 @@ import { dateFormat } from "../../../helpers/dateHelper";
 import Button from "../../../components/ui/Button";
 import { Dialog } from "@material-tailwind/react";
 import JobCategory from "./jobCategory";
-import { useNavigate } from "react-router-dom";
 
 const Jobs = () => {
   const [loading] = useState(false);
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleOpen = () => setOpen(!open);
 
