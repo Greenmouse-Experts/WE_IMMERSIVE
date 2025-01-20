@@ -7,13 +7,23 @@ import { Routes } from "./routes";
 import { PiGear } from "react-icons/pi";
 import { LuArrowRightCircle } from "react-icons/lu";
 import ThemeSwitch from "../../../components/ui/theme-switch";
+import { useLogOut } from "../../../hooks/useLogOut";
 interface Props {
   toggled: boolean;
   collapsed: boolean;
   setToggled: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+const useHandleLogOut = () => {
+  const logOut = useLogOut();
+  return () => {
+    logOut();
+  };
+};
+
 const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
   const path = useLocation();
+  const handleLogOut = useHandleLogOut();
 
   return (
     <div className="left-3 top-3 fixed z-[50] overflow-y-hidden">
@@ -86,7 +96,10 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
               <PiGear />
               <span>Settings</span>
             </li>
-            <li className="flex items-center p-2 gap-x-3 text-red-500">
+            <li
+              className="flex items-center p-2 gap-x-3 text-red-500 cursor-pointer"
+              onClick={handleLogOut}
+            >
               <LuArrowRightCircle />
               <span>Log out</span>
             </li>

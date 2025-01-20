@@ -1,10 +1,43 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import JobItem from "../../modules/landing/jobs/asset-list/job-item";
+import Button from "../../components/ui/Button";
+import { useNavigate } from "react-router-dom";
+import { getCreatorJobs } from "../../api";
+import { useGetData } from "../../hooks/useGetData";
+import { useEffect, useState } from "react";
+import Loader from "../../components/reusables/loader";
 
 const JobsScreen = () => {
+  const navigate = useNavigate();
+
+  const jobsData = useGetData(["creatorJobs"], getCreatorJobs);
+
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Check if all data is available before merging
+    if (jobsData.data) {
+      setData(jobsData.data.data);
+      setLoading(false);
+    }
+  }, [jobsData.data]); // Dependency array ensures this runs when data updates
+
   return (
     <div className="rounded-[20px] p-5 bg-white dark:bg-black">
-      <p className="fw-600 unbound text-2xl">All Jobs</p>
+      <div className="flex w-full justify-between md:py-1 py-4 items-center">
+        <p className="fw-600 unbound text-2xl">All Jobs</p>
+        <div className="md:flex hidden items-center gap-x-2">
+          <div className="flex items-center gap-x-1 px-2 py-1">
+            <Button
+              size={14}
+              onClick={() => navigate('create')}
+              title="Post New Job"
+              altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
+            />
+          </div>
+        </div>
+      </div>
       <div className="flex items-center justify-between mb-8 mt-10">
         <div className="w-[55%]">
           <input
@@ -15,28 +48,38 @@ const JobsScreen = () => {
         </div>
 
         <div className=" flex items-center w-[40%] justify-end">
-        <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
-          <p className="text-[#2C3E50] fs-300">Choose Category</p>
-          <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-        </div>
-        <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
-          <p className="text-[#2C3E50] fs-300">
-            <span className="fs-200 text-[#9094A2]">Sort:</span> Newest First
-          </p>
-          <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-        </div>
-        <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
-          <p className="text-[#2C3E50] fs-300">Export As</p>
-          <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-        </div>
+          <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+            <p className="text-[#2C3E50] fs-300">Choose Category</p>
+            <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
+          </div>
+          <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+            <p className="text-[#2C3E50] fs-300">
+              <span className="fs-200 text-[#9094A2]">Sort:</span> Newest First
+            </p>
+            <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
+          </div>
+          <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+            <p className="text-[#2C3E50] fs-300">Export As</p>
+            <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
+          </div>
         </div>
       </div>
 
-      <div className=" grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-x-6 gap-y-10">
-        {[...Array(9)].map((item, i) => (
-          <JobItem item={item} key={i} />
-        ))}
-      </div>
+      {loading ? (
+        // Loading spinner or placeholder
+        <Loader />
+      ) : (
+        <div className=" grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-x-6 gap-y-10">
+          {
+            data.length > 0 ?
+              data.map((item: any, i: any) => (
+                <JobItem item={item} key={i} />
+              ))
+              :
+              <></>
+          }
+        </div>
+      )}
     </div>
   );
 };

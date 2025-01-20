@@ -176,3 +176,75 @@ export const getAssetCategory = async (headers = {}) => {
   return response.data;
 };
 
+
+export const getCreatorDigitalAssets = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/creator/digital/assets`, {
+      headers: {
+          ...headers, // Merge custom headers
+          Authorization: `Bearer ${token}`, // Add Authorization token
+          "Content-Type": "application/json", // Set content type
+      },
+  });
+  return response.data; // Replace with your API endpoint
+};
+
+export const getCreatorPhysicalAssets = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/creator/physical/assets`, {
+      headers: {
+          ...headers, // Merge custom headers
+          Authorization: `Bearer ${token}`, // Add Authorization token
+          "Content-Type": "application/json", // Set content type
+      },
+  });
+  return response.data; // Replace with your API endpoint
+};
+
+
+export const getJobCategory = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/creator/job/categories`, {
+      headers: {
+          ...headers, // Merge custom headers
+          Authorization: `Bearer ${token}`, // Add Authorization token
+          "Content-Type": "application/json", // Set content type
+      },
+  });
+  return response.data; // Replace with your API endpoint
+};
+
+
+export const createJob = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/creator/job/add`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+
+export const getCreatorJobs = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/creator/jobs`, {
+      headers: {
+          ...headers, // Merge custom headers
+          Authorization: `Bearer ${token}`, // Add Authorization token
+          "Content-Type": "application/json", // Set content type
+      },
+  });
+  return response.data; // Replace with your API endpoint
+};
+
+
+export const editJob = async (payload: any, headers = {}) => {
+  return axios
+    .put(`${baseURL}/creator/job/post`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
