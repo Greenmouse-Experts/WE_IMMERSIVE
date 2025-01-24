@@ -1,13 +1,27 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Autoplay } from "swiper/modules";
 
 const HeroBanner = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(100);
-  const [timeLeft, setTimeLeft] = useState(20);
+  const [timeLeft, setTimeLeft] = useState(10);
+
+  const swiperRef = useRef<any>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (swiperRef.current) {
+        swiperRef.current.slideNext(); // Move to the next slide automatically
+      }
+      swiperRef.current.autoplay.pause = false;
+    }, 10000); // Adjust the interval (e.g., 5000ms = 5 seconds)
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
 
   const slides = [
@@ -45,8 +59,8 @@ const HeroBanner = () => {
   useEffect(() => {
     // Countdown timer logic
     const interval = setInterval(() => {
-      setProgress((prev) => (prev > 0 ? prev - 5 : 100)); // Decrease progress every second
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 20)); // Decrease time left every second
+      setProgress((prev) => (prev > 0 ? prev - 10 : 100)); // Decrease progress every second
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 10)); // Decrease time left every second
     }, 1000);
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
@@ -55,25 +69,26 @@ const HeroBanner = () => {
 
 
   return (
-    <div className="h-96 lg:h-[480px] auth-gradient bg-gradient w-full">
+    <div className="h-96 lg:h-[32rem] bg-gradient auth-gradient pt-3 w-full">
       <div className="flex">
         {/* Left Carousel */}
         <Swiper
           modules={[Autoplay]}
           autoplay={{
-            delay: 20000, // 20 seconds autoplay delay
+            delay: 10500, // 20 seconds autoplay delay
             disableOnInteraction: false,
             waitForTransition: true,
           }}
+          onSwiper={(swiper) => (swiperRef.current = swiper)} 
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           slidesPerView={1}
           loop={true}
-          className="md:w-3/4 w-full relative"
+          className="md:w-3/4 w-full rounded-r-lg relative"
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div
-                className="h-96 lg:h-[480px] bg-cover py-5 bg-gradient bg-center"
+                className="h-96 lg:h-[30rem] bg-cover py-5 bg-gradient bg-center"
                 style={{ backgroundImage: `url(${slide.image})` }}
               >
                 <div className="absolute top-0 w-full h-full bg-[rgba(0,0,0,0.5)]" />
@@ -126,20 +141,23 @@ const HeroBanner = () => {
         </Swiper>
 
         {/* Right Indicators */}
-        <div className="w-1/4 md:flex hidden flex-col justify-center space-y-4 p-4">
+        <div className="w-1/4 md:flex lg:h-[30rem] hidden flex-col justify-between py-1 px-4">
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`p-4 rounded-md transform transition-transform duration-200 ${activeIndex === index
-                ? "bg-white text-black shadow-lg scale-105"
+              className={`py-[1.45rem] px-4 rounded-md transform transition-transform duration-200 flex items-center ${activeIndex === index
+                ? "bg-white text-black shadow-lg scale-100"
                 : "bg-gray-400 text-black scale-100 opacity-50"
                 }`}
             >
-              <h4 className="font-bold text-sm uppercase">{slide.mode}</h4>
-              <h6 className="text-xs my-2 text-black">{slide.title}</h6>
+              <div>
+                <h4 className="font-bold text-sm uppercase">{slide.mode}</h4>
+                <h6 className="text-xs my-2 text-black">{slide.title}</h6>
+              </div>
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );
