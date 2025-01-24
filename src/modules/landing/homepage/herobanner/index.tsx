@@ -69,8 +69,8 @@ const HeroBanner = () => {
 
 
   return (
-    <div className="h-96 lg:h-[32rem] bg-gradient auth-gradient pt-3 w-full">
-      <div className="flex">
+    <div className="h-96 lg:h-[32rem] px-20 pt-3 w-full">
+      <div className="flex w-full">
         {/* Left Carousel */}
         <Swiper
           modules={[Autoplay]}
@@ -83,7 +83,7 @@ const HeroBanner = () => {
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           slidesPerView={1}
           loop={true}
-          className="md:w-3/4 w-full rounded-r-lg relative"
+          className="md:w-[70%] w-full rounded-lg relative"
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
@@ -141,18 +141,17 @@ const HeroBanner = () => {
         </Swiper>
 
         {/* Right Indicators */}
-        <div className="w-1/4 md:flex lg:h-[30rem] hidden flex-col justify-between py-1 px-4">
+        <div className="w-[30%] md:flex lg:h-[30rem] hidden flex-col justify-between py-1 pl-4">
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`py-[1.45rem] px-4 rounded-md transform transition-transform duration-200 flex items-center ${activeIndex === index
-                ? "bg-white text-black shadow-lg scale-100"
-                : "bg-gray-400 text-black scale-100 opacity-50"
-                }`}
+              className={`rounded-md transform transition-transform duration-200 dark:bg-gray-900 flex shadow-lg scale-100`}
             >
-              <div>
-                <h4 className="font-bold text-sm uppercase">{slide.mode}</h4>
-                <h6 className="text-xs my-2 text-black">{slide.title}</h6>
+              <img src={`${slide.image}`} width={150} className="rounded-l-lg object-cover" />
+              {/*activeIndex === index*/}
+              <div className="py-[1.15rem] px-4 flex flex-col">
+                <p className="font-bold text-sm uppercase">{slide.mode}</p>
+                <p className="text-xs my-2">{slide.title}</p>
               </div>
             </div>
           ))}
