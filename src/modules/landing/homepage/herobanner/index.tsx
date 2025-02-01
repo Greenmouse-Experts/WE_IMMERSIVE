@@ -98,7 +98,7 @@ export default function HeroSlider() {
 
 
   return (
-    <div className="relative h-[400px] md:h-[550px] overflow-hidden">
+    <div className="relative h-[400px] md:h-[650px] overflow-hidden">
       {/* Animated Background */}
       <div
         className={`absolute inset-0 bg-cover bg-center ${initialLoad ? '' : ''
@@ -112,13 +112,13 @@ export default function HeroSlider() {
       <div className='bg-[rgba(0,0,0,0.5)] absolute inset-0' />
 
       {/* Main Content */}
-      <div className="relative h-full flex flex-col md:py-20 py-3 items-center text-center text-white px-4">
-        <div className="max-w-4xl space-y-6">
-          <h1 className="md:text-5xl text-3xl font-bold leading-tight">
+      <div className="relative h-full flex flex-col md:py-16 py-5 items-center text-center text-white px-4">
+        <div className="max-w-4xl md:space-y-6 space-y-1">
+          <h1 className="md:text-5xl text-2xl unbound font-bold md:!leading-[4.5rem]">
             {slides[activeIndex].mainTitle}
           </h1>
-          <p className="text-xl text-gray-200">{slides[activeIndex].description}</p>
-          <div className="flex justify-center gap-4 mt-1">
+          <p className="md:text-xl text-lg text-gray-200">{slides[activeIndex].description}</p>
+          <div className="flex justify-center gap-4 md:mt-1 -mt-4">
             <Button
               style={{ width: "fit-content" }}
               withArrows
@@ -132,27 +132,29 @@ export default function HeroSlider() {
 
       {/* Navigation Boxes */}
       <div className="absolute bottom-0 w-full px-4 md:px-8 pb-4 md:pb-8">
-        <div
-          ref={containerRef}
-          className="flex md:grid md:grid-cols-4 gap-3 md:gap-4 overflow-x-auto pb-3 md:pb-0 scrollbar-hide snap-x snap-mandatory"
-        >
-          {slides.map((slide, index) => (
-            <div
-              ref={(el) => boxRefs.current[index] = el}
-              key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`snap-center min-w-[280px] md:min-w-0 relative p-4 md:p-6 border-t-4 border-transparent cursor-pointer bg-[rgba(255,255,255,0.3)] backdrop-blur-lg rounded-xl transition-all`}
-            >
-              {activeIndex === index &&
-                <div className='absolute w-1/3 h-[6px] bg-[rgba(111,10,255,1)] -top-1 left-[3px] rounded-tl-[8.5rem]' />
-              }
-              <h3 className="text-sm md:text-lg font-semibold flex gap-3 mb-1 md:mb-2 text-white">
-                {slide.boxTitle}
-              </h3>
-              <p className="text-xs md:text-sm text-gray-300">{slide.boxSubtitle[0]}</p>
-              <p className="text-xs md:text-sm text-gray-300">{slide.boxSubtitle[1]}</p>
-            </div>
-          ))}
+        <div className='box'>
+          <div
+            ref={containerRef}
+            className="flex md:grid md:grid-cols-4 gap-3 md:gap-4 overflow-x-auto pb-3 md:pb-0 scrollbar-hide snap-x snap-mandatory"
+          >
+            {slides.map((slide, index) => (
+              <div
+                ref={(el) => boxRefs.current[index] = el}
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`snap-center min-w-[280px] md:min-w-0 relative p-4 md:p-6 border-t-4 border-transparent cursor-pointer bg-[rgba(255,255,255,0.3)] backdrop-blur-lg rounded-xl transition-all`}
+              >
+                {activeIndex === index &&
+                  <div className='absolute w-1/3 h-[6px] bg-[rgba(111,10,255,1)] -top-1 left-[3px] rounded-tl-[8.5rem]' />
+                }
+                <h3 className="text-sm md:text-lg font-semibold flex gap-3 mb-1 md:mb-2 text-white">
+                  {slide.boxTitle}
+                </h3>
+                <p className="text-xs md:text-base text-gray-300">{slide.boxSubtitle[0]}</p>
+                <p className="text-xs md:text-base text-gray-300">{slide.boxSubtitle[1]}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
