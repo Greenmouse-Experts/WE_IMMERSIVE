@@ -2,6 +2,19 @@
 
 const withMT = require("@material-tailwind/react/utils/withMT");
 
+
+const customAnimation = {
+  keyframes: {
+    'delayed-fade': {
+      '0%, 99.9%': { opacity: 1 },
+      '100%': { opacity: 0 },
+    },
+  },
+  animation: {
+    'delayed-fade': 'delayed-fade 6000ms step-end',
+  },
+};
+
  
 module.exports = withMT({
   darkMode: "selector",
@@ -13,6 +26,8 @@ module.exports = withMT({
   ],
   theme: {
     extend: {
+      animation: customAnimation.animation,
+      keyframes: customAnimation.keyframes,
       colors:{
         primary:"#710AFC",
         lightPrimary:"#242EF21A",

@@ -30,6 +30,23 @@ body {
   width: 100%;
 }
 
+@keyframes delayed-fade {
+  0%, 99.9% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-delayed-fade {
+  animation: delayed-fade 6000ms step-end;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* remove default input color */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
