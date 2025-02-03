@@ -141,7 +141,7 @@ const LandingHeader = () => {
         onClose={closeDrawer}
         className="dark:bg-[#131313] p-4"
       >
-        <CalloutMenu />
+        <CalloutMenu close={closeDrawer} />
       </Drawer>
       <Dialog title="" size="md">
         <LoginPopup close={() => setShowDialog(false)} type={selected} />

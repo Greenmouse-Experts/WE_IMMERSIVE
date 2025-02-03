@@ -6,7 +6,7 @@ import useDialog from "../../../hooks/useDialog";
 import LoginPopup from "./login-popup";
 import { useState } from "react";
 
-const CalloutMenu = () => {
+const CalloutMenu = ({ close }: { close: () => void }) => {
   const { Dialog, setShowDialog } = useDialog();
     const [selected, setSelected] = useState<string>("");
 
@@ -14,6 +14,10 @@ const CalloutMenu = () => {
     setSelected(type);
     setShowDialog(true);
   };
+
+  const closeMenu = () => {
+    close();
+  }
 
   return (
     <div className="p-4">
@@ -32,7 +36,7 @@ const CalloutMenu = () => {
         <ul className="grid gap-6">
           {headerRoutes.map((item) => (
             <li key={item.route}>
-              <Link to={item.route} className="dark:text-white">
+              <Link to={item.route} onClick={() => closeMenu()} className="dark:text-white">
                 {item.name}
               </Link>
             </li>

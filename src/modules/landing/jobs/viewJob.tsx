@@ -18,7 +18,6 @@ const ViewJobIndex = () => {
     const jobsData = useGetData(["singleJob", id], () => getSingleJob(id));
 
     useEffect(() => {
-        console.log(jobsData)
         if (jobsData?.data) {
             setData(jobsData.data.data);
             setLoading(false);
