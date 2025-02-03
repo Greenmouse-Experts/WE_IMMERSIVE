@@ -1,4 +1,3 @@
-import Button from "../../../../components/ui/Button";
 
 const JobsBanner = () => {
   return (
@@ -9,7 +8,6 @@ const JobsBanner = () => {
           <p className="lg:w-5/12 text-white text-center">
           Browse through the new jobs these companies/organisations are hiring for and find your next opportunity
           </p>
-        <Button title="Post A Job" withArrows={true} style={{width:'261px', height:'80px'}}/>
         </div>
       </div>
     </div>

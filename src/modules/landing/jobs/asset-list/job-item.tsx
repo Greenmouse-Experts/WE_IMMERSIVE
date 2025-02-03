@@ -42,8 +42,8 @@ const JobItem = ({ item, i }: any) => {
                 <div className="mt-3">
                     <Button
                         size={14}
-                        onClick={() => navigate(`edit/${item.id}`)}
-                        title="Edit Job"
+                        onClick={() => navigate(`view/${item.id}`)}
+                        title="View Job"
                         altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
                     />
                 </div>

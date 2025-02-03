@@ -1,8 +1,33 @@
+import { useEffect, useState } from "react";
+import { getAllJobs } from "../../../api";
 import Button from "../../../components/ui/Button";
+import { useGetData } from "../../../hooks/useGetData";
 import AllJobsList from "./asset-list";
 import JobsBanner from "./herobanner";
+import Loader from "../../../components/reusables/loader";
 
 const JobsIndex = () => {
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const jobsData = useGetData(["allJobs"], getAllJobs);
+
+  useEffect(() => {
+    // Check if all data is available before merging
+    if (jobsData.data) {
+      setData(jobsData.data.data);
+      setLoading(false);
+    }
+  }, [jobsData.data]); // Dependency array ensures this runs when data updates
+
+
+  if (loading) {
+    return (
+      // Loading spinner or placeholder
+      <Loader />
+    )
+  }
+
   return (
     <div>
       <div>
@@ -30,7 +55,7 @@ const JobsIndex = () => {
         </div>
       </div>
       <div>
-        <AllJobsList/>
+        <AllJobsList data={data} />
       </div>
     </div>
   );

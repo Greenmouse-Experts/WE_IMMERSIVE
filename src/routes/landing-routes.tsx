@@ -1,4 +1,5 @@
 import LandingLayout from "../layout/landing";
+import ViewJobIndex from "../modules/landing/jobs/viewJob";
 import AssetDetailsPage from "../pages/landing/asset-details";
 import AssetsPage from "../pages/landing/assets";
 import BlogPage from "../pages/landing/blog";
@@ -49,6 +50,10 @@ export const landingRoutes = [
       {
         path:"/jobs",
         element: <JobsPage/>
+      },
+      {
+        path: "/jobs/view/:id",
+        element: <ViewJobIndex />
       }
     ],
   },

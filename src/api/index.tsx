@@ -179,22 +179,22 @@ export const getAssetCategory = async (headers = {}) => {
 
 export const getCreatorDigitalAssets = async (headers = {}) => {
   const response = await axios.get(`${baseURL}/creator/digital/assets`, {
-      headers: {
-          ...headers, // Merge custom headers
-          Authorization: `Bearer ${token}`, // Add Authorization token
-          "Content-Type": "application/json", // Set content type
-      },
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
   });
   return response.data; // Replace with your API endpoint
 };
 
 export const getCreatorPhysicalAssets = async (headers = {}) => {
   const response = await axios.get(`${baseURL}/creator/physical/assets`, {
-      headers: {
-          ...headers, // Merge custom headers
-          Authorization: `Bearer ${token}`, // Add Authorization token
-          "Content-Type": "application/json", // Set content type
-      },
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
   });
   return response.data; // Replace with your API endpoint
 };
@@ -202,11 +202,11 @@ export const getCreatorPhysicalAssets = async (headers = {}) => {
 
 export const getJobCategory = async (headers = {}) => {
   const response = await axios.get(`${baseURL}/creator/job/categories`, {
-      headers: {
-          ...headers, // Merge custom headers
-          Authorization: `Bearer ${token}`, // Add Authorization token
-          "Content-Type": "application/json", // Set content type
-      },
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
   });
   return response.data; // Replace with your API endpoint
 };
@@ -227,11 +227,11 @@ export const createJob = async (payload: any, headers = {}) => {
 
 export const getCreatorJobs = async (headers = {}) => {
   const response = await axios.get(`${baseURL}/creator/jobs`, {
-      headers: {
-          ...headers, // Merge custom headers
-          Authorization: `Bearer ${token}`, // Add Authorization token
-          "Content-Type": "application/json", // Set content type
-      },
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
   });
   return response.data; // Replace with your API endpoint
 };
@@ -247,4 +247,27 @@ export const editJob = async (payload: any, headers = {}) => {
       },
     })
     .then((response) => response.data);
+};
+
+
+export const getAllJobs = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/fetch/jobs`, {
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data; // Replace with your API endpoint
+};
+
+
+export const getSingleJob = async (id: string | undefined) => {
+  const response = await axios.get(`${baseURL}/view/job?jobId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data; // Return the API response data
 };
