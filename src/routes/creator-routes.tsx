@@ -1,5 +1,9 @@
+import CreateLessons from "../modules/creator/courses/createLessons";
+import CreateModules from "../modules/creator/courses/createModules";
 import CreateAsset from "../pages/creator/create-asset";
+import CreateCourses from "../pages/creator/create-courses";
 import CreatorAssetsScreen from "../pages/creator/creator-asset";
+import CreatorCoursesScreen from "../pages/creator/creator-courses";
 import CreatorPortfolio from "../pages/creator/creator-portfolio";
 import CreatorDashboard from "../pages/creator/dashboard";
 import EditJob from "../pages/creator/editJobs";
@@ -27,6 +31,22 @@ export const creatorRoutes = [
       {
         path: "assets",
         element: <CreatorAssetsScreen />,
+      },
+      {
+        path: "courses",
+        element: <CreatorCoursesScreen />
+      },
+      {
+        path: "courses/create/modules",
+        element: <CreateModules />
+      },
+      {
+        path: "courses/create/modules/lessons/:id",
+        element: <CreateLessons />
+      },
+      {
+        path: "courses/create",
+        element: <CreateCourses />
       },
       {
         path: "asset/create",

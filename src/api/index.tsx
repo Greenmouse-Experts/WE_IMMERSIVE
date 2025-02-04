@@ -271,3 +271,111 @@ export const getSingleJob = async (id: string | undefined) => {
   });
   return response.data; // Return the API response data
 };
+
+
+export const getCourseCategory = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/creator/course/categories`, {
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data; // Replace with your API endpoint
+};
+
+export const createCourse = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/creator/course/create`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+
+export const createCourseBasic = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/creator/course/basic`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+
+export const createCourseModule = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/creator/course/module/create`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+
+export const getSingleCourse = async (id: string | undefined) => {
+  const response = await axios.get(`${baseURL}/creator/course?courseId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data; // Replace with your API endpoint
+};
+
+
+export const getCourseModules = async (id: string | undefined) => {
+  const response = await axios.get(`${baseURL}/creator/course/modules?courseId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data; // Replace with your API endpoint
+};
+
+
+export const deleteCourseModule = async (id: string | undefined) => {
+  return axios
+    .delete(`${baseURL}/creator/course/module/delete?moduleId=${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+
+export const createLessons = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/creator/course/module/lesson/create`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+
+export const getModulesLesson = async (id: string | undefined) => {
+  const response = await axios.get(`${baseURL}/creator/course/module/lessons?moduleId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data; // Replace with your API endpoint
+};

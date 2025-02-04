@@ -13,7 +13,8 @@ export default function DropZone({ text, onUpload }: any) {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      "image/*": [], // Accept all image types
+      "image/*": [],
+      "video/*": [] // Accept all image types
     },
   });
 

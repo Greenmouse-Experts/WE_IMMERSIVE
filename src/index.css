@@ -18,6 +18,10 @@
   font-family: "Inter", sans-serif;
 }
 
+[data-slate-editor] {
+  outline: none;
+}
+
 .dark body {
   background: #0e1624 !important;
 }
