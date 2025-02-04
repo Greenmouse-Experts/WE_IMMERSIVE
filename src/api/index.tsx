@@ -379,3 +379,41 @@ export const getModulesLesson = async (id: string | undefined) => {
   });
   return response.data; // Replace with your API endpoint
 };
+
+
+export const getAllCreatorCourses = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/creator/courses`, {
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data; // Replace with your API endpoint
+};
+
+
+export const publishCourseApi = async (id: string | undefined, headers = {}) => {
+  return axios
+    .patch(`${baseURL}/creator/course/publish?courseId=${id}`, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+
+export const courseThumbnail = async (payload: any, headers = {}) => {
+  return axios
+    .post(`${baseURL}/creator/course/thumbnail`, payload, {
+      headers: {
+        ...headers, // Merge custom headers
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
