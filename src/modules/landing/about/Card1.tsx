@@ -27,13 +27,13 @@ const Card1 = () => {
   return (
     <div className="flex justify-between mt-[10%]">
         {
-            cards.map((item, index) => (
-                <div key={index} className="flex flex-col rounded-[15px] w-[30%] text-white pb-5" style={{ backgroundColor: item.color }}>
-                    <img src={item.img} width="149px" alt="img" className={`relative left-[30%] ${index === 2 ? "-mt-[23%]" : "-mt-[18%]"}`}/>
-                    <p className="unbound mb-5 mt-8 text-[15px] font-[600]">{item.title}</p>
-                    <p className="text-[13px] px-[15%] font-[700]">{item.content}</p>
-                </div>
-            ))
+         cards.map((item, index) => (
+            <div key={index} className="flex flex-col rounded-[15px] w-[30%] text-white pb-5" style={{ backgroundColor: item.color }}>
+                <img src={item.img} width="149px" alt="img" className={`relative left-[30%] ${index === 2 ? "-mt-[19%]" : "-mt-[18%]"}`}/>
+                <p className="unbound mb-5 mt-8 text-[15px] font-[600]">{item.title}</p>
+                <p className="text-[13px] px-[15%] font-[700]">{item.content}</p>
+            </div>
+         ))
         }
     </div>
   )
