@@ -9,6 +9,7 @@ import LandingHomepage from "../pages/landing/homepage";
 import JobsPage from "../pages/landing/jobs";
 import LearnPage from "../pages/landing/learn";
 import StorePage from "../pages/landing/store";
+import AboutPage from "../pages/landing/about";
 
 export const landingRoutes = [
   {
@@ -30,6 +31,10 @@ export const landingRoutes = [
       {
         path: "/contact",
         element: <ContactPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutPage />,
       },
       {
         path: "/explore",
