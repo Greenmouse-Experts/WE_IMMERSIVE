@@ -41,10 +41,10 @@ const cards = [
 
 const JoinCard = () => {
   return (
-    <div className="flex items-center w-[75%] m-auto justify-between">
+    <div className="md:flex items-center w-[75%] m-auto justify-between">
         {
             cards.map((card, index) => (
-                <div key={index} className="w-[23%] px-5 pb-11 rounded-[20px] border border-grey-600">
+                <div key={index} className="md:w-[23%] mt-[28%] md:mt-[1%] px-5 pb-11 rounded-[20px] border border-grey-600">
                     <img src={card.img} alt="img" className="-mt-12"/>
                     <div className="flex items-center mt-11">
                         <p className="unbound text-[15px]">{card.title}</p>
