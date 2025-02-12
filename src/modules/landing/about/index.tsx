@@ -102,8 +102,10 @@ const AboutIndex = () => {
         </div>
       </div>
 
-      <div className="mb-[5%] text-center">
-        <h1 className="text-[#EEEEEE] text-[70px] font-[700]">Dream . Create . Inspire || Dream . Create . inspire</h1>
+      <div className="mb-[5%] overflow-hidden">
+        <div className="whitespace-nowrap">
+          <h1 className="text-[#EEEEEE] text-[70px] font-[700]">Dream . Create . Inspire || Dream . Create . inspire</h1>
+        </div>
       </div>
     
     </div>
