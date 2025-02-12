@@ -30,28 +30,26 @@ const maxList = [
     }
 ]
 
-
-
 const AboutIndex = () => {
   return (
     <div className="">
       <AboutBanner/>
-      <div className="bg-white w-full">
+      <div className="w-full">
         <div id="whole_package" className="w-[85%] m-auto text-center py-[5%]">
-            <h1 className="unbound md:text-[35px] font-[700] md:px-[23%] leading-[1.3]">Enjoy the Whole Package with WE Immersive</h1>
-            <p className="md:px-[29%] mt-8 text-[16px] mb-10 text-[#747373]">WE.IMMERSIVE leverages cutting-edge technology to empower African creators through an equitable marketplace</p>
+            <h1 className="unbound md:text-[35px] font-[700] md:px-[23%] leading-[1.3] dark:text-white">Enjoy the Whole Package with WE Immersive</h1>
+            <p className="md:px-[29%] mt-8 text-[16px] mb-10 dark:text-[red] text-[#747373]">WE.IMMERSIVE leverages cutting-edge technology to empower African creators through an equitable marketplace</p>
             <div>
                 <Card1/>
             </div>
         </div>
       </div>
-      <div id="empowering_creators" className="w-[85%] mx-auto mt-5 mb-[7%] bg-[white]">
+      <div id="empowering_creators" className="w-[85%] mx-auto mt-5 mb-[7%] bg-[white] dark:bg-[#0e1624]">
         <div>
             <div className="flex text-white justify-center bg-primary rounded-full px-5 py-[2px] w-[80px]">
                 <p className="text-[10px] unbound fw-600">Creators</p>
             </div>
-            <h1 className="unbound md:text-[35px] mt-4 font-[700]">Empowering Creators Everywhere</h1>
-            <p className="text-[16px] md:pr-[55%] mb-2 mt-5 text-[#747373]">
+            <h1 className="unbound md:text-[35px] mt-4 font-[700] dark:text-white text-center md:text-left">Empowering Creators Everywhere</h1>
+            <p className="text-[12px] md:text-[16px] md:pr-[55%] mb-2 mt-5 text-[#747373] text-center md:text-left">
                We offer advanced analytics to track your growth, custom websites to showcase your portfolio, 
                a community that celebrates and supports your talent, 
                and much more
@@ -74,7 +72,7 @@ const AboutIndex = () => {
                 <div className="flex text-white justify-center bg-primary rounded-full py-[2px] w-[150px] mb-5">
                     <p className="text-[10px] unbound fw-600">Maximize Potential</p>
                 </div>
-                <h1 className="unbound md:text-[40px] font-[500] leading-[1.3] mb-8 w-[60%]">Unlock your full potential</h1>
+                <h1 className="unbound md:text-[40px] font-[500] leading-[1.3] mb-8 w-[70%]">Unlock your full potential</h1>
                 <div className="mt-5">
                     {
                       maxList.map((item, index) => (
@@ -91,10 +89,10 @@ const AboutIndex = () => {
 
       <div className="pb-11">
         <div className="flex flex-col text-center mt-[5%] mb-[8%]">
-            <img src={handshake} width="20%" alt="img" className="m-auto"/>
+            <img src={handshake} alt="img" className="m-auto w-[60%] md:w-[20%]"/>
             <div>
-                <h1 className="unbound font-[700] md:text-[38px] mt-3">Join Us Today</h1>
-                <p className="mt-5 text-[#747373] md:w-[35%] m-auto text-[18px]">Start your journey on WE.IMMERSIVE and access tools designed for creative professionals:</p>
+                <h1 className="unbound font-[700] md:text-[38px] mt-3 dark:text-white">Join Us Today</h1>
+                <p className="px-3 md:px-0 mt-5 text-[#747373] md:w-[35%] m-auto text-[14px] md:text-[18px]">Start your journey on WE.IMMERSIVE and access tools designed for creative professionals:</p>
             </div>
         </div>
         <div> 
@@ -104,7 +102,7 @@ const AboutIndex = () => {
 
       <div className="mb-[5%] overflow-hidden">
         <div className="whitespace-nowrap">
-          <h1 className="text-[#EEEEEE] text-[70px] font-[700]">Dream . Create . Inspire || Dream . Create . inspire</h1>
+          <h1 className="text-[#EEEEEE] text-[70px] font-[700] -ml-14">Dream . Create . Inspire || Dream . Create . inspire</h1>
         </div>
       </div>
     

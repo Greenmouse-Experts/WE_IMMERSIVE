@@ -20,9 +20,9 @@ const Card2 = () => {
   return (
     <div className="md:flex justify-between mt-5">
         {cards.map((card, index) => (
-            <div key={index} className="bg-white rounded-[15px] md:w-[30%] mt-[10%] md:mt-[1%] md:h-[227px] p-8 shadow-md  border-none">
-                <p className="unbound mb-7 text-[15px]">{card.title}</p>
-                <p className="text-[15px] text-[#747373]">{card.content}</p>
+            <div key={index} className="rounded-[15px] md:w-[30%] mt-[10%] md:mt-[1%] md:h-[227px] p-8 shadow-md  border-none dark:bg-[#131313]">
+                <p className="unbound mb-7 text-[14px] md:text-[15px] text-center md:text-left">{card.title}</p>
+                <p className="text-[12px] md:text-[15px] text-[#747373] text-center md:text-left">{card.content}</p>
             </div>
         ))}
     </div>
