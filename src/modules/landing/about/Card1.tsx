@@ -29,9 +29,9 @@ const Card1 = () => {
         {
          cards.map((item, index) => (
             <div key={index} className="flex flex-col rounded-[15px] md:w-[30%] mt-[25%] md:mt-[1%] text-white pb-5" style={{ backgroundColor: item.color }}>
-                <img src={item.img} width="149px" alt="img" className={`relative left-[30%] ${index === 2 ? "-mt-[19%]" : "-mt-[18%]"}`}/>
+                <img src={item.img} width="149px" alt="img" className={`relative left-[30%] ${index === 2 ? "-mt-[21%]" : "-mt-[18%]"}`}/>
                 <p className="unbound mb-5 mt-8 text-[15px] font-[600]">{item.title}</p>
-                <p className="text-[13px] px-[15%] font-[700]">{item.content}</p>
+                <p className="text-[13px] px-[17%] font-[700]">{item.content}</p>
             </div>
          ))
         }
