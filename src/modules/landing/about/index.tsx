@@ -30,8 +30,6 @@ const maxList = [
     }
 ]
 
-
-
 const AboutIndex = () => {
   return (
     <div className="">
@@ -50,8 +48,8 @@ const AboutIndex = () => {
             <div className="flex text-white justify-center bg-primary rounded-full px-5 py-[2px] w-[80px]">
                 <p className="text-[10px] unbound fw-600">Creators</p>
             </div>
-            <h1 className="unbound md:text-[35px] mt-4 font-[700] dark:text-white">Empowering Creators Everywhere</h1>
-            <p className="text-[16px] md:pr-[55%] mb-2 mt-5 text-[#747373]">
+            <h1 className="unbound md:text-[35px] mt-4 font-[700] dark:text-white text-center md:text-left">Empowering Creators Everywhere</h1>
+            <p className="text-[12px] md:text-[16px] md:pr-[55%] mb-2 mt-5 text-[#747373] text-center md:text-left">
                We offer advanced analytics to track your growth, custom websites to showcase your portfolio, 
                a community that celebrates and supports your talent, 
                and much more
@@ -91,10 +89,10 @@ const AboutIndex = () => {
 
       <div className="pb-11">
         <div className="flex flex-col text-center mt-[5%] mb-[8%]">
-            <img src={handshake} width="20%" alt="img" className="m-auto"/>
+            <img src={handshake} alt="img" className="m-auto w-[60%] md:w-[20%]"/>
             <div>
                 <h1 className="unbound font-[700] md:text-[38px] mt-3 dark:text-white">Join Us Today</h1>
-                <p className="mt-5 text-[#747373] md:w-[35%] m-auto text-[18px]">Start your journey on WE.IMMERSIVE and access tools designed for creative professionals:</p>
+                <p className="px-3 md:px-0 mt-5 text-[#747373] md:w-[35%] m-auto text-[14px] md:text-[18px]">Start your journey on WE.IMMERSIVE and access tools designed for creative professionals:</p>
             </div>
         </div>
         <div> 

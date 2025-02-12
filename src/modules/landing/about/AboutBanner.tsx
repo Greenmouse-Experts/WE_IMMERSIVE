@@ -9,7 +9,7 @@ const AboutBanner = () => {
             <h5 className="Mulish text-[14px] text-center md:text-left mb-3 font-[700]">ABOUT WE IMMERSIVE</h5>
             <h1 className="unbound md:text-[30px] text-center md:text-left font-[700] mb-4 leading-[1.6] md:pr-[20%]">The creative hub built for today’s digital artists, designers, and creators.</h1>
             <h5 className="Mulish text-[14px] text-[#696767] text-center md:text-left md:w-[70%] mb-5">WE.IMMERSIVE leverages cutting-edge technology to empower African creators through an equitable marketplace and innovative payment systems.</h5>
-            <div>
+            <div className="px-[20%] md:px-0">
                 <Button 
                     title={"Join Now"} 
                     withArrows
@@ -17,7 +17,7 @@ const AboutBanner = () => {
                 />
             </div>
         </div>
-        <div className="">
+        <div className="hidden md:block">
             <img src={globe} width="500%"  alt="globe"/>
         </div>
       </div>
