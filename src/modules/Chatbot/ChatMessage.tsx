@@ -1,13 +1,13 @@
 import { RiRobot2Fill } from "react-icons/ri";
 
-interface ChatMessage {
+interface ChatMessageType {
   role: "user" | "model";
   text: string;
   isError: boolean;
 }
 
 interface ChatMessageProps {
-  chat: ChatMessage;
+  chat: ChatMessageType;
 }
 const ChatMessage: React.FC<ChatMessageProps> = ({chat}) => {
   return (

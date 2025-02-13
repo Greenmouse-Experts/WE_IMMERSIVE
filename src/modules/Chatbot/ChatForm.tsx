@@ -2,16 +2,16 @@ import { useRef } from 'react';
 import "./chat.css";
 import { MdKeyboardArrowUp } from "react-icons/md";
 
-interface ChatMessage {
+interface ChatMessageType {
   role: "user" | "model";
   text: string;
   isError: boolean;
 }
 
 interface ChatFormProps {
-  chatHistory: ChatMessage[];
-  setChatHistory: React.Dispatch<React.SetStateAction<ChatMessage[]>>;
-  generateBotResponse: (input: string) => void;
+  chatHistory: ChatMessageType[];
+  setChatHistory: React.Dispatch<React.SetStateAction<ChatMessageType[]>>;
+  generateBotResponse: (history: { role: string; text: string }[]) => Promise<void>; 
 }
 
 const ChatForm: React.FC<ChatFormProps> = ({chatHistory, setChatHistory, generateBotResponse}) => {
@@ -27,11 +27,11 @@ const ChatForm: React.FC<ChatFormProps> = ({chatHistory, setChatHistory, generat
     inputRef.current.value = "";
 
     // UPDATE CHAT HISTORY WITH THE USER MESSAGE
-    setChatHistory((history) => [...history, { role: "user", text: userMessage } as ChatMessage])
+    setChatHistory((history) => [...history, { role: "user", text: userMessage } as ChatMessageType])
 
     // ADD A "Thinking..." placeholder for the bot's response
     setTimeout(() => {
-        setChatHistory((history) => [...history, { role: "model", text: "Thinking..."} as ChatMessage]);
+        setChatHistory((history) => [...history, { role: "model", text: "Thinking..."} as ChatMessageType]);
 
         generateBotResponse([...chatHistory, { role: "user", text: userMessage }]);
     }, 600) 
