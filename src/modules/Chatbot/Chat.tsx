@@ -7,12 +7,18 @@ import ChatMessage from './ChatMessage';
 import { BiSolidMessageSquareDots } from "react-icons/bi";
 import { MdOutlineClose } from "react-icons/md";
 
-const Chat = () => {
-  const [ chatHistory, setChatHistory ] = useState<ChatMessage[]>([]);
-  const [ showChatbot, setShowChatbot ] = useState(false);
-  const chatBodyRef = useRef<HTMLDivElement>(null);
+interface ChatMessageType {
+    role: "user" | "model";
+    text: string;
+    isError: boolean;
+  }
 
-  const generateBotResponse = async (history: any) => {
+const Chat = () => {
+  const [ chatHistory, setChatHistory ] = useState<ChatMessageType[]>([]);
+  const [ showChatbot, setShowChatbot ] = useState(false);
+  const chatBodyRef = useRef<HTMLDivElement>(null); 
+
+const generateBotResponse = async (history: any)=> { 
     const updateHistory = (text: string, isError = false) => {
         setChatHistory((prev) => [...prev.filter(msg => msg.text !== "Thinking..."), {role: "model", text, isError}])
     }
