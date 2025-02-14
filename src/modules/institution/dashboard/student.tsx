@@ -9,8 +9,6 @@ import { FaSearch } from "react-icons/fa";
 
 const Student = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selected, setSelected] = useState("Newest First");
-  const optionSearch = ["Newest First", "Oldest First", "Most Popular"];
 
   const options = [
       'View/Edit',
@@ -75,7 +73,7 @@ const Student = () => {
         setAnchorEl(null);
     };
 
-    const handleAction = (option: any) => {
+    const handleAction = () => {
         // option === "Delete" && setDelModal(true)
         // option === "Add Product" && setOpenAddNewProductOptionModal(true)
         // if (option === "View/Edit") {
@@ -181,7 +179,7 @@ const Student = () => {
                             {options.map((option, idx) => (
                                 <MenuItem
                                     key={idx}
-                                    onClick={() => handleAction(option)}
+                                    onClick={() => handleAction()}
                                     sx={{
                                         fontSize: '10px',
                                     }}
