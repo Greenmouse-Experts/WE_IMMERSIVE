@@ -1,4 +1,5 @@
 
+import { Component } from "lucide-react";
 import { GrHomeRounded } from "react-icons/gr";
 // import { HiOutlineShoppingBag } from "react-icons/hi";
 import { LuCreditCard } from "react-icons/lu";
@@ -19,33 +20,39 @@ export const Routes = [
   {
     name: "Dashboard",
     icon: <GrHomeRounded className="text-[17px]" />,
-    route: "/",
+    route: "",
     submenu: [],
   },
   {
     name: "Students",
     icon: <RiHeart2Line className="text-xl" />,
-    route: "/area",
+    route: "student",
     submenu: [
     ],
   },
   {
     name: "Tutors",
     icon: <RiHeart2Line className="text-xl" />,
-    route: "/area",
+    route: "tutor",
     submenu: [
     ],
   },
   {
     name: "Courses",
     icon: <PiBookBookmark className="text-xl" />,
-    route: "/",
+    route: "courses",
     submenu: [],
   },
   {
     name: "Assets",
     icon: <PiBookBookmark className="text-xl" />,
-    route: "/",
+    route: "assets",
+    submenu: [],
+  },
+  {
+    name: "Upload Status",
+    icon: <PiBookBookmark className="text-xl" />,
+    route: "upload",
     submenu: [],
   },
   {
@@ -75,7 +82,7 @@ export const Routes = [
   {
     name: "Transactions",
     icon: <LuCreditCard className="text-lg" />,
-    route: "/",
+    route: "transaction",
     submenu: [],
   },
 ];
