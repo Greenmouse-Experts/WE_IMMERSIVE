@@ -94,7 +94,7 @@ const Assets = () => {
         setAnchorEl(null);
     };
 
-    const handleAction = (option: any) => {
+    const handleAction = () => {
         // option === "Delete" && setDelModal(true)
         // option === "Add Product" && setOpenAddNewProductOptionModal(true)
         // if (option === "View/Edit") {
@@ -200,7 +200,7 @@ const Assets = () => {
                             {options.map((option, idx) => (
                                 <MenuItem
                                     key={idx}
-                                    onClick={() => handleAction(option)}
+                                    onClick={() => handleAction()}
                                     sx={{
                                         fontSize: '10px',
                                     }}

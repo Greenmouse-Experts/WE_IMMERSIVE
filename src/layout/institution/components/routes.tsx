@@ -1,5 +1,4 @@
 
-import { Component } from "lucide-react";
 import { GrHomeRounded } from "react-icons/gr";
 // import { HiOutlineShoppingBag } from "react-icons/hi";
 import { LuCreditCard } from "react-icons/lu";
