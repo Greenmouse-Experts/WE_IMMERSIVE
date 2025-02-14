@@ -11,9 +11,9 @@ const HeaderSection = () => {
 
   return (
     <div>
-      <div className="flex items-stretch gap-x-5">
-        <div className="w-[65%]">
-          <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row lg:flex-row items-stretch gap-x-5">
+        <div className="w-[100%] md:w-[65%] lg:w-[65%]">
+          <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between">
             <div className="">
               <div className="flex items-center h-[44px] 2xl:w-[481px] px-4  bg-white rounded-[14px] overflow-hidden">
                 <CiSearch size={20} />
@@ -25,7 +25,7 @@ const HeaderSection = () => {
               </div>
               {/* <TextInput type={InputType.text} icon={<CiSearch />} placeholder="Search with keyword" style={{backgroundColor:"#fff"}}/> */}
             </div>
-            <div className="flex gap-x-2 items-center">
+            <div className="flex gap-x-2 mt-4 md:mt-0 lg:mt-0 items-center">
               <div className="size-[44px] cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E]">
                 <CiSearch />
               </div>
@@ -52,7 +52,7 @@ const HeaderSection = () => {
             </div>
           </div>
         </div>
-        <div className="w-[35%] bg-white dark:bg-[#15171E] rounded-[14px] p-4">
+        <div className="w-[100%] md:w-[35%] lg:w-[35%] bg-white dark:bg-[#15171E] rounded-[14px] p-4">
           <div className="flex items-center justify-between bg-[#E9EBFB] dark:bg-black rounded-[14px] px-4 py-1">
             <p className="unbound fw-400 text-[#06052A] fs-500">
               Institution Account
