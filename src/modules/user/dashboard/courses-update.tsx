@@ -19,39 +19,28 @@ const CoursesUpdate = () => {
   ];
 
   return (
-    <div>
-      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
-        <p className="unbound text-[#06052A]">Courses Update</p>
-        <div className="mt-6 grid gap-5">
-          {updates.map((item, i) => (
-            <div className="flex items-center gap-x-2" key={i}>
-              <div className="w-[65px] shrink-0">
-                <img src={item.img} alt="course-img" className="w-full" />
+    <div className="bg-white dark:bg-[#15171E] px-4 py-6 rounded-[20px]">
+      <p className="unbound text-[#06052A] text-lg">Courses Update</p>
+      <div className="mt-6 grid gap-5">
+        {updates.map((item, i) => (
+          <div key={i} className="flex flex-wrap items-center gap-4">
+            <div className="w-16 h-16 shrink-0">
+              <img src={item.img} alt="course-img" className="w-full h-full object-cover rounded-md" />
+            </div>
+            <div className="flex-1 min-w-[180px]">
+              <div className="flex justify-between items-center">
+                <p className="fs-500 fw-500">{item.title}</p>
+                <p className={`fs-200 ${i > 0 ? "text-gray-500" : "text-red-500"}`}>
+                  {item.duration}
+                </p>
               </div>
-              <div className="w-full">
-                <div className="flex justify-between items-center">
-                  <p className="fs-500 fw-500">{item.title}</p>
-                  <p
-                    className={`fs-200 ${
-                      i > 0 ? "text-[#696767]" : "text-red-500 "
-                    }`}
-                  >
-                    {item.duration}
-                  </p>
-                </div>
-                <p className="text-[#696767] fs-200 mt-1">{item.name}</p>
-                <div className="pt-1">
-                  <Progress
-                    size="sm"
-                    value={item.value}
-                    color="green"
-                    className="!h-[3px] shrink-0"
-                  />
-                </div>
+              <p className="text-gray-500 fs-200 mt-1">{item.name}</p>
+              <div className="pt-1">
+                <Progress size="sm" value={item.value} color="green" className="!h-[3px]" />
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

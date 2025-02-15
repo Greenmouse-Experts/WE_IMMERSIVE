@@ -1,4 +1,5 @@
 import UserDashboard from "../pages/user/dashboard";
+import OngoingCourses from "../pages/user/OngoingCourses";
 
 export const userRoutes = [
   {
@@ -7,6 +8,10 @@ export const userRoutes = [
       {
         index: true,
         element: <UserDashboard />,
+      },
+      {
+        path: 'ongoing-courses',
+        element: <OngoingCourses />,
       },
     ],
   },

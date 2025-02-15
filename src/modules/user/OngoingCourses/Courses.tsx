@@ -1,4 +1,5 @@
 import { Progress } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const ContinueCourse = () => {
   const courses = [
@@ -10,15 +11,22 @@ const ContinueCourse = () => {
       value: 30,
     },
     {
-      name: "Human Anatomy V4",
-      chapter: "Chapter 5",
+      name: "Human Anatomy V3",
+      chapter: "Chapter 2",
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
       tutor: "Bryan Silva",
-      value: 50,
+      value: 20,
+    },
+    {
+      name: "Human Anatomy V4",
+      chapter: "Chapter 3",
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
+      tutor: "Bryan Silva",
+      value: 35,
     },
     {
       name: "Human Anatomy V5",
-      chapter: "Chapter 6",
+      chapter: "Chapter 4",
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
       tutor: "Bryan Silva",
       value: 35,
@@ -27,8 +35,8 @@ const ContinueCourse = () => {
 
   return (
     <div className="bg-white dark:bg-[#15171E] px-4 py-6 rounded-[20px]">
-      <p className="unbound text-lg">Continue Course</p>
-      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <p className="unbound text-lg">Ongoing Courses</p>
+      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {courses.map((item, i) => (
           <div key={i} className="p-4 rounded-lg shadow-md bg-gray-50 dark:bg-[#1E1E2E]">
             <div>
@@ -51,6 +59,16 @@ const ContinueCourse = () => {
                 <p className="fs-400">{item.tutor}</p>
                 <p className="text-gray-500 fs-200">Tutor</p>
               </div>
+            </div>
+
+            {/* Course Details Link */}
+            <div className="mt-4 text-center">
+              <Link
+                to={`/course-details/${encodeURIComponent(item.name)}`}
+                className="text-gray-500 text-sm hover:underline"
+              >
+                View Course Details
+              </Link>
             </div>
           </div>
         ))}

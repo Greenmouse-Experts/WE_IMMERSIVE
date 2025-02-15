@@ -10,30 +10,22 @@ import TransactionList from "../../modules/user/dashboard/transaction-list";
 
 const UserDashboard = () => {
   return (
-    <div>
+    <div className="overflow-hidden max-w-full">
       <HeaderSection />
       <StatisticList />
+      
       <div className="lg:flex gap-9 mt-6">
         <div className="lg:w-[70%] grid gap-6">
-          <div>
-            <ContinueCourse />
-          </div>
-          <div>
-            <PurchaseAnalysis />
-          </div>
+          <ContinueCourse />
+          <PurchaseAnalysis />
         </div>
         <div className="lg:w-[30%] grid gap-6">
-          <div>
-            <RecentActivities />
-          </div>
-          <div>
-            <CoursesUpdate />
-          </div>
-          <div>
-            <LikedSpaces />
-          </div>
+          <RecentActivities />
+          <CoursesUpdate />
+          <LikedSpaces />
         </div>
       </div>
+      
       <div className="lg:flex gap-8 mt-6">
         <div className="lg:w-[74%]">
           <TransactionList />
@@ -47,3 +39,4 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
+

@@ -19,7 +19,7 @@ export const Routes = [
   {
     name: "Dashboard",
     icon: <GrHomeRounded className="text-[17px]" />,
-    route: "/",
+    route: "/user",
     submenu: [],
   },
   {
@@ -39,7 +39,7 @@ export const Routes = [
   {
     name: "Courses",
     icon: <PiBookBookmark className="text-xl" />,
-    route: "/chat-room",
+    route: "/user/ongoing-courses",
     submenu: [],
   },
   {
