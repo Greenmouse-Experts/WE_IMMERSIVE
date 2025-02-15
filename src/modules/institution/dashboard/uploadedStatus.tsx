@@ -95,9 +95,9 @@ const UploadedStatus = () => {
         <div className="mt-6">
                 <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between mt-5 mb-14 items-center">
-                    <div className="flex flex-col md:flex-row lg:flex-row items-center">
-                        <p className="unbound text-[#06052A] text-[24px]">Uplaod Status</p>
-                        <div className="flex md:ml-11 lg:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+                    <div className="flex flex-col md:flex-col lg:flex-row items-center">
+                        <p className="unbound text-[#06052A] text-[24px] md:text-[18px]">Upload Status</p>
+                        <div className="flex lg:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
                             <p className="text-[#2C3E50] fs-300">
                                 <span className="text-[#2C3E50] fs-200">Sort:</span> Newest
                                 First
@@ -115,7 +115,7 @@ const UploadedStatus = () => {
                                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                     </div>
-                    <div className="flex items-center mt-5 mb-5 md:mt-0 md:mb0 lg:mt-0 lg:mb-0 gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+                    <div className="flex items-center mt-5 mb-5 md:mt-2 md:mb-2 lg:mt-0 lg:mb-0 gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
                         <p className="text-[#2C3E50] fs-300">Export As</p>
                         <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
                     </div>
@@ -123,7 +123,7 @@ const UploadedStatus = () => {
                         type="button"
                         className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold
                                 px-4 py-2 rounded-md shadow-md hover:from-indigo-600 hover:to-purple-700
-                                transition-colors"
+                                transition-colors md:text-[12px]"
                     >
                         Add New Status
                     </button>
@@ -138,7 +138,7 @@ const UploadedStatus = () => {
                         <td className="unbound p-1 pb-2">Image</td>
                         <td className="unbound p-1 pb-2">Category</td>
                         <td className="unbound p-1 pb-2 whitespace-nowrap">Uploaded On</td>
-                        <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left">Status</td>
+                        <td className="unbound p-1 pb-2 text-center md:text-center lg:text-left">Status</td>
                         <td className="unbound p-1 pb-2">Action</td>
                     </tr>
                     </thead>
@@ -149,7 +149,7 @@ const UploadedStatus = () => {
                         <td className="p-2 py-4 whitespace-nowrap">{item.name}</td>
                         <td className="p-2 py-4"><img src={item.image} width="50px" alt="img"/></td>
                         <td className="p-2 py-4 whitespace-nowrap">{item.category}</td>
-                        <td className="p-2 py-4 text-center md:text-left lg:text-left">{item.uploadedOn}</td>
+                        <td className="p-2 py-4 text-center md:text-center lg:text-left">{item.uploadedOn}</td>
                         <td className="p-2 py-4"><span className={`px-8 py-2 rounded-[5px] ${item.status === "Approved" ? "bg-[#D4F9CE] text-[#249B2C]" : item.status === "Pending" ? "bg-[#F9F1CE] text-[#BEA40E]" : item.status === "Declined" ? "bg-[#F9CECE] text-[#F91313]":""}`}>{item.status}</span></td>
                         <td className="p-2 py-4 pl-4">
                         <IconButton

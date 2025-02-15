@@ -90,9 +90,9 @@ const Transaction = () => {
         <div className="mt-6">
                 <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between mt-5 mb-14 items-center">
-                    <div className="flex flex-col md:flex-row lg:flex-row items-center">
-                        <p className="unbound text-[#06052A] text-[24px]">All Transactions</p>
-                        <div className="flex md:ml-11 lg:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+                    <div className="flex flex-col md:flex-col lg:flex-row items-center">
+                        <p className="unbound text-[#06052A] text-[24px] md:text-[18px]">All Transactions</p>
+                        <div className="flex lg:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
                             <p className="text-[#2C3E50] fs-300">
                                 <span className="text-[#2C3E50] fs-200">Sort:</span> Newest
                                 First
@@ -110,7 +110,7 @@ const Transaction = () => {
                                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                     </div>
-                    <div className="flex items-center mt-5 mb-5 md:mt-0 md:mb0 lg:mt-0 lg:mb-0 gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+                    <div className="flex items-center mt-5 mb-5 md:mt-2 md:mb-2 lg:mt-0 lg:mb-0 gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
                         <p className="text-[#2C3E50] fs-300">Export As</p>
                         <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
                     </div>
@@ -118,7 +118,7 @@ const Transaction = () => {
                         type="button"
                         className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold
                                 px-4 py-2 rounded-md shadow-md hover:from-indigo-600 hover:to-purple-700
-                                transition-colors"
+                                transition-colors md:text-[12px]"
                     >
                         Add New Transaction
                     </button>
@@ -133,7 +133,7 @@ const Transaction = () => {
                         <td className="unbound p-1 pb-2">Description</td>
                         <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left">Date</td>
                         <td className="unbound p-1 pb-2">Amount</td>
-                        <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left">Status</td>
+                        <td className="unbound p-1 pb-2 text-center md:text-center lg:text-left">Status</td>
                         <td className="unbound p-1 pb-2">Action</td>
                     </tr>
                     </thead>
