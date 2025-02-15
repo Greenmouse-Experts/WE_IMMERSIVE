@@ -17,7 +17,7 @@ const VideoPlayer = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-[#15171E] p-4 rounded-lg shadow-md w-full">
+    <div className="bg-white dark:bg-[#15171E] p-4 rounded-lg w-full">
       {/* Video Element */}
       <div className="relative">
         <video

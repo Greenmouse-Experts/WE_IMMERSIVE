@@ -41,11 +41,11 @@ const TransactionList = () => {
       <div className="flex justify-between items-center">
         <p className="unbound text-[#06052A] text-lg">Transactions</p>
         <div className="flex items-center gap-x-4">
-          <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+          <div className="flex items-center gap-x-1 btn-shadow px-2 py-3 rounded-lg cursor-pointer">
             <p className="text-[#2C3E50] fs-300">Export As</p>
             <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
           </div>
-          <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+          <div className="flex items-center gap-x-1 btn-shadow px-2 py-3 rounded-lg cursor-pointer">
             <p className="text-[#2C3E50] fs-300">
               <span className="text-[#2C3E50] fs-200">Sort:</span> Newest First
             </p>
@@ -59,29 +59,29 @@ const TransactionList = () => {
         <table className="table-auto w-full min-w-[600px]">
           <thead>
             <tr className="border-b border-gray-300">
-              <th className="unbound p-5 text-left">#</th>
-              <th className="unbound p-5 text-left">Name</th>
-              <th className="unbound p-5 text-left">Image</th>
-              <th className="unbound p-5 text-left">Category</th>
-              <th className="unbound p-5 text-left">Creators</th>
-              <th className="unbound p-5 text-left">Action</th>
+              <th className="p-4 text-left">#</th>
+              <th className="p-4 text-left">Name</th>
+              <th className="p-4 text-left">Image</th>
+              <th className="p-4 text-left">Category</th>
+              <th className="p-4 text-left">Creators</th>
+              <th className="p-4 text-left">Action</th>
             </tr>
           </thead>
           <tbody>
             {data.map((item, i) => (
               <tr key={i} className="odd:bg-[#E9EBFB] odd:dark:bg-black">
-                <td className="p-5 pl-4">{`0${i + 1}`}</td>
-                <td className="p-5">{item.name}</td>
-                <td className="p-5">
+                <td className="p-3">{`0${i + 1}`}</td>
+                <td className="p-3 text-sm">{item.name}</td>
+                <td className="p-3 text-sm">
                   <img
                     src={item.img}
                     alt="purchase-image"
                     className="w-[60px] h-[40px] object-cover rounded-md"
                   />
                 </td>
-                <td className="p-5">{item.category}</td>
-                <td className="p-5">{item.creators}</td>
-                <td className="p-5 pl-4">
+                <td className="p-3 text-sm">{item.category}</td>
+                <td className="p-3 text-sm">{item.creators}</td>
+                <td className="p-3 text-sm">
                   <PiDotsThreeOutlineFill className="cursor-pointer text-lg" />
                 </td>
               </tr>

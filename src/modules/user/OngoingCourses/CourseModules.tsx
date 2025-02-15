@@ -14,7 +14,7 @@ interface CourseModulesProps {
 
 const CourseModules: FC<CourseModulesProps> = ({ modules, activeModuleIndex, activeLessonIndex, onSelectLesson }) => {
   return (
-    <aside className="bg-white dark:bg-[#15171E] p-4 rounded-lg shadow-md w-full md:w-[300px]">
+    <aside className="bg-white dark:bg-[#15171E] p-6 rounded-lg w-full">
       <h2 className="text-lg font-semibold mb-4 dark:text-white">Course Modules</h2>
       <div className="space-y-4">
         {modules.map((module, moduleIndex) => (
@@ -24,9 +24,9 @@ const CourseModules: FC<CourseModulesProps> = ({ modules, activeModuleIndex, act
               {module.lessons.map((lesson, lessonIndex) => (
                 <li
                   key={lessonIndex}
-                  className={`p-2 rounded-md cursor-pointer text-sm 
+                  className={`p-3 rounded-md cursor-pointer text-sm 
                     ${moduleIndex === activeModuleIndex && lessonIndex === activeLessonIndex 
-                      ? "bg-purple-500 text-white" 
+                      ? "bg-gradient text-white" 
                       : "text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"}`}
                   onClick={() => onSelectLesson(moduleIndex, lessonIndex)}
                 >

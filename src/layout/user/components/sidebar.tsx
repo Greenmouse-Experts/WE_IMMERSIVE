@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "/logo.svg";
 import logo2 from "/logo-white.svg";
 import { FC } from "react";
-import { Routes, RouteType } from "./routes";
+import { Routes } from "./routes";
 import { PiGear } from "react-icons/pi";
 import { LuArrowRightCircle, LuMenu } from "react-icons/lu"; // Added LuMenu for Hamburger
 import ThemeSwitch from "../../../components/ui/theme-switch";
@@ -52,45 +52,43 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
           <div className="py-1 pt-2 mb-4 border-b border-[#B2B7B7] items-center">
             <Link to="/" className="pl-2 block">
               <img src={logo} alt="logo" className="w-[100px] dark:hidden" />
-              <img src={logo2} alt="logo" className="w-[100px] hidden dark:block" />
+              <img src={logo2} alt="logo" className="w-[90px] hidden dark:block" />
             </Link>
           </div>
 
           <Menu className="overflow-y-auto relative scroll-pro" transitionDuration={600}>
-            {Routes.map((item) => (
-              <div key={item.name}>
-                {!!item.submenu.length ? (
-                  <SubMenu
-                    className="[&>a]:dark:!bg-[#15171E] dark:text-white"
-                    label={item.name}
-                    icon={item.icon}
-                  >
-                    {item.submenu.map((item: RouteType, i) => (
-                      <MenuItem
-                        className="[&>a]:dark:!bg-[#15171E] dark:!text-white"
-                        component={<Link to={item.route} />}
-                        active={path.pathname === item.route && true}
-                        key={i}
-                      >
-                        <p className="fs-400">{item.name}</p>
-                      </MenuItem>
-                    ))}
-                  </SubMenu>
-                ) : (
-                  <MenuItem
-                    className="[&>a]:dark:!bg-[#15171E] dark:!text-white"
-                    component={<Link to={item.route} />}
-                    icon={item.icon}
-                    active={path.pathname === item.route && true}
-                  >
-                    <div className="flex pr-4 justify-between items-center">
-                      <p className="fs-400">{item.name}</p>
-                    </div>
-                  </MenuItem>
-                )}
-              </div>
-            ))}
-          </Menu>
+  {Routes.map((item) => (
+    <div key={item.name}>
+      {!!item.submenu.length ? (
+        <SubMenu
+          className="[&>a]:dark:!bg-[#15171E] dark:text-white"
+          label={item.name}
+          icon={item.icon}
+        >
+          {item.submenu.map((item, i) => (
+            <MenuItem
+              className={`[&>a]:dark:!bg-[#15171E] dark:!text-white ${path.pathname === item.route ? 'active-class' : ''}`}
+              component={<Link to={item.route} />}
+              key={i}
+            >
+              <p className="fs-400">{item.name}</p>
+            </MenuItem>
+          ))}
+        </SubMenu>
+      ) : (
+        <MenuItem
+          className={`[&>a]:dark:!bg-[#15171E] dark:!text-white ${path.pathname === item.route ? 'active-class' : ''}`}
+          component={<Link to={item.route} />}
+          icon={item.icon}
+        >
+          <div className="flex pr-4 justify-between items-center">
+            <p className="fs-400">{item.name}</p>
+          </div>
+        </MenuItem>
+      )}
+    </div>
+  ))}
+</Menu>
 
           <div className="border-t mt-4 border-[#B2B7B7]">
             <ul className="grid gap-2 mt-5">
@@ -108,8 +106,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
             </ul>
           </div>
 
-          <div className="mt-6">
-            <div className="m-2 mt-1 h-[180px] rounded-2xl bg-[#D9D9D9] dark:bg-black"></div>
+          <div className="mt-5">
             <ThemeSwitch sidebar />
           </div>
         </Sidebar>
