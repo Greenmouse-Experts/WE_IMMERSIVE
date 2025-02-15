@@ -54,7 +54,7 @@ const HeaderSection = () => {
         </div>
         <div className="w-[100%] md:w-[35%] lg:w-[35%] bg-white dark:bg-[#15171E] rounded-[14px] p-4">
           <div className="flex items-center justify-between bg-[#E9EBFB] dark:bg-black rounded-[14px] px-4 py-1">
-            <p className="unbound fw-400 text-[#06052A] fs-500">
+            <p className="unbound fw-400 text-[#06052A] fs-500 md:text-[14px]">
               Institution Account
             </p>
             <img
