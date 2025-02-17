@@ -18,7 +18,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details' | "
     'reset-password'
 );
 
-const [formData, setFormData] = useState<InstitutionFormData>({
+const [setFormData] = useState<InstitutionFormData>({
     name: 'GreenMouse',
     email: 'testmail@gmail.com',
     phone: 'Enter your phone number',
