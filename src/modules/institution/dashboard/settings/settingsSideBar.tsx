@@ -1,6 +1,6 @@
 import { MdSettings, MdPerson, MdContactSupport, MdDelete, MdChevronRight } from "react-icons/md";
 import { FaRev } from "react-icons/fa";
-import ev from "../../../../assets/EV.png";
+import ev from "../../../../assets/ev.png";
 
 interface User {
     name: string;
