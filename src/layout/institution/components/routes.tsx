@@ -69,7 +69,7 @@ export const Routes = [
   {
     name: "Notifications",
     icon: <LuCreditCard className="text-lg" />,
-    route: "/",
+    route: "notification",
     submenu: [],
   },
   {
