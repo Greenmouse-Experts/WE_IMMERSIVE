@@ -5,6 +5,8 @@ import CoursesTable from "../pages/institution/coursesTable";
 import AssetTable from "../pages/institution/assetTable";
 import TransactionTable from "../pages/institution/transactionTable";
 import UploadedStatusTable from "../pages/institution/uploadedStatusTable";
+import Notification from "../modules/institution/dashboard/notification";
+import SettingsTable from "../pages/institution/settingsTable";
 
 export const institutionRoutes = [
   {
@@ -37,6 +39,14 @@ export const institutionRoutes = [
       {
         path:"upload",
         element: <UploadedStatusTable/>,
+      },
+      {
+        path:"notification",
+        element: <Notification/>,
+      },
+      {
+        path:"settings",
+        element: <SettingsTable />,
       },
     ],
   },
