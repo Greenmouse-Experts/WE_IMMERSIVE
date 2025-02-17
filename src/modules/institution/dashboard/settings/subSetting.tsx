@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MdPerson, MdEmail, MdLocationPin } from "react-icons/md";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 import { GrUserManager } from "react-icons/gr";
