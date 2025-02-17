@@ -4,57 +4,16 @@ import { MdPerson, MdEmail, MdLocationPin } from "react-icons/md";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 import { GrUserManager } from "react-icons/gr";
 
-interface InstitutionFormData {
-    name: string;
-    email: string;
-    phone: string;
-    industry: string;
-    size: string;
-    location: string;
-  }
 const SubSetting = () => {
 
 const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details' | "notification-settings">(
     'reset-password'
 );
 
-const [setFormData] = useState<InstitutionFormData>({
-    name: 'GreenMouse',
-    email: 'testmail@gmail.com',
-    phone: 'Enter your phone number',
-    industry: 'Architecture',
-    size: '10-20',
-    location: 'Lagos, Nigeria',
-  });
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Perform update logic here (e.g., API call)
-    alert('Info updated!');
-  };
-
   return (
     <div className="min-h-screen w-[100%]">
-      {/* header Section */}
-      {/* <SettingHeader user={user}/> */}
-
-      {/* Main Content */}
       <main className="px-0 bg-white rounded-[20px] md:px-4 lg:px-4 py-8 flex flex-col md:flex-row gap-6">
-        {/* Left Sidebar */}
-        {/* <SettingsSideBar user={user}/> */}
-        {/* Right Content */}
         <section className="w-[100%]">
-          {/* Settings Tabs */}
           <div className="shadow-sm rounded-md p-2 md:p-8 lg:p-8">
             <p className='unbound text-[16px] font-[400] mb-5'>Settings</p>
             <div className="flex gap-11 border-b pb-2 mb-4">
@@ -92,7 +51,7 @@ const [setFormData] = useState<InstitutionFormData>({
 
             {/* Tab Content */}
             {activeTab === 'reset-password' && (
-              <form className="space-y-4" onSubmit={handleSubmit}>
+              <form className="space-y-4">
 
                 <div className='pt-4 md:pt-8 lg:pt-8'>
                   <label
@@ -106,7 +65,6 @@ const [setFormData] = useState<InstitutionFormData>({
                     name="location"
                     type="text"
                     placeholder='Enter current passwoord'
-                    onChange={handleInputChange}
                     className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                   />
                   <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -127,7 +85,6 @@ const [setFormData] = useState<InstitutionFormData>({
                         name="name"
                         type="text"
                         placeholder='Enter new password'
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -147,7 +104,6 @@ const [setFormData] = useState<InstitutionFormData>({
                         name="email"
                         type="email"
                         placeholder='re-enter new password'
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -184,7 +140,6 @@ const [setFormData] = useState<InstitutionFormData>({
                         name="name"
                         type="text"
                         placeholder='Enter account name'
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -204,7 +159,6 @@ const [setFormData] = useState<InstitutionFormData>({
                         name="email"
                         type="email"
                         placeholder='Enter bank name'
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -226,7 +180,6 @@ const [setFormData] = useState<InstitutionFormData>({
                         name="name"
                         type="text"
                         placeholder='Enter account number'
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -246,7 +199,6 @@ const [setFormData] = useState<InstitutionFormData>({
                         name="email"
                         type="email"
                         placeholder='Enter card number'
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -268,7 +220,6 @@ const [setFormData] = useState<InstitutionFormData>({
                         name="name"
                         type="text"
                         placeholder='mm/yy'
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -288,7 +239,6 @@ const [setFormData] = useState<InstitutionFormData>({
                         name="email"
                         type="email"
                         placeholder='Enter your cvv'
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">

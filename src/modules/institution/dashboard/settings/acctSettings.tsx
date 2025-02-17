@@ -1,46 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MdPerson, MdEmail, MdLocationPin } from "react-icons/md";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 import { GrUserManager } from "react-icons/gr";
 
-interface InstitutionFormData {
-    name: string;
-    email: string;
-    phone: string;
-    industry: string;
-    size: string;
-    location: string;
-  }
 const AcctSettings = () => {
 
 const [activeTab, setActiveTab] = useState<'organisation' | 'admin'>(
     'organisation'
 );
 
-const [formData, setFormData] = useState<InstitutionFormData>({
-    name: 'GreenMouse',
-    email: 'testmail@gmail.com',
-    phone: 'Enter your phone number',
-    industry: 'Architecture',
-    size: '10-20',
-    location: 'Lagos, Nigeria',
-  });
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Perform update logic here (e.g., API call)
-    alert('Info updated!');
-  };
 
   return (
     <div className="min-h-screen w-[100%]">
@@ -81,7 +49,7 @@ const [formData, setFormData] = useState<InstitutionFormData>({
 
             {/* Tab Content */}
             {activeTab === 'organisation' && (
-              <form className="space-y-4" onSubmit={handleSubmit}>
+              <form className="space-y-4">
                 <div className='lg:flex items-center justify-between mt-8'>
                   <div className='w-[100%] lg:w-[48%]'>
                     <label
@@ -94,8 +62,6 @@ const [formData, setFormData] = useState<InstitutionFormData>({
                         id="name"
                         name="name"
                         type="text"
-                        value={formData.name}
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -114,8 +80,6 @@ const [formData, setFormData] = useState<InstitutionFormData>({
                         id="email"
                         name="email"
                         type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -136,8 +100,6 @@ const [formData, setFormData] = useState<InstitutionFormData>({
                         id="name"
                         name="name"
                         type="text"
-                        value={formData.phone}
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] px-2 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                   </div>
@@ -152,8 +114,6 @@ const [formData, setFormData] = useState<InstitutionFormData>({
                     <select
                         id="institution_type"
                         name="institution_type"
-                        value={formData.email}
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] px-2 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     >
                         <option>Sch One</option>
@@ -174,8 +134,6 @@ const [formData, setFormData] = useState<InstitutionFormData>({
                     <select
                         id="industry"
                         name="industry"
-                        value={formData.industry}
-                        onChange={handleInputChange}
                         className="mt-1 w-full bg-[#E9EBFB] px-2 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     >
                         <option>Architecture</option>
@@ -195,8 +153,6 @@ const [formData, setFormData] = useState<InstitutionFormData>({
                         <select
                             id="size"
                             name="size"
-                            value={formData.size}
-                            onChange={handleInputChange}
                             className="mt-1 w-full bg-[#E9EBFB] px-2 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                         >
                             <option>1-5</option>
@@ -219,8 +175,6 @@ const [formData, setFormData] = useState<InstitutionFormData>({
                     id="location"
                     name="location"
                     type="text"
-                    value={formData.location}
-                    onChange={handleInputChange}
                     className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                   />
                   <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
