@@ -62,6 +62,7 @@ const [activeTab, setActiveTab] = useState<'organisation' | 'admin'>(
                         id="name"
                         name="name"
                         type="text"
+                        placeholder='Institution name'
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -80,6 +81,7 @@ const [activeTab, setActiveTab] = useState<'organisation' | 'admin'>(
                         id="email"
                         name="email"
                         type="email"
+                        placeholder='Email'
                         className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                     <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
@@ -100,6 +102,7 @@ const [activeTab, setActiveTab] = useState<'organisation' | 'admin'>(
                         id="name"
                         name="name"
                         type="text"
+                        placeholder='Phone number'
                         className="mt-1 w-full bg-[#E9EBFB] px-2 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                   </div>
@@ -175,6 +178,7 @@ const [activeTab, setActiveTab] = useState<'organisation' | 'admin'>(
                     id="location"
                     name="location"
                     type="text"
+                    placeholder='Institution location'
                     className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                   />
                   <div className="relative -top-9 flex items-center pl-3 pointer-events-none">

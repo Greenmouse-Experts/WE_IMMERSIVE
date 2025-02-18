@@ -11,9 +11,10 @@ interface User {
 interface MyComponentProps {
     user: User;
     handleSetForms: (formName: string) => void;
+    forms:string;
   }
 
-const SettingsSideBar: React.FC<MyComponentProps> = ({user, handleSetForms}) => {
+const SettingsSideBar: React.FC<MyComponentProps> = ({user, handleSetForms, forms}) => {
 
   return (
         <aside className="bg-white shadow-sm rounded-[20px] px-1 md:p-4 lg:p-4">
@@ -51,7 +52,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({user, handleSetForms}) => 
           <nav className="space-y-2 cursor-pointer">
             <ul>
             <li
-                className="block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+                className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-m ${forms === "account-setting" && "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"}`}
                 onClick={() => handleSetForms("account-setting")}
                 >
                 <MdPerson className='text-[#710AFC] bg-[#E0C8FF] w-[51px] h-[47px] p-2 rounded-[10px]'/>
@@ -61,7 +62,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({user, handleSetForms}) => 
                 </span>
             </li>
             <li
-              className="block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+              className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md ${forms === "ev_token" && "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"}`}
               onClick={() => handleSetForms("ev_token")}
             >
                 <FaRev className='text-[#710AFC] bg-[#E0C8FF] w-[51px] h-[47px] p-2 rounded-[10px]' />
@@ -71,7 +72,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({user, handleSetForms}) => 
                 </span>
             </li>
             <li
-              className="block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+              className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md ${forms === "sub-setting" && "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"}`}
               onClick={() => handleSetForms("sub-setting")}
             >
                 <MdSettings className='text-[#710AFC] bg-[#E0C8FF] w-[51px] h-[47px] p-2 rounded-[10px]'/>
@@ -81,7 +82,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({user, handleSetForms}) => 
                 </span>
             </li>
             <li
-              className="block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+              className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md ${forms === "support" && "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"}`}
               onClick={() => handleSetForms("support")}
             >
                 <MdContactSupport className='text-[#710AFC] bg-[#E0C8FF] w-[51px] h-[47px] p-2 rounded-[10px]'/>

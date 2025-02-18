@@ -6,9 +6,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { FaSearch } from "react-icons/fa"; 
+import FormModal from "./Modal/formModal";
+// import NotificationModal from "./Modal/notificationModal";
 
 const Student = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   const options = [
       'View/Edit',
@@ -115,6 +119,7 @@ const Student = () => {
                         </div>
                         <button
                             type="button"
+                            onClick={() => setIsModalOpen(true)}
                             className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold
                                     px-4 py-2 md:text-[12px] rounded-md shadow-md hover:from-indigo-600 hover:to-purple-700
                                     transition-colors"
@@ -197,7 +202,11 @@ const Student = () => {
                 </table>
                 </div>
             </div>
-
+            <FormModal 
+                isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} 
+                userType="student" 
+            />
+            {/* <NotificationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} userType="student" /> */}
         </div>
     </div>
   )

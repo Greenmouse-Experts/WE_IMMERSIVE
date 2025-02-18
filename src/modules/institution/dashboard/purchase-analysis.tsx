@@ -87,8 +87,8 @@ const PurchaseAnalysis = () => {
      ];
   return (
     <div>
-      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
-        <div className="flex justify-between items-center">
+      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px] mb-8 md:mb-0 lg:md-0">
+        <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center pt-5 md:pt-0 lg:pt-0">
           <p className="unbound text-[#06052A]">Purchase Analysis</p>
           <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
             <p className="text-[#2C3E50] fs-300">Export As</p>
