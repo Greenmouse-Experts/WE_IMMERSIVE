@@ -15,6 +15,7 @@ const SettingsTable = () => {
 
   const handleSetForms = (formName: string) => {
       setForms(formName)
+      setSideBar(!sideBar)
   }
 
   const handleSideBar = () => {
@@ -33,7 +34,7 @@ const SettingsTable = () => {
       </div>
       <div className="flex justify-evenly md:gap-1 lg:gap-0">
         <div className={`absolute md:static lg:static ${!sideBar ? "-left-[250px] transition-all duration-300 z-40" : "-left-0 transition-all duration-300 z-40 shadow-xl" }`}>
-          <SettingsSideBar user={user} handleSetForms={handleSetForms}/>
+          <SettingsSideBar user={user} handleSetForms={handleSetForms} forms={forms}/>
         </div>
         <div className="w-[100%] mt-5 md:mt-0 lg:mt-0 md:w-[68%] lg:w-[68%]">
           {

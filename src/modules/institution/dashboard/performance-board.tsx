@@ -25,9 +25,9 @@ export const PerformanceBoard = () => {
 
   return (
     <div>
-      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
-        <p className="unbound text-[#06052A]">Performance Board</p>
-        <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer w-fit mt-3">
+      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px] mb-8 md:mb-0 lg:mb-0">
+        <p className="unbound text-[#06052A] pt-5 md:pt-0 lg:pt-0 text-center md:text-left lg:text-left">Performance Board</p>
+        <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer w-fit mx-auto mt-3 md:mx-0 lg:mx-0">
           <p className="text-[#2C3E50] fs-300">Export As</p>
           <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
         </div>

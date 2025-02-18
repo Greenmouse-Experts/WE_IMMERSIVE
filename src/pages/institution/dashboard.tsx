@@ -12,9 +12,9 @@ const InstitutionDashboard = () => {
       <HeaderSection />
       <StatisticList />
       <div className="lg:flex gap-9 mt-6">
-        <div className="lg:w-[70%] grid gap-6">
+        <div className="lg:w-[70%] md:grid lg:grid md:gap-6 lg:gap-6">
         <TransactionList/>
-        <PurchaseAnalysis/>
+        <PurchaseAnalysis/> 
           {/* <div>
             <ContinueCourse/>
           </div>
@@ -22,7 +22,7 @@ const InstitutionDashboard = () => {
             <PurchaseAnalysis/>
           </div> */}
         </div>
-        <div className="lg:w-[30%] grid gap-6">
+        <div className="lg:w-[30%] md:grid lg:grid md:gap-6 lg:gap-6">
           <div>
             <PerformanceBoard/>
           </div>

@@ -27,7 +27,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
   const handleLogOut = useHandleLogOut();
 
   return (
-    <div className="left-3 top-3  fixed overflow-y-hidden">
+    <div className="left-3 top-3  fixed overflow-y-hidden z-50">
       <Sidebar
         customBreakPoint="1024px"
         className="h-[calc(100vh_-_30px)] overflow-y-hidden bg-white dark:bg-[#15171E] rounded-2xl !border-none scroll-pro p-3"
@@ -81,6 +81,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
                     icon={item.icon}
                     active={path.pathname === item.route && true}
                     key={item.name}
+                    onClick={() => setToggled(!toggled)}
                   >
                     <div className="flex pr-4 justify-between items-center">
                       <p className="fs-400">{item.name}</p>
@@ -93,7 +94,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
         </Menu>
         <div className="border-t mt-4 border-[#B2B7B7]">
           <ul className="grid gap-2 mt-5">
-            <li>
+            <li onClick={() => setToggled(!toggled)}>
               <Link to="settings" className="flex gap-x-3 p-2 items-center">
                 <PiGear />
                 <span>Settings</span>

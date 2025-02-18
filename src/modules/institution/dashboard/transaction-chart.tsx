@@ -44,9 +44,9 @@ const TransactionChart = () => {
   return (
     <div>
       <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
-        <div className="">
-          <p className="unbound text-[#06052A]">Expenses Analysis</p>
-          <div className="flex items-center gap-x-4 mt-2">
+        <div className="pt-6 md:pt-0 lg:pt-0">
+          <p className="unbound text-[#06052A] text-center md:text-left lg:text-left">Expenses Analysis</p>
+          <div className="flex items-center gap-x-4 mt-2 justify-center md:justify-start lg:justify-start">
             <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
               <p className="text-[#2C3E50] fs-300">Export As</p>
               <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
@@ -54,7 +54,7 @@ const TransactionChart = () => {
           </div>
         </div>
         <div className="mt-6">
-          <div className="mt-6">
+          <div className="mt-6 px-6 md:px-0 lg:px-0">
             {typeof window !== "undefined" && (
               <Chart
                 options={options}
