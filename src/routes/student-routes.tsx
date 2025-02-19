@@ -4,6 +4,8 @@ import StudentsNotificationScreen from "../pages/students/notifications";
 import OngoingCourses from "../pages/students/ongoingCourses";
 import Orders from "../pages/students/orders";
 import TransactionList from "../pages/students/transactions";
+import StudentCartTable from "../pages/students/studentCartTable";
+import SettingsTable from "../pages/students/settingsTable";
 
 export const studentRoutes = [
   {
@@ -32,6 +34,18 @@ export const studentRoutes = [
       {
         path: "transaction",
         element: <TransactionList />,
+      },
+      {
+        path: "cart",
+        element: <StudentCartTable />,
+      },
+      {
+        path: "cart",
+        element: <StudentCartTable />,
+      },
+      {
+        path: "settings",
+        element: <SettingsTable />,
       },
     ],
   },

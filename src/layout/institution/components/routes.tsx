@@ -57,13 +57,13 @@ export const Routes = [
   {
     name: "Cart",
     icon: <PiBookBookmark className="text-xl" />,
-    route: "/",
+    route: "cart",
     submenu: [],
   },
   {
     name: "Messages",
     icon: <LuCreditCard className="text-lg" />,
-    route: "/",
+    route: "message",
     submenu: [],
   },
   {
@@ -75,13 +75,19 @@ export const Routes = [
   {
     name: "Subscription",
     icon: <LuCreditCard className="text-lg" />,
-    route: "/",
+    route: "subscription",
     submenu: [],
   },
   {
     name: "Transactions",
     icon: <LuCreditCard className="text-lg" />,
     route: "transaction",
+    submenu: [],
+  },
+  {
+    name: "Jobs",
+    icon: <LuCreditCard className="text-lg" />,
+    route: "jobs",
     submenu: [],
   },
 ];
