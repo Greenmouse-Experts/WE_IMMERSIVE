@@ -42,7 +42,7 @@ export const Routes = [
   {
     name: "Cart",
     icon: <PiBookBookmark className="text-xl text-grey" />,
-    route: "#",
+    route: "cart",
     submenu: [],
   },
   {
@@ -63,4 +63,5 @@ export const Routes = [
     route: "/students/transaction",
     submenu: [],
   },
+  
 ];

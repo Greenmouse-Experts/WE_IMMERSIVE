@@ -46,7 +46,7 @@ const StudentsDashboardLayout = () => {
               {location.pathname !== "/students" ? (
                 <TopHeader openBar={toggleBar} />
               ) : (
-                <HeaderSection openBar={toggleBar} />
+                <HeaderSection openBar={toggleBar} /> 
               )}
               <Outlet />
               <p onClick={() => setCollapsed(true)}></p>

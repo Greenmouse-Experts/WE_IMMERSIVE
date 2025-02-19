@@ -7,6 +7,10 @@ import TransactionTable from "../pages/institution/transactionTable";
 import UploadedStatusTable from "../pages/institution/uploadedStatusTable";
 import Notification from "../modules/institution/dashboard/notification";
 import SettingsTable from "../pages/institution/settingsTable";
+import JobsTable from "../pages/institution/jobsTable";
+import CartTable from "../pages/institution/cartTable";
+import MessageTable from "../pages/institution/messageTable";
+import SubscriptionTable from "../pages/institution/subscriptionTable";
 
 export const institutionRoutes = [
   {
@@ -47,6 +51,22 @@ export const institutionRoutes = [
       {
         path:"settings",
         element: <SettingsTable />,
+      },
+      {
+        path:"jobs",
+        element: <JobsTable />,
+      },
+      {
+        path:"cart",
+        element: <CartTable />,
+      },
+      {
+        path:"message",
+        element: <MessageTable />,
+      },
+      {
+        path:"subscription",
+        element: <SubscriptionTable/>,
       },
     ],
   },
