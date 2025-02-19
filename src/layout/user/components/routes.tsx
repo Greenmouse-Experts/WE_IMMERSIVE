@@ -58,8 +58,11 @@ export const Routes = [
   {
     name: "Jobs",
     icon: <RiBriefcaseLine className="text-xl" />,
-    route: "/user/jobs",
-    submenu: [],
+    route: "#",
+   submenu: [
+    { name: "All Jobs", icon: <PiBookBookmark className="text-lg" />, route: "/user/jobs" },
+    { name: "Saved Jobs", icon: <PiBookBookmark className="text-lg" />, route: "/user/saved-jobs" },
+  ],
   },
   {
     name: "Notifications",

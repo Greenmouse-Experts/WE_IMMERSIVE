@@ -6,6 +6,11 @@ import AvailableAssets from "../pages/user/AllAssets";
 import Notifications from "../pages/user/Notifications";
 import Transactions from "../pages/user/Transactions";
 import AvailableJobs from "../pages/user/AllJobs";
+import SaveJobs from "../pages/user/SavedJobs";
+import CartPage from "../pages/user/CartPage";
+import Orders from "../pages/user/Orders";
+import Settings from "../pages/user/ProfilePage";
+
 
 export const userRoutes = [
   {
@@ -43,6 +48,27 @@ export const userRoutes = [
         path: 'jobs',
         element: <AvailableJobs />,
       },
+      {
+        path: 'cart',
+        element: <CartPage />,
+      },
+      {
+        path: 'orders',
+        element: <Orders />,
+      },
+      {
+        path: 'orders',
+        element: <Orders />,
+      },
+      {
+        path: 'settings',
+        element: <Settings />,
+      },
+      {
+        path: 'saved-jobs',
+        element: <SaveJobs />,
+      },
+      
     ],
   },
 ];

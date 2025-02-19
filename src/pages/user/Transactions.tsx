@@ -63,7 +63,7 @@ const TransactionList = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="px-3 py-1 border rounded-lg outline-none"
+              className="px-3 py-1 border rounded-lg outline-none dark:bg-[#15171E]"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
