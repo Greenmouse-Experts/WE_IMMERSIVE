@@ -9,7 +9,7 @@ import JobForm from "./jobForm";
 
 const Jobs = () => {
 const user = useSelector((state: any) => state.userData.data);
-const [ isActive, setIsActive ] = useState(false);
+const [ isActive ] = useState(false);
 
   return (
     <div>
