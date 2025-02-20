@@ -9,7 +9,7 @@ import JobForm from "./jobForm";
 
 const Jobs = () => {
 const user = useSelector((state: any) => state.userData.data);
-const [ isActive ] = useState(false);
+const [ isActive, setIsActive ] = useState<boolean>(true);
 
   return (
     <div>
@@ -58,7 +58,7 @@ const [ isActive ] = useState(false);
       <div>
         {
           isActive ? (
-            <div className="min-h-screen bg-gray-100 p-2">
+            <div className="bg-gray-100 p-2">
               <div className="mx-auto bg-white rounded-[20px] p-2 md:p-8 lg:p-8">
                   <h2 className="unbound text-[24px] text-center md:text-left lg:text-left font-[600]">Posted Jobs</h2>
                   <div className="flex flex-col md:flex-row lg;flex-row justify-between items-center my-11">
@@ -67,7 +67,11 @@ const [ isActive ] = useState(false);
                           placeholder="Search"
                           className="w-[100%] md:w-[736px] lg:w-[736px] p-2 border rounded-[10px] focus:outline-none"
                       />
-                      <button className="unbound px-4 py-2 mt-3 md:mt-0 lg:mt-0 w-[100%] md:w-[177px] lg:w-[177px] bg-gradient-to-r from-[#5f27f7] to-[#268cdb] text-white rounded-md text-[11px]">Post A New Job</button>
+                      <button className="unbound px-4 py-2 mt-3 md:mt-0 lg:mt-0 w-[100%] md:w-[177px] lg:w-[177px] bg-gradient-to-r from-[#5f27f7] to-[#268cdb] text-white rounded-md text-[11px]"
+                          onClick={() => {setIsActive(false)}}
+                      >
+                        Post A New Job
+                      </button>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-[4%]">
                       {JobListings.map((job, index) => (
@@ -77,7 +81,7 @@ const [ isActive ] = useState(false);
               </div>
             </div>
           ) : (
-            <JobForm/>
+            <JobForm setIsActive={setIsActive}/>
           )
         }
       </div>

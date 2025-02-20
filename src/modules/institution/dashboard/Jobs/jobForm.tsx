@@ -3,7 +3,13 @@ import "react-quill/dist/quill.snow.css";
 import DropZone from "../../../../components/DropZone";
 import ReactQuill from "react-quill";
 import { MdCancel } from "react-icons/md";
-const JobForm = () => {
+import { MdClose } from "react-icons/md";
+
+interface activeProps {
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const JobForm: React.FC<activeProps> = ({setIsActive}) => {
   const [jobTitle, setJobTitle] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [jobLocation, setJobLocation] = useState("Remote");
@@ -23,7 +29,12 @@ const JobForm = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-2">
     <div className="mx-auto bg-white rounded-[20px] pt-5 md:p-8 lg:p-8">
-      <h2 className="unbound text-[20px] md:text-[24px] lg:text-[24px] text-center md:text-left lg:text-left font-[600]">Posted a Job</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="unbound text-[20px] md:text-[24px] lg:text-[24px] text-center md:text-left lg:text-left font-[600]">Posted a Job</h2>
+        <MdClose className="size-[30px] text-[red] cursor-pointer"
+          onClick={() => setIsActive(true)}
+        />
+      </div>
     
     <form className="w-[100%] md:w-[100%] lg:w-[1026px] mx-auto px-2 pb-5 md:p-8 lg:p-8 bg-white rounded-[30px] shadow-md mt-5">
       <label className="block text-[16px] md:text-[18px] lg:text-[18px] text-[#5B5959] font-[400]">Job Title</label>
