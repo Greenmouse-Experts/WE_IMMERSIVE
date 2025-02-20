@@ -9,6 +9,7 @@ import AvailableJobs from "../pages/user/AllJobs";
 import SaveJobs from "../pages/user/SavedJobs";
 import CartPage from "../pages/user/CartPage";
 import Orders from "../pages/user/Orders";
+import JobDescription from "../pages/user/JobDescription";
 import Settings from "../pages/user/ProfilePage";
 
 
@@ -67,6 +68,11 @@ export const userRoutes = [
       {
         path: 'saved-jobs',
         element: <SaveJobs />,
+      },
+
+      {
+        path: 'job-details',
+        element: <JobDescription />,
       },
       
     ],

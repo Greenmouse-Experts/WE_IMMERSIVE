@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const jobs = [
   {
@@ -158,6 +159,14 @@ const JobsPage = () => {
             <p className="text-blue-500 text-sm mt-2">{job.type}</p>
             <p className="font-semibold mt-2">{job.salary}</p>
             <p className="text-gray-500 text-xs mt-1">Posted {job.posted}</p>
+            <div className="mt-4 text-center">
+              <Link
+                to={`/user/job-details`}
+                className="text-gray-500 text-sm hover:underline"
+              >
+                View Job Description
+              </Link>
+            </div>
           </div>
         ))}
       </div>
