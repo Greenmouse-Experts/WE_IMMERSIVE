@@ -28,7 +28,7 @@ const TopHeader = ({ openBar }: any) => {
           <div className="flex gap-x-2 items-center">
             <div
               onClick={() => openSideBar()}
-              className="size-[44px] md:hidden flex cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E]"
+              className="size-[44px] lg:hidden flex cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
