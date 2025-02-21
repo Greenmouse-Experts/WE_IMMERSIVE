@@ -1,5 +1,4 @@
 import { MdEmail } from "react-icons/md";
-import { HiIdentification } from "react-icons/hi2";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 
 const CreatorSettings = () => {
