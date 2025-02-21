@@ -23,6 +23,13 @@ const CoursesUpdate = () => {
       value: 70,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
     },
+    {
+      title: "(Upcoming Test)",
+      duration: "(8 days left)",
+      name: "Science Technology V2",
+      value: 70,
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
+    },
   ];
 
   return (
