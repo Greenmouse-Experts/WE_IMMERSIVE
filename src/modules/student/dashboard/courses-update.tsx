@@ -34,7 +34,7 @@ const CoursesUpdate = () => {
 
   return (
     <div>
-      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
+      <div className="bg-white dark:bg-[#15171E] p-6  rounded-[20px]">
         <p className="unbound text-[#06052A]">Upcoming Assessment</p>
         <div className="mt-6 grid gap-5">
           {updates.map((item, i) => (

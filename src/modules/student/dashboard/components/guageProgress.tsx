@@ -3,8 +3,8 @@ import GaugeChart from "react-gauge-chart";
 const GaugeProgress = () => {
   return (
     <>
-      <h2 className="font-bold mb-2">Performance</h2>
-      <div className="w-72 h-96 rounded-lg p-4 flex bg-white dark:bg-[#15171E] flex-col items-center">
+      <div className="w-full rounded-lg p-6 flex bg-white dark:bg-[#15171E] flex-col items-center">
+        <h2 className="unbound text-[#06052A] mb-5">Performance</h2>
         {/* Title */}
         <div className="flex justify-between w-full mb-4">
           <span className="text-sm flex items-center">

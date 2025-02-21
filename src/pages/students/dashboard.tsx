@@ -6,31 +6,27 @@ import GuageProgress from "../../modules/student/dashboard/components/guageProgr
 
 const StudentsDashboard = () => {
   return (
-    <div className="w-full flex flex-col">
-      <div className="lg:flex gap-4 w-full mt-8">
-        <div className="lg:w-[65%] w-full grid gap-6">
+    <>
+      <div className="flex flex-col lg:flex-row gap-6 w-full mt-6">
+        <div className="lg:w-2/3 w-full grid gap-6">
           <ContinueCourse />
         </div>
-        <div className="lg:w-[35%] w-full mt-10 md:mt-0 grid gap-6">
-          <div>
-            <CoursesUpdate />
-          </div>
+        <div className="lg:w-1/3 w-full grid gap-6">
+          <CoursesUpdate />
         </div>
       </div>
-      <div className="lg:flex w-full gap-4">
-        <div className="lg:w-[68%] flex md:flex-row w-full flex-col rounded-lg gap-5">
-          <div className="lg:w-[60%] grid gap-2">
-            <StackedBarChart />
-          </div>
-          <div className="lg:w-[40%] grid gap-2">
-            <GuageProgress />
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 w-full">
+        <div className="w-full grid gap-4">
+          <StackedBarChart />
         </div>
-        <div className="lg:w-[35%] grid gap-6 md:mt-2">
+        <div className="w-full grid gap-4">
+          <GuageProgress />
+        </div>
+        <div className="w-full grid gap-4">
           <Notifications />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

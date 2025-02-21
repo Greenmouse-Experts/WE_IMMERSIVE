@@ -12,9 +12,6 @@ const PersonalSettings = () => {
 
       {/* Main Content */}
       <main className="px-0 bg-white rounded-[20px] md:px-4 lg:px-4 py-8 flex flex-col md:flex-row gap-6">
-        {/* Left Sidebar */}
-        {/* <SettingsSideBar user={user}/> */}
-        {/* Right Content */}
         <section className="w-[100%]">
           {/* Settings Tabs */}
           <div className="shadow-sm rounded-md p-2 md:p-8 lg:p-8">

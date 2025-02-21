@@ -1,12 +1,13 @@
 import React from "react";
-import AvailableCourses from "../../modules/student/OngoingCourses/AvailableCourses";
+import OngoingCourse from "../../modules/student/OngoingCourses/Courses";
 
 const App: React.FC = () => {
   return (
     <div className="mx-auto">
-      <AvailableCourses />
+      <OngoingCourse />
     </div>
   );
 };
 
 export default App;
+
