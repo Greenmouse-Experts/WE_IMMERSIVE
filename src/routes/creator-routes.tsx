@@ -11,6 +11,7 @@ import CreatorNotificationScreen from "../pages/creator/notifications";
 import CreatorOrders from "../pages/creator/orders";
 import CreateJob from "../pages/shared/create";
 import JobsScreen from "../pages/shared/job-screen";
+import SettingsTable from "../pages/creator/settingsTable";
 
 export const creatorRoutes = [
   {
@@ -63,6 +64,10 @@ export const creatorRoutes = [
       {
         path: "jobs/edit/:id",
         element: <EditJob />
+      },
+      {
+        path: "settings",
+        element: <SettingsTable />
       },
       {
         path: "portfolio",

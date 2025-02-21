@@ -12,7 +12,7 @@ const FormModal: React.FC<AddTutorModalProps> = ({ userType, isOpen, onClose }) 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4"
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4 z-500"
      onClick={onClose}
     >
       <div className={`bg-white w-[1000px] px-3 pt-11 md:p-11 lg:p-11 rounded-[15px] shadow-lg ${userType === "student" ? "h-[419px]" : "h-[600px]"}`}

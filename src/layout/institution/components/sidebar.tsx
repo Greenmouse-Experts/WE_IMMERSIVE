@@ -27,7 +27,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
   const handleLogOut = useHandleLogOut();
 
   return (
-    <div className="left-3 top-3  fixed overflow-y-hidden z-50">
+    <div className="left-3 top-3  fixed overflow-y-hidden z-50 md:z-0 lg:z-0">
       <Sidebar
         customBreakPoint="1024px"
         className="h-[calc(100vh_-_30px)] overflow-y-hidden bg-white dark:bg-[#15171E] rounded-2xl !border-none scroll-pro p-3"

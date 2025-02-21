@@ -1,23 +1,12 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import SidebarLayout from "./components/sidebar";
-// import Button from "../../components/ui/Button";
 import { FaBars } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 
 
 const InstitutionDashboardLayout = () => {
 
-  //   const token = sessionStorage.getItem("weim_token");
-  // const navigate = useNavigate();
-  //   useEffect(() => {
-  //     if (!token) {
-  //       navigate("/login");
-  //     }
-  //   }, []);
-  //   if (!token) {
-  //     return;
-  //   }
   const [toggled, setToggled] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState(false);
 
