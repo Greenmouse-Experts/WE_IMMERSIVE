@@ -1,5 +1,4 @@
 import { MdEmail } from "react-icons/md";
-import { HiIdentification } from "react-icons/hi2";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 
 const CreatorSettings = () => {
@@ -7,26 +6,20 @@ const CreatorSettings = () => {
 
   return (
     <div className="min-h-screen w-[100%]">
-      {/* header Section */}
-      {/* <SettingHeader user={user}/> */}
 
-      {/* Main Content */}
-      <main className="px-0 bg-white rounded-[20px] md:px-4 lg:px-4 py-8 flex flex-col md:flex-row gap-6">
-        {/* Left Sidebar */}
-        {/* <SettingsSideBar user={user}/> */}
-        {/* Right Content */}
+      <main className="px-0 bg-white rounded-[20px] md:px-2 xl:px-4 md:py-2 xl:py-8">
         <section className="w-[100%]">
           {/* Settings Tabs */}
-          <div className="shadow-sm rounded-md p-2 md:p-8 lg:p-8">
+          <div className="shadow-sm rounded-md p-2 md:p-3 xl:p-8">
             <p className='unbound text-[16px] font-[400] mb-5'>Personal Info</p>
 
             {/* Tab Content */}
               <form className="space-y-4">
-                <div className='lg:flex items-center justify-between mt-8'>
-                  <div className='w-[100%] lg:w-[48%]'>
+                <div className='xl:flex items-center justify-between mt-8'>
+                  <div className='w-[100%] xl:w-[48%]'>
                     <label
                         htmlFor="name"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Name
                     </label>
@@ -42,10 +35,10 @@ const CreatorSettings = () => {
                     </div>
                   </div>
             
-                  <div className='w-[100%] lg:w-[48%] pt-3 lg:pt-0'>
+                  <div className='w-[100%] xl:w-[48%] pt-3 lg:pt-0'>
                     <label
                         htmlFor="email"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Email
                     </label>
@@ -62,11 +55,11 @@ const CreatorSettings = () => {
                   </div>
                 </div>
 
-                <div className='lg:flex items-center justify-between pt-0 lg:pt-1'>
-                  <div className='w-[100%] lg:w-[48%]'>
+                <div className='xl:flex items-center justify-between pt-0 lg:pt-1'>
+                  <div className='w-[100%] xl:w-[48%]'>
                     <label
                         htmlFor="name"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Phone Number
                     </label>
@@ -79,10 +72,10 @@ const CreatorSettings = () => {
                     />
                   </div>
             
-                  <div className='w-[100%] lg:w-[48%] mt-10 md:mt-0 lg:mt-0'>
+                  <div className='w-[100%] xl:w-[48%] mt-10 md:mt-8 xl:mt-0'>
                     <label
                         htmlFor="name"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Date Of Birth
                     </label>
@@ -96,11 +89,11 @@ const CreatorSettings = () => {
                   </div>
                 </div>
 
-                <div className='lg:flex items-center justify-between lg:pt-8 pb-11'>
-                  <div className='w-[100%] lg:w-[48%] mb-5 mt-10 md:mt-0 lg:mt-0'>
+                <div className='xl:flex items-center justify-between md:pt-3 xl:pt-8 pb-11'>
+                  <div className='w-[100%] xl:w-[48%] mb-5 mt-10 md:mt-0 lg:mt-0'>
                     <label
                         htmlFor="educational level"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block  mb-2 font-text-[14px] xl:text-[18px][400] text-gray-700"
                     >
                         Professional Skills
                     </label>
@@ -117,10 +110,10 @@ const CreatorSettings = () => {
                   </div>
 
           
-                  <div className='w-[100%] lg:w-[48%] mb-5 mt-10 md:mt-0 lg:mt-0'>
+                  <div className='w-[100%] xl:w-[48%] mb-5 mt-10 md:mt-8 xl:mt-0'>
                     <label
                         htmlFor="educational level"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Industry
                     </label>

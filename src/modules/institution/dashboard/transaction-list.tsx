@@ -64,22 +64,22 @@ const TransactionList = () => {
           <table className="table-auto w-full">
             <thead>
               <tr>
-                <td className="unbound pl-4 p-1 pb-2">#</td>
-                <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left">Name</td>
-                <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left">Email</td>
-                <td className="unbound p-1 pb-2 whitespace-nowrap">Student ID</td>
-                <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left">Date</td>
+                <td className="unbound pl-4 p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">#</td>
+                <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left text-[12px] md:text-[13px] xl:text-[17px]">Name</td>
+                <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left text-[12px] md:text-[13px] xl:text-[17px]">Email</td>
+                <td className="unbound p-1 pb-2 whitespace-nowrap text-[12px] md:text-[13px] xl:text-[17px]">Student ID</td>
+                <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left text-[12px] md:text-[13px] xl:text-[17px]">Date</td>
                 <td className="unbound p-1 pb-2">Action</td>
               </tr>
             </thead>
             <tbody className="">
               {data.map((item, i) => (
                 <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
-                  <td className={`p-2 py-4 pl-4`}>{`0${i + 1}`}</td>
-                  <td className="p-2 py-4 whitespace-nowrap">{item.name}</td>
-                  <td className="p-2 py-4">testmail@gmail.com</td>
-                  <td className="p-2 py-4 whitespace-nowrap">GRE-198832</td>
-                  <td className="p-2 py-4 whitespace-nowrap">1-11-24</td>
+                  <td className="p-2 py-4 pl-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{`0${i + 1}`}</td>
+                  <td className="p-2 py-4 whitespace-nowrap text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.name}</td>
+                  <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">testmail@gmail.com</td>
+                  <td className="p-2 py-4 whitespace-nowrap text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">GRE-198832</td>
+                  <td className="p-2 py-4 whitespace-nowrap text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">1-11-24</td>
                   <td className="p-2 py-4 pl-4">
                     <PiDotsThreeOutlineFill className="cursor-pointer"/>
                   </td>

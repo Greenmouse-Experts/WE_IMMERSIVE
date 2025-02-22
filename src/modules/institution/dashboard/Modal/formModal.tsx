@@ -6,10 +6,16 @@ interface AddTutorModalProps {
   userType: string;
   isOpen: boolean;
   onClose: () => void;
+  setIsNotifyModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FormModal: React.FC<AddTutorModalProps> = ({ userType, isOpen, onClose }) => {
+const FormModal: React.FC<AddTutorModalProps> = ({setIsNotifyModalOpen, userType, isOpen, onClose }) => {
   if (!isOpen) return null;
+
+  const handleAdd = () => {
+    setIsNotifyModalOpen(true)
+    onClose();
+  }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4 z-500"
@@ -57,6 +63,7 @@ const FormModal: React.FC<AddTutorModalProps> = ({ userType, isOpen, onClose }) 
                     <button
                     type="submit"
                     className="unbound px-4 py-2 w-[100%] bg-gradient-to-r from-[#6F0AFF] to-[#1D9CD7] text-white rounded-lg hover:opacity-90"
+                    onClick={handleAdd}
                     >
                     Add Tutor
                     </button>
@@ -84,6 +91,7 @@ const FormModal: React.FC<AddTutorModalProps> = ({ userType, isOpen, onClose }) 
                       <button
                       type="submit"
                       className="unbound px-4 py-2 w-[100%] bg-gradient-to-r from-[#6F0AFF] to-[#1D9CD7] text-white rounded-lg hover:opacity-90"
+                         onClick={handleAdd}
                       >
                         Add Student
                       </button>

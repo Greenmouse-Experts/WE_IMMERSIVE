@@ -32,7 +32,7 @@ const StudentCart = () => {
   return (
    <div className="bg-white p-2 lg:p-8 mx-auto rounded-[20px]">
     <h1 className="unbound text-[24px] font-[600] mb-6">Cart</h1>
-    <div className="flex flex-col lg:flex-row gap-5">
+    <div className="flex flex-col xl:flex-row gap-5">
         <div className="overflow-x-auto lg:w-[983px]">
             <div className="bg-white p-1 md:p-2 lg:p-4 w-[983px] lg:w-[100%] md:w-[100%] rounded-lg">
                 <div className="grid grid-cols-[1fr_1fr_1fr_1fr_auto] text-[14px] font-semibold py-2 pl-5">
@@ -72,7 +72,7 @@ const StudentCart = () => {
                 </div>
             </div>
         </div>
-        <div className="w-[100%] lg:w-[320px] mt-[5%]">
+        <div className="w-[100%] xl:w-[320px] mt-[5%]">
             <div className="bg-[#E9EAFE] p-6 rounded-lg">
                 <h2 className="text-[15px] font-[600] mb-8">Order Summary</h2>
                 <div className="flex justify-between mt-2 text-[#5B5959] text-[17px] mb-6">
@@ -93,7 +93,7 @@ const StudentCart = () => {
                     <span className="unbound text-[17px] font-[500]">N {total.toLocaleString()}</span>
                 </div>
             </div>
-            <button className="unbound w-[100%] lg:w-[320px] h-[50px] mt-4 rounded-[9px] bg-gradient-to-r from-[#6F0AFF] to-[#1D9CD7] text-[13px] font-[500] text-white">Proceed To Checkout</button>
+            <button className="unbound w-[100%] xl:w-[320px] h-[50px] mt-4 rounded-[9px] bg-gradient-to-r from-[#6F0AFF] to-[#1D9CD7] text-[13px] font-[500] text-white">Proceed To Checkout</button>
         </div>
   </div>
   </div>

@@ -37,7 +37,7 @@ const StatisticList = () => {
                 <p className="text monts text-[#7F7F7F] fw-600 text-lg">
                   {item.count}
                 </p>
-                <p className="unbound fs-500 fw-400 text-[#06052A] pt-1 text-[12px] md:text-[17px] lg:text-[17px]">
+                <p className="unbound fs-500 fw-400 text-[#06052A] pt-1 text-[12px] md:text-[13px] md:mt-7 xl:text-[17px]">
                   {item.name}
                 </p>
               </div>

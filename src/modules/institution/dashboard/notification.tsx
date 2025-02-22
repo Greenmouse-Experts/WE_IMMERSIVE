@@ -1,4 +1,3 @@
-import HeaderSection from "./header-section";
 import { MdFormatListBulleted } from "react-icons/md";
 
 interface Notification {
@@ -46,7 +45,6 @@ const Notification = () => {
 
   return (
     <div>
-         <HeaderSection/>
       <div className="bg-white mt-8 p-2 lg:p-8 rounded-lg" >
           <div className="pb-4 border-b border-gray-200">
             <h1 className="text-lg font-semibold">Notifications</h1>
