@@ -12,14 +12,14 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
 
   return (
     <div className="min-h-screen w-[100%]">
-      <main className="px-0 bg-white rounded-[20px] md:px-4 lg:px-4 py-8 flex flex-col md:flex-row gap-6">
+      <main className="px-0 bg-white rounded-[20px] md:px-4 xl:px-4 py-8">
         <section className="w-[100%]">
-          <div className="shadow-sm rounded-md p-2 md:p-8 lg:p-8">
+          <div className="shadow-sm rounded-md p-2 md:p-3 xl:p-8">
             <p className='unbound text-[16px] font-[400] mb-5'>Settings</p>
             <div className="flex justify-between border-b pb-2 mb-4">
               <button
                 onClick={() => setActiveTab('reset-password')}
-                className={`pb-2 text-[10px] md:text-[13px] lg:text-[18px] font-[400] cursor-pointer ${
+                className={`pb-2 text-[10px] text-[13px] xl:text-[18px] font-[400] cursor-pointer ${
                   activeTab === 'reset-password'
                     ? 'text-blue-600 border-b-2 border-blue-600'
                     : 'text-gray-500'
@@ -29,7 +29,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
               </button>
               <button
                 onClick={() => setActiveTab('bank-details')}
-                className={`pb-2 text-[10px] md:text-[13px] lg:text-[18px] font-[400] cursor-pointer${
+                className={`pb-2 text-[10px] text-[13px] xl:text-[18px] font-[400] cursor-pointer${
                   activeTab === 'bank-details'
                     ? 'text-blue-600 border-b-2 border-blue-600'
                     : 'text-gray-500'
@@ -39,7 +39,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
               </button>
               <button
                 onClick={() => setActiveTab("pair-gear")}
-                className={`pb-2 text-[10px] md:text-[13px] lg:text-[18px] font-[400] cursor-pointer${
+                className={`pb-2 text-[10px] text-[13px] xl:text-[18px] font-[400] cursor-pointer${
                   activeTab === "pair-gear"
                     ? 'text-blue-600 border-b-2 border-blue-600'
                     : 'text-gray-500'
@@ -49,7 +49,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
               </button>
               <button
                 onClick={() => setActiveTab("notification-settings")}
-                className={`pb-2 text-[10px] md:text-[13px] lg:text-[18px] font-[400] cursor-pointer${
+                className={`pb-2 text-[10px] text-[13px] xl:text-[18px] font-[400] cursor-pointer${
                   activeTab === "notification-settings"
                     ? 'text-blue-600 border-b-2 border-blue-600'
                     : 'text-gray-500'
@@ -66,7 +66,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <div className='pt-4 md:pt-8 lg:pt-8'>
                   <label
                     htmlFor="location"
-                    className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                    className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                   >
                     Old Password
                   </label>
@@ -82,11 +82,11 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                    </div>
                 </div>
 
-                <div className='lg:flex items-center justify-between pt-0 md:pt-4 lg:pt-4'>
-                  <div className='w-[100%] lg:w-[48%]'>
+                <div className='xl:flex items-center justify-between pt-0 md:pt-0 xl:pt-4'>
+                  <div className='w-[100%] xl:w-[48%]'>
                     <label
                         htmlFor="name"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         New Password
                     </label>
@@ -102,10 +102,10 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                     </div>
                   </div>
             
-                  <div className='w-[100%] lg:w-[48%] pt-3 lg:pt-0'>
+                  <div className='w-[100%] xl:w-[48%] pt-3 lg:pt-0'>
                     <label
                         htmlFor="email"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Re-Enter New Password
                     </label>
@@ -125,7 +125,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <button
                     type="button"
                     className="unbound bg-gradient-to-r from-[#5f27f7] to-[#268cdb] text-white font-[500]
-                            px-4 py-2 md:text-[13px] rounded-md shadow-md transition-colors w-[100%] lg:w-[350px] h-[50px]"
+                            px-4 py-2 text-[12px] md:text-[13px] rounded-md shadow-md transition-colors w-[100%] lg:w-[350px] h-[50px]"
                 >
                     Reset Password
                 </button>
@@ -137,11 +137,11 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
          
                 {/* Example input */}
 
-                <div className='lg:flex items-center justify-between pt-4'>
-                  <div className='w-[100%] lg:w-[48%]'>
+                <div className='xl:flex items-center justify-between pt-4'>
+                  <div className='w-[100%] xl:w-[48%]'>
                     <label
                         htmlFor="name"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Account Name
                     </label>
@@ -157,10 +157,10 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                     </div>
                   </div>
             
-                  <div className='w-[100%] lg:w-[48%] pt-3 lg:pt-0'>
+                  <div className='w-[100%] xl:w-[48%] pt-3 lg:pt-0'>
                     <label
                         htmlFor="email"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Bank Name
                     </label>
@@ -177,11 +177,11 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                   </div>
                 </div>
 
-                <div className='lg:flex items-center justify-between pt-0 md:pt-4 lg:pt-4'>
-                  <div className='w-[100%] lg:w-[48%]'>
+                <div className='xl:flex items-center justify-between pt-0 md:pt-0 xl:pt-4'>
+                  <div className='w-[100%] xl:w-[48%]'>
                     <label
                         htmlFor="name"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Account Number
                     </label>
@@ -197,10 +197,10 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                     </div>
                   </div>
             
-                  <div className='w-[100%] lg:w-[48%] pt-3 lg:pt-0'>
+                  <div className='w-[100%] xl:w-[48%] pt-3 lg:pt-0'>
                     <label
                         htmlFor="email"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Card Number
                     </label>
@@ -217,11 +217,11 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                   </div>
                 </div>
 
-                <div className='lg:flex items-center justify-between pt-0 md:pt-4 lg:pt-4'>
-                  <div className='w-[100%] lg:w-[48%]'>
+                <div className='xl:flex items-center justify-between pt-0 md:pt-0 xl:pt-4'>
+                  <div className='w-[100%] xl:w-[48%]'>
                     <label
                         htmlFor="name"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         Expiry Date
                     </label>
@@ -237,10 +237,10 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                     </div>
                   </div>
             
-                  <div className='w-[100%] lg:w-[48%] pt-3 lg:pt-0'>
+                  <div className='w-[100%] xl:w-[48%] pt-3 lg:pt-0'>
                     <label
                         htmlFor="email"
-                        className="Mulish block text-[18px] mb-2 font-[400] text-gray-700"
+                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
                     >
                         CVV
                     </label>
@@ -260,7 +260,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <button
                     type="button"
                     className="unbound bg-gradient-to-r from-[#5f27f7] to-[#268cdb] text-white font-[500]
-                            px-4 py-2 md:text-[13px] rounded-md shadow-md transition-colors w-[100%] lg:w-[350px] h-[50px]"
+                            px-4 py-2 text-[12px] md:text-[13px] rounded-md shadow-md transition-colors w-[100%] lg:w-[350px] h-[50px]"
                 >
                      Add Bank Details 
                 </button>
@@ -274,7 +274,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <div className='mt-11'>
                   <label
                     htmlFor="adminField"
-                    className="block text-[18px] font-[400] text-gray-700 mb-5"
+                    className="block text-[14px] xl:text-[18px] font-[400] text-gray-700 mb-5"
                   >
                     Admin Full Name
                   </label>
@@ -293,7 +293,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <div className='pt-[1%]'>
                   <label
                     htmlFor="adminField"
-                    className="block text-[18px] font-[400] text-gray-700 mb-5"
+                    className="block text-[14px] xl:text-[18px] font-[400] text-gray-700 mb-5"
                   >
                     Job TItle
                   </label>
@@ -312,7 +312,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <div className='pt-[1%] pb-[5%]'>
                   <label
                     htmlFor="adminField"
-                    className="block text-[18px] font-[400] text-gray-700 mb-5"
+                    className="block text-[14px] xl:text-[18px] font-[400] text-gray-700 mb-5"
                   >
                     Admin Email
                   </label>
@@ -330,7 +330,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <button
                     type="button"
                     className="unbound bg-gradient-to-r from-[#5f27f7] to-[#268cdb] text-white font-[500]
-                            px-4 py-2 md:text-[13px] rounded-md shadow-md transition-colors w-[100%] lg:w-[350px] h-[50px]"
+                            px-4 py-2 text-[12px] md:text-[13px] rounded-md shadow-md transition-colors w-[100%] lg:w-[350px] h-[50px]"
                 >
                      Save Admin Settings
                 </button>
@@ -344,7 +344,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <div className='mt-11'>
                   <label
                     htmlFor="adminField"
-                    className="block text-[18px] font-[400] text-gray-700 mb-5"
+                    className="block text-[14px] xl:text-[18px] font-[400] text-gray-700 mb-5"
                   >
                     Student Full Name
                   </label>
@@ -363,7 +363,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <div className='pt-[1%]'>
                   <label
                     htmlFor="adminField"
-                    className="block text-[18px] font-[400] text-gray-700 mb-5"
+                    className="block text-[14px] xl:text-[18px] font-[400] text-gray-700 mb-5"
                   >
                     Job TItle
                   </label>
@@ -382,7 +382,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <div className='pt-[1%] pb-[5%]'>
                   <label
                     htmlFor="adminField"
-                    className="block text-[18px] font-[400] text-gray-700 mb-5"
+                    className="block text-[14px] xl:text-[18px] font-[400] text-gray-700 mb-5"
                   >
                     Student Email
                   </label>
@@ -400,7 +400,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
                 <button
                     type="button"
                     className="unbound bg-gradient-to-r from-[#5f27f7] to-[#268cdb] text-white font-[500]
-                            px-4 py-2 md:text-[13px] rounded-md shadow-md transition-colors w-[100%] lg:w-[350px] h-[50px]"
+                            px-4 py-2 text-[12px] md:text-[13px] rounded-md shadow-md transition-colors w-[100%] lg:w-[350px] h-[50px]"
                 >
                      Save Student Settings
                 </button>

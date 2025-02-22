@@ -33,15 +33,15 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({user, handleSetForms, form
                 <p>4</p>
             </div>
             <div className="flex gap-3 mt-4">
-              <div className="text-center bg-[#E0C8FF] p-2 w-[70px] h-[70px] md:w-[65px] lg:w-[92px] md:h-[75px] lg:h-[75px] rounded-md">
+              <div className="text-center bg-[#E0C8FF] p-2 w-[70px] h-[70px] md:w-[65px] lg:w-[70px] xl:w-[92px] md:h-[75px] lg:h-[75px] rounded-md">
                 <p className="text-xl font-bold text-[#710AFC]">100</p>
                 <p className="text-xs text-[#710AFC] mt-1">Student</p>
               </div>
-              <div className="text-center bg-[#E0C8FF] p-2 w-[70px] h-[70px] md:w-[65px] lg:w-[92px] md:h-[75px] lg:h-[75px] rounded-md">
+              <div className="text-center bg-[#E0C8FF] p-2 w-[70px] h-[70px] md:w-[65px] lg:w-[70px] md:h-[75px] lg:h-[75px] xl:w-[92px] rounded-md">
                 <p className="text-xl font-bold text-[#710AFC]">100</p>
                 <p className="text-xs text-[#710AFC] mt-1">Courses</p>
               </div>
-              <div className="text-center bg-[#E0C8FF] p-2 w-[70px] h-[70px] md:w-[65px] lg:w-[92px] md:h-[75px] lg:h-[75px] rounded-md ">
+              <div className="text-center bg-[#E0C8FF] p-2 w-[70px] h-[70px] md:w-[65px] lg:w-[70px] md:h-[75px] lg:h-[75px] c rounded-md ">
                 <p className="text-xl font-bold text-[#710AFC]">100</p>
                 <p className="text-xs text-[#710AFC] mt-1">Assets</p>
               </div>

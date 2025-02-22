@@ -1,5 +1,4 @@
 import { useState } from "react"
-import HeaderSection from "./header-section";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -86,13 +85,12 @@ const Transaction = () => {
 
   return (
     <div>
-        <HeaderSection/>
         <div className="mt-6">
                 <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between mt-5 mb-14 items-center">
-                    <div className="flex flex-col md:flex-col lg:flex-row items-center">
-                        <p className="unbound text-[#06052A] text-[24px] md:text-[18px]">All Transactions</p>
-                        <div className="flex lg:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+                    <div className="flex flex-col md:flex-col lg:flex-col xl:flex-row items-center">
+                        <p className="unbound text-[#06052A] text-[24px] md:text-[18px] lg:text-[14px] xl:text-[24px]">All Transactions</p>
+                        <div className="flex lg:ml-0 xl:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
                             <p className="text-[#2C3E50] fs-300">
                                 <span className="text-[#2C3E50] fs-200">Sort:</span> Newest
                                 First
@@ -118,7 +116,7 @@ const Transaction = () => {
                         type="button"
                         className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold
                                 px-4 py-2 rounded-md shadow-md hover:from-indigo-600 hover:to-purple-700
-                                transition-colors md:text-[12px]"
+                                transition-colors md:text-[12px] lg:text-[10px]"
                     >
                         Add New Transaction
                     </button>
@@ -128,24 +126,24 @@ const Transaction = () => {
                 <table className="table-auto w-full">
                     <thead>
                     <tr>
-                        <td className="unbound pl-4 p-1 pb-2">#</td>
-                        <td className="unbound p-1 pb-2">Transaction ID</td>
-                        <td className="unbound p-1 pb-2">Description</td>
-                        <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left">Date</td>
-                        <td className="unbound p-1 pb-2">Amount</td>
-                        <td className="unbound p-1 pb-2 text-center md:text-center lg:text-left">Status</td>
-                        <td className="unbound p-1 pb-2">Action</td>
+                        <td className="unbound pl-4 p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">#</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Transaction ID</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Description</td>
+                        <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left text-[12px] md:text-[13px] xl:text-[17px]">Date</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Amount</td>
+                        <td className="unbound p-1 pb-2 text-center md:text-center text-[12px] md:text-[13px] xl:text-[17px] xl:text-left">Status</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Action</td>
                     </tr>
                     </thead>
                     <tbody className="">
                     {data.map((item, i) => (
                         <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
-                        <td className={`p-2 py-4 pl-4`}>{`0${i + 1}`}</td>
-                        <td className="p-2 py-4">{item.id}</td>
-                        <td className="p-2 py-4">{item.desc}</td>
-                        <td className="p-2 py-4">{item.date}</td>
-                        <td className="p-2 py-4">{item.amount}</td>
-                        <td className="p-2 py-4 "><span className={`py-2 px-8 rounded-[8px] ${item.status == "Active" ? "text-[green] bg-[#AEFFADFF]" : "text-[red] bg-[#FF9595FF]"}`}>{item.status}</span></td>
+                        <td className="p-2 py-4 pl-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{`0${i + 1}`}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.id}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.desc}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.date}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.amount}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]"><span className={`py-2 px-8 rounded-[8px] ${item.status == "Active" ? "text-[green] bg-[#AEFFADFF]" : "text-[red] bg-[#FF9595FF]"}`}>{item.status}</span></td>
                         <td className="p-2 py-4 pl-4">
                         <IconButton
                             aria-label="more"

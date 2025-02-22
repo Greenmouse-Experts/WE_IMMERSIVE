@@ -1,5 +1,4 @@
 import { useState } from "react";
-import HeaderSection from "./header-section";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import modelImg from "../../../assets/modelImg.png";
 import blenImg from "../../../assets/blenImg.png";
@@ -106,13 +105,12 @@ const Assets = () => {
 
   return (
     <div>
-        <HeaderSection/>
         <div className="mt-6">
                 <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between mt-5 mb-14 items-center">
-                <div className="flex flex-col md:flex-col lg:flex-row items-center">
-                        <p className="unbound text-[#06052A] text-[24px] md:text-[18px]">Created Assets</p>
-                        <div className="flex lg:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+                <div className="flex flex-col md:flex-col lg:flex-col xl:flex-row items-center">
+                        <p className="unbound text-[#06052A] text-[24px] md:text-[18px] lg:text-[15px] xl:text-[24px]">Created Assets</p>
+                        <div className="flex lg:ml-0 xl:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
                             <p className="text-[#2C3E50] fs-300">
                                 <span className="text-[#2C3E50] fs-200">Sort:</span> Newest
                                 First
@@ -148,26 +146,26 @@ const Assets = () => {
                 <table className="table-auto w-full">
                     <thead>
                     <tr>
-                        <td className="unbound pl-4 p-1 pb-2">#</td>
-                        <td className="unbound p-1 pb-2 whitespace-nowrap">Asset Name</td>
-                        <td className="unbound p-1 pb-2">Image</td>
-                        <td className="unbound p-1 pb-2">Price</td>
-                        <td className="unbound p-1 pb-2 whitespace-nowrap">Published On</td>
-                        <td className="unbound p-1 pb-2 whitespace-nowrap">Copies Sold</td>
-                        <td className="unbound p-1 pb-2 whitespace-nowrap">Asset Income</td>
-                        <td className="unbound p-1 pb-2">Action</td>
+                        <td className="unbound pl-4 p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">#</td>
+                        <td className="unbound p-1 pb-2 whitespace-nowrap text-[12px] md:text-[13px] xl:text-[17px]">Asset Name</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Image</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Price</td>
+                        <td className="unbound p-1 pb-2 whitespace-nowrap text-[12px] md:text-[13px] xl:text-[17px]">Published On</td>
+                        <td className="unbound p-1 pb-2 whitespace-nowrap text-[12px] md:text-[13px] xl:text-[17px]">Copies Sold</td>
+                        <td className="unbound p-1 pb-2 whitespace-nowrap text-[12px] md:text-[13px] xl:text-[17px]">Asset Income</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Action</td>
                     </tr>
                     </thead>
                     <tbody className="">
                     {data.map((item, i) => (
                         <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
-                        <td className={`p-2 py-4 pl-4`}>{`0${i + 1}`}</td>
-                        <td className="p-2 py-4 whitespace-nowrap">{item.name}</td>
+                        <td className="p-2 py-4 pl-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{`0${i + 1}`}</td>
+                        <td className="p-2 py-4 whitespace-nowrap text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.name}</td>
                         <td className="p-2 py-4"><img src={item.image} width="50px" alt="img"/></td>
-                        <td className="p-2 py-4">{item.price}</td>
-                        <td className="p-2 py-4 text-center md:text-center lg:text-left">{item.publishedOn}</td>
-                        <td className="p-2 py-4 text-center md:text-center lg:text-left">{item.copiesSold}</td>
-                        <td className="p-2 py-4 md:text-center lg:text-left">{item.coursesIncome}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.price}</td>
+                        <td className="p-2 py-4 text-center md:text-center lg:text-center text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px] xl:text-left">{item.publishedOn}</td>
+                        <td className="p-2 py-4 text-center md:text-center lg:text-center text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px] xl:text-left">{item.copiesSold}</td>
+                        <td className="p-2 py-4 text-center md:text-center lg:text-center text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px] xl:text-left">{item.coursesIncome}</td>
                         <td className="p-2 py-4 pl-4">
                         <IconButton
                             aria-label="more"

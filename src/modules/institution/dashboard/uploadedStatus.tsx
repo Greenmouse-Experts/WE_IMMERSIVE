@@ -1,5 +1,4 @@
 import { useState } from "react";
-import HeaderSection from "./header-section";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import modelImg from "../../../assets/modelImg.png";
 import blenImg from "../../../assets/blenImg.png";
@@ -91,13 +90,12 @@ const UploadedStatus = () => {
 
   return (
     <div>
-        <HeaderSection/>
         <div className="mt-6">
                 <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between mt-5 mb-14 items-center">
-                    <div className="flex flex-col md:flex-col lg:flex-row items-center">
+                    <div className="flex flex-col md:flex-col lg:flex-col xl:flex-row items-center">
                         <p className="unbound text-[#06052A] text-[24px] md:text-[18px]">Upload Status</p>
-                        <div className="flex lg:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+                        <div className="flex lg:ml-0 xl:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
                             <p className="text-[#2C3E50] fs-300">
                                 <span className="text-[#2C3E50] fs-200">Sort:</span> Newest
                                 First
@@ -133,24 +131,24 @@ const UploadedStatus = () => {
                 <table className="table-auto w-full">
                     <thead>
                     <tr>
-                        <td className="unbound pl-4 p-1 pb-2">#</td>
-                        <td className="unbound p-1 pb-2">Name</td>
-                        <td className="unbound p-1 pb-2">Image</td>
-                        <td className="unbound p-1 pb-2">Category</td>
-                        <td className="unbound p-1 pb-2 whitespace-nowrap">Uploaded On</td>
-                        <td className="unbound p-1 pb-2 text-center md:text-center lg:text-left">Status</td>
-                        <td className="unbound p-1 pb-2">Action</td>
+                        <td className="unbound pl-4 p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">#</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Name</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Image</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Category</td>
+                        <td className="unbound p-1 pb-2 whitespace-nowrap text-[12px] md:text-[13px] xl:text-[17px]">Uploaded On</td>
+                        <td className="unbound p-1 pb-2 text-center md:text-center text-[12px] md:text-[13px] xl:text-[17px] xl:text-left">Status</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Action</td>
                     </tr>
                     </thead>
                     <tbody className="">
                     {data.map((item, i) => (
                         <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
-                        <td className={`p-2 py-4 pl-4`}>{`0${i + 1}`}</td>
-                        <td className="p-2 py-4 whitespace-nowrap">{item.name}</td>
-                        <td className="p-2 py-4"><img src={item.image} width="50px" alt="img"/></td>
-                        <td className="p-2 py-4 whitespace-nowrap">{item.category}</td>
-                        <td className="p-2 py-4 text-center md:text-center lg:text-left">{item.uploadedOn}</td>
-                        <td className="p-2 py-4"><span className={`px-8 py-2 rounded-[5px] ${item.status === "Approved" ? "bg-[#D4F9CE] text-[#249B2C]" : item.status === "Pending" ? "bg-[#F9F1CE] text-[#BEA40E]" : item.status === "Declined" ? "bg-[#F9CECE] text-[#F91313]":""}`}>{item.status}</span></td>
+                        <td className="p-2 py-4 pl-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{`0${i + 1}`}</td>
+                        <td className="p-2 py-4 whitespace-nowrap text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.name}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]"><img src={item.image} width="50px" alt="img"/></td>
+                        <td className="p-2 py-4 whitespace-nowrap text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.category}</td>
+                        <td className="p-2 py-4 text-center md:text-center text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px] xl:text-left">{item.uploadedOn}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]"><span className={`px-8 py-2 rounded-[5px] ${item.status === "Approved" ? "bg-[#D4F9CE] text-[#249B2C]" : item.status === "Pending" ? "bg-[#F9F1CE] text-[#BEA40E]" : item.status === "Declined" ? "bg-[#F9CECE] text-[#F91313]":""}`}>{item.status}</span></td>
                         <td className="p-2 py-4 pl-4">
                         <IconButton
                             aria-label="more"

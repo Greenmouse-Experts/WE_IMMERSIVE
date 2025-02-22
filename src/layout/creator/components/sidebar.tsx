@@ -28,7 +28,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
   return (
     <div className="left-3 top-3 z-[9999] fixed overflow-y-hidden">
       <Sidebar
-        customBreakPoint="1024px"
+        customBreakPoint="1023px"
         className="h-[calc(100vh_-_30px)] overflow-y-hidden bg-white dark:bg-[#15171E] rounded-2xl !border-none scroll-pro p-3"
         collapsed={collapsed}
         width="256px"

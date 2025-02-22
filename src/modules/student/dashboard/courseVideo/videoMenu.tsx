@@ -16,7 +16,11 @@ interface ModuleItem {
     title:string,
     duration:string
   }
-const VideoMenu = () => {
+
+  interface PlayVideo{
+    playVideo: (e: any, title:string) => void
+  }
+const VideoMenu: React.FC<PlayVideo> = ({playVideo}) => {
 const [subVid, setSubVid] = useState<number | null>(null);
 const [dropVideos, setDropVideos] = useState<number | null>(null);
 
@@ -41,8 +45,9 @@ const modules: ModuleItem[] = [
     { type: "video", title: "Introduction to Physics", duration: "04:28 min", unlocked: false },
   ];
 
-  const toggleSubVideos = (index: number) => {
+  const toggleSubVideos = (index: number, e:any) => {
     setSubVid(subVid === index ? null : index);
+    e.stopPropagation()
   }
 
   const toggleDropVideos = (index: number, e:any) => {
@@ -70,7 +75,7 @@ const modules: ModuleItem[] = [
           <div className=" bg-white rounded-2xl">
             {
                 navigation.map((navItem, index) => (
-                    <div key={index} onClick={() => toggleSubVideos(index)} className={`cursor-pointer mb-2`}>
+                    <div key={index} onClick={(e) => toggleSubVideos(index, e)} className={`cursor-pointer mb-2`}>
                         <div className={`flex items-center justify-between py-5 px-3 ${subVid === index && "bg-[#242EF21A] border-l-4 border-[#242EF2]"}`}>
                             <h2 className="text-[18px] font-[600]">{navItem}</h2>
                             <ChevronDown className={`transition-transform ${subVid === index ? "rotate-180" : "rotate-0"}`} />
@@ -96,6 +101,7 @@ const modules: ModuleItem[] = [
                                                         <div
                                                             key={index}
                                                             className={`flex items-center justify-between p-3 rounded-lg ${item.unlocked ? "bg-gray-100" : "bg-gray-200"}`}
+                                                            onClick={(e) => playVideo(e, item.title)}
                                                         >
                                                             <div className="flex items-center gap-3">
                                                             {item.type === "video" ? (

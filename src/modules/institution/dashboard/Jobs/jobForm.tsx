@@ -30,13 +30,13 @@ const JobForm: React.FC<activeProps> = ({setIsActive}) => {
     <div className="min-h-screen bg-gray-100 p-2">
     <div className="mx-auto bg-white rounded-[20px] pt-5 md:p-8 lg:p-8">
       <div className="flex items-center justify-between">
-        <h2 className="unbound text-[20px] md:text-[24px] lg:text-[24px] text-center md:text-left lg:text-left font-[600]">Posted a Job</h2>
+        <h2 className="unbound text-[20px] md:text-[24px] lg:text-[24px] text-center md:text-left lg:text-left font-[600]">Post a Job</h2>
         <MdClose className="size-[30px] text-[red] cursor-pointer"
           onClick={() => setIsActive(true)}
         />
       </div>
     
-    <form className="w-[100%] md:w-[100%] lg:w-[1026px] mx-auto px-2 pb-5 md:p-8 lg:p-8 bg-white rounded-[30px] shadow-md mt-5">
+    <form className="w-[100%] md:w-[100%] lg:w-[100%] mx-auto px-2 pb-5 md:p-8 lg:p-8 bg-white rounded-[30px] shadow-md mt-5">
       <label className="block text-[16px] md:text-[18px] lg:text-[18px] text-[#5B5959] font-[400]">Job Title</label>
       <input
         type="text"
@@ -104,7 +104,7 @@ const JobForm: React.FC<activeProps> = ({setIsActive}) => {
       />
 
       <div className="w-full flex flex-col gap-2">
-          <div className="flex flex-col w-[100%] md:w-[50%] lg:w-[16%] h-[25vh] gap-6">
+          <div className="flex flex-col w-[100%] md:w-[50%] lg:w-[25%] h-[25vh] gap-6">
               <p className="mt-4 text-[16px] md:text-[18px] lg:text-[18px] text-[#5B5959] font-[400]">
                   Company Logo
               </p>
@@ -124,7 +124,7 @@ const JobForm: React.FC<activeProps> = ({setIsActive}) => {
           </div>
       </div>
 
-      <button className="unbound w-[100%] md:w-[50%] lg:w-[350px] mt-6 p-3 text-[14px] lg:text-[16px] md:text-[18px] lg:text-[18px] text-white bg-gradient-to-r from-[#6F0AFF] to-[#1D9CD7] rounded-[9px]">
+      <button className="unbound w-[100%] md:w-[50%] lg:w-[300px] xl-[350px] mt-6 p-3 text-[14px] lg:text-[16px] md:text-[18px] lg:text-[18px] text-white bg-gradient-to-r from-[#6F0AFF] to-[#1D9CD7] rounded-[9px]">
         Post Job »
       </button>
     </form>

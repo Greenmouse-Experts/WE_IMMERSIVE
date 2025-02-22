@@ -14,19 +14,25 @@ const CourseVideo = () => {
 
   const attachImg : string[] = [attach01, attach02, attach03, attach04]
 
+  const playVideo = (e:any, title:string) => {
+    setNavVisible(false)
+    console.log("PLAYING: ", title)
+    e.stopPropagation()
+  }
+
 
   return (
     <div className="flex flex-col gap-1 md:flex-row min-h-screen">
-      <div className=" lg:hidden absolute right-[3%] top-[8%] md:top-[14.5%]" onClick={() => setNavVisible(!navVisible)}>
+      <div className=" xl:hidden absolute right-[4%] top-[8%] md:right-[6%] md:top-[14.5%]" onClick={() => setNavVisible(!navVisible)}>
           <RxHamburgerMenu className={`size-[20px] ${!navVisible ? "block" : "hidden" }`} />
           <MdClose className={`size-[20px] ${!navVisible ? "hidden" : "block" }`}/>
       </div>
       {/* Sidebar */}
-      <div className={`absolute lg:static -left-[300px] md:-left-[380px] z-40 transition-all duration-2 ${navVisible && "left-[12px] md:left-[15px]"}`}>
-        <VideoMenu />
+      <div className={`absolute xl:static -left-[300px] md:-left-[380px] z-40 transition-all duration-2 ${navVisible && "left-[12px] md:left-[15px] lg:left-[300px]"}`}>
+        <VideoMenu playVideo={playVideo} />
       </div>
       {/* Main Content */}
-      <main className="flex-1 p-0 md:p-4 lg:p-4">
+      <main className="flex-1 p-0 md:p-4 xl:p-4">
         {/* Video Player */}
         <div className="bg-black rounded-lg shadow-md relative aspect-video">
           <div className="absolute inset-0 flex justify-center items-center text-white">

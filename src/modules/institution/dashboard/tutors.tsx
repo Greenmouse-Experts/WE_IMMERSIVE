@@ -1,5 +1,4 @@
 import { useState } from "react";
-import HeaderSection from "./header-section";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -7,11 +6,12 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { FaSearch } from "react-icons/fa";
 import FormModal from "./Modal/formModal";
-// import NotificationModal from "./Modal/notificationModal";
+import NotificationModal from "./Modal/notificationModal";
 
 const Tutors = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNotifyModalOpen, setIsNotifyModalOpen] = useState(false);
 
   const options = [
       'View/Edit',
@@ -76,14 +76,12 @@ const Tutors = () => {
 
   return (
     <div>
-          <HeaderSection/>
-
-          <div className="mt-6">
-                <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
+        <div className="mt-6">
+            <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between mt-5  mb-14 items-center">
-                    <div className="flex flex-col md:flex-col lg:flex-row items-center">
+                    <div className="flex flex-col md:flex-col lg:flex-col xl:flex-row items-center">
                         <p className="unbound text-[#06052A] text-[24px] md:text-[18px]">All Tutors</p>
-                        <div className="flex lg:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+                        <div className="flex lg:ml-0 xl:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
                             <p className="text-[#2C3E50] fs-300">
                                 <span className="text-[#2C3E50] fs-200">Sort:</span> Newest
                                 First
@@ -120,24 +118,24 @@ const Tutors = () => {
                 <table className="table-auto w-full">
                     <thead>
                     <tr>
-                        <td className="unbound pl-4 p-1 pb-2">#</td>
-                        <td className="unbound p-1 pb-2 whitespace-nowrap">Tutor Name</td>
-                        <td className="unbound p-1 pb-2">Phone Number</td>
-                        <td className="unbound p-1 pb-2 text-center md:text-center lg:text-left">Email</td>
-                        <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left">Course</td>
-                        <td className="unbound p-1 pb-2 text-center md:text-left lg:text-left">Status</td>
-                        <td className="unbound p-1 pb-2">Action</td>
+                        <td className="unbound pl-4 p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">#</td>
+                        <td className="unbound p-1 pb-2 whitespace-nowrap text-[12px] md:text-[13px] xl:text-[17px]">Tutor Name</td>
+                        <td className="unbound p-1 pb-2 text-[12px] text-center md:text-[13px] xl:text-[17px] xl:text-left">Phone Number</td>
+                        <td className="unbound p-1 pb-2 text-[12px] text-center md:text-center lg:text-center xl:text-[17px] xl:text-left">Email</td>
+                        <td className="unbound p-1 pb-2 text-[12px] text-center md:text-left lg:text-center xl:text-[17px] xl:text-left">Course</td>
+                        <td className="unbound p-1 pb-2 text-[12px] text-center md:text-left lg:text-center xl:text-[17px] xl:text-left">Status</td>
+                        <td className="unbound p-1 pb-2 text-[12px] md:text-[13px] xl:text-[17px]">Action</td>
                     </tr>
                     </thead>
                     <tbody className="">
                     {data.map((item, i) => (
                         <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
-                        <td className={`p-2 py-4 pl-4`}>{`0${i + 1}`}</td>
-                        <td className="p-2 py-4">{item.name}</td>
-                        <td className="p-2 py-4">{item.phoneNo}</td>
-                        <td className="p-2 py-4">testmail@gmail.com</td>
-                        <td className="p-2 py-4 whitespace-nowrap">{item.course}</td>
-                        <td className="p-2 py-4 "><span className={`py-2 px-8 rounded-[8px] ${item.status == "Active" ? "text-[#249B2C] bg-[#D4F9CE]" : "text-[#F91313] bg-[#F9CECE]"}`}>{item.status}</span></td>
+                        <td className="p-2 py-4 pl-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{`0${i + 1}`}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.name}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.phoneNo}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">testmail@gmail.com</td>
+                        <td className="p-2 py-4 whitespace-nowrap text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]">{item.course}</td>
+                        <td className="p-2 py-4 text-[12px] md:text-[13px] text-[#2C3E50] xl:text-[17px]"><span className={`py-2 px-8 rounded-[8px] ${item.status == "Active" ? "text-[#249B2C] bg-[#D4F9CE]" : "text-[#F91313] bg-[#F9CECE]"}`}>{item.status}</span></td>
                         <td className="p-2 py-4 pl-4">
                         <IconButton
                             aria-label="more"
@@ -190,9 +188,10 @@ const Tutors = () => {
             </div>
             <FormModal 
                 isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} 
+                setIsNotifyModalOpen={setIsNotifyModalOpen}
                 userType="tutor"
             />
-            {/* <NotificationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} userType="tutor"/> */}
+            <NotificationModal isOpen={isNotifyModalOpen} onClose={() => setIsNotifyModalOpen(false)} userType="tutor"/>
         </div>
     </div>
   )

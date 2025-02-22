@@ -25,18 +25,18 @@ const SettingsTable = () => {
   return (
     <div>
       <div>
-        <SettingHeader user={user}/>
+        <SettingHeader/>
       </div>
-      <div className='absolute right-5  top-[35%] md:hidden lg:hidden cursor-pointer'>
+      <div className='absolute right-8 top-[26.3%] md:hidden lg:hidden cursor-pointer'>
         {
           !sideBar ? <FaAlignLeft className="text-[18px]" onClick={() => handleSideBar()}/> : <MdOutlineCancel className="text-[25px]" onClick={() => handleSideBar()}/>
         }
       </div>
       <div className="flex justify-evenly md:gap-1 lg:gap-0">
-        <div className={`absolute md:static lg:static ${!sideBar ? "-left-[250px] transition-all duration-300 z-40" : "-left-0 transition-all duration-300 z-40 shadow-xl" }`}>
+        <div className={`absolute md:static lg:static md:w-[35%] lg:w-[38%] xl:w-[333px] ${!sideBar ? "-left-[250px] transition-all duration-300 z-40" : "-left-0 transition-all duration-300 z-40 shadow-xl" }`}>
           <SettingsSideBar user={user} handleSetForms={handleSetForms} forms={forms}/>
         </div>
-        <div className="w-[100%] mt-5 md:mt-0 lg:mt-0 md:w-[68%] lg:w-[68%]">
+        <div className="w-[100%] mt-5 md:mt-0 lg:mt-0 md:w-[58%] lg:w-[58%]">
           {
             forms === "account-setting" ? <AcctSettings/> 
             : 
@@ -46,7 +46,6 @@ const SettingsTable = () => {
             : 
             forms === "support" ? <Support/> : "" 
           }
-         
         </div>
       </div>
         
