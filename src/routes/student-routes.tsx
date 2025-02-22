@@ -1,7 +1,8 @@
-import AllCourses from "../pages/students/allCourses";
 import StudentsDashboard from "../pages/students/dashboard";
 import StudentsNotificationScreen from "../pages/students/notifications";
-import OngoingCourses from "../pages/students/ongoingCourses";
+import AvailableCourses from "../pages/students/AllCourses";
+import OngoingCourse from "../pages/students/OngoingCourse";
+import CourseDetails from "../pages/students/CourseDetails";
 import Orders from "../pages/students/orders";
 import TransactionList from "../pages/students/transactions";
 import StudentCartTable from "../pages/students/studentCartTable";
@@ -17,11 +18,15 @@ export const studentRoutes = [
       },
       {
         path: "ongoing-courses",
-        element: <OngoingCourses />,
+        element: <OngoingCourse />,
       },
       {
-        path: "all-courses",
-        element: <AllCourses />,
+        path: 'all-courses',
+        element: <AvailableCourses />,
+      },
+      {
+        path: 'course-details',
+        element: <CourseDetails />,
       },
       {
         path: "orders",

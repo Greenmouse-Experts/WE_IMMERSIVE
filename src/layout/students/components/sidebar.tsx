@@ -53,60 +53,46 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
           className="overflow-y-auto relative scroll-pro"
           transitionDuration={600}
         >
-          {Routes.map((item) => {
-            return (
-              <div key={item.name} className="">
-                {!!item.submenu.length ? (
-                  <SubMenu
-                    className="[&>a]:dark:!bg-[#15171E] dark:text-white"
-                    label={item.name}
-                    icon={item.icon}
-                    key={item.name}
-                  >
-                    {item.submenu.map((item: RouteType, i) => (
-                      <MenuItem
-                        className="[&>a]:dark:!bg-[#15171E] dark:!text-white"
-                        component={<Link to={item.route} />}
-                        active={path.pathname === item.route && true}
-                        key={i}
-                      >
-                        <p
-                          className="fs-400 text-grey"
-                          onClick={() => setToggled(false)}
-                        >
-                          {item.name}
-                        </p>
-                      </MenuItem>
-                    ))}
-                  </SubMenu>
-                ) : (
-                  <MenuItem
-                    className={`[&>a]:dark:!bg-[#15171E] dark:!text-white ${
-                      path.pathname === item.route ? "active-class" : ""
-                    }`}
-                    component={<Link to={item.route} />}
-                    icon={item.icon}
-                    active={path.pathname === item.route && true}
-                    key={item.name}
-                  >
-                    <div className="flex pr-4 justify-between items-center">
-                      <p
-                        className="fs-400 text-grey"
-                        onClick={() => setToggled(false)}
-                      >
-                        {item.name}
-                      </p>
-                    </div>
-                  </MenuItem>
-                )}
-              </div>
-            );
-          })}
+          {Routes.map((item) => (
+            <div key={item.name}>
+              {!!item.submenu.length ? (
+                <SubMenu
+                  className="[&>a]:dark:!bg-[#15171E] dark:text-white"
+                  label={item.name}
+                  icon={item.icon}
+                >
+                  {item.submenu.map((item, i) => (
+                    <MenuItem
+                      className={`[&>a]:dark:!bg-[#15171E] dark:!text-white ${
+                        path.pathname === item.route ? "active-class" : ""
+                      }`}
+                      component={<Link to={item.route} />}
+                      key={i}
+                    >
+                      <p className="fs-400">{item.name}</p>
+                    </MenuItem>
+                  ))}
+                </SubMenu>
+              ) : (
+                <MenuItem
+                  className={`[&>a]:dark:!bg-[#15171E] dark:!text-white ${
+                    path.pathname === item.route ? "active-class" : ""
+                  }`}
+                  component={<Link to={item.route} />}
+                  icon={item.icon}
+                >
+                  <div className="flex pr-4 justify-between items-center">
+                    <p className="fs-400">{item.name}</p>
+                  </div>
+                </MenuItem>
+              )}
+            </div>
+          ))}
         </Menu>
         <div className="border-t mt-4 border-[#B2B7B7]">
           <ul className="grid gap-2 mt-5">
             <li className="flex gap-x-3 p-2 items-center">
-              <Link to="settings" className="flex gap-x-3 p-2 items-center">
+              <Link to="/students/settings" className="flex items-center gap-x-3">
                 <PiGear />
                 <span>Settings</span>
               </Link>
@@ -120,8 +106,8 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
             </li>
           </ul>
         </div>
-        <div className="mt-6">
-          <div className="m-2 mt-1 h-[180px] rounded-2xl bg-[#D9D9D9] dark:bg-black"></div>
+
+        <div className="mt-5">
           <ThemeSwitch sidebar />
         </div>
       </Sidebar>
