@@ -5,9 +5,10 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { todayDate } from "../../../helpers/dateHelper";
 
-const HeaderSection = () => {
+const HeaderSection = ({ openBar }: any) => {
   // const navigate = useNavigate();
   const user = useSelector((state: any) => state.userData.data);
+  console.log(openBar)
 
   return (
     <div>
