@@ -1,6 +1,6 @@
 import StudentsDashboard from "../pages/students/dashboard";
 import StudentsNotificationScreen from "../pages/students/notifications";
-import AvailableCourses from "../pages/students/AllCourses";
+import AvailableCourses from "../pages/students/allCourses";
 import OngoingCourse from "../pages/students/OngoingCourse";
 import CourseDetails from "../pages/students/CourseDetails";
 import Orders from "../pages/students/orders";
