@@ -14,7 +14,7 @@ const FormModal: React.FC<AddTutorModalProps> = ({setIsNotifyModalOpen, userType
 
   const handleAdd = () => {
     setIsNotifyModalOpen(true)
-    onClose();
+    onClose()
   }
 
   return (
