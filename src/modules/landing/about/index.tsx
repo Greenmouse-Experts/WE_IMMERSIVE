@@ -36,8 +36,8 @@ const AboutIndex = () => {
       <AboutBanner/>
       <div className="w-full">
         <div id="whole_package" className="md:w-[95%] lg:w-[85%] w-[85%] m-auto text-center py-[5%]">
-            <h1 className="unbound md:text-[25px] lg:text-[35px] font-[700] lg:px-[25%] leading-[1.3] dark:text-white">Enjoy the Whole Package with WE Immersive</h1>
-            <p className="md:px-[15%] lg:px-[30%] mt-5 md:mt-8 lg:mt-8 text-[14px] md:text-[16px] lg:text-[16px] mb-10 dark:text-[red] text-[#747373]">WE.IMMERSIVE leverages cutting-edge technology to empower African creators through an equitable marketplace</p>
+            <h1 className="unbound md:text-[25px] lg:text-[35px] font-[700] lg:px-[10%] xl:px-[25%] leading-[1.3] dark:text-white">Enjoy the Whole Package with WE Immersive</h1>
+            <p className="md:px-[15%] lg:px-[20%] xl:px-[30%] mt-5 md:mt-8 lg:mt-8 text-[14px] md:text-[16px] lg:text-[16px] mb-10 dark:text-[red] text-[#747373]">WE.IMMERSIVE leverages cutting-edge technology to empower African creators through an equitable marketplace</p>
             <div>
                 <Card1/>
             </div>
@@ -49,7 +49,7 @@ const AboutIndex = () => {
                 <p className="text-[10px] unbound fw-600">Creators</p>
             </div>
             <h1 className="unbound md:text-[35px] mt-4 font-[700] dark:text-white text-center lg:text-left">Empowering Creators Everywhere</h1>
-            <p className="text-[12px] md:text-[16px] lg:text-[18px] lg:pr-[55%] mb-2 mt-5 text-[#747373] text-center lg:text-left">
+            <p className="text-[12px] md:text-[16px] lg:text-[18px] lg:pr-[30%] xl:pr-[55%] mb-2 mt-5 text-[#747373] text-center lg:text-left">
                We offer advanced analytics to track your growth, custom websites to showcase your portfolio, 
                a community that celebrates and supports your talent, 
                and much more
@@ -64,7 +64,7 @@ const AboutIndex = () => {
       </div>
 
       <div className="bg-[#E9EBFB] pt-[5%] pb-[1%]">
-        <div className="lg:flex lg:flex-row md:flex md:flex-col items-top md:w-[95%] lg:w-[85%] w-[85%] mx-auto">
+        <div className="lg:flex lg:flex-row md:flex md:flex-col items-top md:w-[95%] lg:w-[95%] w-[85%] xl:w-[85%] mx-auto">
             <div className="md:w-[100%] md:align-center md:flex lg:w-[50%]">
                 <img src={cupid} width="100%" alt="img" className="md:ml-[4.3%]"/>
             </div>
@@ -72,13 +72,13 @@ const AboutIndex = () => {
                 <div className="flex text-white justify-center bg-primary rounded-full py-[4px] w-[150px] mb-5 md:mx-auto lg:mx-0">
                     <p className="text-[10px] unbound fw-600">Maximize Potential</p>
                 </div>
-                <h1 className="unbound md:text-[40px] font-[500] leading-[1.3] mb-8 w-[70%] md:w-[100%] lg:w-[60%] md:text-center lg:text-left">Unlock your full potential</h1>
+                <h1 className="unbound md:text-[40px] font-[500] leading-[1.3] mb-8 w-[70%] md:w-[100%] xl:w-[60%] md:text-center lg:text-left">Unlock your full potential</h1>
                 <div className="mt-5 md:flex md:flex-col md:items-center">
                     {
                       maxList.map((item, index) => (
-                        <div key={index} className="flex items-center list-none mb-10 md:w-[65%] lg:w-[100%] lg:mt-3 lg:pr-[25%]">
+                        <div key={index} className="flex items-center list-none mb-10 md:w-[65%] lg:w-[100%] lg:mt-3 xl:pr-[25%]">
                             <img src={item.icon} alt="img" width="24px"/>
-                            <li className="Mulish text-[14px] ml-3 lg:text-[17px] text-[#747373]">{item.content}</li>
+                            <li className="Mulish text-[14px] ml-3 xl:text-[17px] text-[#747373]">{item.content}</li>
                         </div>
                       ))
                     }
@@ -100,7 +100,7 @@ const AboutIndex = () => {
         </div>
       </div>
 
-      <div className="mb-[5%] overflow-hidden">
+      <div className="mb-[5%] overflow-hidden overflow-x-auto">
         <div className="whitespace-nowrap">
           <h1 className="text-[#EEEEEE] text-[70px] font-[700] -ml-14">Dream . Create . Inspire || Dream . Create . inspire</h1>
         </div>

@@ -29,7 +29,7 @@ const StatisticList = () => {
      ];
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 mt-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 mt-10 z-0">
         {list.map((item) => (
           <div className="relative h-[120px]">
             <div className="box-drop rounded-[20px] p-4 h-full bg-white dark:bg-[#15171E] flex items-center">

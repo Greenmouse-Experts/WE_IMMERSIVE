@@ -41,7 +41,7 @@ const cards = [
 
 const JoinCard = () => {
   return (
-    <div className="md:flex md:flex-wrap items-center w-[75%] md:w-[80%] lg:w-[75%] m-auto md:m-auto lg:m-auto md:justify-evenly lg:justify-between">
+    <div className="md:flex md:flex-wrap items-center w-[75%] md:w-[80%] lg:w-[90%] xl:w-[75%] m-auto md:m-auto lg:m-auto md:justify-evenly lg:justify-between">
         {
             cards.map((card, index) => (
                 <div key={index} className="md:w-[40%] lg:w-[23%] mt-[28%] lg:mt-[1%] md:mt-[10%] px-5 pb-11 rounded-[20px] border border-grey-600">
@@ -50,7 +50,7 @@ const JoinCard = () => {
                         <p className="unbound text-[15px]">{card.title}</p>
                         <img src={card.icon} width="25px" alt="icon" className="ml-3"/>
                     </div>
-                    <p className="mt-5 text-[#747373] text-[14px] lg:pr-11 text-center lg:text-left">{card.content}</p>
+                    <p className="mt-5 text-[#747373] text-[14px] xl:pr-11 text-center lg:text-left">{card.content}</p>
                     <button type="button"
                             className="mt-11 text-center border border-[#6F0AFF] border-500 w-full text-[#6F0AFF] py-2 rounded-md"
                     >

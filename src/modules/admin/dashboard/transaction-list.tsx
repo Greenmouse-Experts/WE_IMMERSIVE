@@ -38,8 +38,8 @@ const TransactionList = () => {
   return (
     <div className="w-full">
       <div className="bg-white dark:bg-[#15171E] w-full px-4 lg:py-6 rounded-[20px]">
-        <div className="flex justify-between items-center">
-          <p className="unbound text-[#06052A]">New Users</p>
+        <div className="md:flex justify-between items-center">
+          <p className="unbound text-center md:text-left text-[#06052A]">New Users</p>
           <div className="flex items-center gap-x-4">
             <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
               <p className="text-[#2C3E50] fs-300">Export As</p>

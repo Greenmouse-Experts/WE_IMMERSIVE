@@ -46,7 +46,7 @@ const SalesCommissionChart = () => {
   ];
 
   return (
-    <div className="bg-white dark:bg-[#15171E] p-4 rounded-lg">
+    <div className="bg-white md:w-[100%] lg:w-[100%] dark:bg-[#15171E] p-4 rounded-lg">
       <div className="flex justify-between items-center">
         <div>
           <p className="text-gray-500">Sales Commission</p>
