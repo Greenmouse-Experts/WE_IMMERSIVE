@@ -1,6 +1,7 @@
 import { CiSearch } from "react-icons/ci";
 import { BsCalendarFill, BsGear } from "react-icons/bs";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { GiHamburgerMenu } from "react-icons/gi";
 // import {  useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { todayDate } from "../../../helpers/dateHelper";
@@ -27,6 +28,11 @@ const HeaderSection = ({ openBar }: any) => {
               {/* <TextInput type={InputType.text} icon={<CiSearch />} placeholder="Search with keyword" style={{backgroundColor:"#fff"}}/> */}
             </div>
             <div className="flex gap-x-2 mt-4 md:mt-0 lg:mt-0 items-center">
+              <div className="size-[44px] cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E] lg:hidden"
+                    onClick={openBar}
+              >
+                <GiHamburgerMenu />
+              </div>
               <div className="size-[44px] cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E]">
                 <CiSearch />
               </div>

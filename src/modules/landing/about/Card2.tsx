@@ -25,12 +25,12 @@ const Card2 = () => {
   return (
     <div className="md:flex md:gap-3 lg:justify-between mt-5">
         {cards.map((card, index) => (
-            <div key={index} className="rounded-[15px] w-[100%] md:w-[35%] lg:w-[30%] mt-[10%] md:mt-[1%] h-[227px] md:h-[227px] lg:h-[227px] p-8 md:px-3 md:py-8 lg:p-8 border border-2 dark:bg-[#131313]">
+            <div key={index} className="rounded-[15px] w-[100%] md:w-[35%] xl:w-[30%] mt-[10%] md:mt-[1%] h-[227px] md:h-[227px] lg:h-[227px] p-8 md:px-3 md:py-8 xl:p-8 border border-2 dark:bg-[#131313]">
                 <div className="flex items-center justify-center lg:justify-start mt-6 mb-4">
                     <p className="unbound text-[14px] lg:text-[15px] text-center lg:text-left">{card.title}</p>
                     <img src={card.icon} width="25px" alt="img" className="ml-3"/>
                 </div>
-                <p className="text-[12px] md:text-[14px] lg:text-[15px] text-[#747373] text-center lg:text-left">{card.content}</p>
+                <p className="text-[12px] md:text-[14px] xl:text-[15px] text-[#747373] text-center lg:text-left">{card.content}</p>
             </div>
         ))}
     </div>

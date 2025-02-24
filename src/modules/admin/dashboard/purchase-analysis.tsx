@@ -87,7 +87,7 @@ const PurchaseAnalysis = () => {
      ];
   return (
     <div>
-      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
+      <div className="bg-white md:w-[100%] lg:w-[100%] dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
       <p className="text-sm text-[#7F7F7F]">Total profit</p>
 
       <div className="flex items-center justify-between">

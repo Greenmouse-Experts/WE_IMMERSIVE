@@ -45,7 +45,7 @@ const TransactionChart: React.FC = () => {
 
   return (
     <div className="bg-white dark:bg-[#15171E] w-full rounded-[20px] p-6">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex lg:flex-col xl:flex-row items-center justify-between mb-4">
         <p className="font-semibold text-gray-800 text-lg">User Analysis</p>
         <div className="flex items-center gap-x-2 px-3 py-1 bg-gray-100 rounded-full cursor-pointer w-fit">
           <span className="text-sm text-gray-600">Monthly</span>

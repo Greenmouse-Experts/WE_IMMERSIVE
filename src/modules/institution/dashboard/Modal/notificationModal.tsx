@@ -11,7 +11,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({userType, isOpen, 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4"
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4 z-10"
      onClick={onClose}
     >
       <div className="flex flex-col justify-center items-center bg-white w-[510px] h-[487px] p-11 rounded-[15px] shadow-lg"

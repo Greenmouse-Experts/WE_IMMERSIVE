@@ -3,24 +3,34 @@ import globe from "../../../assets/globe.png";
 
 const AboutBanner = () => {
   return (
-    <div className="bg-gradient-to-r from-blue-100 to-purple-200">
-      <div className="flex flex-col-reverse md:flex-col-reverse lg:flex-row align-middle items-center py-11 md:py-0">
-        <div className="md:px-[3%] lg:pl-[9%] py-[3%] px-[5%] lg:w-[85%]">
-            <h5 className="Mulish text-[14px] text-center lg:text-left mb-3 font-[700]">ABOUT WE IMMERSIVE</h5>
-            <h1 className="unbound md:text-[30px] text-center lg:text-left font-[700] mb-4 leading-[1.6] lg:pr-[20%]">The creative hub built for today’s digital artists, designers, and creators.</h1>
-            <h5 className="Mulish text-[14px] lg:text-[16px] lg:pr-5   text-[#696767] text-center lg:text-left lg:w-[70%] mb-5">WE.IMMERSIVE leverages cutting-edge technology to empower African creators through an equitable marketplace and innovative payment systems.</h5>
-            <div className="">
-              <button className="unbound m-auto lg:m-0   flex items-center bg-gradient-to-r from-[#6b24fb] to-[#2f91db] px-5 py-2 text-[12px] lg:text-[15px] lg:px-10 lg:py-3 text-[white] bg-[blue] rounded-[7px]">
-                Join Now
-                <span className="ml-1"><MdOutlineKeyboardDoubleArrowRight className="text-[25px]" /></span>
-              </button> 
-            </div>
-        </div>
-        <div className="hidden md:hidden lg:block">
-            <img src={globe} width="500%"  alt="globe"/>
-        </div>
+  <div className="flex items-center justify-center bg-gradient-to-r from-blue-100 via-blue-100 via-40% to-purple-200">
+    <div className="container mx-auto flex flex-col md:flex-row items-center gap-10">
+      {/* Left Content */}
+      <div className="text-center lg:text-left pt-[70%] pb-[10%] px-[2%] md:pt-[55%] lg:py-[4%] xl:py-[4%]">
+        <h3 className="text-sm font-semibold text-gray-600 uppercase">About We Immersive</h3>
+        <h1 className="mt-2 text-[20px] md:text-5xl lg:text-[35px] xl:text-5xl font-extrabold text-gray-900 lg:pr-[35%] xl:pr-[35%]">
+          The creative hub built for today’s digital artists, designers, and creators.
+        </h1>
+        <p className="mt-4 text-gray-600 lg:pr-[40%] xl:text-lg xl:pr-[55%]">
+          WE.IMMERSIVE leverages cutting-edge technology to empower African
+          creators through an equitable marketplace and innovative payment systems.
+        </p>
+        <button className="unbound mx-auto mt-3 md:mt-8 lg:mt-8 xl:mt-8 lg:mx-0 flex items-center bg-gradient-to-r from-[#6b24fb] to-[#2f91db] px-5 py-2 text-[12px] lg:text-[15px] lg:px-10 lg:py-3 text-[white] rounded-[7px]">
+             Join Now
+           <span className="ml-1"><MdOutlineKeyboardDoubleArrowRight className="text-[25px]" /></span>
+        </button> 
       </div>
+
+      {/* Right Image */}
+   
+        <img
+          src={globe}
+          alt="3D Globe"
+          className="absolute w-[679px] md:w-[600px] lg:w-[500px] lg:right-0 lg:top-[21%] xl:w-[685px] right-[3%] md:top-[12%] xl:top-[14%] md:right-[10%] xl:right-[8%]"
+        />
+   
     </div>
+  </div>
   );
 }
 

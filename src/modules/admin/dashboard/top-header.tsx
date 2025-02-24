@@ -16,11 +16,11 @@ const TopHeader = ({ openBar }: any) => {
         <div className="w-full flex gap-x-5 ">
           <div className="flex items-center justify-between w-[65%]">
             <div className="">
-              <div className="flex items-center h-[44px] 2xl:w-[481px] px-4 bg-white dark:bg-[#15171E] rounded-[14px] overflow-hidden">
+              <div className="flex items-center h-[44px] 2xl:w-[481px] px-4 bg-white dark:bg-[#15171E] rounded-[14px] hidden md:inline-flex overflow-hidden">
                 <CiSearch size={20} />
                 <input
                   type="text"
-                  className="h-full w-full bg-transparent px-2 placeholder:text-sm ]"
+                  className="h-full w-full bg-transparent px-2 placeholder:text-sm"
                   placeholder="Search with keyword"
                 />
               </div>
@@ -29,7 +29,7 @@ const TopHeader = ({ openBar }: any) => {
             <div className="flex gap-x-2 items-center">
               <div
                 onClick={() => openSideBar()}
-                className="size-[44px] md:hidden flex cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E]"
+                className="size-[44px] lg:hidden flex cursor-pointer hover:shadow rounded-[14px] place-center bg-white dark:bg-[#15171E]"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

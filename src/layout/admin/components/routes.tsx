@@ -53,7 +53,7 @@ export const Routes = [
   {
     name: "Courses",
     icon: <RiHeart2Line className="text-xl" />,
-    route: "/area",
+    route: "courses",
     submenu: [],
   },
   {
