@@ -93,8 +93,10 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
         <div className="border-t mt-4 border-[#B2B7B7]">
           <ul className="grid gap-2 mt-5">
             <li className="flex gap-x-3 p-2 items-center">
-              <PiGear />
-              <span>Settings</span>
+             <Link to="settings" className="flex gap-x-3 p-2 items-center">
+                <PiGear />
+                <span>Settings</span>
+              </Link>
             </li>
             <li
               className="flex items-center p-2 gap-x-3 text-red-500 cursor-pointer"
