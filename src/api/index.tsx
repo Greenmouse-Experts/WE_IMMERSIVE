@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-console.log(baseURL);
 const token = localStorage.getItem('we-immersiveUser');
 
 export const registerUser = async (payload: any) => {
@@ -95,7 +94,7 @@ export const getPhysicalAssets = async () => {
 
 export const loginAdmin = async (payload: any) => {
   return axios
-    .post(`${baseURL}/auth/admin/login`, payload)
+    .post(`https://api.test.weimmersive.io/v1/auth/admin/login`, payload)
     .then((response) => response.data);
 };
 
