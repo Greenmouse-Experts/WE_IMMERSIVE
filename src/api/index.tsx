@@ -94,7 +94,7 @@ export const getPhysicalAssets = async () => {
 
 export const loginAdmin = async (payload: any) => {
   return axios
-    .post(`https://api.test.weimmersive.io/v1/auth/admin/login`, payload)
+    .post(`https://api.test.weimmersive.io/v1/api/auth/admin/login`, payload)
     .then((response) => response.data);
 };
 
