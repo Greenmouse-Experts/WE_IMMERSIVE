@@ -72,7 +72,7 @@ const ThreeDViewer = ({ modelUrl }) => {
         <pointLight position={[0, 10, 0]} intensity={2} color="#ffffff" />
 
         {/* Load and render the 3D model from the URL */}
-        <Suspense fallback={null}>
+        <Suspense allback={<ModelLoader />}>
           <Model url={modelUrl} />
         </Suspense>
 
