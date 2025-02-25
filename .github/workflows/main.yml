@@ -44,7 +44,7 @@ jobs:
             cd /var/www/web
             cp /var/www/.env.web /var/www/web/.env
             git pull
-            npm install --omit=dev  # Install only necessary dependencies
+            npm install  # Install only necessary dependencies
             npm run prod
           EOF
 
