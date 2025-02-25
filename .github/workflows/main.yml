@@ -45,6 +45,7 @@ jobs:
             cp /var/www/.env.web /var/www/web/.env
             git pull
             npm install  # Install only necessary dependencies
+            npm run build
             npm run prod
           EOF
 
