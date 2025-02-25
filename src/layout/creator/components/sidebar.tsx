@@ -28,7 +28,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
   return (
     <div className="left-3 top-3 z-[9999] fixed overflow-y-hidden">
       <Sidebar
-        customBreakPoint="1024px"
+        customBreakPoint="1023px"
         className="h-[calc(100vh_-_30px)] overflow-y-hidden bg-white dark:bg-[#15171E] rounded-2xl !border-none scroll-pro p-3"
         collapsed={collapsed}
         width="256px"
@@ -104,9 +104,11 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
         </Menu>
         <div className="border-t mt-4 border-[#B2B7B7]">
           <ul className="grid gap-2 mt-5">
-            <li className="flex gap-x-3 p-2 items-center">
-              <PiGear />
-              <span>Settings</span>
+            <li>
+              <Link to="settings" className="flex gap-x-3 p-2 items-center">
+                <PiGear />
+                <span>Settings</span>
+              </Link>
             </li>
             <li
               className="flex items-center p-2 gap-x-3 text-red-500 cursor-pointer"

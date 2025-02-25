@@ -23,11 +23,18 @@ const CoursesUpdate = () => {
       value: 70,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
     },
+    {
+      title: "(Upcoming Test)",
+      duration: "(8 days left)",
+      name: "Science Technology V2",
+      value: 70,
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
+    },
   ];
 
   return (
     <div>
-      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
+      <div className="bg-white dark:bg-[#15171E] p-6  rounded-[20px]">
         <p className="unbound text-[#06052A]">Upcoming Assessment</p>
         <div className="mt-6 grid gap-5">
           {updates.map((item, i) => (

@@ -25,14 +25,14 @@ const cards = [
 
 const Card1 = () => {
   return (
-    <div className="md:flex justify-between mt-[10%]">
+    <div className="md:flex justify-between lg:justify-evenly mt-[10%] md:gap-3">
         {
          cards.map((item, index) => (
-            <div key={index} className="flex flex-col rounded-[15px] md:w-[30%] mt-[30%] md:mt-[1%] text-white pb-5" style={{ backgroundColor: item.color }}>
-                <img src={item.img} width="149px" alt="img" className={`relative left-[21%] md:left-[30%] ${index === 2 ? "-mt-[31%] md:-mt-[21%]" : "-mt-[25%] md:-mt-[18%]"}`}/>
-                <p className="unbound mb-5 mt-8 text-[15px] font-[600]">{item.title}</p>
-                <p className="text-[13px] px-[17%] font-[700]">{item.content}</p>
-            </div>
+            <div key={index} className="flex flex-col h-[227px] rounded-[15px] md:w-[35%] xl:w-[28%] w-[100%] mt-[25%] md:mt-[1%] text-white pb-5 md:px-1" style={{ backgroundColor: item.color }}>
+                <img src={item.img} alt="img" className={` md:w-[50%] xl:w-[149px] w-[135px] m-auto ${index === 2 ? "-mt-[26%] md:-mt-[27%] xl:-mt-[21%]" : "-mt-[20%] md:-mt-[20%] lg:-mt-[18%]"}`}/>
+                <p className={`unbound lg:mt-8 md:mt-3 text-[15px] xl:text-[16px] md:text-[14px] font-[600  ${index === 0 ? "mb-3" : "mb-4"}`}>{item.title}</p>
+                <p className={`text-[13px] px-[12%] xl:px-[17%] md:px-[8%] font-[700] ${index === 0 ? "mb-0" : "mb-5"}`}>{item.content}</p>
+            </div> 
          ))
         }
     </div>

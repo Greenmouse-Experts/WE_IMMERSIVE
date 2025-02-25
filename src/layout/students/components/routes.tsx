@@ -1,9 +1,9 @@
-import { GrHomeRounded } from "react-icons/gr";
-// import { HiOutlineShoppingBag } from "react-icons/hi";
-import { LuCreditCard } from "react-icons/lu";
-// import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { PiBookBookmark } from "react-icons/pi";
-import { RiHeart2Line } from "react-icons/ri";
+import { GrHomeRounded } from "react-icons/gr";
+import { LuCreditCard } from "react-icons/lu";
+import { RiHeart2Line , RiNotificationLine } from "react-icons/ri";
+import { FaShoppingCart, FaBoxOpen } from "react-icons/fa";
+import { MdSubscriptions } from "react-icons/md";
 export interface RouteType {
   name: string;
   icon: any;
@@ -23,13 +23,16 @@ export const Routes = [
   },
   {
     name: "Courses",
-    icon: <PiBookBookmark className="text-xl text-grey" />,
-    route: "/students/all-courses",
-    submenu: [],
+    icon: <PiBookBookmark className="text-xl" />,
+    route: "#",
+    submenu: [
+      { name: "All Courses", icon: <PiBookBookmark className="text-lg" />, route: "/students/all-courses" },
+      { name: "Ongoing Courses", icon: <PiBookBookmark className="text-lg" />, route: "/students/ongoing-courses" },
+    ],
   },
   {
     name: "Orders",
-    icon: <RiHeart2Line className="text-xl text-grey" />,
+    icon: <FaBoxOpen className="text-xl" />,
     route: "/students/orders",
     submenu: [],
   },
@@ -41,26 +44,27 @@ export const Routes = [
   },
   {
     name: "Cart",
-    icon: <PiBookBookmark className="text-xl text-grey" />,
-    route: "#",
+    icon: <FaShoppingCart className="text-xl" />,
+    route: "cart",
     submenu: [],
   },
   {
     name: "Notifications",
-    icon: <LuCreditCard className="text-lg text-grey" />,
+    icon: <RiNotificationLine className="text-xl" />,
     route: "/students/notification",
     submenu: [],
   },
   {
     name: "Subscription",
-    icon: <LuCreditCard className="text-lg text-grey" />,
-    route: "#",
+    icon: <MdSubscriptions className="text-xl" />,
+    route: "/user/subscription",
     submenu: [],
   },
   {
     name: "Transactions",
-    icon: <LuCreditCard className="text-lg text-grey" />,
+    icon: <LuCreditCard className="text-lg" />,
     route: "/students/transaction",
     submenu: [],
   },
+  
 ];

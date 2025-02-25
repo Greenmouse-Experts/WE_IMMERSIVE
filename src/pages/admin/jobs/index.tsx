@@ -87,8 +87,8 @@ const Jobs = () => {
                     <td className="unbound pl-4 p-1 pb-2">#</td>
                     <td className="unbound p-1 pb-2">Job Title</td>
                     <td className="unbound p-1 pb-2">Job Description</td>
-                    <td className="unbound p-1 pb-2">Posted By</td>
-                    <td className="unbound p-1 pb-2">Date</td>
+                    <td className="unbound p-1 pb-2 whitespace-nowrap">Posted By</td>
+                    <td className="unbound p-1 pb-2 md:text-center xl:text-left">Date</td>
                     <td className="unbound p-1 pb-2">Action</td>
                   </tr>
                 </thead>
@@ -100,14 +100,14 @@ const Jobs = () => {
                           key={i}
                         >
                           <td className={`p-2 py-4 pl-4`}>{`${i + 1}`}</td>
-                          <td className="p-2 py-4">{item.assetName}</td>
+                          <td className="p-2 py-4 whitespace-nowrap">{item.assetName}</td>
                           <td className="p-2 py-4">
                             {item.description}
                           </td>
-                          <td className="p-2 py-4">
+                          <td className="p-2 py-4 whitespace-nowrap">
                             {item.postedBy}
                           </td>
-                          <td className="p-2 py-4 capitalize">
+                          <td className="p-2 py-4 capitalize whitespace-nowrap">
                             {dateFormat(item?.createdAt, "dd-MM-yyyy")}
                           </td>
                           <td className="p-2 py-4 pl-4">

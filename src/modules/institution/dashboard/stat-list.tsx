@@ -29,7 +29,7 @@ const StatisticList = () => {
      ];
   return (
     <div>
-      <div className="grid grid-cols-4 gap-6 mt-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 mt-10 z-0">
         {list.map((item) => (
           <div className="relative h-[120px]">
             <div className="box-drop rounded-[20px] p-4 h-full bg-white dark:bg-[#15171E] flex items-center">
@@ -37,13 +37,13 @@ const StatisticList = () => {
                 <p className="text monts text-[#7F7F7F] fw-600 text-lg">
                   {item.count}
                 </p>
-                <p className="unbound fs-500 fw-400 text-[#06052A] pt-1">
+                <p className="unbound fs-500 fw-400 text-[#06052A] pt-1 text-[12px] md:text-[13px] md:mt-7 xl:text-[17px]">
                   {item.name}
                 </p>
               </div>
             </div>
             <div
-              className="absolute top-0 right-0 w-[70px] h-[60px] place-center border-[8px] rounded-[20px] border-[#F6F7FB]"
+              className="absolute top-0 right-0 w-[65px] md:w-[70px] lg:w-[70px] h-[60px] place-center border-[8px] rounded-[20px] border-[#F6F7FB]"
               style={{ backgroundColor: `${item.color}` }}
             >
               <img src={item.img} alt="icon-image" className="size-[32px]" />

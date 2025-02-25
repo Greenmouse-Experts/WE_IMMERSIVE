@@ -1,21 +1,20 @@
-import { Outlet } from "react-router-dom";
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import SidebarLayout from "./components/sidebar";
-// import Button from "../../components/ui/Button";
+import TopHeader from "../../modules/institution/dashboard/top-header";
+import HeaderSection from "../../modules/institution/dashboard/header-section";
+
 
 const InstitutionDashboardLayout = () => {
-  //   const token = sessionStorage.getItem("weim_token");
-  // const navigate = useNavigate();
-  //   useEffect(() => {
-  //     if (!token) {
-  //       navigate("/login");
-  //     }
-  //   }, []);
-  //   if (!token) {
-  //     return;
-  //   }
-  const [toggled, setToggled] = useState(false);
+
+  const [toggled, setToggled] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState(false);
+
+
+  const toggleBar = () => {
+    setToggled(!toggled);
+  };
+
   return (
     <>
       <div className="flex bg-[#F6F7FB] dark:bg-[#0D0D0D] dark:text-white">
@@ -33,6 +32,11 @@ const InstitutionDashboardLayout = () => {
         >
           <div className="">
             <div className="px-3 lg:px-7">
+            {location.pathname !== "/institution" ? (
+                <TopHeader openBar={toggleBar} />
+              ) : (
+                <HeaderSection openBar={toggleBar} /> 
+              )}
               <Outlet />
               <p onClick={() => setCollapsed(true)}></p>
             </div>

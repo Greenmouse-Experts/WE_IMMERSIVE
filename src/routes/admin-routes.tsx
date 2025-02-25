@@ -13,6 +13,7 @@ import CreateJob from "../pages/admin/jobs/create";
 import Subscription from "../pages/admin/subscription";
 import CreateSubscription from "../pages/admin/subscription/createSubscription";
 import UploadRequests from "../pages/admin/uploadRequests";
+import CoursesTable from "../pages/admin/coursesTable";
 
 export const adminRoutes = [
   {
@@ -74,6 +75,10 @@ export const adminRoutes = [
       {
         path: "subscription/create",
         element: <CreateSubscription />
+      },
+      {
+        path: "courses",
+        element: <CoursesTable />
       }
     ],
   },
