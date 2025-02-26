@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import SelectInput from "../../../components/ui/SelectInput";
+// import SelectInput from "../../../components/ui/SelectInput";
 import Button from "../../../components/ui/Button";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
@@ -16,6 +16,7 @@ const CreateLessons = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const navigate = useNavigate();
   const [files, setFiles] = useState("");
+  const [contentType, setContentType] = useState("video")
 
   const { id } = useParams();
 
@@ -36,12 +37,13 @@ const CreateLessons = () => {
     },
   });
 
-  const selectedContentType = watch("contentType");
+  // const selectedContentType = watch("contentType");
 
   const onSubmit = (formData: any) => {
     if (id) {
       const payload = {
         ...formData,
+        contentType,
         moduleId: id,
         contentUrl:
           files === ""
@@ -154,7 +156,7 @@ const CreateLessons = () => {
                 )}
               />
 
-              <Controller
+              {/* <Controller
                 name="contentType"
                 control={control}
                 rules={{
@@ -181,7 +183,7 @@ const CreateLessons = () => {
                     {...field}
                   />
                 )}
-              />
+              /> */}
 
               <Controller
                 name="duration"
@@ -204,7 +206,7 @@ const CreateLessons = () => {
                 )}
               />
 
-              {selectedContentType === "text" && (
+              {contentType === "text" && (
                 <div>
                   <p className="my-4">Write Content</p>
                   <div className="w-full p-7 border border-dashed">
@@ -215,7 +217,7 @@ const CreateLessons = () => {
                 </div>
               )}
 
-              {selectedContentType === "video" && (
+              {contentType === "video" && (
                 <div>
                   <p className="my-3">Upload Video</p>
 
@@ -250,7 +252,7 @@ const CreateLessons = () => {
         </div>
       </div>
       <div className=" w-1/4">
-        <AddContent/>
+        <AddContent selectedContent={contentType} setContentType={setContentType}/>
       </div>
     </div>
   );
