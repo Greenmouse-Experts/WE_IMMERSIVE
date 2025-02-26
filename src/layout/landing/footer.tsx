@@ -55,7 +55,7 @@ const LandingFooter = () => {
           We dream. We create. We Inspire
         </p>
         <p className="text-[#9A9999] text-center relative">
-          © 2024, WEimmersive. All rights reserved
+          © 2025, WEimmersive. All rights reserved
         </p>
       </div>
     </div>
