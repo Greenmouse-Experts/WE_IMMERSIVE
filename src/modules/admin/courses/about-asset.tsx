@@ -1,7 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import Button from "../../../components/ui/Button";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import Select from 'react-select';  
+import Select, { OptionsOrGroups, GroupBase } from 'react-select';  
 import DropZone from "../../../components/DropZone";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -12,18 +12,19 @@ interface AboutAssetProps {
 }
 
 const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
+  
   const [files, setFiles] = useState("");
 
   const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
+    { value: 'option1'},
+    { value: 'option2'},
+    { value: 'option3'},
   ];
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, /*isValid*/ },
   } = useForm({
     mode: "onChange",
     defaultValues: {

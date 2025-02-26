@@ -1,7 +1,17 @@
+import { useState } from "react"
 import { Trash2, MoreVertical, Image, FileText, Video, Music, File, BookOpen, Clipboard } from 'lucide-react';
+import FormModal from './formModal';
 
 const AddLesson: React.FC = () => {
+  const [ isOpen, setIsOpen ] = useState(false);
 
+  const addLesson = () => {
+    setIsOpen(true)
+  } 
+
+  const onClose = () => {
+    setIsOpen(false)
+  }
 
   return (
     <div className="space-y-8 mx-auto">
@@ -29,6 +39,7 @@ const AddLesson: React.FC = () => {
                 </p>
                 <button
                     className="unbound w-[211px] mx-auto mt-8 bg-gradient-to-r from-[#6F0AFF] to-[#1D9CD7] text-white text-[12px] md:text-[13px] xl:text-[13px] py-2 md:px-4 md:py-4 rounded-lg shadow"
+                    onClick={addLesson}
                 >
                     Add Content &raquo;
                 </button>
@@ -89,6 +100,9 @@ const AddLesson: React.FC = () => {
             </div>
           </div>
         </div>
+        {
+          isOpen && <FormModal isOpen={isOpen} onClose={onClose} />
+        }
     </div>
   );
 };
