@@ -1,4 +1,4 @@
-import Courses from "../../modules/admin/dashboard/courses"
+import Courses from "../../modules/admin/courses/courses"
 
 const CoursesTable = () => {
   return (
