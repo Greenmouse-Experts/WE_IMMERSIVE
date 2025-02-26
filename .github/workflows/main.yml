@@ -20,10 +20,10 @@ jobs:
           cache: 'npm' # Cache dependencies for faster installs
 
       - name: 📦 Install Dependencies
-        run: npm install --omit=dev
+        run: npm install
 
-      # - name: 🔨 Build Project (TypeScript)
-      #   run: npm run build # Ensure your package.json has "build": "tsc"
+      - name: 🔨 Build Project (TypeScript)
+        run: npm run build # Ensure your package.json has "build": "tsc"
 
       - name: 🚀 Deploy to AWS Lightsail
         env:
@@ -42,9 +42,10 @@ jobs:
           # Connect via SSH and restart PM2
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $AWS_USER@$AWS_HOST << 'EOF'
             cd /var/www/web
-            cp /var/www/.env.web /var/www/web
+            cp /var/www/.env.web /var/www/web/.env
             git pull
-            npm install --omit=dev  # Install only necessary dependencies
+            npm install  # Install only necessary dependencies
+            npm run build
             npm run prod
           EOF
 
