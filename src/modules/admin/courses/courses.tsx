@@ -12,9 +12,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { FaSearch } from "react-icons/fa"; 
+import CreateAsset from "./create-asset";
 
 const Courses = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [ anchorEl, setAnchorEl ] = useState(null);
+    const [ active, setActive ] = useState(true);
 
     const options = [
         'View/Edit',
@@ -105,6 +107,9 @@ const Courses = () => {
 
   return (
     <div>
+        {active ? (
+
+     
         <div className="mt-6">
                 <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between mt-5 mb-14 items-center">
@@ -134,11 +139,11 @@ const Courses = () => {
                     </div>
                     <button
                         type="button"
-                        className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold
-                                px-4 py-2 rounded-md shadow-md hover:from-indigo-600 hover:to-purple-700
-                                transition-colors md:text-[12px]"
+                        className="bg-gradient-to-r from-[#5f27f7] to-[#268cdb] text-white font-semibold
+                                px-4 py-2 rounded-md shadow-md md:text-[12px]"
+                                onClick={() => setActive(false)}
                     >
-                        Add New Course
+                        Create New Course
                     </button>
                 </div>
                 </div>
@@ -218,6 +223,11 @@ const Courses = () => {
             </div>
 
         </div>
+           ) : (
+            <div className="mt-6">
+                <CreateAsset/>
+            </div>
+           )}
     </div>
   )
 }
