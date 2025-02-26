@@ -61,6 +61,7 @@ const CreatorAssetsScreen = () => {
                     <td className="unbound p-1 pb-2">Image</td>
                     <td className="unbound p-1 pb-2">Price</td>
                     <td className="unbound p-1 pb-2">Published On</td>
+                    <td className="unbound p-1 pb-2">Status</td>
                     <td className="unbound p-1 pb-2">Copies Sold</td>
                     <td className="unbound p-1 pb-2">Action</td>
                   </tr>
@@ -86,6 +87,7 @@ const CreatorAssetsScreen = () => {
                           <td className="p-2 py-4 capitalize">
                             {dateFormat(item?.createdAt, "dd-MM-yyyy")}
                           </td>
+                          <td>{item?.status}</td>
                           <td className="p-2 py-4 capitalize">---</td>
                           <td className="p-2 py-4 pl-4">
                             <PiDotsThreeOutlineFill className="cursor-pointer" />

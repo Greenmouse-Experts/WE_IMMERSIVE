@@ -91,7 +91,7 @@ const CourseModule = ({ handleStepper }: CreateAssetItemProps ) => {
             ))}
 
             {/* Add New Module Button */}
-            <div className="border-2 border-dashed border-blue-400 p-4 rounded-lg flex justify-center items-center cursor-pointer hover:bg-blue-50 transition">
+            <div className="border-2 border-dashed border-blue-400 p-4 rounded-lg flex justify-between items-center cursor-pointer hover:bg-blue-50 transition">
               <Button
                 style={{ width: "fit-content" }}
                 title="Add New Module"
@@ -100,6 +100,14 @@ const CourseModule = ({ handleStepper }: CreateAssetItemProps ) => {
                 // disabled={!isValid}
                 altClassName="btn-primary px-10 py-2 whitespace-nowrap"
                 onClick={addModule}
+              />
+
+              <Button
+                style={{ width: "fit-content" }}
+                size={14}
+                onClick={() => handleStepper("previous")}
+                title={"Go Back"}
+                altClassName="btn-primary px-10 py-2 flex whitespace-nowrap"
               />
             </div>
           </div>

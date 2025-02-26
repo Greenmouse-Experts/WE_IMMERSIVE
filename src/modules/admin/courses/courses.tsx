@@ -115,7 +115,7 @@ const Courses = () => {
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between mt-5 mb-14 items-center">
                     <div className="flex flex-col md:flex-col lg:flex-col xl:flex-row items-center">
                         <p className="unbound text-[#06052A] text-[24px] md:text-[17px] lg:text-[15px] xl:text-[24px]">All Courses</p>
-                        <div className="flex lg:ml-0 xl:ml-11 mt-5 mb-5 md:mt-0 md:mb-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+                        <div className="flex lg:ml-0 xl:ml-11 mt-5 mb-5 md:mt-0 lg:mt-0 md:mb-0 items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
                             <p className="text-[#2C3E50] fs-300">
                                 <span className="text-[#2C3E50] fs-200">Sort:</span> Newest
                                 First

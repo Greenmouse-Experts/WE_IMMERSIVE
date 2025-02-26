@@ -78,7 +78,7 @@ const CreateAsset = () => {
   console.log(assetPayload)
 
   return (
-    <div className={`rounded-[20px] xl:p-5 bg-white dark:bg-black ${stepper === 4 ? "bg-[#F7F7F7FF]" : "bg-white"}`}>
+    <div className={`rounded-[20px] md:p-3 xl:p-5 bg-white dark:bg-black ${stepper === 4 ? "bg-[#F7F7F7FF]" : "bg-white"}`}>
       {stepper === 1 && (
         <div>
           <p className="unbound text-[#06052A] fw-600">Create </p>
@@ -117,7 +117,7 @@ const CreateAsset = () => {
         <CourseModule handleStepper={handleStepper}/>
       )}
       {stepper === 4 && (
-        <AddLesson/>
+        <AddLesson handleStepper={handleStepper}/>
       )}
     </div>
   );

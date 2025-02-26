@@ -16,7 +16,7 @@ const TopHeader = ({ openBar }: any) => {
         <div className="w-full flex gap-x-5 ">
           <div className="flex items-center justify-between w-[65%]">
             <div className="">
-              <div className="flex items-center h-[44px] 2xl:w-[481px] px-4 bg-white dark:bg-[#15171E] rounded-[14px] hidden md:inline-flex overflow-hidden">
+              <div className="hidden items-center h-[44px] 2xl:w-[481px] px-4 bg-white dark:bg-[#15171E] rounded-[14px] md:flex overflow-hidden">
                 <CiSearch size={20} />
                 <input
                   type="text"
@@ -63,7 +63,7 @@ const TopHeader = ({ openBar }: any) => {
             <img
               src="https://res.cloudinary.com/do2kojulq/image/upload/v1731789862/Greenchmas-1_s5suif.png"
               alt="profile"
-              className="w-6 rounded-full"
+              className="w-4 md:w-6 rounded-full"
             />
           </div>
         </div>

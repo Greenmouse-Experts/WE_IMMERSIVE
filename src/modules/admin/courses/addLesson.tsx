@@ -2,7 +2,11 @@ import { useState } from "react"
 import { Trash2, MoreVertical, Image, FileText, Video, Music, File, BookOpen, Clipboard } from 'lucide-react';
 import FormModal from './formModal';
 
-const AddLesson: React.FC = () => {
+interface CreateAssetItemProps {
+  handleStepper: (direction: string) => void;
+}
+
+const AddLesson = ({ handleStepper }: CreateAssetItemProps) => {
   const [ isOpen, setIsOpen ] = useState(false);
 
   const addLesson = () => {
@@ -47,12 +51,19 @@ const AddLesson: React.FC = () => {
             </div>
 
             {/* Delete Module Button */}
-            <button
-              className="flex items-center gap-2 text-red-500 mx-auto md:mx-0"
-            >
-              <Trash2 className="w-5 h-5" />
-              Delete Module
-            </button>
+            <div className="flex items-center justify-between px-3">
+              <button
+                className="flex items-center gap-2 text-red-500 md:mx-0"
+              >
+                <Trash2 className="w-5 h-5" />
+                Delete Module
+              </button>
+              <button className="flex items-center text-red-500 md:mx-0"
+                onClick={() => handleStepper("previous")}
+              >
+                 Go Back
+              </button>
+            </div>
           </div>
 
           {/* Right: Add Content Panel */}

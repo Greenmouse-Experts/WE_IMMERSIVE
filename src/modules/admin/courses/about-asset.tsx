@@ -128,9 +128,9 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
           </div>
 
           <div>
-            <p>Upload Asset</p>
+            <p className="mb-3">Upload Asset</p>
 
-            <div className=" bg-[#E9EBFB] rounded-[10px] sm:w-[400px] w-full h-[254px] border border-dashed border-primary flex flex-col justify-center items-center px-24 gap-6">
+            <div className=" bg-[#E9EBFB] rounded-[10px] sm:w-[400px] w-full h-[254px] border border-dashed border-primary flex flex-col justify-center items-center md:px-24 gap-6">
               <DropZone onUpload={handleDrop} />
             </div>
 
@@ -148,7 +148,7 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
           </div>
         </div>
 
-        <div className=" mt-16 flex w-full justify-between ">
+        <div className="mt-16 flex w-full justify-between gap-2">
           <Button
             style={{ width: "fit-content" }}
             title="Proceed"
