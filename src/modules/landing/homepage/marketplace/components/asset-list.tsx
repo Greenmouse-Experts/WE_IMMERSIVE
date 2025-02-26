@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { IoCaretDown } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
   name: string;
@@ -10,6 +10,8 @@ interface Props {
 }
 const AssetList: FC<Props> = ({ name, data, addFilter, classStyle }) => {
   // const arrayStar = new Array(5).fill("");
+
+  const navigate = useNavigate()
   return (
     <div>
       {addFilter ? (
@@ -30,7 +32,7 @@ const AssetList: FC<Props> = ({ name, data, addFilter, classStyle }) => {
       <div className="mt-6">
         <div className="grid lg:grid-cols-4 gap-10 lg:gap-6">
           {data?.map((item: any) => (
-            <div>
+            <div onClick={() => navigate(`/asset/${item.id}`)} className=" cursor-pointer">
               <img
                 src={item?.assetThumbnail}
                 alt="image-banner"

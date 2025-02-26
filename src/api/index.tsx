@@ -1,8 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-const token = localStorage.getItem('we-immersiveUser');
+
+const token = localStorage.getItem("we-immersiveUser");
 
 export const registerUser = async (payload: any) => {
   return axios
@@ -52,7 +53,7 @@ export const createDigitalAsset = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -64,7 +65,7 @@ export const createPhysicalAsset = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -76,7 +77,7 @@ export const createAssetCategory = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -103,7 +104,7 @@ export const getGeneralUsers = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data;
@@ -114,7 +115,7 @@ export const getStudents = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data;
@@ -125,7 +126,7 @@ export const getCreators = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data;
@@ -136,7 +137,7 @@ export const getInstitutions = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data;
@@ -148,7 +149,7 @@ export const createAdminDigitalAsset = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -160,7 +161,7 @@ export const createAdminPhysicalAsset = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -171,7 +172,7 @@ export const getAssetCategory = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data;
@@ -182,7 +183,7 @@ export const getCreatorDigitalAssets = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data; // Replace with your API endpoint
@@ -193,7 +194,7 @@ export const getCreatorPhysicalAssets = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data; // Replace with your API endpoint
@@ -204,7 +205,7 @@ export const getJobCategory = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data; // Replace with your API endpoint
@@ -216,7 +217,7 @@ export const createJob = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -227,7 +228,7 @@ export const getCreatorJobs = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data; // Replace with your API endpoint
@@ -239,7 +240,7 @@ export const editJob = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -250,7 +251,7 @@ export const getAllJobs = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data; // Replace with your API endpoint
@@ -260,7 +261,7 @@ export const getSingleJob = async (id: string | undefined) => {
   const response = await axios.get(`${baseURL}/view/job?jobId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data; // Return the API response data
@@ -271,7 +272,7 @@ export const getCourseCategory = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data; // Replace with your API endpoint
@@ -283,7 +284,7 @@ export const createCourse = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -295,7 +296,7 @@ export const createCourseBasic = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -307,7 +308,7 @@ export const createCourseModule = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -317,7 +318,7 @@ export const getSingleCourse = async (id: string | undefined) => {
   const response = await axios.get(`${baseURL}/creator/course?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data; // Replace with your API endpoint
@@ -329,7 +330,7 @@ export const getCourseModules = async (id: string | undefined) => {
     {
       headers: {
         Authorization: `Bearer ${token}`, // Add Authorization token
-        'Content-Type': 'application/json', // Set content type
+        "Content-Type": "application/json", // Set content type
       },
     }
   );
@@ -341,7 +342,18 @@ export const deleteCourseModule = async (id: string | undefined) => {
     .delete(`${baseURL}/creator/course/module/delete?moduleId=${id}`, {
       headers: {
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const deleteLessonApi = async (id: string | undefined) => {
+  return axios
+    .delete(`${baseURL}/creator/course/module/lesson/delete?lessonId=${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -353,7 +365,7 @@ export const createLessons = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -365,7 +377,7 @@ export const getModulesLesson = async (id: string | undefined) => {
     {
       headers: {
         Authorization: `Bearer ${token}`, // Add Authorization token
-        'Content-Type': 'application/json', // Set content type
+        "Content-Type": "application/json", // Set content type
       },
     }
   );
@@ -377,7 +389,7 @@ export const getAllCreatorCourses = async (headers = {}) => {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
-      'Content-Type': 'application/json', // Set content type
+      "Content-Type": "application/json", // Set content type
     },
   });
   return response.data; // Replace with your API endpoint
@@ -388,11 +400,11 @@ export const publishCourseApi = async (
   headers = {}
 ) => {
   return axios
-    .patch(`${baseURL}/creator/course/publish?courseId=${id}`, {
+    .post(`${baseURL}/creator/course/publish?courseId=${id}`, {}, {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
@@ -404,8 +416,42 @@ export const courseThumbnail = async (payload: any, headers = {}) => {
       headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        'Content-Type': 'application/json', // Example for setting content type
+        "Content-Type": "application/json", // Example for setting content type
       },
     })
     .then((response) => response.data);
 };
+
+
+const getBearerToken = () => {
+  const token = localStorage.getItem("we-immersiveUser");
+  return `Bearer ${token}`;
+};
+
+axios.defaults.baseURL = baseURL;
+axios.defaults.headers.common["Authorization"] = getBearerToken();
+axios.interceptors.request.use(
+  function (config) {
+    const token = getBearerToken();
+   
+    if (token) {
+      config.headers["Authorization"] = token;
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error?.response?.status === 401) {
+      // localStorage.clear();
+      // return (window.location.href = "/login");
+    }
+    return Promise.reject(error);
+  }
+);
