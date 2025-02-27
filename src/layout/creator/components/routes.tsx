@@ -61,12 +61,6 @@ export const Routes = [
     submenu: [],
   },
   {
-    name: "Upload Status",
-    icon: <LuCreditCard className="text-lg text-grey" />,
-    route: "/",
-    submenu: [],
-  },
-  {
     name: "Notifications",
     icon: <LuCreditCard className="text-lg text-grey" />,
     route: "/creator/notification",

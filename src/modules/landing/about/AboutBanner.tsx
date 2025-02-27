@@ -3,7 +3,7 @@ import globe from "../../../assets/globe.png";
 
 const AboutBanner = () => {
   return (
-  <div className="flex items-center justify-center bg-gradient-to-r from-blue-100 via-blue-100 via-40% to-purple-200">
+  <div className="relative flex items-center justify-center bg-gradient-to-r from-blue-100 via-blue-100 via-40% to-purple-200">
     <div className="container mx-auto flex flex-col md:flex-row items-center gap-10">
       {/* Left Content */}
       <div className="text-center lg:text-left pt-[70%] pb-[10%] px-[2%] md:pt-[55%] lg:py-[4%] xl:py-[4%]">
@@ -26,7 +26,7 @@ const AboutBanner = () => {
         <img
           src={globe}
           alt="3D Globe"
-          className="absolute w-[679px] md:w-[600px] lg:w-[500px] lg:right-0 lg:top-[21%] xl:w-[685px] right-[3%] md:top-[12%] xl:top-[14%] md:right-[10%] xl:right-[8%]"
+          className="absolute w-[679px] md:w-[600px] lg:w-[500px] lg:right-0 lg:top-[11.3%] xl:w-[620px] right-[3%] md:top-[-1%] xl:top-[9.5%] md:right-[13%] xl:right-[8%]"
         />
    
     </div>

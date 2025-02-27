@@ -38,7 +38,7 @@ const AboutIndex = () => {
         <div id="whole_package" className="md:w-[95%] lg:w-[85%] w-[85%] m-auto text-center py-[5%]">
             <h1 className="unbound md:text-[25px] lg:text-[35px] font-[700] lg:px-[10%] xl:px-[25%] leading-[1.3] dark:text-white">Enjoy the Whole Package with WE Immersive</h1>
             <p className="md:px-[15%] lg:px-[20%] xl:px-[30%] mt-5 md:mt-8 lg:mt-8 text-[14px] md:text-[16px] lg:text-[16px] mb-10 dark:text-[red] text-[#747373]">WE.IMMERSIVE leverages cutting-edge technology to empower African creators through an equitable marketplace</p>
-            <div>
+            <div className="">
                 <Card1/>
             </div>
         </div>
