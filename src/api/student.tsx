@@ -37,3 +37,20 @@ export function saveCourseProgress() {
     },
   });
 }
+
+export function enrollForACourse(){
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (courseId:string | undefined) => {
+      const response = await axios.post(`/student/course/${courseId}/enroll`, { });
+      return response.data.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["courses"] });
+      toast.success("Successfully enrolled in the course");
+    },
+    onError: () => {
+      toast.error("Failed to enroll");
+    },
+  });
+}

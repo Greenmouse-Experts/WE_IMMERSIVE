@@ -1,10 +1,21 @@
 import React, { useState } from "react";
+import { enrollForACourse } from "../../../../api/student";
+import { useParams } from "react-router-dom";
+import Button from "../../../../components/ui/Button";
+import { BeatLoader } from "react-spinners";
 
 const CourseDetailsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
     "description" | "lessons" | "reviews"
   >("description");
 
+  const { courseId } = useParams();
+
+  const { mutate: enroll, isPending } = enrollForACourse();
+
+  const handleEnroll = () => {
+    enroll(courseId);
+  };
   return (
     <div className="box pt-20 pb-20">
       {/* Course Title & Metadata */}
@@ -34,9 +45,18 @@ const CourseDetailsPage: React.FC = () => {
             </p>
             <div className="border-b border-gray-600"></div>
             <p className="text-base font-bold mt-4">₦20,000</p>
-            <button className="w-full bg-gradient text-white py-3 rounded-lg mt-3">
+            {/* <button onClick={handleEnroll} className="w-full bg-gradient text-white py-3 rounded-lg mt-3">
               Buy Now
-            </button>
+            </button> */}
+            <Button
+              withArrows
+              title={
+                isPending ? <BeatLoader size={12} color="white" /> : " Buy Now"
+              }
+              altClassName="btn-primary w-full py-3"
+              disabled={isPending}
+              onClick={handleEnroll}
+            />
             <button className="w-full border border-purple-600 text-purple-600 py-3 rounded-lg mt-4">
               Add to Cart
             </button>
@@ -194,9 +214,7 @@ const CourseDetailsPage: React.FC = () => {
       <div className="mt-12 space-y-10">
         {/* Skills You’ll Gain Section */}
         <div>
-          <p className="text-2xl font-bold mb-4">
-            Skills you'll gain
-          </p>
+          <p className="text-2xl font-bold mb-4">Skills you'll gain</p>
           <div className="flex flex-wrap gap-3">
             {[
               "Game Development",
@@ -219,9 +237,7 @@ const CourseDetailsPage: React.FC = () => {
         {/* Certification Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6">
           <div>
-            <p className="text-2xl font-bold mb-4">
-              Certification
-            </p>
+            <p className="text-2xl font-bold mb-4">Certification</p>
             <p className="text-gray-600 text-base leading-loose">
               You can add this credential to your LinkedIn profile, resume, or
               CV. Share it on social media and in your performance review.
@@ -236,9 +252,7 @@ const CourseDetailsPage: React.FC = () => {
 
         {/* Course Tutors Section */}
         <div>
-          <p className="text-2xl font-bold mb-4">
-            Course Tutors
-          </p>
+          <p className="text-2xl font-bold mb-4">Course Tutors</p>
           <div className="flex items-center gap-4">
             <img
               src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1740683797/We-Immersive/image_zsbxx6.png"
