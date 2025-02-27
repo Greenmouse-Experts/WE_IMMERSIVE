@@ -38,19 +38,60 @@ const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Function to handle lesson selection
-  const handleSelectLesson = (lesson:ILesson) => {
+  const handleSelectLesson = (lesson: ILesson) => {
     setSelectedLesson(lesson);
   };
 
   const { data: courseDetails, isLoading } = getEnrolledCourseDetails(courseId);
 
   if (isLoading) return <Loader />;
-
-  console.log(courseDetails);
-
   const courseModules = courseDetails.course.modules;
-
   console.log(courseModules);
+
+  const findLessonIndex = () => {
+    for (let module of courseModules) {
+      const lessonIndex = module.lessons.findIndex(
+        (l: ILesson) => l.id === selectedLesson?.id
+      );
+      if (lessonIndex !== -1) {
+        return {
+          module,
+          lessonIndex,
+          moduleIndex: courseModules.indexOf(module),
+        };
+      }
+    }
+    return { module: null, lessonIndex: -1, moduleIndex: -1 };
+  };
+
+  const handleNextLesson = () => {
+    const { module, lessonIndex, moduleIndex } = findLessonIndex();
+    if (!module) return;
+
+    if (lessonIndex < module.lessons.length - 1) {
+      setSelectedLesson(module.lessons[lessonIndex + 1]);
+    } else if (moduleIndex < courseModules.length - 1) {
+      setSelectedLesson(courseModules[moduleIndex + 1].lessons[0]);
+    }
+  };
+
+  const handlePreviousLesson = () => {
+    const { module, lessonIndex, moduleIndex } = findLessonIndex();
+    if (!module) return;
+
+    if (lessonIndex > 0) {
+      setSelectedLesson(module.lessons[lessonIndex - 1]);
+    } else if (moduleIndex > 0) {
+      const prevModule = courseModules[moduleIndex - 1];
+      setSelectedLesson(prevModule.lessons[prevModule.lessons.length - 1]);
+    }
+  };
+
+  const { lessonIndex, moduleIndex } = findLessonIndex();
+  const isFirstLesson = moduleIndex === 0 && lessonIndex === 0;
+  const isLastLesson =
+    moduleIndex === courseModules.length - 1 &&
+    lessonIndex === courseModules[courseModules.length - 1].lessons.length - 1;
 
   return (
     <div className="dark:bg-[#121212] min-h-screen">
@@ -75,7 +116,13 @@ const App: React.FC = () => {
 
         {/* Main Content (Video + Lesson Details) */}
         <div className="flex-1 space-y-6">
-          <VideoPlayer selectedLesson={selectedLesson} />
+          <VideoPlayer
+            selectedLesson={selectedLesson}
+            handleNextLesson={handleNextLesson}
+            handlePreviousLesson={handlePreviousLesson}
+            disableNext={isLastLesson}
+            disablePrev={isFirstLesson}
+          />
           {/* <LessonDetails
             title={modules[activeModuleIndex].lessons[activeLessonIndex]}
             module={modules[activeModuleIndex].title}
