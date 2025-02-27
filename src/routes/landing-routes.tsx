@@ -8,6 +8,7 @@ import FaqPage from "../pages/landing/faq";
 import LandingHomepage from "../pages/landing/homepage";
 import JobsPage from "../pages/landing/jobs";
 import LearnPage from "../pages/landing/learn";
+import CoursesDetails from "../pages/landing/courses-details";
 import StorePage from "../pages/landing/store";
 import AboutPage from "../pages/landing/about";
 
@@ -47,6 +48,10 @@ export const landingRoutes = [
       {
         path: "/learn",
         element: <LearnPage />,
+      },
+      {
+        path: "/learn/view-course",
+        element: <CoursesDetails />,
       },
       {
         path: "/blog",

@@ -9,7 +9,7 @@ interface Props {
 }
 const CoursesList: FC<Props> = ({ name, data, addFilter, classStyle }) => {
     console.log(data)
-  // const arrayStar = new Array(5).fill("");
+  const arrayStar = new Array(5).fill("");
   return (
     <div>
       {addFilter ? (
@@ -28,7 +28,7 @@ const CoursesList: FC<Props> = ({ name, data, addFilter, classStyle }) => {
           {data?.map((item: any) => (
             <div>
               <img
-                src={item?.image}
+                src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1739646333/We-Immersive/image3_mvln32.png"
                 alt="image-banner"
                 className="rounded-md h-[230px] object-cover w-full"
               />
@@ -42,9 +42,9 @@ const CoursesList: FC<Props> = ({ name, data, addFilter, classStyle }) => {
                 <span className={`${classStyle}`}>
                   {item.currency === "" ? "" : item.amount}
                 </span>
-                {/*item.creator && (
+                item.creator && (
                   <span className="text-white fs-500">{item.creator}</span>
-                )*/}
+                )
               </div>
               {/*item.rating && (
                 <div className="flex gap-x-3 pt-1">
