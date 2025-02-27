@@ -1,46 +1,45 @@
 import React, { useState } from "react";
 import CourseSidebar from "../../modules/student/OngoingCourses/CourseSidebar";
-import CourseModules from "../../modules/student/OngoingCourses/CourseModules";
-import LessonDetails from "../../modules/student/OngoingCourses/LessonDetails";
+// import CourseModules from "../../modules/student/OngoingCourses/CourseModules";
+// import LessonDetails from "../../modules/student/OngoingCourses/LessonDetails";
 import VideoPlayer from "../../modules/student/OngoingCourses/VideoPlayer";
 import { getEnrolledCourseDetails } from "../../api/student";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/reusables/loader";
+import { ILesson } from "./lesson.types";
 
 const App: React.FC = () => {
   const { courseId } = useParams();
-  const modules = [
-    {
-      title: "Introduction to Physics",
-      lessons: [
-        // "Lesson 1: Overview",
-        // "Lesson 2: Basic Concepts",
-        // "Lesson 3: Motion and Forces",
-        // "Lesson 4: Energy and Work",
-        // "Lesson 5: Waves and Sound",
-      ],
-    },
-    {
-      title: "Advanced Physics",
-      lessons: [
-        // "Lesson 1: Thermodynamics",
-        // "Lesson 2: Quantum Mechanics",
-        // "Lesson 3: Relativity",
-        // "Lesson 4: Nuclear Physics",
-        // "Lesson 5: Astrophysics",
-      ],
-    },
-  ];
+  // const modules = [
+  //   {
+  //     title: "Introduction to Physics",
+  //     lessons: [
+  //       "Lesson 1: Overview",
+  //       "Lesson 2: Basic Concepts",
+  //       "Lesson 3: Motion and Forces",
+  //       "Lesson 4: Energy and Work",
+  //       "Lesson 5: Waves and Sound",
+  //     ],
+  //   },
+  //   {
+  //     title: "Advanced Physics",
+  //     lessons: [
+  //       "Lesson 1: Thermodynamics",
+  //       "Lesson 2: Quantum Mechanics",
+  //       "Lesson 3: Relativity",
+  //       "Lesson 4: Nuclear Physics",
+  //       "Lesson 5: Astrophysics",
+  //     ],
+  //   },
+  // ];
 
   // State to track active module and lesson
-  const [activeModuleIndex, setActiveModuleIndex] = useState(0);
-  const [activeLessonIndex, setActiveLessonIndex] = useState(0);
+  const [selectedLesson, setSelectedLesson] = useState<ILesson | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Function to handle lesson selection
-  const handleSelectLesson = (moduleIndex: number, lessonIndex: number) => {
-    setActiveModuleIndex(moduleIndex);
-    setActiveLessonIndex(lessonIndex);
+  const handleSelectLesson = (lesson:ILesson) => {
+    setSelectedLesson(lesson);
   };
 
   const { data: courseDetails, isLoading } = getEnrolledCourseDetails(courseId);
@@ -48,6 +47,10 @@ const App: React.FC = () => {
   if (isLoading) return <Loader />;
 
   console.log(courseDetails);
+
+  const courseModules = courseDetails.course.modules;
+
+  console.log(courseModules);
 
   return (
     <div className="dark:bg-[#121212] min-h-screen">
@@ -64,22 +67,25 @@ const App: React.FC = () => {
         <div
           className={`md:block ${isSidebarOpen ? "block" : "hidden"} md:w-1/4`}
         >
-          <CourseSidebar />
+          <CourseSidebar
+            course={courseDetails}
+            handleSelectLesson={handleSelectLesson}
+          />
         </div>
 
         {/* Main Content (Video + Lesson Details) */}
         <div className="flex-1 space-y-6">
-          <VideoPlayer />
-          <LessonDetails
+          <VideoPlayer selectedLesson={selectedLesson} />
+          {/* <LessonDetails
             title={modules[activeModuleIndex].lessons[activeLessonIndex]}
             module={modules[activeModuleIndex].title}
             lesson={`Lesson ${activeLessonIndex + 1}`}
             transcript="This is the transcript content for the selected lesson..."
-          />
+          /> */}
         </div>
 
         {/* Course Modules List (Hidden on Mobile, Shows in Sidebar) */}
-        <div
+        {/* <div
           className={`md:block ${isSidebarOpen ? "block" : "hidden"} md:w-1/4`}
         >
           <CourseModules
@@ -88,7 +94,7 @@ const App: React.FC = () => {
             activeLessonIndex={activeLessonIndex}
             onSelectLesson={handleSelectLesson}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

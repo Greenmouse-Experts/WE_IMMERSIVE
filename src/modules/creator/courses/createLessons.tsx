@@ -16,14 +16,13 @@ const CreateLessons = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const navigate = useNavigate();
   const [files, setFiles] = useState("");
-  const [contentType, setContentType] = useState("video")
+  const [contentType, setContentType] = useState("video");
 
   const { id } = useParams();
 
   const {
     control,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors, isValid },
   } = useForm({
@@ -252,7 +251,10 @@ const CreateLessons = () => {
         </div>
       </div>
       <div className=" w-1/4">
-        <AddContent selectedContent={contentType} setContentType={setContentType}/>
+        <AddContent
+          selectedContent={contentType}
+          setContentType={setContentType}
+        />
       </div>
     </div>
   );
