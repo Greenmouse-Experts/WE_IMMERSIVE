@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 const MAX_VIDEO_SIZE_MB = 50; // Maximum allowed video size in MB
 const MAX_IMAGE_SIZE_MB = 5; // Maximum allowed image size in MB
 
-export const uploadFile = async (event, type ) => {
+export const uploadFile = async (event:any, type:any ) => {
+  console.log(type)
   try {
     const file = event.target.files[0];
     if (!file) {
@@ -11,6 +12,7 @@ export const uploadFile = async (event, type ) => {
     }
 
     const { size, name, type: mimeType } = file;
+    console.log(name)
     const isVideo = mimeType.startsWith("video");
     const isImage = mimeType.startsWith("image");
 

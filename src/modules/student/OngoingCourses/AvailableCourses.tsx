@@ -91,8 +91,10 @@ const ContinueCourse = () => {
     (course:any) =>
       (category === "All" || course.category === category) &&
       (status === "All" || course.status === status) &&
-      course.name.toLowerCase().includes(search.toLowerCase())
+      course?.name?.toLowerCase().includes(search?.toLowerCase())
   );
+
+  console.log(filteredCourses)
 
   return (
     <div className="bg-white dark:bg-[#15171E] px-4 py-6 rounded-[20px]">
@@ -130,7 +132,7 @@ const ContinueCourse = () => {
       </div>
 
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredCourses?.map((item:any, i:number) => (
+        {courses?.map((item:any, i:number) => (
           <div key={i} className="p-4 rounded-lg bg-gray-50 dark:bg-[#1E1E2E]">
             {/* Course Image */}
             <div>
@@ -143,13 +145,13 @@ const ContinueCourse = () => {
 
             {/* Course Details */}
             <div className="mt-2">
-              <p className="unbound fs-500">{item.name}</p>
+              <p className="unbound fs-500">{item.course.title}</p>
               <p className="fs-300 text-gray-500">{item.chapter}</p>
             </div>
 
             {/* Progress Bar */}
             <div className="mt-3">
-              <Progress size="sm" value={item.value} />
+              <Progress size="sm" value={20} />
             </div>
 
             {/* Tutor Info */}
@@ -160,7 +162,7 @@ const ContinueCourse = () => {
                 className="w-10 h-10 rounded-full"
               />
               <div>
-                <p className="fs-400">{item.tutor}</p>
+                <p className="fs-400">{item.course.creator.name}</p>
                 <p className="text-gray-500 fs-200">Tutor</p>
               </div>
             </div>
@@ -168,7 +170,7 @@ const ContinueCourse = () => {
             {/* View Course Details Link */}
             <div className="mt-4 text-center">
               <Link
-                to={`/students/course/1`}
+                to={`/students/course/${item?.id}`}
                 className="text-gray-500 text-sm hover:underline"
               >
                 View Course Details
