@@ -12,9 +12,8 @@ export function publishLesson() {
       );
       return response.data.data;
     },
-    onSuccess: (res) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
-
       toast.success("Lesson updated successfully");
     },
     onError: (error) => {
