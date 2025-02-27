@@ -19,7 +19,7 @@ const CreatorAssetsScreen = () => {
     // Check if all data is available before merging
     if (digitalAssetsQuery.data && physicalAssetsQuery.data) {
 
-      const assetsData = [...digitalAssetsQuery.data.data, ...physicalAssetsQuery.data.data];
+      const assetsData = [...digitalAssetsQuery.data.data, ...physicalAssetsQuery.data.data]
 
       setData(assetsData);
       setLoading(false);
