@@ -25,7 +25,7 @@ export const studentRoutes = [
         element: <AvailableCourses />,
       },
       {
-        path: 'course-details',
+        path: 'course/:courseId',
         element: <CourseDetails />,
       },
       {

@@ -1,89 +1,94 @@
 import { Progress } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { getEnrolledCourses } from "../../../api/student";
+import Loader from "../../../components/reusables/loader";
 
 const ContinueCourse = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [status, setStatus] = useState("All");
 
-  const courses = [
-    {
-      name: "Human Anatomy V2",
-      chapter: "Chapter 1",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-      tutor: "Bryan Silva",
-      value: 30,
-      category: "Science",
-      status: "Ongoing",
-    },
-    {
-      name: "Human Anatomy V3",
-      chapter: "Chapter 2",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-      tutor: "Bryan Silva",
-      value: 20,
-      category: "Science",
-      status: "Completed",
-    },
-    {
-      name: "Physics Essentials",
-      chapter: "Chapter 5",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-      tutor: "Lisa Adams",
-      value: 50,
-      category: "Science",
-      status: "Ongoing",
-    },
-    {
-      name: "Biochemistry Basics",
-      chapter: "Chapter 3",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-      tutor: "James Carter",
-      value: 40,
-      category: "Health",
-      status: "Completed",
-    },
-    {
-      name: "Human Anatomy V4",
-      chapter: "Chapter 3",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-      tutor: "Bryan Silva",
-      value: 35,
-      category: "Health",
-      status: "Ongoing",
-    },
-    {
-      name: "Human Anatomy V5",
-      chapter: "Chapter 4",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-      tutor: "Bryan Silva",
-      value: 35,
-      category: "Health",
-      status: "Completed",
-    },
-    {
-      name: "Introduction to Genetics",
-      chapter: "Chapter 1",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-      tutor: "Sophia Lee",
-      value: 60,
-      category: "Health",
-      status: "Ongoing",
-    },
-    {
-      name: "Organic Chemistry",
-      chapter: "Chapter 2",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-      tutor: "Mark Johnson",
-      value: 25,
-      category: "Science",
-      status: "Completed",
-    },
-  ];
+  const { data: courses, isLoading } = getEnrolledCourses();
 
-  const filteredCourses = courses.filter(
-    (course) =>
+  // const courses = [
+  //   // {
+  //   //   name: "Human Anatomy V2",
+  //   //   chapter: "Chapter 1",
+  //   //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
+  //   //   tutor: "Bryan Silva",
+  //   //   value: 30,
+  //   //   category: "Science",
+  //   //   status: "Ongoing",
+  //   // },
+  //   // {
+  //   //   name: "Human Anatomy V3",
+  //   //   chapter: "Chapter 2",
+  //   //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
+  //   //   tutor: "Bryan Silva",
+  //   //   value: 20,
+  //   //   category: "Science",
+  //   //   status: "Completed",
+  //   // },
+  //   // {
+  //   //   name: "Physics Essentials",
+  //   //   chapter: "Chapter 5",
+  //   //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
+  //   //   tutor: "Lisa Adams",
+  //   //   value: 50,
+  //   //   category: "Science",
+  //   //   status: "Ongoing",
+  //   // },
+  //   // {
+  //   //   name: "Biochemistry Basics",
+  //   //   chapter: "Chapter 3",
+  //   //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
+  //   //   tutor: "James Carter",
+  //   //   value: 40,
+  //   //   category: "Health",
+  //   //   status: "Completed",
+  //   // },
+  //   // {
+  //   //   name: "Human Anatomy V4",
+  //   //   chapter: "Chapter 3",
+  //   //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
+  //   //   tutor: "Bryan Silva",
+  //   //   value: 35,
+  //   //   category: "Health",
+  //   //   status: "Ongoing",
+  //   // },
+  //   // {
+  //   //   name: "Human Anatomy V5",
+  //   //   chapter: "Chapter 4",
+  //   //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
+  //   //   tutor: "Bryan Silva",
+  //   //   value: 35,
+  //   //   category: "Health",
+  //   //   status: "Completed",
+  //   // },
+  //   // {
+  //   //   name: "Introduction to Genetics",
+  //   //   chapter: "Chapter 1",
+  //   //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
+  //   //   tutor: "Sophia Lee",
+  //   //   value: 60,
+  //   //   category: "Health",
+  //   //   status: "Ongoing",
+  //   // },
+  //   // {
+  //   //   name: "Organic Chemistry",
+  //   //   chapter: "Chapter 2",
+  //   //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
+  //   //   tutor: "Mark Johnson",
+  //   //   value: 25,
+  //   //   category: "Science",
+  //   //   status: "Completed",
+  //   // },
+  // ];
+
+  if (isLoading) return <Loader />;
+  const filteredCourses = courses?.filter(
+    (course:any) =>
       (category === "All" || course.category === category) &&
       (status === "All" || course.status === status) &&
       course.name.toLowerCase().includes(search.toLowerCase())
@@ -125,7 +130,7 @@ const ContinueCourse = () => {
       </div>
 
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredCourses.map((item, i) => (
+        {filteredCourses?.map((item:any, i:number) => (
           <div key={i} className="p-4 rounded-lg bg-gray-50 dark:bg-[#1E1E2E]">
             {/* Course Image */}
             <div>
@@ -163,7 +168,7 @@ const ContinueCourse = () => {
             {/* View Course Details Link */}
             <div className="mt-4 text-center">
               <Link
-                to={`/students/course-details`}
+                to={`/students/course/1`}
                 className="text-gray-500 text-sm hover:underline"
               >
                 View Course Details

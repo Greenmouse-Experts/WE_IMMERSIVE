@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { BsCheckCircleFill } from "react-icons/bs";
+// import { useState } from "react";
+// import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+// import { BsCheckCircleFill } from "react-icons/bs";
 
 const Sidebar = () => {
-  const [openModule, setOpenModule] = useState<number | null>(0);
+  // const [openModule, setOpenModule] = useState<number | null>(0);
 
   const course = {
     title: "Physics Vol 2",
@@ -89,7 +89,7 @@ const Sidebar = () => {
 
       {/* Modules & Lessons */}
       <div className="overflow-y-auto max-h-[60vh] md:max-h-none">
-        {course.modules.map((module, index) => (
+        {/* {course.modules.map((module, index) => (
           <div key={index} className="mb-3">
             <button
               className="flex justify-between w-full text-left text-gray-700 dark:text-white font-medium py-2 focus:outline-none"
@@ -99,7 +99,7 @@ const Sidebar = () => {
               {openModule === index ? <FaChevronUp /> : <FaChevronDown />}
             </button>
 
-            {/* Lessons (Show if Module is Open) */}
+            
             {openModule === index && (
               <ul className="pl-4 mt-2 text-sm text-gray-600 dark:text-gray-300">
                 {module.lessons.map((lesson, i) => (
@@ -111,7 +111,7 @@ const Sidebar = () => {
               </ul>
             )}
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );
