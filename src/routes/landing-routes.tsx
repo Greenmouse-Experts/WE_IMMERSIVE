@@ -50,7 +50,7 @@ export const landingRoutes = [
         element: <LearnPage />,
       },
       {
-        path: "/learn/view-course",
+        path: "/learn/view-course/:courseId",
         element: <CoursesDetails />,
       },
       {
