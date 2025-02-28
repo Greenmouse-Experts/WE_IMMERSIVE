@@ -10,7 +10,7 @@ interface Props {
   classStyle?: any;
 }
 const CoursesList: FC<Props> = ({ name, data, addFilter, classStyle }) => {
-  // console.log(data);
+ 
   const arrayStar = new Array(5).fill("");
   return (
     <div>
