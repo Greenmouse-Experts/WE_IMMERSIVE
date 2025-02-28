@@ -30,7 +30,7 @@ const CoursesList: FC<Props> = ({ name, data, addFilter, classStyle }) => {
             <Link to={`/learn/view-course/${item.id}`} key={i}>
               <div className="cursor-pointer" >
                 <img
-                  src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1739646333/We-Immersive/image3_mvln32.png"
+                  src={item.image}
                   alt="image-banner"
                   className="rounded-md h-[230px] object-cover w-full"
                 />
