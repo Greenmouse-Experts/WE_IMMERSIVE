@@ -65,6 +65,8 @@ const AssetSpecification = ({
     const newPayload = {
       ...payload,
       ...restFormData,
+      categoryId:"7430cb38-326f-4708-a143-0648d76b53c2",
+      amount: parseInt(formData.amount),
       specificationTags:
         specificationTags?.split(",").map((tag: string) => tag.trim()) || [], // Convert to an array
     };
@@ -112,12 +114,13 @@ const AssetSpecification = ({
                 list={[
                   {
                     id: "3D",
-                    name: "3D"
+                    name: "3D",
                   },
                   {
                     id: "Gaming",
-                    name: "Gaming"
-                  }]}
+                    name: "Gaming",
+                  },
+                ]}
                 placeholder="Choose medium"
                 // icon={
                 //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
@@ -142,7 +145,7 @@ const AssetSpecification = ({
                 type={InputType.text}
                 label="Software Used"
                 placeholder="Choose softwares used"
-                error={errors.specificationSubjectMatter?.message}
+                error={errors.specificationSoftwareUsed?.message}
                 {...field}
               />
             )}
@@ -195,7 +198,7 @@ const AssetSpecification = ({
                 label="Pricing Model"
                 list={[
                   { id: "One-Time-Purchase", name: "One-Time-Purchase" },
-                  { id: "Free", name: "Free" }
+                  { id: "Free", name: "Free" },
                 ]}
                 placeholder="Choose model"
                 // icon={
@@ -222,7 +225,7 @@ const AssetSpecification = ({
                     label="Currency"
                     list={[
                       { id: "USD", name: "USD" },
-                      { id: "NGN", name: "NGN" }
+                      { id: "NGN", name: "NGN" },
                     ]}
                     placeholder="Choose currency"
                     // icon={

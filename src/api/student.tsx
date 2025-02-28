@@ -38,19 +38,24 @@ export function saveCourseProgress() {
   });
 }
 
-export function enrollForACourse(){
+export function enrollForACourse() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (courseId:string | undefined) => {
-      const response = await axios.post(`/student/course/${courseId}/enroll`, { });
+    mutationFn: async (courseId: string | undefined) => {
+      const response = await axios.post(
+        `/student/course/${courseId}/enroll`,
+        {}
+      );
       return response.data.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["courses"] });
+      queryClient.invalidateQueries({
+        queryKey: ["courses", "general-courses"],
+      });
       toast.success("Successfully enrolled in the course");
     },
-    onError: () => {
-      toast.error("Failed to enroll");
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
     },
   });
 }

@@ -36,7 +36,7 @@ const ModelLoader = () => (
 );
 
 // Main Component to render the 3D model
-const ThreeDViewer = ({ modelUrl }) => {
+export const ThreeDViewer = ({ modelUrl }) => {
   return (
     <div style={{ height: "80vh", position: "relative" }}>
       <Canvas>
@@ -95,7 +95,7 @@ const AssetDetailsIndex = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `https://weimmerse.greenmouseacademy.com.ng/v1/api/view/digital/asset?id=${id}`
+        `https://api.test.weimmersive.io/v1/api/view/digital/asset?id=${id}`
       );
       console.log(data);
       setAssetUrl(data?.data?.assetUpload);

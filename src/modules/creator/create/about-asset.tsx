@@ -1,16 +1,66 @@
 import { Controller, useForm } from "react-hook-form";
 import Button from "../../../components/ui/Button";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import DropZone from "../../../components/DropZone";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { upload3DModel, uploadImage } from "../../../helpers";
+import { ThreeDViewer } from "../../landing/assets/asset-details";
 
 interface AboutAssetProps {
   handleStepper: (direction: string) => void;
   payload: any;
 }
 const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
-  const [files, setFiles] = useState("");
+  const [thumbnail, setThumbnail] = useState<string | null>(null);
+  const [modelUrl, setModelUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const thumbnailInputRef = useRef<HTMLInputElement>(null);
+  const modelInputRef = useRef<HTMLInputElement>(null);
+
+  const handleThumbnailChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setLoading(true);
+    setError(null);
+
+    const file = event.target.files?.[0];
+    if (!file) {
+      setLoading(false);
+      return;
+    }
+
+    const result = await uploadImage(file);
+    setLoading(false);
+
+    if (result.isSuccess) {
+      setThumbnail(result.fileUrl);
+    } else {
+      setError("Thumbnail upload failed.");
+    }
+  };
+
+  const handleModelChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setLoading(true);
+    setError(null);
+
+    const result = await upload3DModel(event);
+    setLoading(false);
+
+    if (result.isSuccess) {
+      setModelUrl(result.fileUrl);
+    } else {
+      setError("Model upload failed.");
+    }
+  };
+
+  const openFilePicker = (inputRef: React.RefObject<HTMLInputElement>) => {
+    if (inputRef.current) {
+      inputRef.current.click();
+    }
+  };
 
   const {
     control,
@@ -24,19 +74,19 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
     },
   });
 
-  const handleDrop = (data: any) => {
-    setFiles(data);
-  };
+  // const handleDrop = (data: any) => {
+  //   setFiles(data);
+  // };
 
   const onSubmit = (formData: any) => {
     payload({
       categoryId: "8d649021-958a-485c-95bf-fdcfb41f9604",
       assetName: formData.assetName,
       assetDetails: formData.assetDetails,
-      assetUpload: files,
-      assetThumbnail: files,
+      assetUpload: modelUrl,
+      assetThumbnail: thumbnail,
     });
-    if (files === "") {
+    if (modelUrl === "" || thumbnail ==="") {
       toast.error("Please upload asset file");
     } else {
       handleStepper("next");
@@ -94,21 +144,84 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
             )}
           />
           <div>
-            <p>Upload Asset</p>
+            {/* Upload Thumbnail Section */}
+            <div>
+              <p>Upload Thumbnail</p>
 
-            <div className=" bg-[#E9EBFB] rounded-[10px] sm:w-[400px] w-full h-[254px] border border-dashed border-primary flex flex-col justify-center items-center px-24 gap-6">
-              <DropZone onUpload={handleDrop} />
+              <div
+                className="h-[274px] w-[427px] border-primary border-dashed border rounded-[10px] overflow-hidden flex flex-col items-center justify-center cursor-pointer relative"
+                onClick={() => openFilePicker(thumbnailInputRef)}
+              >
+                {thumbnail ? (
+                  <img
+                    src={thumbnail}
+                    alt="Thumbnail Preview"
+                    className="h-full w-full object-cover rounded-lg"
+                  />
+                ) : (
+                  <img
+                    src="https://res.cloudinary.com/do2kojulq/image/upload/v1740739007/model-placeholder_tpk7em.png"
+                    alt="Image Placeholder"
+                    className="h-full w-full object-cover"
+                  />
+                )}
+                <input
+                  type="file"
+                  ref={thumbnailInputRef}
+                  onChange={handleThumbnailChange}
+                  accept="image/*"
+                  className="hidden"
+                />
+              </div>
+
+              {loading && <p className="mt-2">Uploading...</p>}
+              {error && <p className="mt-2 text-red-500">{error}</p>}
+
+              {thumbnail && (
+                <button
+                  onClick={() => openFilePicker(thumbnailInputRef)}
+                  className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                >
+                  Change Thumbnail
+                </button>
+              )}
             </div>
 
-            <div className="grid grid-cols-3 gap-4 mt-4">
-              {files !== "" && (
-                <div className="relative">
+            {/* Upload Asset (3D Model) Section */}
+            <div className="mt-6">
+              <p>Upload Asset</p>
+              <div
+                className="h-[274px] w-[427px] border-primary border-dashed border rounded-[10px] overflow-hidden flex flex-col items-center justify-center cursor-pointer relative"
+                onClick={() => openFilePicker(modelInputRef)}
+              >
+                {modelUrl ? (
+                  <ThreeDViewer modelUrl={modelUrl} />
+                ) : (
                   <img
-                    src={files}
-                    alt="preview"
-                    className="w-full h-24 object-cover rounded"
+                    src="https://res.cloudinary.com/do2kojulq/image/upload/v1740739007/model-placeholder_tpk7em.png"
+                    alt="Model Placeholder"
+                    className="h-full w-full object-cover"
                   />
-                </div>
+                )}
+                <input
+                  type="file"
+                  ref={modelInputRef}
+                  onChange={handleModelChange}
+                  accept=".glb,.gltf,.obj,.fbx,.usdz"
+                  className="hidden"
+                />
+              </div>
+
+              {loading && <p className="mt-2">Uploading...</p>}
+              {error && <p className="mt-2 text-red-500">{error}</p>}
+
+              {modelUrl && (
+                <button
+                  onClick={() => openFilePicker(modelInputRef)}
+                  className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                >
+                  Change File
+                </button>
               )}
             </div>
           </div>

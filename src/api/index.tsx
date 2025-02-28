@@ -394,6 +394,16 @@ export const getAllCreatorCourses = async (headers = {}) => {
   });
   return response.data; // Replace with your API endpoint
 };
+export const getAllCoursesGeneral = async (headers = {}) => {
+  const response = await axios.get(`${baseURL}/general/courses`, {
+    headers: {
+      ...headers, // Merge custom headers
+      Authorization: `Bearer ${token}`, // Add Authorization token
+      "Content-Type": "application/json", // Set content type
+    },
+  });
+  return response.data; // Replace with your API endpoint
+};
 
 export const publishCourseApi = async (
   id: string | undefined,

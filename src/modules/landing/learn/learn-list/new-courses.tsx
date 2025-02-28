@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getAllCreatorCourses } from "../../../../api";
+import { getAllCoursesGeneral, getAllCreatorCourses } from "../../../../api";
 import { useGetData } from "../../../../hooks/useGetData";
 import CoursesList from "./courses-list";
 
 const NewCourses = () => {
-  const creatorCoursesQuery = useGetData(["courses"], getAllCreatorCourses);
+  const creatorCoursesQuery = useGetData(["general-courses"], getAllCoursesGeneral);
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
