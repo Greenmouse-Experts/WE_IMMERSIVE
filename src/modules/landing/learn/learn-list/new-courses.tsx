@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllCoursesGeneral, getAllCreatorCourses } from "../../../../api";
+import { getAllCoursesGeneral } from "../../../../api";
 import { useGetData } from "../../../../hooks/useGetData";
 import CoursesList from "./courses-list";
 
