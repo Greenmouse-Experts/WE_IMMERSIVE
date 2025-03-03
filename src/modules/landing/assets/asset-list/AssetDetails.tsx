@@ -10,7 +10,7 @@ const AssetDetails: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState(images[0]);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="box px-4 py-8">
       <h1 className="text-3xl font-bold">Tesla Cybertruck 3D</h1>
       <div className="flex items-center space-x-2 mt-2">
         <div className="flex text-yellow-400">
