@@ -1,9 +1,9 @@
-import AssetDetailsIndex from "../../modules/landing/assets/asset-details"
+import AssetDetails from "../../modules/landing/assets/asset-list/AssetDetails"
 
 const AssetDetailsPage = () => {
   return (
     <div>
-        <AssetDetailsIndex/>
+        <AssetDetails/>
     </div>
   )
 }
