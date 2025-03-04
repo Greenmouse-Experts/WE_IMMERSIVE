@@ -96,7 +96,7 @@ const ContinueCourse = () => {
             {/* View Course Details Link */}
             <div className="mt-4 text-center">
               <Link
-                to={`/students/course/${item?.id}`}
+                to={`/user/course/${item?.id}`}
                 className="text-gray-500 text-sm hover:underline"
               >
                 View Course Details

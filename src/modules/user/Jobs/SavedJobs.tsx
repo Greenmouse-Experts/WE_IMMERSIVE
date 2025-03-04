@@ -1,65 +1,33 @@
 import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
+import { getSavedJobs, saveJob } from "../../../api/general";
+import Loader from "../../../components/reusables/loader";
+import { IJob } from "../../../types/job.types";
+import { BeatLoader } from "react-spinners";
 
-const jobs = [
-  {
-    title: "2D Modeling",
-    company: "ArtLabs",
-    location: "Remote",
-    type: "Full Time",
-    salary: "₦320,000/month",
-    posted: "27 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "3D Modeling",
-    company: "ArtLabs",
-    location: "Remote",
-    type: "Full Time",
-    salary: "₦320,000/month",
-    posted: "27 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "Graphic Designer",
-    company: "Pixel Studio",
-    location: "Lagos, Nigeria",
-    type: "Part Time",
-    salary: "₦250,000/month",
-    posted: "25 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "UI/UX Designer",
-    company: "Creative Hub",
-    location: "Remote",
-    type: "Contract",
-    salary: "₦400,000/month",
-    posted: "20 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "Product Manager",
-    company: "Visionary Inc.",
-    location: "Lagos, Nigeria",
-    type: "Full Time",
-    salary: "₦600,000/month",
-    posted: "5 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-];
 
 const JobsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("");
-  const [location,] = useState("");
-  const [jobType,] = useState("");
+  const [location] = useState("");
+  const [jobType] = useState("");
 
-  const filteredJobs = jobs.filter((job) =>
-    job.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    (category ? job.title.includes(category) : true) &&
-    (location ? job.location.includes(location) : true) &&
-    (jobType ? job.type.includes(jobType) : true)
+  const { data: jobs, isLoading } = getSavedJobs();
+
+  const { mutate: savejob, isPending } = saveJob();
+
+  const handleSave = (jobId: string) => {
+    savejob(jobId);
+  };
+
+  if (isLoading) return <Loader />;
+
+  const filteredJobs = jobs?.filter(
+    (job: { job: IJob }) =>
+      job.job?.title?.toLowerCase()?.includes(searchQuery?.toLowerCase()) &&
+      (category ? job.job.title?.includes(category) : true) &&
+      (location ? job.job.location?.includes(location) : true) &&
+      (jobType ? job.job.jobType?.includes(jobType) : true)
   );
 
   return (
@@ -88,20 +56,30 @@ const JobsPage = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredJobs.map((job, index) => (
+        {filteredJobs.map((job: { job: IJob }, index: number) => (
           <div key={index} className="border p-4 rounded-lg relative">
-            <AiOutlineHeart className="absolute top-4 right-4 text-red-500 cursor-pointer" />
+            <AiOutlineHeart
+              onClick={() => handleSave(job.job.id)}
+              className="absolute top-4 right-4 text-red-500 cursor-pointer"
+            />
+            {isPending && <BeatLoader />}
             <div className="flex items-center gap-3">
-              <img src={job.logo} alt="Company Logo" className="w-16 h-16 rounded-full" />
+              <img
+                src={job.job.logo}
+                alt="Company Logo"
+                className="w-16 h-16 rounded-full"
+              />
               <div>
-                <p className="font-semibold text-lg">{job.title}</p>
-                <p className="text-blue-500 text-sm">{job.location}</p>
+                <p className="font-semibold text-lg">{job.job.title}</p>
+                <p className="text-blue-500 text-sm">{job.job.location}</p>
               </div>
             </div>
-            <p className="mt-2 text-sm">We are looking for an experienced artist...</p>
-            <p className="text-blue-500 text-sm mt-2">{job.type}</p>
-            <p className="font-semibold mt-2">{job.salary}</p>
-            <p className="text-gray-500 text-xs mt-1">Posted {job.posted}</p>
+            <p className="mt-2 text-sm">
+              We are looking for an experienced artist...
+            </p>
+            <p className="text-blue-500 text-sm mt-2">{job.job.jobType}</p>
+            {/* <p className="font-semibold mt-2">{job.salary}</p> */}
+            {/* <p className="text-gray-500 text-xs mt-1">Posted {job.posted}</p> */}
           </div>
         ))}
       </div>

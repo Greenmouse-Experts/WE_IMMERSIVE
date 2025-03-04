@@ -1,90 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useGetData } from "../../../hooks/useGetData";
+import { getAllJobs } from "../../../api";
+import Loader from "../../../components/reusables/loader";
+import { saveJob } from "../../../api/general";
+import { BeatLoader } from "react-spinners";
 
-const jobs = [
-  {
-    title: "2D Modeling",
-    company: "ArtLabs",
-    location: "Remote",
-    type: "Full Time",
-    salary: "₦320,000/month",
-    posted: "27 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "3D Modeling",
-    company: "ArtLabs",
-    location: "Remote",
-    type: "Full Time",
-    salary: "₦320,000/month",
-    posted: "27 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "Graphic Designer",
-    company: "Pixel Studio",
-    location: "Lagos, Nigeria",
-    type: "Part Time",
-    salary: "₦250,000/month",
-    posted: "25 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "UI/UX Designer",
-    company: "Creative Hub",
-    location: "Remote",
-    type: "Contract",
-    salary: "₦400,000/month",
-    posted: "20 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "Frontend Developer",
-    company: "Tech Solutions",
-    location: "Abuja, Nigeria",
-    type: "Full Time",
-    salary: "₦500,000/month",
-    posted: "18 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "Backend Developer",
-    company: "Innovatech",
-    location: "Remote",
-    type: "Full Time",
-    salary: "₦550,000/month",
-    posted: "15 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "Data Analyst",
-    company: "DataCorp",
-    location: "Lagos, Nigeria",
-    type: "Part Time",
-    salary: "₦300,000/month",
-    posted: "12 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "Marketing Specialist",
-    company: "Brandify",
-    location: "Remote",
-    type: "Contract",
-    salary: "₦350,000/month",
-    posted: "10 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-  {
-    title: "Product Manager",
-    company: "Visionary Inc.",
-    location: "Lagos, Nigeria",
-    type: "Full Time",
-    salary: "₦600,000/month",
-    posted: "5 October",
-    logo: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png",
-  },
-];
 
 const JobsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -92,7 +14,34 @@ const JobsPage = () => {
   const [location, setLocation] = useState("");
   const [jobType, setJobType] = useState("");
 
-  const filteredJobs = jobs.filter((job) =>
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const jobsData = useGetData(["allJobs"], getAllJobs);
+
+  useEffect(() => {
+    // Check if all data is available before merging
+    if (jobsData.data) {
+      setData(jobsData.data.data);
+      setLoading(false);
+    }
+  }, [jobsData.data]); // Dependency array ensures this runs when data updates
+
+  const {mutate:savejob, isPending} =saveJob();
+
+  const handleSave = (jobId: string) => {
+    savejob(jobId);
+  };
+
+
+  if (loading) {
+    return (
+      // Loading spinner or placeholder
+      <Loader />
+    )
+  }
+
+  const filteredJobs = data.filter((job) =>
     job.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
     (category ? job.title.includes(category) : true) &&
     (location ? job.location.includes(location) : true) &&
@@ -147,7 +96,8 @@ const JobsPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredJobs.map((job, index) => (
           <div key={index} className="border p-4 rounded-lg relative">
-            <AiOutlineHeart className="absolute top-4 right-4 text-red-500 cursor-pointer" />
+            <AiOutlineHeart onClick={() => handleSave(job.id)} className="absolute top-4 right-4 text-red-500 cursor-pointer" />
+              {isPending && <BeatLoader/>}
             <div className="flex items-center gap-3">
               <img src={job.logo} alt="Company Logo" className="w-16 h-16 rounded-full" />
               <div>
@@ -155,13 +105,13 @@ const JobsPage = () => {
                 <p className="text-blue-500 text-sm">{job.location}</p>
               </div>
             </div>
-            <p className="mt-2 text-sm">We are looking for an experienced artist...</p>
+            {/* <p className="mt-2 text-sm">We are looking for an experienced artist...</p> */}
             <p className="text-blue-500 text-sm mt-2">{job.type}</p>
             <p className="font-semibold mt-2">{job.salary}</p>
             <p className="text-gray-500 text-xs mt-1">Posted {job.posted}</p>
             <div className="mt-4 text-center">
               <Link
-                to={`/user/job-details`}
+                to={`/user/job-details/${job.id}`}
                 className="text-gray-500 text-sm hover:underline"
               >
                 View Job Description

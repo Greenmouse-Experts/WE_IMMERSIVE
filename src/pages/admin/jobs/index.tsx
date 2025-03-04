@@ -13,38 +13,7 @@ const Jobs = () => {
 
   const handleOpen = () => setOpen(!open);
 
-  const data = [
-    {
-        assetName: "2D/3D Designer",
-        description: "Looking for a 2D Designer to create designs for an upcoming ...",
-        postedBy: "Chukka Ude",
-        createdAt: "2022-10-10T00:00:00Z",
-    },
-    {
-        assetName: "2D/3D Designer",
-        description: "Looking for a 2D Designer to create designs for an upcoming ...",
-        postedBy: "Chukka Ude",
-        createdAt: "2022-10-10T00:00:00Z",
-    },
-    {
-        assetName: "2D/3D Designer",
-        description: "Looking for a 2D Designer to create designs for an upcoming ...",
-        postedBy: "Chukka Ude",
-        createdAt: "2022-10-10T00:00:00Z",
-    },
-    {
-        assetName: "2D/3D Designer",
-        description: "Looking for a 2D Designer to create designs for an upcoming ...",
-        postedBy: "Chukka Ude",
-        createdAt: "2022-10-10T00:00:00Z",
-    },
-    {
-        assetName: "2D/3D Designer",
-        description: "Looking for a 2D Designer to create designs for an upcoming ...",
-        postedBy: "Chukka Ude",
-        createdAt: "2022-10-10T00:00:00Z",
-    }
-  ]
+  const data = [{}];
 
   return (
     <div>
@@ -87,23 +56,27 @@ const Jobs = () => {
                     <td className="unbound pl-4 p-1 pb-2">#</td>
                     <td className="unbound p-1 pb-2">Job Title</td>
                     <td className="unbound p-1 pb-2">Job Description</td>
-                    <td className="unbound p-1 pb-2 whitespace-nowrap">Posted By</td>
-                    <td className="unbound p-1 pb-2 md:text-center xl:text-left">Date</td>
+                    <td className="unbound p-1 pb-2 whitespace-nowrap">
+                      Posted By
+                    </td>
+                    <td className="unbound p-1 pb-2 md:text-center xl:text-left">
+                      Date
+                    </td>
                     <td className="unbound p-1 pb-2">Action</td>
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.length > 0
+                  {/* {data?.length > 0
                     ? data.map((item, i) => (
                         <tr
                           className="odd:bg-[#E9EBFB] odd:dark:bg-black"
                           key={i}
                         >
                           <td className={`p-2 py-4 pl-4`}>{`${i + 1}`}</td>
-                          <td className="p-2 py-4 whitespace-nowrap">{item.assetName}</td>
-                          <td className="p-2 py-4">
-                            {item.description}
+                          <td className="p-2 py-4 whitespace-nowrap">
+                            {item.assetName}
                           </td>
+                          <td className="p-2 py-4">{item.description}</td>
                           <td className="p-2 py-4 whitespace-nowrap">
                             {item.postedBy}
                           </td>
@@ -115,7 +88,7 @@ const Jobs = () => {
                           </td>
                         </tr>
                       ))
-                    : null}
+                    : null} */}
                 </tbody>
               </table>
             )}

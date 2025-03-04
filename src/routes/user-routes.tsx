@@ -1,7 +1,6 @@
 import UserDashboard from "../pages/user/dashboard";
-import AvailableCourses from "../pages/user/AllCourses";
 import OngoingCourses from "../pages/user/OngoingCourses";
-import CourseDetails from "../pages/user/CourseDetails";
+import CourseDetails from "../pages/students/CourseDetails";
 import AvailableAssets from "../pages/user/AllAssets";
 import Notifications from "../pages/user/Notifications";
 import Transactions from "../pages/user/Transactions";
@@ -11,6 +10,7 @@ import CartPage from "../pages/user/CartPage";
 import Orders from "../pages/user/Orders";
 import JobDescription from "../pages/user/JobDescription";
 import Settings from "../pages/user/ProfilePage";
+import AvailableCourses from "../pages/students/allCourses";
 
 
 export const userRoutes = [
@@ -30,7 +30,7 @@ export const userRoutes = [
         element: <AvailableCourses />,
       },
       {
-        path: 'course-details',
+        path: 'course/:courseId',
         element: <CourseDetails />,
       },
       {
@@ -71,7 +71,7 @@ export const userRoutes = [
       },
 
       {
-        path: 'job-details',
+        path: 'job-details/:jobId',
         element: <JobDescription />,
       },
       
