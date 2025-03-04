@@ -1,40 +1,19 @@
 import { useState } from "react";
+import { getGeneralCourses } from "../../../api/general";
+import Loader from "../../../components/reusables/loader";
+import { IAsset } from "../../../types/asset.types";
 
 const AllAssets = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+  const { data: assets, isLoading } = getGeneralCourses();
 
-  const assets = [
-    {
-      name: "AnnaElsa Frozen 3D",
-      creator: "By Chuka Uzo",
-      img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739646333/We-Immersive/image_zh7h9q.png",
-      category: "Animation",
-    },
-    {
-      name: "Skull Chaser Rig",
-      creator: "By Hamzat Abdulazeez",
-      img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739646333/We-Immersive/image4_qcpt2t.png",
-      category: "Character Rigging",
-    },
-    {
-      name: "Troll Hunters Anim Rig",
-      creator: "By Stephen Finn",
-      img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739646333/We-Immersive/image3_mvln32.png",
-      category: "Character Rigging",
-    },
-    {
-      name: "Cartoon Family Pack",
-      creator: "By Adeleke Evulo",
-      img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739646333/We-Immersive/image2_fmojtk.png",
-      category: "Animation",
-    },
-  ];
+  if (isLoading) return <Loader />;
 
-  const filteredAssets = assets.filter(
-    (asset) =>
-      (category === "All" || asset.category === category) &&
-      asset.name.toLowerCase().includes(search.toLowerCase())
+  console.log(assets);
+
+  const filteredAssets = assets?.filter((asset: IAsset) =>
+    asset.assetName.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -64,12 +43,12 @@ const AllAssets = () => {
       </div>
 
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredAssets.map((item, i) => (
+        {filteredAssets?.map((item:IAsset, i:number) => (
           <div key={i} className="p-4 rounded-lg bg-gray-50 dark:bg-[#1E1E2E]">
             {/* Asset Image */}
             <div>
               <img
-                src={item.img}
+                src={item.assetThumbnail}
                 alt="asset-img"
                 className="w-full rounded-lg"
               />
@@ -77,8 +56,8 @@ const AllAssets = () => {
 
             {/* Asset Details */}
             <div className="mt-2">
-              <p className="unbound fs-500">{item.name}</p>
-              <p className="fs-300 text-gray-500">{item.creator}</p>
+              <p className="unbound fs-500">{item.assetName}</p>
+              <p className="fs-300 text-gray-500">{item.amount}</p>
             </div>
           </div>
         ))}

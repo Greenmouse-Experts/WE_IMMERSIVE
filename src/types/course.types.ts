@@ -35,7 +35,7 @@ interface ILesson {
     industry: string;
     jobTitle: string | null;
     referralCode: string;
-    photo: string | null;
+    photo: string;
     evToken: string | null;
     accountType: string;
     status: string;
