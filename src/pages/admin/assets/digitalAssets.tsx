@@ -1,58 +1,102 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { PiDotsThreeOutlineFill } from "react-icons/pi";
-import { useGetData } from "../../../hooks/useGetData";
-import { useEffect, useState } from "react";
 import Loader from "../../../components/reusables/loader";
 import { dateFormat } from "../../../helpers/dateHelper";
-import { getCreators } from "../../../api";
 import Button from "../../../components/ui/Button";
-import { Dialog } from "@material-tailwind/react";
 import AssetCategory from "./assetCategory";
 import { useNavigate } from "react-router-dom";
-import { getApprovedDigitalAssets } from "../../../api/admin";
-
-interface DataItem {
-  createdAt: string; // ISO 8601 date string
-  // Other properties as needed
-}
+import {
+  deleteDigitalAsset,
+  getAllAdminDigitalAssets,
+  publishDigitalAsset,
+} from "../../../api/admin";
+import {
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
+import Publish from "../../../components/reusables/Publish";
+import useDialog from "../../../hooks/useDialog";
+import { MoreVertical } from "lucide-react";
+import { IAsset } from "../../../types/asset.types";
+import { useState } from "react";
+import { Dialog } from "@material-tailwind/react";
 
 const DigitalAssets = () => {
   // Fetch data for each group
-  const digitalAssetsQuery = useGetData(["digitalAssets"], getApprovedDigitalAssets);
-  const creators = useGetData(["creators"], getCreators);
-  const navigate = useNavigate
-  ();
+  // const digitalAssetsQuery = useGetData(
+  //   ["digitalAssets"],
+  //   getApprovedDigitalAssets
+  // );
+  // const creators = useGetData(["creators"], getCreators);
+  const { data, isLoading } = getAllAdminDigitalAssets();
+  const navigate = useNavigate();
 
-  const [data, setData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [data, setData] = useState<any[]>([]);
+  const [selected, setSelected] = useState<any>(null);
   const [open, setOpen] = useState(false);
+  const { Dialog: PublishedDialog, setShowDialog } = useDialog();
+  const { Dialog: DeleteDialog, setShowDialog: setDeleteDialog } = useDialog();
 
   const handleOpen = () => setOpen(!open);
+  const openPublish = (asste: any) => {
+    setSelected(asste);
+    setShowDialog(true);
+  };
+  const openDelete = (asste: any) => {
+    setSelected(asste);
+    setDeleteDialog(true);
+  };
+  const { mutate: publishAsset, isPending } = publishDigitalAsset();
+  const { mutate: deleteAsset, isPending:isDeleting } = deleteDigitalAsset();
+  const handlePublish = () => {
+    publishAsset(
+      {
+        assetId: selected.id,
+        status: selected?.status === "published" ? "unpublished" : "published",
+        adminNote: "This is very much required",
+      },
+      {
+        onSuccess() {
+          setShowDialog(false);
+        },
+      }
+    );
+  };
+  const handleDelete = () => {
+    deleteAsset(selected.id, {
+      onSuccess() {
+        setShowDialog(false);
+      },
+    });
+  };
 
-  useEffect(() => {
-    // Check if all data is available before merging
-    if (digitalAssetsQuery.data && creators.data) {
-      const mergedData: DataItem[] = digitalAssetsQuery.data.data.map(
-        (asset: { creatorId: any }) => {
-          // Find the corresponding creator by ID
-          const creator = creators.data?.data.find(
-            (creator: { id: any }) => creator.id === asset.creatorId
-          );
-          return {
-            ...asset,
-            creatorName: creator ? creator.name : "Unknown", // Add creator name or default to "Unknown"
-          };
-        }
-      );
+  if (isLoading) return <Loader />;
 
-      const sortedData = mergedData.sort(
-        (a: DataItem, b: DataItem) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-      setData(sortedData);
-      setLoading(false);
-    }
-  }, [digitalAssetsQuery.data, creators.data]); // Dependency array ensures this runs when data updates
+  // useEffect(() => {
+  //   // Check if all data is available before merging
+  //   if (digitalAssetsQuery.data && creators.data) {
+  //     const mergedData: DataItem[] = digitalAssetsQuery.data.data.map(
+  //       (asset: { creatorId: any }) => {
+  //         // Find the corresponding creator by ID
+  //         const creator = creators.data?.data.find(
+  //           (creator: { id: any }) => creator.id === asset.creatorId
+  //         );
+  //         return {
+  //           ...asset,
+  //           creatorName: creator ? creator.name : "Unknown", // Add creator name or default to "Unknown"
+  //         };
+  //       }
+  //     );
+
+  //     const sortedData = mergedData.sort(
+  //       (a: DataItem, b: DataItem) =>
+  //         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  //     );
+  //     setData(sortedData);
+  //     setLoading(false);
+  //   }
+  // }, [digitalAssetsQuery.data, creators.data]); // Dependency array ensures this runs when data updates
 
   return (
     <div>
@@ -76,7 +120,9 @@ const DigitalAssets = () => {
             <div className="flex items-center gap-x-1 px-2 py-1">
               <Button
                 size={14}
-                onClick={() => navigate('/super-admin/assets/create?slug=digital')}
+                onClick={() =>
+                  navigate("/super-admin/assets/create?slug=digital")
+                }
                 title="Create New Asset"
                 altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
               />
@@ -93,7 +139,7 @@ const DigitalAssets = () => {
         </div>
         <div className="mt-2">
           <div className="overflow-x-auto">
-            {loading ? (
+            {isLoading ? (
               // Loading spinner or placeholder
               <Loader />
             ) : (
@@ -105,14 +151,14 @@ const DigitalAssets = () => {
                     <td className="unbound p-1 pb-2">Image</td>
                     <td className="unbound p-1 pb-2">Price</td>
                     <td className="unbound p-1 pb-2">Published On</td>
-                    <td className="unbound p-1 pb-2">Copies Sold</td>
+                    <td className="unbound p-1 pb-2">Status</td>
                     <td className="unbound p-1 pb-2">Created By</td>
                     <td className="unbound p-1 pb-2">Action</td>
                   </tr>
                 </thead>
                 <tbody>
                   {data?.length > 0
-                    ? data.map((item, i) => (
+                    ? data.map((item: IAsset, i: number) => (
                         <tr
                           className="odd:bg-[#E9EBFB] odd:dark:bg-black"
                           key={i}
@@ -131,10 +177,34 @@ const DigitalAssets = () => {
                           <td className="p-2 py-4 capitalize">
                             {dateFormat(item?.createdAt, "dd-MM-yyyy")}
                           </td>
-                          <td className="p-2 py-4 capitalize">---</td>
-                          <td className="p-2 py-4">{item?.creatorName}</td>
+                          <td className="p-2 py-4 capitalize">{item.status}</td>
+                          <td className="p-2 py-4">{item?.user?.name}</td>
                           <td className="p-2 py-4 pl-4">
-                            <PiDotsThreeOutlineFill className="cursor-pointer" />
+                            <Menu placement="left">
+                              <MenuHandler>
+                                <MoreVertical />
+                              </MenuHandler>
+                              <MenuList>
+                                <MenuItem className="flex flex-col gap-3">
+                                  <span
+                                    className="cursor-pointer w-full"
+                                    onClick={() => openPublish(item)}
+                                  >
+                                    {item.status === "published"
+                                      ? "Unpublish Asset"
+                                      : "Publish Asset"}
+                                  </span>
+                                </MenuItem>
+                                <MenuItem className="flex flex-col gap-3">
+                                  <span
+                                    className="cursor-pointer w-full"
+                                    onClick={() => openDelete(item)}
+                                  >
+                                    Delete Asset
+                                  </span>
+                                </MenuItem>
+                              </MenuList>
+                            </Menu>
                           </td>
                         </tr>
                       ))
@@ -154,6 +224,24 @@ const DigitalAssets = () => {
       >
         <AssetCategory onClose={handleOpen} />
       </Dialog>
+      <PublishedDialog title="" size="md">
+        <Publish
+          handleCancel={() => setShowDialog(false)}
+          title={`Are you sure you want to ${
+            selected?.status === "published" ? "unpublished" : "published"
+          } this asset`}
+          handleProceed={handlePublish}
+          isLoading={isPending}
+        />
+      </PublishedDialog>
+      <DeleteDialog title="" size="md">
+        <Publish
+          handleCancel={() => setDeleteDialog(false)}
+          title={`Are you sure you want to delete this asset`}
+          handleProceed={handleDelete}
+          isLoading={isDeleting}
+        />
+      </DeleteDialog>
     </div>
   );
 };

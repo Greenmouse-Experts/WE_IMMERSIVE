@@ -14,6 +14,7 @@ import UserDashboardLayout from "./layout/user";
 import CreatorDashboardLayout from "./layout/creator";
 import InstitutionDashboardLayout from "./layout/institution";
 import StudentsDashboardLayout from "./layout/students";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   const user = useSelector((state: any) => state.userData.data); // Assuming user.role exists in userData
@@ -57,6 +58,10 @@ const App = () => {
         </AuthMiddleware>
       ),
       children: studentRoutes,
+    },
+    {
+      path: "*",
+      element: <PageNotFound />,
     },
   ]);
 
