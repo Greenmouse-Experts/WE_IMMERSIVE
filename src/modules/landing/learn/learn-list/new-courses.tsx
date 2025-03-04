@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { getAllCoursesGeneral } from "../../../../api";
-import { useGetData } from "../../../../hooks/useGetData";
 import CoursesList from "./courses-list";
 import { getGeneralCourses } from "../../../../api/general";
 import Loader from "../../../../components/reusables/loader";
