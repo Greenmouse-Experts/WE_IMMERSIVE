@@ -1,8 +1,6 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { useState } from "react";
 import Loader from "../../../components/reusables/loader";
-import { dateFormat } from "../../../helpers/dateHelper";
 import Button from "../../../components/ui/Button";
 import { Dialog } from "@material-tailwind/react";
 import JobCategory from "./jobCategory";
@@ -13,8 +11,8 @@ const Jobs = () => {
 
   const handleOpen = () => setOpen(!open);
 
-  const data = [{}];
-
+  // const data = [{}];
+  // console.log(data);
   return (
     <div>
       <div className="bg-white dark:bg-[#15171E] mt-10 px-4 lg:py-6 rounded-[20px]">
