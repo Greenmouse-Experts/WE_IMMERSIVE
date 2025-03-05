@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { createDigitalAsset, createPhysicalAsset } from "../../../api";
+import { useNavigate } from "react-router-dom";
 
 interface AssetSpecificationProps {
   payload: any;
@@ -19,6 +20,7 @@ const AssetSpecification = ({
   category,
 }: AssetSpecificationProps) => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const {
     control,
@@ -48,6 +50,7 @@ const AssetSpecification = ({
     onSuccess: (data: any) => {
       toast.success(data.message);
       setIsBusy(false); // Hide loader
+      navigate("-1")
     },
     onError: (error: any) => {
       toast.error(error.response.data.message);
@@ -65,7 +68,7 @@ const AssetSpecification = ({
     const newPayload = {
       ...payload,
       ...restFormData,
-      categoryId:"7430cb38-326f-4708-a143-0648d76b53c2",
+      categoryId: "7430cb38-326f-4708-a143-0648d76b53c2",
       amount: parseInt(formData.amount),
       specificationTags:
         specificationTags?.split(",").map((tag: string) => tag.trim()) || [], // Convert to an array

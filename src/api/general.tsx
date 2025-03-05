@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { IJob } from "../types/job.types";
 import { toast } from "react-toastify";
+import { IAsset } from "../types/asset.types";
 
 export function getGeneralCourseDetails(courseId: string | undefined) {
   return useQuery({
@@ -13,6 +14,15 @@ export function getGeneralCourseDetails(courseId: string | undefined) {
   });
 }
 
+export function getGeneralAssetDetails(assetId: string | undefined) {
+  return useQuery({
+    queryKey: ["general-asset-details", assetId],
+    queryFn: async () => {
+      const response = await axios.get(`view/digital/asset?id=${assetId}`);
+      return response.data.data as IAsset;
+    },
+  });
+}
 export function getGeneralCourses() {
   return useQuery({
     queryKey: ["general-courses"],
@@ -45,7 +55,7 @@ export function viewJobDetails(jobId: string | undefined) {
 export function saveJob() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (jobId:string) => {
+    mutationFn: async (jobId: string) => {
       const response = await axios.post(`/general/save/job?jobId=${jobId}`);
       return response.data;
     },
