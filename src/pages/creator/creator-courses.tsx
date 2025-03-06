@@ -3,16 +3,30 @@ import { useGetData } from "../../hooks/useGetData";
 import { useEffect, useState } from "react";
 import Loader from "../../components/reusables/loader";
 import { dateFormat } from "../../helpers/dateHelper";
-import { courseThumbnail, getAllCreatorCourses, publishCourseApi } from "../../api";
+import {
+  courseThumbnail,
+  getAllCreatorCourses,
+  publishCourseApi,
+} from "../../api";
 import Button from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
-import { ButtonGroup, Dialog, DialogBody, DialogFooter, Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
+import {
+  ButtonGroup,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
 import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MoreVertical } from "lucide-react";
 import DropZone from "../../components/DropZone";
-
+import UpdateCourseInfo from "../../modules/creator/courses/updateCourseInfo";
+import { ICourse } from "../../types/course.types";
 
 const CreatorCoursesScreen = () => {
   const queryClient = useQueryClient();
@@ -24,11 +38,12 @@ const CreatorCoursesScreen = () => {
   const [courseId, setCourseId] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [openThumbnail, setOpenThumbnail] = useState(false);
+  const [openCourseInfo, setOpenCourseInfo] = useState(false);
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const [files, setFiles] = useState("");
+  const [selected, setSelected] = useState<ICourse | null>(null);
 
   const navigate = useNavigate();
-
 
   const mutationPublish = useMutation({
     mutationFn: (courseId: string) => publishCourseApi(courseId),
@@ -52,18 +67,25 @@ const CreatorCoursesScreen = () => {
     }
   }, [creatorCoursesQuery.data]); // Dependency array ensures this runs when data updates
 
-
   const handleModulePublish = (moduleId: string) => {
     setCourseId(moduleId);
     setOpen(true);
-  }
+  };
 
   const handleModuleThumbnail = (moduleId: string) => {
     setCourseId(moduleId);
     setOpenThumbnail(true);
-  }
+  };
 
   const handleOpen = () => setOpen(!open);
+  const handleOpenCourseInfo = (course: ICourse) => {
+    setSelected(course);
+    setOpenCourseInfo(!openCourseInfo);
+  };
+  const handleCloseCourseInfo = () => {
+    setSelected(null);
+    setOpenCourseInfo(false)
+  };
 
   const handleOpenThumbnail = () => setOpenThumbnail(!openThumbnail);
 
@@ -78,32 +100,28 @@ const CreatorCoursesScreen = () => {
         },
       });
     }
-  }
-
+  };
 
   const handleDrop = (data: any) => {
     setFiles(data);
   };
 
-
   const createThumbnail = () => {
     if (courseId) {
       const payload = {
         courseId: courseId,
-        thumbnail: files
-      }
+        thumbnail: files,
+      };
       mutation.mutate(payload, {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ["courses"] });
         },
       });
     }
-  }
-
+  };
 
   const mutation = useMutation({
-    mutationFn:
-      courseThumbnail,
+    mutationFn: courseThumbnail,
     onSuccess: (data: any) => {
       toast.success(data.message);
       setIsBusy(false); // Hide loader
@@ -116,8 +134,6 @@ const CreatorCoursesScreen = () => {
       setIsBusy(false); // Hide loader
     },
   });
-
-
 
   return (
     <div>
@@ -141,7 +157,7 @@ const CreatorCoursesScreen = () => {
             <div className="flex items-center gap-x-1 px-2 py-1">
               <Button
                 size={14}
-                onClick={() => navigate('create')}
+                onClick={() => navigate("create")}
                 title="Create Courses"
                 altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
               />
@@ -169,57 +185,83 @@ const CreatorCoursesScreen = () => {
                 <tbody>
                   {data?.length > 0
                     ? data.map((item, i) => (
-                      <tr
-                        className="odd:bg-[#E9EBFB] odd:dark:bg-black"
-                        key={i}
-                      >
-                        <td className={`p-2 py-4 pl-4`}>{`${i + 1}`}</td>
-                        <td className="p-2 py-4">{item.title}</td>
-                        <td className="pl-1 p-2 py-4">
-                          <img
-                            src={item.image}
-                            className="w-[50px]"
-                          />
-                        </td>
-                        <td className="p-2 py-4">
-                          {`${item?.currency ? item.currency : ''} ${item?.price}` || "---"}
-                        </td>
-                        <td className="p-2 py-4 capitalize">
-                          {dateFormat(item?.createdAt, "dd-MM-yyyy")}
-                        </td>
-                        <td className="p-2 py-4 capitalize">
-                          {item?.status}
-                        </td>
-                        <td className="p-2 py-4 pl-4">
-                          <button className="text-gray-500 hover:text-gray-700">
-                            <Menu placement="left">
-                              <MenuHandler>
-                                <MoreVertical />
-                              </MenuHandler>
-                              <MenuList>
-                                {item?.status === 'draft' &&
+                        <tr
+                          className="odd:bg-[#E9EBFB] odd:dark:bg-black"
+                          key={i}
+                        >
+                          <td className={`p-2 py-4 pl-4`}>{`${i + 1}`}</td>
+                          <td className="p-2 py-4">{item.title}</td>
+                          <td className="pl-1 p-2 py-4">
+                            <img src={item.image} className="w-[50px]" />
+                          </td>
+                          <td className="p-2 py-4">
+                            {`${item?.currency ? item.currency : ""} ${
+                              item?.price
+                            }` || "---"}
+                          </td>
+                          <td className="p-2 py-4 capitalize">
+                            {dateFormat(item?.createdAt, "dd-MM-yyyy")}
+                          </td>
+                          <td className="p-2 py-4 capitalize">
+                            {item?.status}
+                          </td>
+                          <td className="p-2 py-4 pl-4">
+                            <button className="text-gray-500 hover:text-gray-700">
+                              <Menu placement="left">
+                                <MenuHandler>
+                                  <MoreVertical />
+                                </MenuHandler>
+                                <MenuList>
+                                  {item?.status === "draft" && (
+                                    <MenuItem className="flex flex-col gap-3">
+                                      <span
+                                        className="cursor-pointer w-full"
+                                        onClick={() =>
+                                          handleModulePublish(item.id)
+                                        }
+                                      >
+                                        Publish
+                                      </span>
+                                    </MenuItem>
+                                  )}
                                   <MenuItem className="flex flex-col gap-3">
-                                    <span className="cursor-pointer w-full" onClick={() => handleModulePublish(item.id)}>
-                                      Publish
+                                    <span
+                                      className="cursor-pointer w-full"
+                                      onClick={() => [
+                                        navigate(`create/modules`),
+                                        localStorage.setItem(
+                                          "courseId",
+                                          JSON.stringify(item.id)
+                                        ),
+                                      ]}
+                                    >
+                                      Add Modules
                                     </span>
                                   </MenuItem>
-                                }
-                                <MenuItem className="flex flex-col gap-3">
-                                  <span className="cursor-pointer w-full" onClick={() => [navigate(`create/modules`), localStorage.setItem('courseId', JSON.stringify(item.id))]}>
-                                    Add Modules
-                                  </span>
-                                </MenuItem>
-                                <MenuItem className="flex flex-col gap-3">
-                                  <span className="cursor-pointer w-full" onClick={() => handleModuleThumbnail(item.id)}>
-                                    Add Thumbnail
-                                  </span>
-                                </MenuItem>
-                              </MenuList>
-                            </Menu>
-                          </button>
-                        </td>
-                      </tr>
-                    ))
+                                  <MenuItem className="flex flex-col gap-3">
+                                    <span
+                                      className="cursor-pointer w-full"
+                                      onClick={() => handleOpenCourseInfo(item)}
+                                    >
+                                      Update Info
+                                    </span>
+                                  </MenuItem>
+                                  <MenuItem className="flex flex-col gap-3">
+                                    <span
+                                      className="cursor-pointer w-full"
+                                      onClick={() =>
+                                        handleModuleThumbnail(item.id)
+                                      }
+                                    >
+                                      Add Thumbnail
+                                    </span>
+                                  </MenuItem>
+                                </MenuList>
+                              </Menu>
+                            </button>
+                          </td>
+                        </tr>
+                      ))
                     : null}
                 </tbody>
               </table>
@@ -228,10 +270,11 @@ const CreatorCoursesScreen = () => {
         </div>
       </div>
 
-
       <Dialog open={open} handler={handleOpen}>
         <DialogBody>
-          <p className="unbound w-full text-center p-2">Are you sure you want to publish this course?</p>
+          <p className="unbound w-full text-center p-2">
+            Are you sure you want to publish this course?
+          </p>
         </DialogBody>
         <DialogFooter>
           <div className="flex gap-4">
@@ -245,7 +288,9 @@ const CreatorCoursesScreen = () => {
             </ButtonGroup>
             <Button
               style={{ width: "fit-content" }}
-              title={isBusy ? <BeatLoader size={12} color="white" /> : "Publish"}
+              title={
+                isBusy ? <BeatLoader size={12} color="white" /> : "Publish"
+              }
               withArrows
               size={14}
               onClick={() => publishCourse()}
@@ -254,8 +299,16 @@ const CreatorCoursesScreen = () => {
           </div>
         </DialogFooter>
       </Dialog>
-
-
+      <Dialog open={openCourseInfo} handler={handleCloseCourseInfo}>
+        <DialogBody>
+          <p className="unbound w-full text-center p-2">
+            Are you sure you want to publish this course?
+          </p>
+        </DialogBody>
+        <div className=" overflow-y-auto h-[90vh]">
+          <UpdateCourseInfo selected={selected} handleCloseCourseInfo={handleCloseCourseInfo} />
+        </div>
+      </Dialog>
 
       <Dialog open={openThumbnail} handler={handleOpenThumbnail}>
         <DialogBody>
@@ -272,7 +325,10 @@ const CreatorCoursesScreen = () => {
                 {files !== "" && (
                   <div className="grid grid-cols-1 place-items-center mt-2">
                     <div className="relative">
-                      <img src={files} className="object-cover w-32 h-32 rounded-lg" />
+                      <img
+                        src={files}
+                        className="object-cover w-32 h-32 rounded-lg"
+                      />
                     </div>
                   </div>
                 )}
@@ -301,7 +357,6 @@ const CreatorCoursesScreen = () => {
           </div>
         </DialogFooter>
       </Dialog>
-
     </div>
   );
 };
