@@ -43,8 +43,8 @@ const DigitalAssets = () => {
     setSelected(asste);
     setShowDialog(true);
   };
-  const openDelete = (asste: any) => {
-    setSelected(asste);
+  const openDelete = (asset: any) => {
+    setSelected(asset);
     setDeleteDialog(true);
   };
   const { mutate: publishAsset, isPending } = publishDigitalAsset();
