@@ -12,6 +12,7 @@ import CreatorOrders from "../pages/creator/orders";
 import CreateJob from "../pages/shared/create";
 import JobsScreen from "../pages/shared/job-screen";
 import SettingsTable from "../pages/creator/settingsTable";
+import EditAsset from "../pages/creator/edit-asset";
 
 export const creatorRoutes = [
   {
@@ -35,23 +36,27 @@ export const creatorRoutes = [
       },
       {
         path: "courses",
-        element: <CreatorCoursesScreen />
+        element: <CreatorCoursesScreen />,
       },
       {
         path: "courses/create/modules",
-        element: <CreateModules />
+        element: <CreateModules />,
       },
       {
         path: "courses/create/modules/lessons/:id",
-        element: <CreateLessons />
+        element: <CreateLessons />,
       },
       {
         path: "courses/create",
-        element: <CreateCourses />
+        element: <CreateCourses />,
       },
       {
         path: "asset/create",
         element: <CreateAsset />, // Add this when profile page is ready
+      },
+      {
+        path: "asset/edit/:assetId",
+        element: <EditAsset />, // Add this when profile page is ready
       },
       {
         path: "jobs",
@@ -59,15 +64,15 @@ export const creatorRoutes = [
       },
       {
         path: "jobs/create",
-        element: <CreateJob />
+        element: <CreateJob />,
       },
       {
         path: "jobs/edit/:id",
-        element: <EditJob />
+        element: <EditJob />,
       },
       {
         path: "settings",
-        element: <SettingsTable />
+        element: <SettingsTable />,
       },
       {
         path: "portfolio",
