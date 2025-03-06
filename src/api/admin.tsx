@@ -131,25 +131,97 @@ export const updatePhysicalRequests = async (payload: any, headers = {}) => {
     .then((response) => response.data);
 };
 
-export function getAllAdminDigitalAssets(){
+export function getAllAdminDigitalAssets() {
   return useQuery({
     queryKey: ["admin-digital-assets"],
     queryFn: async () => {
       const response = await axios.get(`/admin/all/digital/assets`);
       return response.data.data;
     },
-  })
+  });
+}
+
+export function getAdminCourseCategory() {
+  return useQuery({
+    queryKey: ["admin-course-category"],
+    queryFn: async () => {
+      const response = await axios.get(`/admin/course/categories`);
+      return response.data.data;
+    },
+  });
+}
+
+export function addAdminCourseCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/admin/course/category/create`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-course-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function deleteAdminCourseCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (categoryId: string) => {
+      const response = await axios.delete(
+        `admin/course/category/delete?id=${categoryId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-course-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function editAdminCourseCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/admin/course/category/update`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-course-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
 }
 
 export function publishCourse() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (courseId:string) => {
+    mutationFn: async (courseId: string) => {
       const response = await axios.post(`/admin/course/${courseId}/publish`);
       return response.data;
     },
     onSuccess: (res) => {
-      console.log(res)
+      console.log(res);
       toast.success(res.message);
       queryClient.invalidateQueries({
         queryKey: ["general-courses"],
@@ -164,12 +236,15 @@ export function publishCourse() {
 export function publishDigitalAsset() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data:any) => {
-      const response = await axios.patch(`/admin/digital/asset/update/status`, data);
+    mutationFn: async (data: any) => {
+      const response = await axios.patch(
+        `/admin/digital/asset/update/status`,
+        data
+      );
       return response.data;
     },
     onSuccess: (res) => {
-      console.log(res)
+      console.log(res);
       toast.success(res.message);
       queryClient.invalidateQueries({
         queryKey: ["admin-digital-assets"],
@@ -185,11 +260,13 @@ export function deleteDigitalAsset() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (assetId) => {
-      const response = await axios.delete(`/admin/digital/asset/delete?id=${assetId}`);
+      const response = await axios.delete(
+        `/admin/digital/asset/delete?id=${assetId}`
+      );
       return response.data;
     },
     onSuccess: (res) => {
-      console.log(res)
+      console.log(res);
       toast.success(res.message);
       queryClient.invalidateQueries({
         queryKey: ["admin-digital-assets"],

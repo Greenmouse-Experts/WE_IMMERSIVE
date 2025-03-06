@@ -53,8 +53,17 @@ export const Routes = [
   {
     name: "Courses",
     icon: <RiHeart2Line className="text-xl" />,
-    route: "courses",
-    submenu: [],
+    route: "",
+    submenu: [
+      {
+        name: "All Courses",
+        route: "courses",
+      },
+      {
+        name: "Course Category",
+        route: "courses/category",
+      },
+    ],
   },
   {
     name: "Assets",

@@ -15,6 +15,7 @@ import CreateSubscription from "../pages/admin/subscription/createSubscription";
 import UploadRequests from "../pages/admin/uploadRequests";
 import CoursesTable from "../pages/admin/coursesTable";
 import SettingsTable from "../pages/admin/settingsTable";
+import CourseCategory from "../pages/admin/assets/courseCategory";
 
 export const adminRoutes = [
   {
@@ -80,6 +81,10 @@ export const adminRoutes = [
       {
         path: "courses",
         element: <CoursesTable />
+      },
+      {
+        path: "courses/category",
+        element: <CourseCategory />
       },
       {
         path: "settings",

@@ -65,3 +65,10 @@ interface ILesson {
     creator: ICreator;
     modules: IModule[];
   }
+
+  export interface ICourseCategory{
+    id: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+  }

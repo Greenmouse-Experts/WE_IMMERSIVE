@@ -3,6 +3,7 @@ import { IoMdRadioButtonOff, IoMdRadioButtonOn } from "react-icons/io";
 import Button from "../../components/ui/Button";
 import AboutAsset from "../../modules/creator/create/about-asset";
 import AssetSpecification from "../../modules/creator/create/asset-specification";
+import { useNavigate } from "react-router-dom";
 
 interface CreateAssetItemProps {
   item: { title: string; img: string; desc: string; selected: boolean };
@@ -66,7 +67,12 @@ const CreateAsset = () => {
     setSelectedAsset(itemName);
   };
 
+  const navigate = useNavigate();
+
   const handleStepper = (direction: string) => {
+    if (selectedAsset === "Course") {
+      return navigate("/creator/courses/create");
+    }
     setStepper((prev) => prev + (direction === "next" ? 1 : -1));
   };
 
