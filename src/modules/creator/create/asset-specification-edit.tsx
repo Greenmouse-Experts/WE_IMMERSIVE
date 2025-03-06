@@ -10,13 +10,11 @@ import { editDigitalAsset } from "../../../api/creator";
 interface AssetSpecificationEditProps {
   payload: any;
   handleSteeper: any;
-  category: any;
   assetDetails: IAsset | undefined;
 }
 const AssetSpecificationEdit = ({
   handleSteeper,
   payload,
-  category,
   assetDetails,
 }: AssetSpecificationEditProps) => {
   const navigate = useNavigate();
