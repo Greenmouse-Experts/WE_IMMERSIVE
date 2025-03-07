@@ -2,7 +2,10 @@ import AssetList from "./components/asset-list";
 import { getDigitalAssets, getPhysicalAssets } from "../../../../api";
 import { useGetData } from "../../../../hooks/useGetData";
 
-const MarketBody = () => {
+interface MarketBodyProps{
+  activeTab: string;
+}
+const MarketBody = ({activeTab}:MarketBodyProps) => {
   const digitalAssetsQuery = useGetData(["digitalAssets"], getDigitalAssets);
   const physicalAssetsQuery = useGetData(["physicalAssets"], getPhysicalAssets);
 
@@ -14,12 +17,14 @@ const MarketBody = () => {
     return <p>Error occurred while fetching data!</p>;
   }
 
+  console.log("active", activeTab)
+
   return (
     <div>
       <div className="grid gap-4 lg:gap-7 mt-6">
         {/* assets categories */}
         <div>{/* <AssetList name="Hot Trending 🔥" data={hotTrends}/> */}</div>
-        {digitalAssetsQuery?.data?.data?.length > 0 && (
+        {activeTab ==="3D Models" && digitalAssetsQuery?.data?.data?.length > 0 && (
           <div className="md:px-20 px-4">
             <AssetList
               name="Explore Digital Assets 📈"

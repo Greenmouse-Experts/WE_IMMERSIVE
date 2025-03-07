@@ -1,6 +1,10 @@
 import MarketBar from "./components/market-bar";
 
-const MarketHeader = () => {
+interface MarketHeaderProp{
+  activeTab: string;
+  setActiveTab: (tab: string) => void;  
+}
+const MarketHeader = ({activeTab, setActiveTab}:MarketHeaderProp) => {
   return (
     <div className="dark:bg-white bg-[#000000] md:px-20 text-white dark:text-black">
       <div className="md:py-10 md:px-0 px-5 pt-3">
@@ -8,7 +12,7 @@ const MarketHeader = () => {
           Welcome to our XR <br /> Marketplace
         </span>
       </div>
-      <MarketBar />
+      <MarketBar activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };
