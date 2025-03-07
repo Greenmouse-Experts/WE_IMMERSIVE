@@ -1,17 +1,20 @@
+import { useState } from "react";
 import MarketBody from "./market-body";
 import MarketHeader from "./market-header";
 
 const MarketPlace = () => {
+  const [activeTab, setActiveTab] = useState("3D Models");
+  
   return (
     <div className="mt-6 lg:mt-16">
       <div className="relative py-12 pb-20 min-h-[500px]">
         <div className="w-full">
           <div>
-            <MarketHeader />
+            <MarketHeader activeTab={activeTab} setActiveTab={setActiveTab}/>
           </div>
           {/* <div className="mt-6">{/*<MarketSearch/></div>*/}
           <div>
-            <MarketBody />
+            <MarketBody  activeTab={activeTab}/>
           </div>
         </div>
         {/* side design */}

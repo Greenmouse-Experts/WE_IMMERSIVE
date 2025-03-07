@@ -1,10 +1,12 @@
-import { useState } from "react";
 import ArrowsIcon from "../../../../../assets/svg-components/arrows";
 
-const MarketBar = () => {
-  const [activeTab, setActiveTab] = useState("XR Courses");
+interface MarketHeaderProp{
+  activeTab: string;
+  setActiveTab: (tab: string) => void;  
+}
+const MarketBar = ({ activeTab, setActiveTab }:MarketHeaderProp) => {
   const barItems = [
-    "XR Courses",
+    "3D Models",
     "Frine Courses",
     "Deaxe Courses",
     "Waners Courses",
