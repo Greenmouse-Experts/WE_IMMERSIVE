@@ -1,20 +1,12 @@
-import { GiCheckMark } from "react-icons/gi";
 import { IoLocationOutline } from "react-icons/io5";
+import { IJob } from "../../../../types/job.types";
 
-interface JobCardProps {
-    img: string;
-    title: string;
-    company: string;
-    location: string;
-    description: string;
-    tags: string[];
-  }
   
-  const JobCard: React.FC<JobCardProps> = ({img, title, company, location, description, tags }) => {
+  const JobCard: React.FC<IJob> = ({logo, title, company, location, description }) => {
     return (
       <div className="bg-white rounded-xl shadow-md p-2 md:p-3 lg:p-3 xl:p-8 border border-gray-200">
         <div className="flex flex-col md:flex-row lg:flex-row items-center gap-3 mb-3">
-          <img src={img} alt="Company Logo" className="w-[106px] h-[106px] rounded-full" />
+          <img src={logo} alt="Company Logo" className="w-[106px] h-[106px] rounded-full" />
           <div className="text-center md:text-left lg:text-left">
             <p className="text-[13px] font-[500] text-[#696767]">{company}</p>
             <h3 className="unbound font-[400] text-[16px] lg:text-[14px] xl:text-[20px] my-1">{title}</h3>
@@ -23,12 +15,12 @@ interface JobCardProps {
         </div>
         <p className="mulish text-[14px] text-center md:text-left lg:text-left my-4 md:my-6 lg:my-6 md:text-justify">{description}</p>
         <div className="flex flex-wrap gap-0 lg:gap-1 xl:gap-2 mb-4">
-          {tags.map((tag, index) => (
+          {/* {tags?.map((tag, index) => (
             <span key={index} className="flex items-center text-xs px-1 lg:px-3 py-1 rounded-full text-[#1D9CD7]">
               <GiCheckMark className="mr-1"/>
               {tag}
             </span>
-          ))}
+          ))} */}
         </div>
         <hr className="border-t-2 border-gray-400 border-dashed my-5 md:my-3 xl:my-11"></hr>
         <div className="flex justify-between gap-1 md:gap-4 lg:gap-4">
