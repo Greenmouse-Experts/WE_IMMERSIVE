@@ -35,8 +35,13 @@ body {
 }
 
 @keyframes delayed-fade {
-  0%, 99.9% { opacity: 1; }
-  100% { opacity: 0; }
+  0%,
+  99.9% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .animate-delayed-fade {
@@ -502,4 +507,9 @@ input.PhoneInputInput {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* react quill */
+.ql-container {
+  height: 10rem !important;
 }
