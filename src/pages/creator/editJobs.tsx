@@ -112,21 +112,6 @@ const EditJob = () => {
     }
   };
 
-  const mutation = useMutation({
-    // mutationFn:
-    //     createJob,
-    // onSuccess: (data: any) => {
-    //     toast.success(data.message);
-    //     setIsBusy(false); // Hide loader
-    // },
-    // onError: (error: any) => {
-    //     toast.error(error.response.data.message);
-    //     setIsBusy(false); // Hide loader
-    // },
-    // onSettled: () => {
-    //     setIsBusy(false); // Hide loader
-    // },
-  });
 
   const handleThumbnailChange = async (
     event: React.ChangeEvent<HTMLInputElement>

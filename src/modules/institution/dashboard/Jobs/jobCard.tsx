@@ -1,6 +1,5 @@
 import { IoLocationOutline } from "react-icons/io5";
 import { IJob } from "../../../../types/job.types";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 interface JobCardProps extends IJob{
@@ -14,7 +13,7 @@ const JobCard = ({
   location,
   description,
   id,
-  handleDeleteModal,
+  // handleDeleteModal,
 }:JobCardProps) => {
 
   const navigate = useNavigate();

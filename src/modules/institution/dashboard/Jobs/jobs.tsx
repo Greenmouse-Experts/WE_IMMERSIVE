@@ -5,13 +5,14 @@ import { getInstitutionJob } from "../../../../api/institution";
 import Loader from "../../../../components/reusables/loader";
 import { IJob } from "../../../../types/job.types";
 import { Dialog } from "@material-tailwind/react";
-import Publish from "../../../../components/reusables/Publish";
+// import Publish from "../../../../components/reusables/Publish";
 
 const Jobs = () => {
   const [isActive, setIsActive] = useState<boolean>(true);
   const [open, setOpen] = useState(false);
 
   const [deleteDialog, setShowDeleteDialog] = useState<boolean>(false);
+  console.log(setShowDeleteDialog)
 
   const handleOpen = () => setOpen(!open);
   const handleDeleteModal = () => setOpen(!deleteDialog);

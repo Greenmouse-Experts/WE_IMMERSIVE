@@ -41,7 +41,7 @@ const CreateJob = () => {
     const {
         control,
         handleSubmit,
-        formState: { errors, isValid },
+        formState: { errors },
         reset,
         register,
         watch,
