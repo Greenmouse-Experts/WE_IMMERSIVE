@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { IJob } from "../types/job.types";
 
 export function getInstitutionJobCategory(){
   return useQuery({
@@ -42,12 +43,22 @@ export function addInstitutionJob() {
   });
 }
 
+export function viewInstitutionJobDetails(jobId: string | undefined) {
+  return useQuery({
+    queryKey: ["institution-job-details", jobId],
+    queryFn: async () => {
+      const response = await axios.get(`/institution/job/${jobId}/details`);
+      return response.data.data as IJob;
+    },
+  });
+}
+
 export function deleteInstitutionJob() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (categoryId: string) => {
       const response = await axios.delete(
-        `admin/course/category/delete?id=${categoryId}`
+        `/institution/job/delete?jobId=${categoryId}`
       );
       return response.data;
     },

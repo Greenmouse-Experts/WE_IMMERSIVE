@@ -1,15 +1,25 @@
 import { IoLocationOutline } from "react-icons/io5";
 import { IJob } from "../../../../types/job.types";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
-const JobCard: React.FC<IJob> = ({
+interface JobCardProps extends IJob{
+  handleDeleteModal: () => void;
+}
+
+const JobCard = ({
   logo,
   title,
   company,
   location,
   description,
-}) => {
+  id,
+  handleDeleteModal,
+}:JobCardProps) => {
+
+  const navigate = useNavigate();
   return (
-    <div className="bg-white rounded-xl shadow-md p-2 md:p-3 lg:p-3 xl:p-8 border border-gray-200">
+    <div className="bg-white rounded-xl shadow-md p-2 md:p-3 lg:p-3 xl:p-8 border border-gray-200 relative">
       <div className="flex flex-col md:flex-row lg:flex-row items-center gap-3 mb-3">
         <img
           src={logo}
@@ -43,13 +53,16 @@ const JobCard: React.FC<IJob> = ({
       </div>
       <hr className="border-t-2 border-gray-400 border-dashed my-5 md:my-3 xl:my-11"></hr>
       <div className="flex justify-between gap-1 md:gap-4 lg:gap-4">
-        <button className="unbound px-4 py-2 w-[292px] border border-[#BDBDBD] text-[#7B7B7B] rounded-md text-[10px] lg:text-[12px] xl:text-[13px]">
+        <button onClick={() => navigate(`/institution/job/view/${id}`)} className="unbound px-4 py-2 w-[292px] border border-[#BDBDBD] text-[#7B7B7B] rounded-md text-[10px] lg:text-[12px] xl:text-[13px]">
           See Details »
         </button>
         <button className="unbound px-4 py-2 w-[292px] border border-[#BDBDBD] text-[#7B7B7B] rounded-md text-[10px] lg:text-[12px] xl:text-[13px]">
           See Bids (10) »
         </button>
       </div>
+      {/* <div className="absolute right-2 top-2">
+      <RiDeleteBin5Line />
+      </div> */}
     </div>
   );
 };

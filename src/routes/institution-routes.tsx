@@ -11,6 +11,8 @@ import JobsTable from "../pages/institution/jobsTable";
 import CartTable from "../pages/institution/cartTable";
 import MessageTable from "../pages/institution/messageTable";
 import SubscriptionTable from "../pages/institution/subscriptionTable";
+import JobDetails from "../pages/institution/Job-details";
+import EditJob from "../pages/institution/editJobs";
 
 export const institutionRoutes = [
   {
@@ -55,6 +57,14 @@ export const institutionRoutes = [
       {
         path:"jobs",
         element: <JobsTable />,
+      },
+      {
+        path: "job/view/:jobId",
+        element: <JobDetails />, // Add this when profile page is ready
+      },
+      {
+        path: "jobs/edit/:jobId",
+        element: <EditJob />,
       },
       {
         path:"cart",

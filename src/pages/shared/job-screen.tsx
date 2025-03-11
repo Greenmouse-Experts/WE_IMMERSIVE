@@ -6,15 +6,41 @@ import { getCreatorJobs } from "../../api";
 import { useGetData } from "../../hooks/useGetData";
 import { useEffect, useState } from "react";
 import Loader from "../../components/reusables/loader";
+import { Dialog } from "@material-tailwind/react";
+import Publish from "../../components/reusables/Publish";
+import { deleteCreatorJob } from "../../api/creator";
 
 const JobsScreen = () => {
   const navigate = useNavigate();
+
+  const [selected, setSelected] = useState<any>(null);
+  const [open, setOpen] = useState(false);
+
+  const [deleteDialog, setShowDeleteDialog] = useState<boolean>(false);
+
+  const handleOpen = () => setOpen(!open);
+  const handleDeleteModal = () => setShowDeleteDialog(!deleteDialog);
 
   const jobsData = useGetData(["creatorJobs"], getCreatorJobs);
 
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const openDelete = (job: any) => {
+    setSelected(job);
+    setShowDeleteDialog(true);
+  };
+
+  const { mutate: deleteAsset, isPending: isDeleting } =
+  deleteCreatorJob();
+
+const handleDelete = () => {
+  deleteAsset(selected.id, {
+    onSuccess: () => {
+      setShowDeleteDialog(false);
+    },
+  });
+};
   useEffect(() => {
     // Check if all data is available before merging
     if (jobsData.data) {
@@ -31,7 +57,7 @@ const JobsScreen = () => {
           <div className="flex items-center gap-x-1 px-2 py-1">
             <Button
               size={14}
-              onClick={() => navigate('create')}
+              onClick={() => navigate("create")}
               title="Post New Job"
               altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
             />
@@ -70,16 +96,31 @@ const JobsScreen = () => {
         <Loader />
       ) : (
         <div className=" grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-x-6 gap-y-10">
-          {
-            data.length > 0 ?
-              data.map((item: any, i: any) => (
-                <JobItem item={item} key={i} />
-              ))
-              :
-              <></>
-          }
+          {data.length > 0 ? (
+            data.map((item: any, i: any) => <JobItem handleDeleteModal={() => openDelete(item)} item={item} key={i} />)
+          ) : (
+            <></>
+          )}
         </div>
       )}
+      <Dialog
+        className="bg-transparent flex justify-center"
+        open={open}
+        handler={handleOpen}
+        size="md"
+      >
+        <div></div>
+      </Dialog>
+      <Dialog handler={handleDeleteModal} open={deleteDialog} size="md">
+        <div className="p-5">
+          <Publish
+            handleCancel={() => setShowDeleteDialog(false)}
+            title={`Are you sure you want to delete this item`}
+            handleProceed={handleDelete}
+            isLoading={isDeleting}
+          />
+        </div>
+      </Dialog>
     </div>
   );
 };

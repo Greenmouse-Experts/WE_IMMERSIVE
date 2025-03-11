@@ -42,13 +42,6 @@ const JobForm: React.FC<activeProps> = ({ setIsActive }) => {
       toast.error("Please upload a thumbnail and provide a job description.");
       return;
     }
-    // console.log(data);
-    // console.log(jobDescription);
-    // return;
-    // const selectedCategory = jobCategory.find(
-    //   (c: any) => c.name === data.jobCategory
-    // );
-    // console.log(selectedCategory);
     addJob(
       {
         ...data,

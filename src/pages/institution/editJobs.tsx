@@ -11,8 +11,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGetData } from "../../hooks/useGetData";
 import ReactQuill from "react-quill";
 import { uploadImage } from "../../helpers";
-import { editCreatorJob, viewCreatorJobDetails } from "../../api/creator";
+import { editCreatorJob } from "../../api/creator";
 import Loader from "../../components/reusables/loader";
+import { viewInstitutionJobDetails } from "../../api/institution";
 
 const EditJob = () => {
   const jobCategory = useGetData(["jobCategory"], getJobCategory);
@@ -22,7 +23,7 @@ const EditJob = () => {
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const { jobId } = useParams();
-  const { data: jobDetails, isLoading } = viewCreatorJobDetails(jobId);
+  const { data: jobDetails, isLoading } = viewInstitutionJobDetails(jobId);
   const { mutate: updateJob, isPending: isUpdating } = editCreatorJob();
 
   const navigate = useNavigate();

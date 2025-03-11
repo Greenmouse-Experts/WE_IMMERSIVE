@@ -12,10 +12,11 @@ export interface IJob {
     description: string | null;
     skills: string[] | null;
     views: number;
-    applyLink: string | null;
+    applyLink: string;
     applicantCollectionEmailAddress: string | null;
     rejectionEmails: boolean;
     status: "active" | "inactive" | "closed";
     createdAt: string; // ISO date format
     updatedAt: string; // ISO date format
+    applyMethod:string | null;
   }

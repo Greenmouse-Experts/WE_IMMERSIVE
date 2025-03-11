@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { IAsset } from "../types/asset.types";
+import { IJob } from "../types/job.types";
 
 export function publishLesson() {
   const queryClient = useQueryClient();
@@ -71,6 +72,58 @@ export function deleteDigitalAsset() {
     },
     onError: (error) => {
       toast.error(error?.message);
+    },
+  });
+}
+
+export function viewCreatorJobDetails(jobId: string | undefined) {
+  return useQuery({
+    queryKey: ["creator-job-details", jobId],
+    queryFn: async () => {
+      const response = await axios.get(`/creator/job/${jobId}/details`);
+      return response.data.data as IJob;
+    },
+  });
+}
+
+export function deleteCreatorJob() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (categoryId: string) => {
+      const response = await axios.delete(
+        `/creator/job/delete?jobId=${categoryId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["creatorJobs"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function editCreatorJob() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/creator/job/post`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["creatorJobs"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
     },
   });
 }

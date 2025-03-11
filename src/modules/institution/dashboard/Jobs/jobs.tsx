@@ -4,13 +4,20 @@ import JobForm from "./jobForm";
 import { getInstitutionJob } from "../../../../api/institution";
 import Loader from "../../../../components/reusables/loader";
 import { IJob } from "../../../../types/job.types";
+import { Dialog } from "@material-tailwind/react";
+import Publish from "../../../../components/reusables/Publish";
 
 const Jobs = () => {
   const [isActive, setIsActive] = useState<boolean>(true);
+  const [open, setOpen] = useState(false);
+
+  const [deleteDialog, setShowDeleteDialog] = useState<boolean>(false);
+
+  const handleOpen = () => setOpen(!open);
+  const handleDeleteModal = () => setOpen(!deleteDialog);
 
   const { data: jobs, isLoading } = getInstitutionJob();
 
-  console.log(jobs);
 
   if (isLoading) {
     return <Loader />;
@@ -41,9 +48,10 @@ const Jobs = () => {
                 </button>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-[2%] xl:gap-[2%]">
-                {jobs && jobs?.map((job:IJob, index:number) => (
-                  <JobCard key={index} {...job} />
-                ))}
+                {jobs &&
+                  jobs?.map((job: IJob, index: number) => (
+                    <JobCard key={index} {...job}  handleDeleteModal={handleDeleteModal}/>
+                  ))}
               </div>
             </div>
           </div>
@@ -51,6 +59,25 @@ const Jobs = () => {
           <JobForm setIsActive={setIsActive} />
         )}
       </div>
+
+      <Dialog
+        className="bg-transparent flex justify-center"
+        open={open}
+        handler={handleOpen}
+        size="md"
+      >
+        <div></div>
+      </Dialog>
+      <Dialog handler={handleDeleteModal} open={deleteDialog} size="md">
+        <div className="p-5">
+          {/* <Publish
+            handleCancel={() => setShowDeleteDialog(false)}
+            title={`Are you sure you want to delete this item`}
+            handleProceed={handleDelete}
+            isLoading={isDeleting}
+          /> */}
+        </div>
+      </Dialog>
     </div>
   );
 };

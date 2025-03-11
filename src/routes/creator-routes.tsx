@@ -13,6 +13,7 @@ import CreateJob from "../pages/shared/create";
 import JobsScreen from "../pages/shared/job-screen";
 import SettingsTable from "../pages/creator/settingsTable";
 import EditAsset from "../pages/creator/edit-asset";
+import JobDetails from "../pages/creator/Job-details";
 
 export const creatorRoutes = [
   {
@@ -63,11 +64,15 @@ export const creatorRoutes = [
         element: <JobsScreen />, // Add this when profile page is ready
       },
       {
+        path: "job/view/:jobId",
+        element: <JobDetails />, // Add this when profile page is ready
+      },
+      {
         path: "jobs/create",
         element: <CreateJob />,
       },
       {
-        path: "jobs/edit/:id",
+        path: "jobs/edit/:jobId",
         element: <EditJob />,
       },
       {
