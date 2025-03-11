@@ -4,7 +4,6 @@ import TextInput, { InputType } from "../../components/ui/TextInput";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import SelectInput from "../../components/ui/SelectInput";
-import { useMutation } from "@tanstack/react-query";
 import { BeatLoader } from "react-spinners";
 import { getJobCategory } from "../../api";
 import { useNavigate, useParams } from "react-router-dom";
