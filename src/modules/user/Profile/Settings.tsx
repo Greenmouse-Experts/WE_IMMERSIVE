@@ -1,3 +1,5 @@
+import UpdatePassword from "./UpdatePasswordForm";
+
 interface SettingsProps {
   settingsTab: string;
   setSettingsTab: (tab: string) => void;
@@ -33,27 +35,7 @@ const Settings: React.FC<SettingsProps> = ({ settingsTab, setSettingsTab }) => {
     {/* Tab Content */}
     <div className="mt-4">
       {settingsTab === "reset-password" && (
-        <div>
-          <h3 className="text-md font-semibold">Reset Password</h3>
-          <input
-            type="password"
-            placeholder="Enter current password"
-            className="w-full px-4 py-3 rounded-md mt-4 bg-[#E9EBFB] outline-none text-black"
-          />
-          <input
-            type="password"
-            placeholder="Enter new password"
-            className="w-full px-4 py-3 rounded-md mt-4 bg-[#E9EBFB] outline-none text-black"
-          />
-          <input
-            type="password"
-            placeholder="Re-enter new password"
-            className="w-full px-4 py-3 rounded-md mt-4 bg-[#E9EBFB] outline-none text-black"
-          />
-          <button className="mt-4 w-full md:w-auto bg-blue-600 text-white px-6 py-3 rounded-lg">
-            Reset Password
-          </button>
-        </div>
+       <UpdatePassword/>
       )}
   
       {settingsTab === "bank-details" && (

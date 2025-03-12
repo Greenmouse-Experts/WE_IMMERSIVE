@@ -2,14 +2,12 @@ import { CiSearch } from "react-icons/ci";
 import { BsCalendarFill, BsGear } from "react-icons/bs";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
-// import {  useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { todayDate } from "../../../helpers/dateHelper";
+import { getGeneralUserDetails } from "../../../api/general";
 
 const HeaderSection = ({ openBar }: any) => {
-  // const navigate = useNavigate();
-  const user = useSelector((state: any) => state.userData.data);
-  console.log(openBar)
+  const { data: userData, isLoading } = getGeneralUserDetails();
+ 
 
   return (
     <div>
@@ -53,7 +51,7 @@ const HeaderSection = ({ openBar }: any) => {
             </div>
             <div>
               <p className="unbound text-white text-lg">
-                Welcome, {user.name} 👋
+                Welcome, {userData?.name} 👋
               </p>
               <p className="fs-300 text-white">Have a great day!</p>
             </div>
@@ -66,11 +64,10 @@ const HeaderSection = ({ openBar }: any) => {
             </p>
             <img
               src={`${
-                user.photo
-                  ? user.photo
-                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1731789862/Greenchmas-1_s5suif.png"
-              }
-              `}
+                userData?.photo && !isLoading
+                  ? userData?.photo
+                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1730286484/default_user_mws5jk.jpg"
+              }`}
               alt="profile"
               className="w-6"
             />
@@ -78,16 +75,15 @@ const HeaderSection = ({ openBar }: any) => {
           <div className="mt-5 grid text-center">
             <img
               src={`${
-                user.photo
-                  ? user.photo
-                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1731789862/Greenchmas-1_s5suif.png"
-              }
-              `}
+                userData?.photo && !isLoading
+                  ? userData?.photo
+                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1730286484/default_user_mws5jk.jpg"
+              }`}
               alt="profile"
               className="size-[110px] aspect-square mx-auto"
             />
-            <p className="text-[#06052A] unbound pt-2">{user.name}</p>
-            <p className="fs-300 text-[#7F7F7F]">{user.institutionEmail}</p>
+            <p className="text-[#06052A] unbound pt-2">{userData?.name}</p>
+            <p className="fs-300 text-[#7F7F7F]">{userData?.institutionEmail}</p>
           </div>
         </div>
       </div>

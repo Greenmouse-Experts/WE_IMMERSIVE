@@ -1,12 +1,10 @@
 import { BsCalendarFill } from "react-icons/bs";
 import MetricTag from "../../../components/reusables/metric-tag";
-// import {  useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { todayDate } from "../../../helpers/dateHelper";
+import { getGeneralUserDetails } from "../../../api/general";
 
 const HeaderSection = () => {
-  // const navigate = useNavigate();
-  const user = useSelector((state: any) => state.userData.data);
+  const { data: userData, isLoading } = getGeneralUserDetails();
 
   return (
     <div>
@@ -20,7 +18,7 @@ const HeaderSection = () => {
           </div>
           <div>
             <p className="unbound text-white text-lg">
-              Welcome, {user.name} 👋
+              Welcome, {userData?.name} 👋
             </p>
             <p className="fs-300 text-white">Have a great day!</p>
           </div>
@@ -28,17 +26,17 @@ const HeaderSection = () => {
         <div className="md:w-[35%] w-full bg-white dark:bg-[#15171E] rounded-[14px] px-4 py-2">
           <div className=" flex items-center gap-4 ">
             <img
-              src={`${
-                user.photo
-                  ? user.photo
-                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005705_c9ddis.png"
-              }`}
+             src={`${
+              userData?.photo && !isLoading
+                ? userData?.photo
+                : "https://res.cloudinary.com/do2kojulq/image/upload/v1730286484/default_user_mws5jk.jpg"
+            }`}
               alt="profile"
               className="w-[76px] h-[76px] rounded-[20px]"
             />
             <div>
-              <p className="text-[#06052A] unbound ">{user.name}</p>
-              <p className="fs-300 text-[#7F7F7F]">{user.email}</p>
+              <p className="text-[#06052A] unbound ">{userData?.name}</p>
+              <p className="fs-300 text-[#7F7F7F]">{userData?.email}</p>
             </div>
           </div>
           <div className="mt-8 flex items-center justify-between">

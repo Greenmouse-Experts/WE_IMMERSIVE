@@ -1,10 +1,11 @@
 import { BsGear } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { getGeneralUserDetails } from "../../../api/general";
 
 const TopHeader = ({ openBar }: any) => {
-  const user = useSelector((state: any) => state.userData.data);
+
+  const { data: userData, isLoading } = getGeneralUserDetails();
 
   const openSideBar = () => {
     openBar(true);
@@ -60,10 +61,10 @@ const TopHeader = ({ openBar }: any) => {
                 Creators Account
               </p>
               <img
-                src={`${
-                  user.photo
-                    ? user.photo
-                    : "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005705_c9ddis.png"
+                 src={`${
+                  userData?.photo && !isLoading
+                    ? userData?.photo
+                    : "https://res.cloudinary.com/do2kojulq/image/upload/v1730286484/default_user_mws5jk.jpg"
                 }`}
                 alt="profile"
                 className="w-6"
@@ -79,9 +80,9 @@ const TopHeader = ({ openBar }: any) => {
           </p>
           <img
             src={`${
-              user.photo
-                ? user.photo
-                : "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005705_c9ddis.png"
+              userData?.photo && !isLoading
+                ? userData?.photo
+                : "https://res.cloudinary.com/do2kojulq/image/upload/v1730286484/default_user_mws5jk.jpg"
             }`}
             alt="profile"
             className="w-8 h-8 rounded-lg"

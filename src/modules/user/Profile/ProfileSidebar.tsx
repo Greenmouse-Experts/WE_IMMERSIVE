@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import {
   MdSettings,
@@ -6,6 +7,10 @@ import {
   MdChevronRight,
   MdElectricBolt,
 } from "react-icons/md";
+import { uploadImage } from "../../../helpers";
+import { BiSolidEdit } from "react-icons/bi";
+import { BeatLoader } from "react-spinners";
+import { getGeneralUserDetails, updateGeneralUserPhoto } from "../../../api/general";
 
 interface ProfileSidebarProps {
   setActiveSection: (section: string) => void;
@@ -16,17 +21,81 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   setActiveSection,
   activeSection,
 }) => {
+  const { data: userData, isLoading } = getGeneralUserDetails();
+  const [photo, setPhoto] = useState<string | null>(userData?.photo || null);
+  const [error, setError] = useState<string | null>(null);
+  const photoInputRef = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(false);
+  const { mutate: updatePhoto, isPending } = updateGeneralUserPhoto();
+  const handlePhotoChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setLoading(true);
+    setError(null);
+
+    const file = event.target.files?.[0];
+    if (!file) {
+      setLoading(false);
+      return;
+    }
+
+    const result = await uploadImage(file);
+    setLoading(false);
+
+    if (result.isSuccess) {
+      setPhoto(result.fileUrl);
+      updatePhoto({
+        photo: result.fileUrl,
+      });
+    } else {
+      setError("Thumbnail upload failed.");
+    }
+  };
+
+  useEffect(() => {
+    setPhoto(userData?.photo);
+  }, [userData]);
+
+  // const openFilePicker = (inputRef: React.RefObject<HTMLInputElement>) => {
+  //   if (inputRef.current) {
+  //     inputRef.current.click();
+  //   }
+  // };
   return (
     <div className="w-full md:w-1/4 bg-white rounded-lg p-6">
       <p className="unbound text-[#06052A] text-lg text-left">Profile</p>
       <div className="flex flex-col items-center w-full">
-        <img
-          src="https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005834_ohgzc2.png"
-          alt="User Avatar"
-          className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-        />
-        <h3 className="text-xl font-semibold mt-3 leading-loose">Chukka Uzo</h3>
-        <p className="text-gray-600 text-sm">General Account</p>
+        <div className="relative">
+          <BiSolidEdit
+            size={25}
+            className=" absolute top-2 right-2  cursor-pointer"
+            onClick={() => photoInputRef.current?.click()}
+          />
+          {loading ? (
+            <BeatLoader />
+          ) : (
+            <img
+              src={
+                photo
+                  ? photo
+                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1730286484/default_user_mws5jk.jpg"
+              }
+              alt="User Avatar"
+              className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+            />
+          )}
+           <p className="text-xs">{error}</p>
+          <input
+            type="file"
+            ref={photoInputRef}
+            onChange={handlePhotoChange}
+            accept="image/*"
+            className="hidden"
+            disabled={isPending}
+          />
+        </div>
+        <h3 className="text-xl font-semibold mt-3 leading-loose">{userData?.name}</h3>
+        <p className="text-gray-600 text-sm capitalize">{userData?.accountType} Account</p>
 
         <div className="flex justify-center gap-3 mt-4">
           <div className="text-center bg-[#E0C8FF] px-2 py-2 rounded-lg w-20">

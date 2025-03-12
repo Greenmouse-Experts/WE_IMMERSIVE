@@ -1,3 +1,5 @@
+import PersonalInfo from "./PersonalInfo";
+
 interface ProfileFormProps {
   settingsTab?: string;
 }
@@ -62,45 +64,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ settingsTab }) => {
           )}
         </>
       ) : (
-        <>
-          <h2 className="text-lg font-semibold mb-4">Personal Info</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="text-gray-600">Name</label>
-              <input
-                type="text"
-                className="w-full px-4 py-4 rounded-md mt-4 bg-[#E9EBFB] outline-none"
-                defaultValue="Chukka Uzo"
-              />
-            </div>
-            <div>
-              <label className="text-gray-600">Email</label>
-              <input
-                type="email"
-                className="w-full px-4 py-4 rounded-md mt-4 bg-[#E9EBFB] outline-none"
-                defaultValue="testmail@gmail.com"
-              />
-            </div>
-            <div>
-              <label className="text-gray-600">Phone Number</label>
-              <input
-                type="tel"
-                className="w-full px-4 py-4 rounded-md mt-4 bg-[#E9EBFB] outline-none"
-                placeholder="Enter your phone number"
-              />
-            </div>
-            <div>
-              <label className="text-gray-600">Date of Birth</label>
-              <input
-                type="date"
-                className="w-full px-4 py-4 rounded-md mt-4 bg-[#E9EBFB] outline-none"
-              />
-            </div>
-          </div>
-          <button className="mt-5 bg-gradient text-white px-5 py-3 rounded-md">
-            Update Info
-          </button>
-        </>
+        <PersonalInfo/>
       )}
     </div>
   );

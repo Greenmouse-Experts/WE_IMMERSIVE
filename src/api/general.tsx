@@ -4,6 +4,83 @@ import { IJob } from "../types/job.types";
 import { toast } from "react-toastify";
 import { IAsset } from "../types/asset.types";
 
+export function getGeneralUserDetails() {
+  return useQuery({
+    queryKey: ["general-user"],
+    queryFn: async () => {
+      const response = await axios.get(`/general/profile`);
+      return response.data.data;
+    },
+  });
+}
+
+export function updateGeneralUserDetails() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/general/profile/update`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["general-user"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function updateGeneralUserPassword() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(
+        `/general/profile/update/password`,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["general-user"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function updateGeneralUserPhoto() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.patch(
+        `/general/profile/photo/update`,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["general-user"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+
 export function getGeneralCourseDetails(courseId: string | undefined) {
   return useQuery({
     queryKey: ["general-course-details", courseId],

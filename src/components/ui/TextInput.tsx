@@ -13,6 +13,7 @@ export enum InputType {
   number = 'number',
   checkbox = 'checkbox',
   search = 'search',
+  date = 'date',
 }
 
 interface Props {
