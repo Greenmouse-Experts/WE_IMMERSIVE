@@ -21,7 +21,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   setActiveSection,
   activeSection,
 }) => {
-  const { data: userData, isLoading } = getGeneralUserDetails();
+  const { data: userData } = getGeneralUserDetails();
   const [photo, setPhoto] = useState<string | null>(userData?.photo || null);
   const [error, setError] = useState<string | null>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);

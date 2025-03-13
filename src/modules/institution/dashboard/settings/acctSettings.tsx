@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { MdPerson, MdEmail, MdLocationPin } from "react-icons/md";
-import { TbBuildingSkyscraper } from "react-icons/tb";
+import { MdPerson, MdEmail } from "react-icons/md";
 import { GrUserManager } from "react-icons/gr";
 import InstitutionInfoForm from './InstitutionInfoForm';
 

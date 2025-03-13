@@ -29,7 +29,6 @@ interface MyComponentProps {
 }
 
 const SettingsSideBar: React.FC<MyComponentProps> = ({
-  user,
   handleSetForms,
   forms,
 }) => {
