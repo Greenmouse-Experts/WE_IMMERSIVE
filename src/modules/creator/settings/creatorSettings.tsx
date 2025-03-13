@@ -23,7 +23,6 @@ const CreatorSettings = () => {
     formState: { errors },
   } = useForm();
 
-  console.log(userData);
   useEffect(() => {
     if (userData) {
       setValue("name", userData.name);

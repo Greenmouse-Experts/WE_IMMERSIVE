@@ -161,3 +161,19 @@ export function submitApplication() {
     },
   });
 }
+export function submitKyc() {
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/kyc/upload`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      toast.success(res.message);
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+

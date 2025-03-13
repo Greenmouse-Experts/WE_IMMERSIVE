@@ -3,16 +3,23 @@ import Button from "../../../components/ui/Button";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
 import SelectInput from "../../../components/ui/SelectInput";
 import { BeatLoader } from "react-spinners";
-import { addSubscriptionPlan } from "../../../api/admin";
-import { useNavigate } from "react-router-dom";
+import {  getSubscriptionPlans, updateSubscriptionPlan } from "../../../api/admin";
+import { useNavigate, useParams } from "react-router-dom";
+import { IPlan } from "../../../types/plan.types";
+import Loader from "../../../components/reusables/loader";
+import { useEffect } from "react";
 
-const CreateSubscription = () => {
-  const { mutate: addSubscription, isPending } = addSubscriptionPlan();
+const EditSubscription = () => {
+  const { mutate: editSubscription, isPending } = updateSubscriptionPlan();
+  const { data: subscriptionData, isLoading } = getSubscriptionPlans();
   const navigate = useNavigate();
+
+  const { planId } = useParams();
 
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -26,18 +33,32 @@ const CreateSubscription = () => {
 
   const onSubmit = (formData: any) => {
     const payload = {
+      planId,
       name: formData.name,
       duration: Number(formData.duration),
       price: Number(formData.price),
       period: formData.period,
     };
 
-    addSubscription(payload, {
+    editSubscription(payload, {
       onSuccess: () => {
         navigate(-1);
       },
     });
   };
+  const selectedPlan = subscriptionData?.find(
+    (item: IPlan) => item.id === planId
+  );
+  useEffect(() => {
+    if (selectedPlan) {
+      setValue("name", selectedPlan.name);
+      setValue("duration", selectedPlan.duration);
+      setValue("price", selectedPlan.price);
+      setValue("period", selectedPlan.period);
+    }
+  }, [subscriptionData]);
+  console.log(errors)
+  if (isLoading) return <Loader />;
 
   return (
     <div className="rounded-[20px] p-5 mt-10 bg-white dark:bg-black">
@@ -93,7 +114,7 @@ const CreateSubscription = () => {
               rules={{
                 required: {
                   value: true,
-                  message: "Select a duration type",
+                  message: "Please enter auction product limit",
                 },
               }}
               render={({ field }) => (
@@ -146,7 +167,7 @@ const CreateSubscription = () => {
             style={{ width: "fit-content" }}
             withArrows
             title={
-              isPending ? <BeatLoader size={12} color="white" /> : "Create Plan"
+              isPending ? <BeatLoader size={12} color="white" /> : "Update Plan"
             }
             size={14}
             disabled={isPending}
@@ -158,4 +179,4 @@ const CreateSubscription = () => {
   );
 };
 
-export default CreateSubscription;
+export default EditSubscription;

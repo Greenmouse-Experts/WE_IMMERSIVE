@@ -84,17 +84,6 @@ export const createJob = async (payload: any, headers = {}) => {
     .then((response) => response.data);
 };
 
-export const getSubscriptionPlans = async (headers = {}) => {
-  const response = await axios.get(`${baseURL}/admin/subscription/plans`, {
-    headers: {
-      ...headers, // Merge custom headers
-      Authorization: `Bearer ${token}`, // Add Authorization token
-      "Content-Type": "application/json", // Set content type
-    },
-  });
-  return response.data; // Replace with your API endpoint
-};
-
 export const createSubscription = async (payload: any, headers = {}) => {
   return axios
     .post(`${baseURL}/admin/subscription/plan/create`, payload, {
@@ -270,6 +259,81 @@ export function deleteDigitalAsset() {
       toast.success(res.message);
       queryClient.invalidateQueries({
         queryKey: ["admin-digital-assets"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function getSubscriptionPlans() {
+  return useQuery({
+    queryKey: ["subscriptionPlan"],
+    queryFn: async () => {
+      const response = await axios.get(`/admin/subscription/plans`);
+      return response.data.data;
+    },
+  });
+}
+
+export function addSubscriptionPlan() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(
+        `/admin/subscription/plan/create`,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["subscriptionPlan"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function deleteSubscriptionPlan() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (categoryId: string) => {
+      const response = await axios.delete(
+        `/admin/subscription/plan/delete?planId=${categoryId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["subscriptionPlan"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function updateSubscriptionPlan() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/admin/subscription/plan/update`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["subscriptionPlan"],
       });
     },
     onError: (error: any) => {

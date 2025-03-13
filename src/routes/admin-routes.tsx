@@ -16,6 +16,7 @@ import UploadRequests from "../pages/admin/uploadRequests";
 import CoursesTable from "../pages/admin/coursesTable";
 import SettingsTable from "../pages/admin/settingsTable";
 import CourseCategory from "../pages/admin/assets/courseCategory";
+import EditSubscription from "../pages/admin/subscription/editSubscription";
 
 export const adminRoutes = [
   {
@@ -77,6 +78,10 @@ export const adminRoutes = [
       {
         path: "subscription/create",
         element: <CreateSubscription />
+      },
+      {
+        path: "subscription/edit/:planId",
+        element: <EditSubscription />
       },
       {
         path: "courses",
