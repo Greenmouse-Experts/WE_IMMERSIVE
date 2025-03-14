@@ -1,14 +1,13 @@
 import { Controller, useForm } from "react-hook-form";
-import { useEffect, useRef, useState } from "react";
-import Loader from "./reusables/loader";
-import { getGeneralUserDetails, submitKyc } from "../api/general";
+import {  useRef, useState } from "react";
+import {  submitKyc } from "../api/general";
 import { BeatLoader } from "react-spinners";
 import Button from "./ui/Button";
 import SelectInput from "./ui/SelectInput";
 import { uploadImage } from "../helpers";
 
 const KycForm = () => {
-  const { data: userData, isLoading } = getGeneralUserDetails();
+
   const { mutate: submitDocument, isPending: isUpdating } = submitKyc();
   const [documentUrl, setDocumentUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -17,15 +16,8 @@ const KycForm = () => {
   const {
     handleSubmit,
     control,
-    setValue,
     formState: { errors },
   } = useForm();
-
-  useEffect(() => {
-    if (userData) {
-      setValue("documentType", userData.documentType);
-    }
-  }, [userData]);
 
   const onSubmit = (data: any) => {
     submitDocument({
@@ -61,10 +53,6 @@ const KycForm = () => {
       inputRef.current.click();
     }
   };
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <div className="min-h-screen w-[100%]">

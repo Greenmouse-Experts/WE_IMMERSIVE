@@ -7,6 +7,7 @@ import SubSetting from "../../modules/institution/dashboard/settings/subSetting"
 import Support from "../../modules/institution/dashboard/settings/support";
 import { FaAlignLeft } from "react-icons/fa";
 import { MdOutlineCancel } from "react-icons/md";
+import KycForm from "../../components/KycForm";
 
 const SettingsTable = () => {
   const [ forms, setForms ] = useState("account-setting");
@@ -41,6 +42,8 @@ const SettingsTable = () => {
             forms === "account-setting" ? <AcctSettings/> 
             : 
             forms === "ev_token" ? <h1>EV TOKEN</h1> 
+            : 
+            forms === "kyc" ? <KycForm/> 
             : 
             forms === "sub-setting" ? <SubSetting/> 
             : 

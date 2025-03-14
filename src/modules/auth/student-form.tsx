@@ -174,7 +174,7 @@ const StudentForm = () => {
             <TextInput
               label="School ID"
               placeholder="Enter ID provided by your school"
-              type={InputType.tel}
+              type={InputType.text}
               error={errors.schoolId?.message}
               {...field}
               ref={null}

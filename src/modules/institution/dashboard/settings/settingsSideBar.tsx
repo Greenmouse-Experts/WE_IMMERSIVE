@@ -15,6 +15,7 @@ import {
 } from "../../../../api/general";
 import { BeatLoader } from "react-spinners";
 import { BiSolidEdit } from "react-icons/bi";
+import { FaUserLock } from "react-icons/fa6";
 
 interface User {
   name: string;
@@ -148,6 +149,18 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({
             <FaRev className="text-[#710AFC] bg-[#E0C8FF] w-[51px] h-[47px] p-2 rounded-[10px]" />
             <span className="ml-4 flex items-center justify-between w-[70%]">
               <p>EV Token</p>
+              <MdChevronRight />
+            </span>
+          </li>
+          <li
+            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md ${
+              forms === "kyc" && "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"
+            }`}
+            onClick={() => handleSetForms("kyc")}
+          >
+            <FaUserLock  className="text-[#710AFC] bg-[#E0C8FF] w-[51px] h-[47px] p-2 rounded-[10px]" />
+            <span className="ml-4 flex items-center justify-between w-[70%]">
+              <p>KYC</p>
               <MdChevronRight />
             </span>
           </li>

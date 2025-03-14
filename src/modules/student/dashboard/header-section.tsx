@@ -3,11 +3,11 @@ import { BsCalendarFill, BsGear } from "react-icons/bs";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Calendar from "./components/calendar";
 import StatisticList from "./stat-list";
-import { useSelector } from "react-redux";
 import { todayDate } from "../../../helpers/dateHelper";
+import { getGeneralUserDetails } from "../../../api/general";
 
 const HeaderSection = ({ openBar }: any) => {
-  const user = useSelector((state: any) => state.userData.data);
+  const { data: userData, isLoading } = getGeneralUserDetails();
 
   const openSideBar = () => {
     openBar(true);
@@ -65,9 +65,9 @@ const HeaderSection = ({ openBar }: any) => {
                 </p>
                 <img
                   src={`${
-                    user.photo
-                      ? user.photo
-                      : "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005705_c9ddis.png"
+                    userData?.photo && !isLoading
+                      ? userData?.photo
+                      : "https://res.cloudinary.com/do2kojulq/image/upload/v1730286484/default_user_mws5jk.jpg"
                   }`}
                   alt="profile"
                   className="w-6"
@@ -90,7 +90,7 @@ const HeaderSection = ({ openBar }: any) => {
             </div>
             <div>
               <p className="unbound text-white text-lg">
-                Welcome, {user.name} 👋
+                Welcome, {userData?.name} 👋
               </p>
               <p className="fs-300 text-white">Have a great day!</p>
             </div>
@@ -107,9 +107,9 @@ const HeaderSection = ({ openBar }: any) => {
             </p>
             <img
               src={`${
-                user.photo
-                  ? user.photo
-                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/Group_1000005705_c9ddis.png"
+                userData?.photo && !isLoading
+                  ? userData?.photo
+                  : "https://res.cloudinary.com/do2kojulq/image/upload/v1730286484/default_user_mws5jk.jpg"
               }`}
               alt="profile"
               className="w-6"
