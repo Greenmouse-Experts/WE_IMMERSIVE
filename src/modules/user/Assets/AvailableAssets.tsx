@@ -13,7 +13,7 @@ const AllAssets = () => {
   console.log(assets);
 
   const filteredAssets = assets?.filter((asset: IAsset) =>
-    asset.assetName.toLowerCase().includes(search.toLowerCase())
+    asset?.assetName?.toLowerCase()?.includes(search?.toLowerCase())
   );
 
   return (
