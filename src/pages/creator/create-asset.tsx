@@ -1,42 +1,12 @@
 import { useState } from "react";
-import { IoMdRadioButtonOff, IoMdRadioButtonOn } from "react-icons/io";
 import Button from "../../components/ui/Button";
 import AboutAsset from "../../modules/creator/create/about-asset";
 import AssetSpecification from "../../modules/creator/create/asset-specification";
 import { useNavigate } from "react-router-dom";
+import CreateAssetItem from "../../components/CreateAssetItem";
 
-interface CreateAssetItemProps {
-  item: { title: string; img: string; desc: string; selected: boolean };
-  handleSelect: (title: string) => void;
-  isSelected: boolean;
-}
 const CreateAsset = () => {
-  const CreateAssetItem = ({
-    item,
-    handleSelect,
-    isSelected,
-  }: CreateAssetItemProps) => {
-    return (
-      <div
-        onClick={() => handleSelect(item.title)}
-        className={`border ${
-          isSelected ? "border-primary" : "border-[#C4C4C4]"
-        } 
-          rounded-[20px]  p-4 py-12 flex flex-col gap-3 items-center relative cursor-pointer`}
-      >
-        <div className="absolute top-4 right-4">
-          {isSelected ? (
-            <IoMdRadioButtonOn size={25} className="text-primary" />
-          ) : (
-            <IoMdRadioButtonOff size={25} color="#7D7C7C" />
-          )}
-        </div>
-        <img src={item.img} alt="" className="w-[81px] h-[73px]" />
-        <p className="text-lg unbound fw-500">{item.title}</p>
-        <p className="text-center">{item.desc}</p>
-      </div>
-    );
-  };
+ 
 
   const createList = [
     {
@@ -59,10 +29,10 @@ const CreateAsset = () => {
     },
   ];
 
-  const [selectedAsset, setSelectedAsset] = useState("Course");
   const [stepper, setStepper] = useState(1);
   const [assetPayload, setAssetPayload] = useState(null);
-
+  
+  const [selectedAsset, setSelectedAsset] = useState("Course");
   const handleSelect = (itemName: string) => {
     setSelectedAsset(itemName);
   };

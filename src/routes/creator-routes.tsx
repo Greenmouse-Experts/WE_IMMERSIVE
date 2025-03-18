@@ -14,6 +14,7 @@ import JobsScreen from "../pages/shared/job-screen";
 import SettingsTable from "../pages/creator/settingsTable";
 import EditAsset from "../pages/creator/edit-asset";
 import JobDetails from "../pages/creator/Job-details";
+import CreateAssetWithAi from "../pages/creator/create-asset-with-ai";
 
 export const creatorRoutes = [
   {
@@ -54,6 +55,10 @@ export const creatorRoutes = [
       {
         path: "asset/create",
         element: <CreateAsset />, // Add this when profile page is ready
+      },
+      {
+        path: "asset/create/with-ai",
+        element: <CreateAssetWithAi />, // Add this when profile page is ready
       },
       {
         path: "asset/edit/:assetId",

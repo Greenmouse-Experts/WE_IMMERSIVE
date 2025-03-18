@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { upload3DModel, uploadImage } from "../../../helpers";
 import { ThreeDViewer } from "../../landing/assets/asset-details";
+import { Dialog } from "@material-tailwind/react";
+import CreateWithAISelect from "../../../components/utils/CreateWithAISelect";
 
 interface AboutAssetProps {
   handleStepper: (direction: string) => void;
@@ -86,17 +88,34 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
       assetUpload: modelUrl,
       assetThumbnail: thumbnail,
     });
-    if (modelUrl === "" || thumbnail ==="") {
+    if (modelUrl === "" || thumbnail === "") {
       toast.error("Please upload asset file");
     } else {
       handleStepper("next");
     }
   };
 
+  const [deleteDialog, setShowDeleteDialog] = useState<boolean>(false);
+
+  const handleDeleteModal = () => setShowDeleteDialog(!deleteDialog);
   return (
     <div>
-      <p className="fw-600 text-sm text-grey">CREATE</p>
-      <p className="unbound text-[#06052A] fw-600 mt-3">Create </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="fw-600 text-sm text-grey">CREATE</p>
+          <p className="unbound text-[#06052A] fw-600 mt-3 text-xl">
+            About Asset{" "}
+          </p>
+        </div>
+        <button onClick={handleDeleteModal} className="border border-primary py-3 px-6 text-primary unbound fw-500 text-[13px] rounded-lg flex gap-3 items-center">
+          Create with AI
+          <img
+            className="w-5 h-5"
+            src="https://res.cloudinary.com/do2kojulq/image/upload/v1742304663/Vector_7_ux270h.png"
+            alt="star"
+          />
+        </button>
+      </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
         <div className="flex flex-col gap-4 mt-5">
@@ -246,6 +265,11 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
           />
         </div>
       </form>
+      <Dialog handler={handleDeleteModal} open={deleteDialog} size="lg">
+        <div className="">
+         <CreateWithAISelect/>
+        </div>
+      </Dialog>
     </div>
   );
 };

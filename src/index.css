@@ -33,6 +33,11 @@ body {
   margin: 0;
   width: 100%;
 }
+h4{
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-family: "Unbounded", sans-serif;
+}
 
 @keyframes delayed-fade {
   0%,
