@@ -10,18 +10,22 @@ const CreateWithAISelect = () => {
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1742306202/Group_1171275571_epf0oe.png",
       desc: "Create detailed asset from simple text prompts",
       selected: false,
+      id: "text-to-model",
     },
     {
       title: " Image to 3D",
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1742306202/image_5_kanpax.png",
       desc: "CTurn your image, artwork  detailed asset from simple text prompts",
       selected: false,
+      id: "image-to-model",
     },
   ];
-  const [selectedAsset, setSelectedAsset] = useState("Text to Image");
+  const [selectedType, setSelectedType] = useState("text-to-model");
   const handleSelect = (itemName: string) => {
-    setSelectedAsset(itemName);
+    setSelectedType(itemName);
   };
+  const queryParams =
+    selectedType === "Text to Image" ? "text-to-model" : "image-to-model";
   const navigate = useNavigate();
   return (
     <div className="p-14">
@@ -37,23 +41,25 @@ const CreateWithAISelect = () => {
             handleSelect={handleSelect}
             key={index}
             item={item}
-            isSelected={selectedAsset === item.title}
+            isSelected={selectedType === item.title}
             altImgStyle="w-[133px] h-[50px]"
           />
         ))}
       </div>
-     <div className="flex justify-center mt-10">
-     <Button
-        style={{ width: "243px" }}
-        title="Proceed"
-        withArrows
-        size={14}
-        onClick={() => navigate(`/creator/asset/create/with-ai`)}
-        // width={243}
-        // disabled={!isValid}
-        // altClassName="btn-primary px-10 py-2 whitespace-nowrap"
-      />
-     </div>
+      <div className="flex justify-center mt-10">
+        <Button
+          style={{ width: "243px" }}
+          title="Proceed"
+          withArrows
+          size={14}
+          onClick={() =>
+            navigate(`/creator/asset/create/with-ai?type=${queryParams}`)
+          }
+          // width={243}
+          // disabled={!isValid}
+          // altClassName="btn-primary px-10 py-2 whitespace-nowrap"
+        />
+      </div>
     </div>
   );
 };
