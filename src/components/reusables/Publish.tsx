@@ -3,7 +3,7 @@ import Button from "../ui/Button";
 interface IPublishProps {
   title: string;
   text?: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   handleProceed: () => void;
   handleCancel: () => void;
 }

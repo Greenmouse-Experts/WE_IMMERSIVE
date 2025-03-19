@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CreateAssetItem from "../CreateAssetItem";
-import Button from "../ui/Button";
+import CreateAssetItem from "./CreateAssetItem";
+import Button from "./ui/Button";
 import { useNavigate } from "react-router-dom";
 
 const CreateWithAISelect = () => {
@@ -53,7 +53,7 @@ const CreateWithAISelect = () => {
           withArrows
           size={14}
           onClick={() =>
-            navigate(`/creator/asset/create/with-ai?type=${queryParams}`)
+            navigate(`with-ai?type=${queryParams}`)
           }
           // width={243}
           // disabled={!isValid}

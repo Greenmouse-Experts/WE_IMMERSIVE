@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { upload3DModel, uploadImage } from "../../../helpers";
 import { ThreeDViewer } from "../../landing/assets/asset-details";
 import { Dialog } from "@material-tailwind/react";
-import CreateWithAISelect from "../../../components/utils/CreateWithAISelect";
+import CreateWithAISelect from "../../../components/CreateWithAISelect";
 
 interface AboutAssetProps {
   handleStepper: (direction: string) => void;

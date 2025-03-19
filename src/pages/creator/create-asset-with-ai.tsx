@@ -7,7 +7,7 @@ const CreateAssetWithAi = () => {
 
   const type = searchParams.get("type");
   return (
-    <div className="rounded-[20px] p-5 bg-white dark:bg-black pb-20">
+    <div className="rounded-[20px] p-5 bg-white dark:bg-black pb-20 mt-10">
       <p className="text-[#6C6969] fw-600">CREATE </p>
 
       {type === "text-to-model" ? (

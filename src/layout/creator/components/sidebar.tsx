@@ -2,12 +2,14 @@ import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import { Link, useLocation } from "react-router-dom";
 import logo from "/logo.svg";
 import logo2 from "/logo-white.svg";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Routes, RouteType } from "./routes";
 import { PiGear } from "react-icons/pi";
 import { LuArrowRightCircle } from "react-icons/lu";
 import ThemeSwitch from "../../../components/ui/theme-switch";
 import { useLogOut } from "../../../hooks/useLogOut";
+import { Dialog } from "@material-tailwind/react";
+import Publish from "../../../components/reusables/Publish";
 interface Props {
   toggled: boolean;
   collapsed: boolean;
@@ -24,6 +26,8 @@ const useHandleLogOut = () => {
 const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
   const path = useLocation();
   const handleLogOut = useHandleLogOut();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(!open);
 
   return (
     <div className="left-3 top-3 z-[9999] fixed overflow-y-hidden">
@@ -112,7 +116,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
             </li>
             <li
               className="flex items-center p-2 gap-x-3 text-red-500 cursor-pointer"
-              onClick={handleLogOut}
+              onClick={handleOpen}
             >
               <LuArrowRightCircle />
               <span>Log out</span>
@@ -124,6 +128,16 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
           <ThemeSwitch sidebar />
         </div>
       </Sidebar>
+      <Dialog className="" open={open} handler={handleOpen} size="md">
+        <div className="p-6 bg-white rounded-xl overflow-hidden">
+          <Publish
+            handleCancel={handleOpen}
+            title={`Are you sure you want to logout?`}
+            handleProceed={handleLogOut}
+            // isLoading={isDeleting}
+          />
+        </div>
+      </Dialog>
     </div>
   );
 };

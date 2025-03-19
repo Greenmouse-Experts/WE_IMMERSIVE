@@ -17,6 +17,7 @@ import CoursesTable from "../pages/admin/coursesTable";
 import SettingsTable from "../pages/admin/settingsTable";
 import CourseCategory from "../pages/admin/assets/courseCategory";
 import EditSubscription from "../pages/admin/subscription/editSubscription";
+import CreateAssetWithAi from "../pages/creator/create-asset-with-ai";
 
 export const adminRoutes = [
   {
@@ -54,6 +55,10 @@ export const adminRoutes = [
       {
         path: "assets/create",
         element: <CreateAsset />,
+      },
+      {
+        path: "assets/create/with-ai",
+        element: <CreateAssetWithAi />, // Add this when profile page is ready
       },
       {
         path: "physicalAssets",
