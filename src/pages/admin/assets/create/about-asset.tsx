@@ -1,10 +1,8 @@
 import { Controller, useForm } from "react-hook-form";
 import Button from "../../../../components/ui/Button";
 import TextInput, { InputType } from "../../../../components/ui/TextInput";
-import DropZone from "../../../../components/DropZone";
 import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
-import SelectInput from "../../../../components/ui/SelectInput";
 import { useGetData } from "../../../../hooks/useGetData";
 import { getAssetCategory } from "../../../../api";
 import { Dialog } from "@material-tailwind/react";
@@ -27,7 +25,7 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
   const [error, setError] = useState<string | null>(null);
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
   const modelInputRef = useRef<HTMLInputElement>(null);
-
+  console.log(setFiles);
   useEffect(() => {
     if (assetCategory.data) {
       const options = assetCategory.data.data.map((category: any) => ({
@@ -123,7 +121,10 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
             About Asset{" "}
           </p>
         </div>
-        <button onClick={handleDeleteModal} className="border border-primary py-3 px-6 text-primary unbound fw-500 text-[13px] rounded-lg flex gap-3 items-center">
+        <button
+          onClick={handleDeleteModal}
+          className="border border-primary py-3 px-6 text-primary unbound fw-500 text-[13px] rounded-lg flex gap-3 items-center"
+        >
           Create with AI
           <img
             className="w-5 h-5"
@@ -283,7 +284,7 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
       </form>
       <Dialog handler={handleDeleteModal} open={deleteDialog} size="lg">
         <div className="">
-         <CreateWithAISelect/>
+          <CreateWithAISelect />
         </div>
       </Dialog>
     </div>
