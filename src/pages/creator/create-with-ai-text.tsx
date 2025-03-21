@@ -374,7 +374,7 @@ const CreateAssetWithAiText = () => {
               type="submit"
               className="btn-primary text-xs unbound fw-500 w-full h-10 mb-5 disabled:cursor-not-allowed"
             >
-              {isGettingRefined ? <BeatLoader /> : "Refine"}
+              {isGettingRefined || isInitializing ? <BeatLoader /> : "Refine"}
             </button>
           )}
           <p></p>
