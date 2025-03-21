@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const CreateWithAISelect = () => {
   const createList = [
     {
-      title: "Text to Image",
+      title: "Text to 3D",
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1742306202/Group_1171275571_epf0oe.png",
       desc: "Create detailed asset from simple text prompts",
       selected: false,
@@ -25,7 +25,7 @@ const CreateWithAISelect = () => {
     setSelectedType(itemName);
   };
   const queryParams =
-    selectedType === "Text to Image" ? "text-to-3d" : "image-to-3d";
+    selectedType === "Text to 3D" ? "text-to-3d" : "image-to-3d";
   const navigate = useNavigate();
   return (
     <div className="p-14">
