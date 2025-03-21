@@ -61,8 +61,8 @@ const CreateAssetWithAiImage = () => {
     setIsInitializing(true);
   };
   const [previewProgress, setPreviewProgress] = useState(0);
-  const [previewModal, setShowDeleteDialog] = useState<boolean>(false);
-  const handleOpenModal = () => setShowDeleteDialog(!previewModal);
+  const [previewModal, setShowPreviewModal] = useState<boolean>(false);
+  const handleOpenModal = () => setShowPreviewModal(!previewModal);
 
   const { mutate: generateModel, isPending } = generateImageTo3d();
   const { mutate: fetch3DTask } =
@@ -338,7 +338,7 @@ const CreateAssetWithAiImage = () => {
       </div>
       <Dialog handler={handleOpenModal} open={previewModal} size="md">
         <div className="">
-          <AiModelPreview model={generatedModel} handleOpenModal={handleOpenModal} />
+          <AiModelPreview model={generatedModel} handleOpenModal={() => setShowPreviewModal(false)} />
         </div>
       </Dialog>
     </div>

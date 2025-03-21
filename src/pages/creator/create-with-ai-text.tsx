@@ -78,8 +78,8 @@ const CreateAssetWithAiText = () => {
   // const meshAIURL =
   //   "https://assets.meshy.ai/bfabf1ea-5caf-409e-88b6-960f32c53357/tasks/0195b334-19ff-7d23-9475-9892f25af99e/output/model.glb?Expires=4896028800&Signature=Ozzg-JNTGH6uOiDh9MPh6wlqAUeqLEvO9vgPV6Hfp~r5sXYRsb-JeMvtRXUIQnZ5opIxECtXOZ4h0UeMOWrT-RHzc133H0rWARyXM1YIyHp9nEHI121nhAUvLmFZkAsUnXNeoKmDkuLI7HSoHR6UVtrTuIT6M0pcePXsbu0aDObkvjaEVdGq8dCwMmUU6Ia98ir50H4y0H8-1FRPn7AFZ6M-4dwM9xg216o5SqNn3QxFPNp6uwYoG3N0E9QrOcr~foURqBcWKajFcwLLTqRou60eLq6YyMBJAfOIMV79RRqtU4z7MuwaSb6gcOI-o~x0Z2QOUQtmJPRxERHSOvYVjg__&Key-Pair-Id=KL5I0C8H7HX83";
   // downloadAndUpload(meshAIURL);
-  const [previewModal, setShowDeleteDialog] = useState<boolean>(false);
-  const handleOpenModal = () => setShowDeleteDialog(!previewModal);
+  const [previewModal, setShowPreviewModal] = useState<boolean>(false);
+  const handleOpenModal = () => setShowPreviewModal(!previewModal);
   const [refinedDialog, setRefinedDialog] = useState(false);
   const handleRefinedOpenModal = () => setRefinedDialog(!refinedDialog);
 
@@ -462,12 +462,12 @@ const CreateAssetWithAiText = () => {
 
       <Dialog handler={handleOpenModal} open={previewModal} size="md">
         <div className="">
-          <AiModelPreview model={generatedModel} handleOpenModal={handleOpenModal} />
+          <AiModelPreview model={generatedModel} handleOpenModal={() => setShowPreviewModal(false)} />
         </div>
       </Dialog>
       <Dialog handler={handleRefinedOpenModal} open={refinedDialog} size="md">
         <div className="">
-          <AiModelPreview model={refinedModel} handleOpenModal={handleOpenModal} />
+          <AiModelPreview model={refinedModel} handleOpenModal={() => setRefinedDialog(false)} />
         </div>
       </Dialog>
       {/* <Dialog
