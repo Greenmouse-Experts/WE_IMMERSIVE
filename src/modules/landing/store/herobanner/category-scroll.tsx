@@ -8,13 +8,13 @@ const CategoryScroll = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [activeTab, setActiveTab] = useState("XR Courses");
   const barItems = [
-    "XR Courses",
-    "Frine Courses",
-    "Deaxe Courses",
-    "Waners Courses",
-    "Roules Courses",
-    "Cises Courses",
-    "Visual ER Courses",
+    "XR Learning and Experiences",
+    "Digital Assets",
+    "Immersive Experiences",
+    "Game Assets",
+    "Animation Packs",
+    "Hardware & Tools",
+    "Creator Services",
     "Animated Courses",
   ];
 
