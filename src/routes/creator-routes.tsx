@@ -14,7 +14,6 @@ import JobsScreen from "../pages/shared/job-screen";
 import SettingsTable from "../pages/creator/settingsTable";
 import EditAsset from "../pages/creator/edit-asset";
 import JobDetails from "../pages/creator/Job-details";
-import CreateAssetWithAi from "../pages/creator/create-asset-with-ai";
 import CreateAssetImageTo3d from "../pages/creator/create-asset-image-to-3d";
 import CreateAssetTextTo3d from "../pages/creator/create-asset-text-to-3d";
 

@@ -17,7 +17,8 @@ import CoursesTable from "../pages/admin/coursesTable";
 import SettingsTable from "../pages/admin/settingsTable";
 import CourseCategory from "../pages/admin/assets/courseCategory";
 import EditSubscription from "../pages/admin/subscription/editSubscription";
-import CreateAssetWithAi from "../pages/creator/create-asset-with-ai";
+import CreateAssetTextTo3d from "../pages/creator/create-asset-text-to-3d";
+import CreateAssetImageTo3d from "../pages/creator/create-asset-image-to-3d";
 
 export const adminRoutes = [
   {
@@ -57,8 +58,12 @@ export const adminRoutes = [
         element: <CreateAsset />,
       },
       {
-        path: "assets/create/with-ai",
-        element: <CreateAssetWithAi />, // Add this when profile page is ready
+        path: "asset/create/text-to-3d",
+        element: <CreateAssetTextTo3d />, // Add this when profile page is ready
+      },
+      {
+        path: "asset/create/image-to-3d",
+        element: <CreateAssetImageTo3d />, // Add this when profile page is ready
       },
       {
         path: "physicalAssets",

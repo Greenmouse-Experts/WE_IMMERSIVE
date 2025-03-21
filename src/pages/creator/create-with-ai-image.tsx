@@ -65,7 +65,7 @@ const CreateAssetWithAiImage = () => {
   const handleOpenModal = () => setShowDeleteDialog(!previewModal);
 
   const { mutate: generateModel, isPending } = generateImageTo3d();
-  const { mutate: fetch3DTask, isPending: isFetching } =
+  const { mutate: fetch3DTask } =
     useGetImageTo3dByTaskId();
 
   const onSubmit = (data: any) => {
