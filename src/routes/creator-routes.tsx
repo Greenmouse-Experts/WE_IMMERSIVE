@@ -15,6 +15,8 @@ import SettingsTable from "../pages/creator/settingsTable";
 import EditAsset from "../pages/creator/edit-asset";
 import JobDetails from "../pages/creator/Job-details";
 import CreateAssetWithAi from "../pages/creator/create-asset-with-ai";
+import CreateAssetImageTo3d from "../pages/creator/create-asset-image-to-3d";
+import CreateAssetTextTo3d from "../pages/creator/create-asset-text-to-3d";
 
 export const creatorRoutes = [
   {
@@ -57,8 +59,12 @@ export const creatorRoutes = [
         element: <CreateAsset />, // Add this when profile page is ready
       },
       {
-        path: "asset/create/with-ai",
-        element: <CreateAssetWithAi />, // Add this when profile page is ready
+        path: "asset/create/text-to-3d",
+        element: <CreateAssetTextTo3d />, // Add this when profile page is ready
+      },
+      {
+        path: "asset/create/image-to-3d",
+        element: <CreateAssetImageTo3d />, // Add this when profile page is ready
       },
       {
         path: "asset/edit/:assetId",

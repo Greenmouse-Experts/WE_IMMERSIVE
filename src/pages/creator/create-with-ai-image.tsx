@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import Button from "../../components/ui/Button";
 // import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
@@ -6,14 +6,19 @@ import TextInput, { InputType } from "../../components/ui/TextInput";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { IoCopyOutline } from "react-icons/io5";
 import { TbReload } from "react-icons/tb";
-import ArrowsIcon from "../../assets/svg-components/arrows";
+// import ArrowsIcon from "../../assets/svg-components/arrows";
 import { uploadImage } from "../../helpers";
 import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import { generateImageTo3d, useGetImageTo3dByTaskId } from "../../api/meshy-ai";
+import { IMeshiResponse } from "../../types/meshy.types";
+import { Dialog, Progress } from "@material-tailwind/react";
+import AiModelPreview from "../../components/AiModelPreview";
+
 
 const CreateAssetWithAiImage = () => {
   // const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("Minimal");
+  // const [activeTab, setActiveTab] = useState("Minimal");
   const {
     control,
     handleSubmit,
@@ -25,15 +30,86 @@ const CreateAssetWithAiImage = () => {
       prompt: "",
     },
   });
-  const barItems = ["Minimal", "Sketchy", "Cartoon"];
+  // const barItems = ["Minimal", "Sketchy", "Cartoon"];
 
   const [documentUrl, setDocumentUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const documentUrlInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
+  const [generatedModel, setGeneratedModel] = useState<IMeshiResponse | any>(
+    null
+  );
 
-  const onSubmit = () => {
-    if(!documentUrl) return toast.error('upload an image')
+  const [isInitializing, setIsInitializing] = useState(false);
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (isInitializing) {
+        event.preventDefault();
+        event.returnValue =
+          "Are you sure you want to leave? Your initialization is still in progress.";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isInitializing]);
+
+  const startInitialization = () => {
+    setIsInitializing(true);
+  };
+  const [previewProgress, setPreviewProgress] = useState(0);
+  const [previewModal, setShowDeleteDialog] = useState<boolean>(false);
+  const handleOpenModal = () => setShowDeleteDialog(!previewModal);
+
+  const { mutate: generateModel, isPending } = generateImageTo3d();
+  const { mutate: fetch3DTask, isPending: isFetching } =
+    useGetImageTo3dByTaskId();
+
+  const onSubmit = (data: any) => {
+    if (!documentUrl) return toast.error("upload an image");
+    startInitialization();
+    generateModel(
+      {
+        ...data,
+        image_url: documentUrl,
+        enable_pbr: true,
+        should_remesh: true,
+        should_texture: true,
+      },
+      {
+        onSuccess: (res) => {
+          // console.log("preview response", res);
+          if (res.result) {
+            checkProgress(res.result);
+          }
+        },
+        onError: () => setIsInitializing(false),
+      }
+    );
+  };
+
+  const checkProgress = (taskId: string) => {
+    const interval = setInterval(() => {
+      fetch3DTask(taskId, {
+        onSuccess: (res) => {
+          console.log(`Progress: ${res.progress}%`);
+          setPreviewProgress(res.progress);
+          if (res.progress === 100) {
+            setGeneratedModel(res);
+            clearInterval(interval);
+            setIsInitializing(false);
+            // generateRefinedModel(taskId);
+          }
+        },
+        onError: () => {
+          clearInterval(interval);
+          setIsInitializing(false);
+        },
+      });
+    }, 10000);
   };
 
   const handleThumbnailChange = async (
@@ -63,6 +139,24 @@ const CreateAssetWithAiImage = () => {
       inputRef.current.click();
     }
   };
+
+  // const downloadImage = (url: string, filename = "image.png") => {
+  //   fetch(url)
+  //     .then((response) => response.blob())
+  //     .then((blob) => {
+  //       const link = document.createElement("a");
+  //       link.href = URL.createObjectURL(blob);
+  //       link.download = filename;
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       document.body.removeChild(link);
+  //     })
+  //     .catch((error) => console.error("Error downloading image:", error));
+  // };
+
+  // downloadImage(
+  //   "https://assets.meshy.ai/bfabf1ea-5caf-409e-88b6-960f32c53357/tasks/0195b449-92d2-7840-b7fa-c2777d4ed7e6/output/preview.png?Expires=4896115200&Signature=qH0Ivqw8TQj3vSXfZuygfFwfHfm4q5E3zGryzoAV5fh-1TKvKJiUUT8mlpHT-USNnTuSM361g3-sZ3rokQdNNNaYF-2~By-0wVHeFsNspXFIPP7r1P4DfDl0WxPFxSEHStTaoAFV3Wwj3rvHjOXN2o14ifHUAZz5vXc2QwvvakkcwTB4pTHHAzthR~tD8ZlDgWiezBOXKYgI76EvmhSwYjWqimz6ooOjbj66YQJNApbhOaN2Po-9PYR2TEuvFEv-Gk~qMJgRqKFairLJloPWAesSYTtOV7OAF-3thV2jvGcwjZRVZOZyAE4PRoA-AuKGACr056m9aRNno4v4rW9HUA__&Key-Pair-Id=KL5I0C8H7HX83"
+  // );
 
   return (
     <div>
@@ -163,7 +257,7 @@ const CreateAssetWithAiImage = () => {
               </div>
             </div>
           </div>
-          <div className="mt-6 ">
+          {/* <div className="mt-6 ">
             <p className=" text-greyLight">Art Style</p>
             <div className="flex overflow-auto md:px-0 px-3 scroll-pro gap-x-5 mt-2">
               {barItems.map((item, key) => (
@@ -179,45 +273,74 @@ const CreateAssetWithAiImage = () => {
                 </div>
               ))}
             </div>
+          </div> */}
+          <div className="mt-5">
+            {isInitializing && !generatedModel && (
+              <Progress
+                value={previewProgress}
+                color="blue"
+                label="Completed"
+              />
+            )}
           </div>
+
           <button
+            disabled={isPending || isInitializing}
             type="submit"
-            className="btn-primary text-xs unbound fw-500 w-full h-10 mt-10"
+            className="btn-primary text-xs unbound fw-500 w-full h-10 mt-10 disabled:cursor-not-allowed"
           >
-            Generate
+            {isPending || isInitializing ? <BeatLoader /> : "Generate"}
           </button>
         </form>
-        <div className="flex-1 grid grid-cols-2 gap-6 h-full">
-          <div className="bg-[#D9D9D9] rounded-[20px] flex justify-center items-center h-[300px]">
-            <img
-              src="https://res.cloudinary.com/do2kojulq/image/upload/v1742310182/Vector_8_abep5r.png"
-              alt=""
-              className="w-16"
-            />
-          </div>
-          <div className="bg-[#D9D9D9] rounded-[20px] flex justify-center items-center h-[300px]">
-            <img
-              src="https://res.cloudinary.com/do2kojulq/image/upload/v1742310182/Vector_8_abep5r.png"
-              alt=""
-              className="w-16"
-            />
-          </div>
-          <div className="bg-[#D9D9D9] rounded-[20px] flex justify-center items-center h-[300px]">
-            <img
-              src="https://res.cloudinary.com/do2kojulq/image/upload/v1742310182/Vector_8_abep5r.png"
-              alt=""
-              className="w-16"
-            />
-          </div>
-          <div className="bg-[#D9D9D9] rounded-[20px] flex justify-center items-center h-[300px]">
-            <img
-              src="https://res.cloudinary.com/do2kojulq/image/upload/v1742310182/Vector_8_abep5r.png"
-              alt=""
-              className="w-16"
-            />
-          </div>
+        <div className="flex-1 h-full">
+          {generatedModel?.thumbnail_url ? (
+            <div className="grid grid-cols-2 gap-6">
+              <div
+                className="bg-[#D9D9D9] rounded-[20px] flex justify-center items-center h-[300px] overflow-hidden cursor-pointer"
+                onClick={handleOpenModal}
+              >
+                <img
+                  src={generatedModel?.thumbnail_url}
+                  alt=""
+                  className="object-contain h-[200px] w-full"
+                />
+              
+              </div>
+              <div className="bg-[#D9D9D9] rounded-[20px] flex justify-center items-center h-[300px] overflow-hidden">
+                <video
+                  src={generatedModel?.video_url}
+                  controls
+                  autoPlay
+                  loop
+                  className="h-[200px] w-full"
+                ></video>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-6">
+              <div className="bg-[#D9D9D9] rounded-[20px] flex justify-center items-center h-[300px] overflow-hidden">
+                <img
+                  src="https://res.cloudinary.com/do2kojulq/image/upload/v1742310182/Vector_8_abep5r.png"
+                  alt=""
+                  className="w-16"
+                />
+              </div>
+              <div className="bg-[#D9D9D9] rounded-[20px] flex justify-center items-center h-[300px] overflow-hidden">
+                <img
+                  src="https://res.cloudinary.com/do2kojulq/image/upload/v1742310182/Vector_8_abep5r.png"
+                  alt=""
+                  className="w-16"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
+      <Dialog handler={handleOpenModal} open={previewModal} size="md">
+        <div className="">
+          <AiModelPreview model={generatedModel} handleOpenModal={handleOpenModal} />
+        </div>
+      </Dialog>
     </div>
   );
 };

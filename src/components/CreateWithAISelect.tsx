@@ -25,7 +25,7 @@ const CreateWithAISelect = () => {
     setSelectedType(itemName);
   };
   const queryParams =
-    selectedType === "Text to Image" ? "text-to-model" : "image-to-model";
+    selectedType === "Text to Image" ? "text-to-3d" : "image-to-3d";
   const navigate = useNavigate();
   return (
     <div className="p-14">
@@ -52,9 +52,7 @@ const CreateWithAISelect = () => {
           title="Proceed"
           withArrows
           size={14}
-          onClick={() =>
-            navigate(`with-ai?type=${queryParams}`)
-          }
+          onClick={() => navigate(`${queryParams}`)}
           // width={243}
           // disabled={!isValid}
           // altClassName="btn-primary px-10 py-2 whitespace-nowrap"

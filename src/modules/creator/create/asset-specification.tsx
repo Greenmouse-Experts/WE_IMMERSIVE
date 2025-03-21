@@ -50,7 +50,7 @@ const AssetSpecification = ({
     onSuccess: (data: any) => {
       toast.success(data.message);
       setIsBusy(false); // Hide loader
-      navigate("-1")
+      navigate(-1)
     },
     onError: (error: any) => {
       toast.error(error.response.data.message);
