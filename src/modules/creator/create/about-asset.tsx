@@ -7,6 +7,9 @@ import { upload3DModel, uploadImage } from "../../../helpers";
 import { ThreeDViewer } from "../../landing/assets/asset-details";
 import { Dialog } from "@material-tailwind/react";
 import CreateWithAISelect from "../../../components/CreateWithAISelect";
+import { getCreatorAssetCategory } from "../../../api/creator";
+import SelectInput from "../../../components/ui/SelectInput";
+import { BeatLoader } from "react-spinners";
 
 interface AboutAssetProps {
   handleStepper: (direction: string) => void;
@@ -19,6 +22,8 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
   const [error, setError] = useState<string | null>(null);
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
   const modelInputRef = useRef<HTMLInputElement>(null);
+  const { data: assetCategory, isLoading: isGettingCategory } =
+    getCreatorAssetCategory();
 
   const handleThumbnailChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -73,21 +78,19 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
     defaultValues: {
       assetName: "",
       assetDetails: "",
+      categoryId: "",
     },
   });
 
-  // const handleDrop = (data: any) => {
-  //   setFiles(data);
-  // };
-
   const onSubmit = (formData: any) => {
     payload({
-      categoryId: "8d649021-958a-485c-95bf-fdcfb41f9604",
       assetName: formData.assetName,
       assetDetails: formData.assetDetails,
+      categoryId: formData.categoryId,
       assetUpload: modelUrl,
       assetThumbnail: thumbnail,
     });
+    console.log(formData);
     if (modelUrl === "" || thumbnail === "") {
       toast.error("Please upload asset file");
     } else {
@@ -107,7 +110,10 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
             About Asset{" "}
           </p>
         </div>
-        <button onClick={handleDeleteModal} className="border border-primary py-3 px-6 text-primary unbound fw-500 text-[13px] rounded-lg flex gap-3 items-center">
+        <button
+          onClick={handleDeleteModal}
+          className="border border-primary py-3 px-6 text-primary unbound fw-500 text-[13px] rounded-lg flex gap-3 items-center"
+        >
           Create with AI
           <img
             className="w-5 h-5"
@@ -162,7 +168,33 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
               />
             )}
           />
-          <div>
+          {isGettingCategory ? (
+            <p>Loading asset categories {<BeatLoader />}</p>
+          ) : (
+            <Controller
+              name="categoryId"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "This field is required",
+                },
+              }}
+              render={({ field }) => (
+                <SelectInput
+                  label="Asset Category"
+                  list={assetCategory}
+                  placeholder="Choose medium"
+                  // icon={
+                  //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
+                  // }
+                  error={errors.categoryId?.message}
+                  {...field}
+                />
+              )}
+            />
+          )}
+          <div className="mt-5">
             {/* Upload Thumbnail Section */}
             <div>
               <p>Upload Thumbnail</p>
@@ -267,7 +299,7 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
       </form>
       <Dialog handler={handleDeleteModal} open={deleteDialog} size="lg">
         <div className="">
-         <CreateWithAISelect/>
+          <CreateWithAISelect />
         </div>
       </Dialog>
     </div>

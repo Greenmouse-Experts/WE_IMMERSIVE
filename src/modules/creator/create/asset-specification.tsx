@@ -61,6 +61,8 @@ const AssetSpecification = ({
     },
   });
 
+  console.log(payload)
+
   const onSubmit = (formData: any) => {
     setIsBusy(true);
     const { specificationTags, ...restFormData } = formData; // Destructure specificationTags from formData
@@ -68,7 +70,6 @@ const AssetSpecification = ({
     const newPayload = {
       ...payload,
       ...restFormData,
-      categoryId: "7430cb38-326f-4708-a143-0648d76b53c2",
       amount: parseInt(formData.amount),
       specificationTags:
         specificationTags?.split(",").map((tag: string) => tag.trim()) || [], // Convert to an array

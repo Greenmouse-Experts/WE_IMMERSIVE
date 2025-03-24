@@ -68,7 +68,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
                   >
                     {item.submenu.map((item: any, i) => (
                       <MenuItem
-                        className="[&>a]:dark:!bg-[#15171E] dark:!text-white"
+                        className="[&>a]:dark:!bg-[#15171E]  dark:!text-white"
                         component={<Link to={item.route} />}
                         active={path.pathname === item.route && true}
                         key={i}

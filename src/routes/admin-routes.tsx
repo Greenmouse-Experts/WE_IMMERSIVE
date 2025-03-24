@@ -19,6 +19,8 @@ import CourseCategory from "../pages/admin/assets/courseCategory";
 import EditSubscription from "../pages/admin/subscription/editSubscription";
 import CreateAssetTextTo3d from "../pages/creator/create-asset-text-to-3d";
 import CreateAssetImageTo3d from "../pages/creator/create-asset-image-to-3d";
+import AssetCategory from "../pages/admin/assets/assetCategoryTable";
+import JobCategory from "../pages/admin/assets/jobCategory";
 
 export const adminRoutes = [
   {
@@ -54,15 +56,23 @@ export const adminRoutes = [
         element: <DigitalAssets />,
       },
       {
+        path: "asset-category",
+        element: <AssetCategory />,
+      },
+      {
+        path: "job-category",
+        element: <JobCategory />,
+      },
+      {
         path: "assets/create",
         element: <CreateAsset />,
       },
       {
-        path: "asset/create/text-to-3d",
+        path: "assets/create/text-to-3d",
         element: <CreateAssetTextTo3d />, // Add this when profile page is ready
       },
       {
-        path: "asset/create/image-to-3d",
+        path: "assets/create/image-to-3d",
         element: <CreateAssetImageTo3d />, // Add this when profile page is ready
       },
       {

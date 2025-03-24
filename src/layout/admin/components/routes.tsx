@@ -78,6 +78,10 @@ export const Routes = [
         name: "Physical Assets",
         route: "/super-admin/physicalAssets",
       },
+      {
+        name: "Assets Category",
+        route: "/super-admin/asset-category",
+      },
     ],
   },
   {
@@ -86,11 +90,26 @@ export const Routes = [
     route: "/super-admin/upload-requests",
     submenu: [],
   },
+  // {
+  //   name: "Jobs",
+  //   icon: <LuCreditCard className="text-lg" />,
+  //   route: "/super-admin/jobs",
+  //   submenu: [],
+  // },
   {
     name: "Jobs",
     icon: <LuCreditCard className="text-lg" />,
-    route: "/super-admin/jobs",
-    submenu: [],
+    route: "",
+    submenu: [
+      {
+        name: "Posted Jobs",
+        route: "/super-admin/jobs",
+      },
+      {
+        name: "Job Category",
+        route: "/super-admin/job-category",
+      },
+    ],
   },
   {
     name: "Subscription",

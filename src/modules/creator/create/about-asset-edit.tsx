@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 import { upload3DModel, uploadImage } from "../../../helpers";
 import { ThreeDViewer } from "../../landing/assets/asset-details";
 import { IAsset } from "../../../types/asset.types";
+import { getCreatorAssetCategory } from "../../../api/creator";
+import SelectInput from "../../../components/ui/SelectInput";
+import { BeatLoader } from "react-spinners";
 
 interface AboutAssetProps {
   handleStepper: (direction: string) => void;
@@ -23,6 +26,10 @@ const AboutAssetEdit = ({
   const [error, setError] = useState<string | null>(null);
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
   const modelInputRef = useRef<HTMLInputElement>(null);
+
+  const { data: assetCategory, isLoading: isGettingCategory } =
+  getCreatorAssetCategory();
+
 
   const handleThumbnailChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -77,6 +84,7 @@ const AboutAssetEdit = ({
     defaultValues: {
       assetName: assetDetails?.assetName,
       assetDetails: assetDetails?.assetDetails,
+      categoryId: assetDetails?.categoryId,
     },
   });
 
@@ -86,7 +94,7 @@ const AboutAssetEdit = ({
 
   const onSubmit = (formData: any) => {
     payload({
-      categoryId: "8d649021-958a-485c-95bf-fdcfb41f9604",
+      categoryId: formData.categoryId,
       assetName: formData.assetName,
       assetDetails: formData.assetDetails,
       assetUpload: modelUrl,
@@ -149,6 +157,32 @@ const AboutAssetEdit = ({
               />
             )}
           />
+            {isGettingCategory ? (
+            <p>Loading asset categories {<BeatLoader />}</p>
+          ) : (
+            <Controller
+              name="categoryId"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "This field is required",
+                },
+              }}
+              render={({ field }) => (
+                <SelectInput
+                  label="Asset Category"
+                  list={assetCategory}
+                  placeholder="Choose medium"
+                  // icon={
+                  //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
+                  // }
+                  error={errors.categoryId?.message}
+                  {...field}
+                />
+              )}
+            />
+          )}
           <div>
             {/* Upload Thumbnail Section */}
             <div>

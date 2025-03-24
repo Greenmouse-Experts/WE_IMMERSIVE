@@ -130,6 +130,78 @@ export function getAllAdminDigitalAssets() {
   });
 }
 
+export function addAdminAssetCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/admin/asset/category/create`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-asset-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function getAdminAssetCategory() {
+  return useQuery({
+    queryKey: ["admin-asset-category"],
+    queryFn: async () => {
+      const response = await axios.get(`/admin/asset/categories`);
+      return response.data.data;
+    },
+  });
+}
+
+export function deleteAdminAssetCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (categoryId: string) => {
+      const response = await axios.delete(
+        `admin/asset/category/delete?id=${categoryId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-asset-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function editAdminAssetCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/admin/asset/category/update`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-asset-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
 export function getAdminCourseCategory() {
   return useQuery({
     queryKey: ["admin-course-category"],
@@ -194,6 +266,79 @@ export function editAdminCourseCategory() {
       toast.success(res.message);
       queryClient.invalidateQueries({
         queryKey: ["admin-course-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+
+export function addAdminJobCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/admin/job/category/create`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-job-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function getAdminJobCategory() {
+  return useQuery({
+    queryKey: ["admin-job-category"],
+    queryFn: async () => {
+      const response = await axios.get(`/admin/job/categories`);
+      return response.data.data;
+    },
+  });
+}
+
+export function deleteAdminJobCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (categoryId: string) => {
+      const response = await axios.delete(
+        `admin/job/category/delete?id=${categoryId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-job-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function editAdminJobCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/admin/job/category/update`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-job-category"],
       });
     },
     onError: (error: any) => {

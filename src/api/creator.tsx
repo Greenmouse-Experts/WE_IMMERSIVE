@@ -127,3 +127,15 @@ export function editCreatorJob() {
     },
   });
 }
+
+export function getCreatorAssetCategory() {
+  return useQuery({
+    queryKey: ["creator-asset-category"],
+    queryFn: async () => {
+      const response = await axios.get(`/creator/asset/categories`);
+      return response.data.data;
+    },
+  });
+}
+
+
