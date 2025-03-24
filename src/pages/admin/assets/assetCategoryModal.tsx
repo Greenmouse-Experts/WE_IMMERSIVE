@@ -6,7 +6,6 @@ import { BeatLoader } from "react-spinners";
 import {
   addAdminAssetCategory,
   editAdminAssetCategory,
-  editAdminCourseCategory,
 } from "../../../api/admin";
 import { ICourseCategory } from "../../../types/course.types";
 
