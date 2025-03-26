@@ -130,6 +130,26 @@ export function getUserDetails(userId:string) {
     queryKey: ["users-details", userId]
   });
 }
+export function adminKycAction() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/kyc/review`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["users-details"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
 
 export function getAllAdminDigitalAssets() {
   return useQuery({

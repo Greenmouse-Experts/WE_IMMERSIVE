@@ -1,10 +1,17 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { useGetData } from "../../hooks/useGetData";
 import { getGeneralUsers } from "../../api";
 import { useEffect, useState } from "react";
 import Loader from "../../components/reusables/loader";
 import { dateFormat } from "../../helpers/dateHelper";
+import {
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
+import { MoreVertical } from "lucide-react";
 
 interface DataItem {
   createdAt: string; // ISO 8601 date string
@@ -14,6 +21,7 @@ interface DataItem {
 const GeneralUsers = () => {
   // Fetch data for each group
   const generalUsers = useGetData(["general"], getGeneralUsers);
+  const navigate = useNavigate();
 
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -97,7 +105,25 @@ const GeneralUsers = () => {
                             </span>
                           </td>
                           <td className="p-2 py-4 pl-4">
-                            <PiDotsThreeOutlineFill className="cursor-pointer" />
+                            <Menu placement="left">
+                              <MenuHandler>
+                                <MoreVertical />
+                              </MenuHandler>
+                              <MenuList>
+                                <MenuItem className="flex flex-col gap-3">
+                                  <span
+                                    className="cursor-pointer w-full"
+                                    onClick={() =>
+                                      navigate(
+                                        `/super-admin/user-details/${item.id}`
+                                      )
+                                    }
+                                  >
+                                    View Details
+                                  </span>
+                                </MenuItem>
+                              </MenuList>
+                            </Menu>
                           </td>
                         </tr>
                       ))
