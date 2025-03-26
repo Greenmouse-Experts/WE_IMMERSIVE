@@ -191,7 +191,7 @@ const UserDetails = () => {
             </div>
           </div>
           <div className="mt-10 ">
-            <AdminKycForm/>
+            <AdminKycForm userDetails={userDetails}/>
           </div>
         </div>
       </div>
