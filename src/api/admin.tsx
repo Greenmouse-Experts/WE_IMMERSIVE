@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { UserAdminData } from "../types/userDetails.types";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const token = localStorage.getItem("we-immersiveUser");
@@ -119,6 +120,16 @@ export const updatePhysicalRequests = async (payload: any, headers = {}) => {
     })
     .then((response) => response.data);
 };
+
+export function getUserDetails(userId:string) {
+  return useQuery({
+    queryFn: async () => {
+      const response = await axios.get(`/admin/user-details/${userId}`);
+      return response.data.data as UserAdminData;
+    },
+    queryKey: ["users-details", userId]
+  });
+}
 
 export function getAllAdminDigitalAssets() {
   return useQuery({
@@ -273,7 +284,6 @@ export function editAdminCourseCategory() {
     },
   });
 }
-
 
 export function addAdminJobCategory() {
   const queryClient = useQueryClient();

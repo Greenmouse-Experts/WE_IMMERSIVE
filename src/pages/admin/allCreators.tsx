@@ -1,10 +1,17 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { useGetData } from "../../hooks/useGetData";
 import { useEffect, useState } from "react";
 import Loader from "../../components/reusables/loader";
 import { dateFormat } from "../../helpers/dateHelper";
 import { getCreators } from "../../api";
+import {
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
+import { MoreVertical } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface DataItem {
   createdAt: string; // ISO 8601 date string
@@ -14,6 +21,7 @@ interface DataItem {
 const AllCreators = () => {
   // Fetch data for each group
   const creators = useGetData(["creators"], getCreators);
+  const navigate = useNavigate();
 
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -101,7 +109,21 @@ const AllCreators = () => {
                             </span>
                           </td>
                           <td className="p-2 py-4 pl-4">
-                            <PiDotsThreeOutlineFill className="cursor-pointer" />
+                            <Menu placement="left">
+                              <MenuHandler>
+                                <MoreVertical />
+                              </MenuHandler>
+                              <MenuList>
+                                <MenuItem className="flex flex-col gap-3">
+                                  <span
+                                    className="cursor-pointer w-full"
+                                    onClick={() => navigate(`/super-admin/user-details/${item.id}`)}
+                                  >
+                                    View Details
+                                  </span>
+                                </MenuItem>
+                              </MenuList>
+                            </Menu>
                           </td>
                         </tr>
                       ))

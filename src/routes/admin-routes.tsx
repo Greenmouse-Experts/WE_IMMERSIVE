@@ -21,6 +21,8 @@ import CreateAssetTextTo3d from "../pages/creator/create-asset-text-to-3d";
 import CreateAssetImageTo3d from "../pages/creator/create-asset-image-to-3d";
 import AssetCategory from "../pages/admin/assets/assetCategoryTable";
 import JobCategory from "../pages/admin/assets/jobCategory";
+import SubCategory from "../pages/admin/subCategory";
+import UserDetails from "../pages/admin/userDetails";
 
 export const adminRoutes = [
   {
@@ -50,6 +52,10 @@ export const adminRoutes = [
       {
         path: "all-students",
         element: <AllStudents />,
+      },
+      {
+        path: "user-details/:userId",
+        element: <UserDetails />,
       },
       {
         path: "digitalAssets",
@@ -114,6 +120,10 @@ export const adminRoutes = [
       {
         path: "settings",
         element: <SettingsTable />
+      },
+      {
+        path: "sub-category",
+        element: <SubCategory />
       }
     ],
   },

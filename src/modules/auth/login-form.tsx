@@ -39,21 +39,18 @@ const LoginForm = () => {
 
       dispatch(weImmersiveUser(data.data));
 
+      let route = "/";
       if (data.data.accountType === "user") {
-        navigate("/user");
+        route = "/user";
+      } else if (data.data.accountType === "creator") {
+        route = "/creator";
+      } else if (data.data.accountType === "student") {
+        route = "/students";
+      } else if (data.data.accountType === "institution") {
+        route = "/institution";
       }
 
-      if (data.data.accountType === "creator") {
-        navigate("/creator");
-      }
-
-      if (data.data.accountType === "student") {
-        navigate("/students");
-      }
-
-      if (data.data.accountType === "institution") {
-        navigate("/institution");
-      }
+      navigate(route, { replace: true });
       toast.success(data.message);
     },
     onError: (error: any) => {

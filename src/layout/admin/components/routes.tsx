@@ -117,4 +117,10 @@ export const Routes = [
     route: "/super-admin/subscription",
     submenu: [],
   },
+  {
+    name: "Sub Categories",
+    icon: <LuCreditCard className="text-lg" />,
+    route: "/super-admin/sub-category",
+    submenu: [],
+  },
 ];

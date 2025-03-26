@@ -1,26 +1,28 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import Loader from "../../../components/reusables/loader";
-import { dateFormat } from "../../../helpers/dateHelper";
-import Button from "../../../components/ui/Button";
+import Loader from "../../components/reusables/loader";
+import { dateFormat } from "../../helpers/dateHelper";
+import Button from "../../components/ui/Button";
 import {
-  deleteAdminAssetCategory,
-  getAdminAssetCategory,
-} from "../../../api/admin";
+  deleteAdminJobCategory,
+  getAdminJobCategory,
+} from "../../api/admin";
 import {
   Menu,
   MenuHandler,
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
-import Publish from "../../../components/reusables/Publish";
+// import Publish from "../../../components/reusables/Publish";
 import { MoreVertical } from "lucide-react";
 import { useState } from "react";
 import { Dialog } from "@material-tailwind/react";
-import { ICourseCategory } from "../../../types/course.types";
-import AssetCategoryModal from "./assetCategoryModal";
+import Publish from "../../components/reusables/Publish";
+import JobCategoryModal from "./assets/jobCategoryModal";
+import { ICourseCategory } from "../../types/course.types";
+// import JobCategoryModal from "./jobCategoryModal";
 
-const AssetCategory = () => {
-  const { data: assetCategory, isLoading } = getAdminAssetCategory();
+const SubCategory = () => {
+  const { data: assetCategory, isLoading } = getAdminJobCategory();
 
   const [selected, setSelected] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -29,7 +31,7 @@ const AssetCategory = () => {
 
   const handleOpen = () => setOpen(!open);
   const handleDeleteModal = () => setOpen(!deleteDialog);
-  const openEdit = (item: ICourseCategory) => {
+  const openEdit = (item:ICourseCategory) => {
     setSelected(item);
     handleOpen();
   };
@@ -43,7 +45,7 @@ const AssetCategory = () => {
     setShowDeleteDialog(true);
   };
   const { mutate: deleteAsset, isPending: isDeleting } =
-  deleteAdminAssetCategory();
+  deleteAdminJobCategory();
 
   const handleDelete = () => {
     deleteAsset(selected.id, {
@@ -65,7 +67,7 @@ const AssetCategory = () => {
       <div className="bg-white dark:bg-[#15171E] mt-10 px-4 lg:py-6 rounded-[20px]">
         <div className="flex w-full justify-between md:py-1 py-4 items-center">
           <p className="unbound flex flex-grow text-sm md:text-base text-[#06052A]">
-            Asset Category
+            Sub Categories
           </p>
           <div className="md:flex hidden items-center gap-x-2">
             <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
@@ -84,7 +86,7 @@ const AssetCategory = () => {
               <Button
                 size={14}
                 onClick={openCreate}
-                title="Add Asset Category"
+                title="Add Sub Category"
                 altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
               />
             </div>
@@ -107,7 +109,7 @@ const AssetCategory = () => {
                 </thead>
                 <tbody>
                   {assetCategory?.length > 0
-                    ? assetCategory.map((item: ICourseCategory, i: number) => (
+                    ? assetCategory.map((item:ICourseCategory, i: number) => (
                         <tr
                           className="odd:bg-[#E9EBFB] odd:dark:bg-black"
                           key={i}
@@ -158,7 +160,7 @@ const AssetCategory = () => {
         handler={handleOpen}
         size="md"
       >
-        <AssetCategoryModal onClose={handleOpen} selected={selected} />
+        <JobCategoryModal onClose={handleOpen} selected={selected} />
       </Dialog>
 
       <Dialog handler={handleDeleteModal} open={deleteDialog} size="md">
@@ -175,4 +177,4 @@ const AssetCategory = () => {
   );
 };
 
-export default AssetCategory;
+export default SubCategory;

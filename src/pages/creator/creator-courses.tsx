@@ -115,6 +115,7 @@ const CreatorCoursesScreen = () => {
       mutation.mutate(payload, {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ["courses"] });
+          setOpenThumbnail(false);
         },
       });
     }

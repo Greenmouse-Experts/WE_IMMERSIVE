@@ -3,19 +3,47 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/reusables/loader";
 import { dateFormat } from "../../helpers";
 import { BeatLoader } from "react-spinners";
-import { deleteCreatorJob, viewCreatorJobDetails } from "../../api/creator";
+import { deleteCreatorJob, postCreatorJob, viewCreatorJobDetails } from "../../api/creator";
 import { Dialog } from "@material-tailwind/react";
 import Publish from "../../components/reusables/Publish";
 
 const JobDetails: React.FC = () => {
   const { jobId } = useParams();
 
-  const [deleteDialog, setShowDeleteDialog] = useState<boolean>(false);
   const { data: jobDetails, isLoading } = viewCreatorJobDetails(jobId);
   const navigate = useNavigate();
+  const [deleteDialog, setShowDeleteDialog] = useState<boolean>(false);
   const handleDeleteModal = () => setShowDeleteDialog(!deleteDialog);
+  const [publishDialog, setPublishDialog] = useState<boolean>(false);
+  const handlePublishModal = () => setPublishDialog(!publishDialog);
 
   const { mutate: deleteAsset, isPending: isDeleting } = deleteCreatorJob();
+  const {mutate:postJob, isPending:isPosting} = postCreatorJob();
+
+  const handlePublish = () => {
+    postJob(
+      {
+        company: jobDetails?.company,
+        logo: jobDetails?.logo,
+        jobType: jobDetails?.jobType,
+        workplaceType: jobDetails?.workplaceType,
+        location: jobDetails?.location,
+        description: jobDetails?.description,
+        jobId: jobId as string,
+        applicantCollectionEmailAddress: "hr@techcorp.com",
+        rejectionEmails: false,
+        status: "published",
+      },
+      {
+        onSuccess() {
+          setPublishDialog(false);
+        },
+        onError: () => {
+          setPublishDialog(false);
+        },
+      }
+    );
+  }
 
   const handleDelete = () => {
     deleteAsset(jobId as string, {
@@ -82,6 +110,12 @@ const JobDetails: React.FC = () => {
               >
                 {isDeleting ? <BeatLoader /> : "Delete »"}
               </button>
+              <button
+                onClick={handlePublishModal}
+                className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:opacity-90"
+              >
+                {isPosting ? <BeatLoader /> : "Post Job »"}
+              </button>
             </div>
           </div>
         </div>
@@ -93,6 +127,16 @@ const JobDetails: React.FC = () => {
             title={`Are you sure you want to delete this job`}
             handleProceed={handleDelete}
             isLoading={isDeleting}
+          />
+        </div>
+      </Dialog>
+      <Dialog handler={handlePublishModal} open={publishDialog} size="md">
+        <div className="p-5">
+          <Publish
+            handleCancel={() => setPublishDialog(false)}
+            title={`Are you sure you want to post this job`}
+            handleProceed={handlePublish}
+            isLoading={isPosting}
           />
         </div>
       </Dialog>

@@ -33,9 +33,11 @@ const AdminLoginForm = () => {
     onSuccess: (data: any) => {
       localStorage.setItem("we-immersiveUser", data.token);
       delete data.data.password;
-
+      let route = "/";
       dispatch(weImmersiveUser(data.data));
       navigate("/super-admin");
+      route = "/super-admin";
+      navigate(route, { replace: true });
     },
   });
 

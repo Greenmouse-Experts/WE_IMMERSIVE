@@ -108,6 +108,26 @@ export function deleteCreatorJob() {
   });
 }
 
+export function postCreatorJob() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/creator/job/post`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["creatorJobs"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
 export function editCreatorJob() {
   const queryClient = useQueryClient();
   return useMutation({
