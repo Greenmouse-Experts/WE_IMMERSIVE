@@ -28,7 +28,7 @@ interface Props {
     | string
     | FieldError
     | Merge<FieldError, FieldErrorsImpl<any>>
-    | undefined;
+    | undefined | any;
   required?: boolean;
   labelClassName?: string;
   className?: string;
@@ -126,7 +126,7 @@ const TextInput: React.FC<Props> = ({
             type="checkbox"
             className={
               altClassName ||
-              classNames(fullWidth ? '' : 'p-2 w-[16px] h-[16px]', className)
+              classNames(fullWidth ? '' : 'p-2 w-[16px] h-[16px] bg-transparent', className)
             }
             name={name}
             required={required}

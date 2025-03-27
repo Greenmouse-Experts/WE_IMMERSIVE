@@ -23,6 +23,7 @@ import AssetCategory from "../pages/admin/assets/assetCategoryTable";
 import JobCategory from "../pages/admin/assets/jobCategory";
 import SubCategory from "../pages/admin/subCategory";
 import UserDetails from "../pages/admin/userDetails";
+import CourseSubCategory from "../pages/admin/assets/courseSubCategory";
 
 export const adminRoutes = [
   {
@@ -116,6 +117,10 @@ export const adminRoutes = [
       {
         path: "courses/category",
         element: <CourseCategory />
+      },
+      {
+        path: "sub-category/:categoryId",
+        element: <CourseSubCategory />
       },
       {
         path: "settings",

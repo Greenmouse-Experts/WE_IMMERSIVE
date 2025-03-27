@@ -263,6 +263,35 @@ export function addAdminCourseCategory() {
   });
 }
 
+export function getAdminCourseSubCategory(courseId: string) {
+  return useQuery({
+    queryKey: ["admin-course-sub-category"],
+    queryFn: async () => {
+      const response = await axios.get(`/category/${courseId}?includeChildren=true`);
+      return response.data.data;
+    },
+  });
+}
+export function addAdminCourseSubCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/category`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-course-sub-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
 export function deleteAdminCourseCategory() {
   const queryClient = useQueryClient();
   return useMutation({

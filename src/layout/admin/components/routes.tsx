@@ -57,11 +57,11 @@ export const Routes = [
     submenu: [
       {
         name: "All Courses",
-        route: "courses",
+        route: "/super-admin/courses",
       },
       {
         name: "Course Category",
-        route: "courses/category",
+        route: "/super-admin/courses/category",
       },
     ],
   },
@@ -117,10 +117,10 @@ export const Routes = [
     route: "/super-admin/subscription",
     submenu: [],
   },
-  {
-    name: "Sub Categories",
-    icon: <LuCreditCard className="text-lg" />,
-    route: "/super-admin/sub-category",
-    submenu: [],
-  },
+  // {
+  //   name: "Sub Categories",
+  //   icon: <LuCreditCard className="text-lg" />,
+  //   route: "/super-admin/sub-category",
+  //   submenu: [],
+  // },
 ];

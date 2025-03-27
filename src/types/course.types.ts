@@ -72,3 +72,12 @@ interface ILesson {
     createdAt: string;
     updatedAt: string;
   }
+  export interface ICourseSubCategory{
+    id: string;
+    parentId: string;
+    name: string;
+    description: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+  }

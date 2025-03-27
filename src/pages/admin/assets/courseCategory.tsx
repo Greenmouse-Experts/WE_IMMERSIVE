@@ -18,6 +18,7 @@ import { useState } from "react";
 import { Dialog } from "@material-tailwind/react";
 import { ICourseCategory } from "../../../types/course.types";
 import CourseCategoryModal from "./courseCategoryModal";
+import { Link } from "react-router-dom";
 
 const CourseCategory = () => {
   const { data: courseCategory, isLoading } = getAdminCourseCategory();
@@ -132,6 +133,14 @@ const CourseCategory = () => {
                                     onClick={() => openDelete(item)}
                                   >
                                     Delete
+                                  </span>
+                                </MenuItem>
+                                <MenuItem className="flex flex-col gap-3">
+                                  <span
+                                    className="cursor-pointer w-full"
+                                    onClick={() => openDelete(item)}
+                                  >
+                                  <Link to={`/super-admin/sub-category/${item.id}`}>Sub categories</Link>
                                   </span>
                                 </MenuItem>
                               </MenuList>

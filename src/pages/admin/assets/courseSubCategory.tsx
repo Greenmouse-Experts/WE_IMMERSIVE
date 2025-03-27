@@ -3,8 +3,8 @@ import Loader from "../../../components/reusables/loader";
 import { dateFormat } from "../../../helpers/dateHelper";
 import Button from "../../../components/ui/Button";
 import {
-  deleteAdminAssetCategory,
-  getAdminAssetCategory,
+  deleteAdminCourseCategory,
+  getAdminCourseSubCategory,
 } from "../../../api/admin";
 import {
   Menu,
@@ -17,11 +17,12 @@ import { MoreVertical } from "lucide-react";
 import { useState } from "react";
 import { Dialog } from "@material-tailwind/react";
 import { ICourseCategory } from "../../../types/course.types";
-import AssetCategoryModal from "./assetCategoryModal";
-import { Link } from "react-router-dom";
+import CourseSubCategoryModal from "./courseSubCategoryModal";
+import { useParams } from "react-router-dom";
 
-const AssetCategory = () => {
-  const { data: assetCategory, isLoading } = getAdminAssetCategory();
+const CourseSubCategory = () => {
+  const { categoryId } = useParams();
+  const { data: courseCategory, isLoading } = getAdminCourseSubCategory(categoryId!);
 
   const [selected, setSelected] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -34,27 +35,22 @@ const AssetCategory = () => {
     setSelected(item);
     handleOpen();
   };
-  const openCreate = () => {
+  const openCreate = () =>{
     setSelected(null);
     handleOpen();
-  };
+  }
 
   const openDelete = (asset: any) => {
     setSelected(asset);
     setShowDeleteDialog(true);
   };
   const { mutate: deleteAsset, isPending: isDeleting } =
-  deleteAdminAssetCategory();
+    deleteAdminCourseCategory();
 
   const handleDelete = () => {
     deleteAsset(selected.id, {
       onSuccess: () => {
         setShowDeleteDialog(false);
-        setShowDeleteDialog(false)
-      },
-
-      onError: () => {
-        setShowDeleteDialog(false)
       },
     });
   };
@@ -66,7 +62,7 @@ const AssetCategory = () => {
       <div className="bg-white dark:bg-[#15171E] mt-10 px-4 lg:py-6 rounded-[20px]">
         <div className="flex w-full justify-between md:py-1 py-4 items-center">
           <p className="unbound flex flex-grow text-sm md:text-base text-[#06052A]">
-            Asset Category
+          Sub Category
           </p>
           <div className="md:flex hidden items-center gap-x-2">
             <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
@@ -85,7 +81,7 @@ const AssetCategory = () => {
               <Button
                 size={14}
                 onClick={openCreate}
-                title="Add Asset Category"
+                title="Add Sub Category"
                 altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
               />
             </div>
@@ -107,8 +103,8 @@ const AssetCategory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {assetCategory?.length > 0
-                    ? assetCategory.map((item: ICourseCategory, i: number) => (
+                  {courseCategory?.length > 0
+                    ? courseCategory.map((item: ICourseCategory, i: number) => (
                         <tr
                           className="odd:bg-[#E9EBFB] odd:dark:bg-black"
                           key={i}
@@ -140,14 +136,6 @@ const AssetCategory = () => {
                                     Delete
                                   </span>
                                 </MenuItem>
-                                <MenuItem className="flex flex-col gap-3">
-                                  <span
-                                    className="cursor-pointer w-full"
-                                    onClick={() => openDelete(item)}
-                                  >
-                                  <Link to={`/super-admin/sub-category/${item.id}`}>Sub categories</Link>
-                                  </span>
-                                </MenuItem>
                               </MenuList>
                             </Menu>
                           </td>
@@ -167,7 +155,7 @@ const AssetCategory = () => {
         handler={handleOpen}
         size="md"
       >
-        <AssetCategoryModal onClose={handleOpen} selected={selected} />
+        <CourseSubCategoryModal onClose={handleOpen} selected={selected} />
       </Dialog>
 
       <Dialog handler={handleDeleteModal} open={deleteDialog} size="md">
@@ -184,4 +172,4 @@ const AssetCategory = () => {
   );
 };
 
-export default AssetCategory;
+export default CourseSubCategory;
