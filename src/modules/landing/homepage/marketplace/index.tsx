@@ -5,7 +5,6 @@ import MarketHeader from "./market-header";
 const MarketPlace = () => {
   const [activeTab, setActiveTab] = useState("3D Models");
 
-  console.log(activeTab);
   
   return (
     <div className="mt-6 lg:mt-16">

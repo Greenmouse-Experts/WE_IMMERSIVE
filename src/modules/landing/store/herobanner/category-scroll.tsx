@@ -101,7 +101,7 @@ const CategoryScroll = ({ activeTab, setActiveTab }: MarketHeaderProp) => {
                         activeTab === subItem.name && "bg-primary text-white"
                       }`}
                     >
-                      <p>{subItem.name}</p>
+                      <p className="dark:!text-[#696767]">{subItem.name}</p>
                     </MenuItem>
                   ))}
                 </MenuList>
