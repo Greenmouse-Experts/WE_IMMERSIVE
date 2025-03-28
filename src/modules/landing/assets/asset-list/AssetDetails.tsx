@@ -1,20 +1,38 @@
 import React from "react";
-import { getGeneralAssetDetails } from "../../../../api/general";
-import { useParams } from "react-router-dom";
+import {
+  getGeneralAssetDetails,
+} from "../../../../api/general";
+import {  useParams } from "react-router-dom";
 import Loader from "../../../../components/reusables/loader";
 import { ThreeDViewer } from "../asset-details";
-
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { addProduct } from "../../../../reducers/cartSlice";
 
 const AssetDetails: React.FC = () => {
-  // const [selectedImage, setSelectedImage] = useState(images[0]);
-
+ 
+  
   const { id } = useParams();
-
+  
   const { data: assetDetails, isLoading } = getGeneralAssetDetails(id);
-
+  
   if (isLoading) {
     return <Loader />;
   }
+  const dispatch = useDispatch();
+  const addToCart = () => {
+    dispatch(
+      addProduct({
+        price: assetDetails?.amount,
+        name: assetDetails?.assetName,
+        productId: id,
+        unitPrice: assetDetails?.amount,
+        image: assetDetails?.assetThumbnail,
+      })
+    );
+    toast.success(`${assetDetails?.assetName} added successfully`);
+  };
+ 
 
   return (
     <div className="box px-4 py-8">
@@ -63,10 +81,16 @@ const AssetDetails: React.FC = () => {
             <p className="text-gray-600">{assetDetails?.assetName}</p>
             <hr />
             <p className="text-xl font-bold">₦{assetDetails?.amount}</p>
-            <button className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg">
+            <button
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg"
+              onClick={addToCart}
+            >
               Buy Now
             </button>
-            <button className="w-full border border-purple-600 text-purple-600 py-2 rounded-lg">
+            <button
+              onClick={addToCart}
+              className="w-full border border-purple-600 text-purple-600 py-2 rounded-lg"
+            >
               Add to cart
             </button>
           </div>

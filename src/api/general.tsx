@@ -3,6 +3,8 @@ import axios from "axios";
 import { IJob } from "../types/job.types";
 import { toast } from "react-toastify";
 import { IAsset } from "../types/asset.types";
+import { ICourse } from "../types/course.types";
+import { ICategory } from "../types/category.types";
 
 export function getGeneralUserDetails() {
   return useQuery({
@@ -86,7 +88,7 @@ export function getGeneralCourseDetails(courseId: string | undefined) {
     queryKey: ["general-course-details", courseId],
     queryFn: async () => {
       const response = await axios.get(`/general/course/${courseId}`);
-      return response.data.data;
+      return response.data.data as ICourse;
     },
   });
 }
@@ -172,6 +174,16 @@ export function submitKyc() {
     },
     onError: (error: any) => {
       toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function getSubCategories() {
+  return useQuery({
+    queryKey: ["general-subcategories"],
+    queryFn: async () => {
+      const response = await axios.get(`/category`);
+      return response.data.data as ICategory[];
     },
   });
 }

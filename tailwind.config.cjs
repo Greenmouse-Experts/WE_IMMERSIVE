@@ -37,7 +37,10 @@ module.exports = withMT({
         green:"#249B2C",
         lightGreen:"#D4F9CE",
         darkMode:"#15171E",
-      }
+      },
+      fontFamily: {
+        mulish: ["Mulish", "sans-serif"]
+      },
     },
   },
   plugins: [],

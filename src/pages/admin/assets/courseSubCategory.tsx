@@ -4,6 +4,7 @@ import { dateFormat } from "../../../helpers/dateHelper";
 import Button from "../../../components/ui/Button";
 import {
   deleteAdminCourseCategory,
+  deleteAdminSubCourseCategory,
   getAdminCourseSubCategory,
 } from "../../../api/admin";
 import {
@@ -45,7 +46,7 @@ const CourseSubCategory = () => {
     setShowDeleteDialog(true);
   };
   const { mutate: deleteAsset, isPending: isDeleting } =
-    deleteAdminCourseCategory();
+  deleteAdminSubCourseCategory();
 
   const handleDelete = () => {
     deleteAsset(selected.id, {
@@ -97,14 +98,14 @@ const CourseSubCategory = () => {
                 <thead>
                   <tr className="bg-gray-100 dark:bg-gray-800">
                     <td className="unbound pl-4 p-1 pb-2">#</td>
-                    <td className="unbound p-1 pb-2">Category Name</td>
+                    <td className="unbound p-1 pb-2">Sub Category Name</td>
                     <td className="unbound p-1 pb-2">Date Created</td>
                     <td className="unbound p-1 pb-2">Action</td>
                   </tr>
                 </thead>
                 <tbody>
-                  {courseCategory?.length > 0
-                    ? courseCategory.map((item: ICourseCategory, i: number) => (
+                  {courseCategory?.children?.length! > 0
+                    ? courseCategory?.children?.map((item: ICourseCategory, i: number) => (
                         <tr
                           className="odd:bg-[#E9EBFB] odd:dark:bg-black"
                           key={i}

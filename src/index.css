@@ -9,7 +9,9 @@
 .unbound {
   font-family: "Unbounded", sans-serif;
 }
-
+.mulish{
+  font-family: "Mulish", sans-serif !important;
+}
 .roboto {
   font-family: "Roboto", sans-serif;
 }

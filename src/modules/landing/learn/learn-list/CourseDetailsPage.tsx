@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { enrollForACourse } from "../../../../api/student";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
 import { BeatLoader } from "react-spinners";
-import { getGeneralCourseDetails } from "../../../../api/general";
+import { getGeneralCourseDetails, getGeneralUserDetails } from "../../../../api/general";
 import Loader from "../../../../components/reusables/loader";
+import { usePaystackPayment } from "react-paystack";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { addProduct } from "../../../../reducers/cartSlice";
 
 const CourseDetailsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
@@ -17,15 +21,34 @@ const CourseDetailsPage: React.FC = () => {
   const { mutate: enroll, isPending } = enrollForACourse();
   const{data:courseDetails, isLoading} =getGeneralCourseDetails(courseId);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return <Loader />;
+  }
 
-  const handleEnroll = () => {
-    enroll(courseId);
+
+  // const handleEnroll = () => {
+  //   enroll(courseId);
+  // };
+
+  const dispatch = useDispatch();
+  const addToCart = () => {
+    dispatch(
+      addProduct({
+        price: courseDetails?.price,
+        name: courseDetails?.title,
+        productId: courseDetails?.id,
+        unitPrice: courseDetails?.price,
+        image: courseDetails?.image,
+      })
+    );
+    toast.success(`${courseDetails?.title} added successfully`);
   };
+
+ 
   return (
     <div className="box pt-20 pb-20">
       {/* Course Title & Metadata */}
-      <p className="text-3xl font-bold mb-4">{courseDetails.title}</p>
+      <p className="text-3xl font-bold mb-4">{courseDetails?.title}</p>
       <p className="text-gray-600 my-1 mb-4">⭐⭐⭐⭐⭐ (40 ratings)</p>
       <p className="text-gray-500">By Industry & Co</p>
 
@@ -44,13 +67,13 @@ const CourseDetailsPage: React.FC = () => {
           <div className="bg-[#F7F8FD] p-6 rounded-xl shadow-sm dark:bg-[#15171E]">
             <p className="font-bold text-lg text-black mb-4 unbound">Payment</p>
             <p className="text-gray-600 text-base mb-3">
-             {courseDetails.title}
+             {courseDetails?.title}
             </p>
             <p className="text-gray-600 text-base mb-3">
-            {courseDetails.subtitle}
+            {courseDetails?.subtitle}
             </p>
             <div className="border-b border-gray-600"></div>
-            <p className="text-base font-bold mt-4">₦{courseDetails.price}</p>
+            <p className="text-base font-bold mt-4">₦{courseDetails?.price}</p>
             {/* <button onClick={handleEnroll} className="w-full bg-gradient text-white py-3 rounded-lg mt-3">
               Buy Now
             </button> */}
@@ -61,9 +84,9 @@ const CourseDetailsPage: React.FC = () => {
               }
               altClassName="btn-primary w-full py-3"
               disabled={isPending}
-              onClick={handleEnroll}
+              onClick={addToCart}
             />
-            <button className="w-full border border-purple-600 text-purple-600 py-3 rounded-lg mt-4">
+            <button onClick={addToCart} className="w-full border border-purple-600 text-purple-600 py-3 rounded-lg mt-4">
               Add to Cart
             </button>
           </div>
@@ -119,7 +142,7 @@ const CourseDetailsPage: React.FC = () => {
             {activeTab === "description" && (
               <>
                 <p className="text-black leading-loose">
-                 {courseDetails.description}
+                 {courseDetails?.description}
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
@@ -261,7 +284,7 @@ const CourseDetailsPage: React.FC = () => {
               className="w-14 h-14 rounded-full"
             />
             <div>
-              <h4 className="font-medium text-gray-800">{courseDetails.creator.name}</h4>
+              <h4 className="font-medium text-gray-800">{courseDetails?.creator.name}</h4>
               <p className="text-sm text-gray-500">{courseDetails?.creator.professionalSkill}</p>
               <div className="flex gap-1 mt-1 text-yellow-500">
                 ⭐️⭐️⭐️⭐️⭐️

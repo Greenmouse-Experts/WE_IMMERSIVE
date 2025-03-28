@@ -140,7 +140,7 @@ const CourseCategory = () => {
                                     className="cursor-pointer w-full"
                                     onClick={() => openDelete(item)}
                                   >
-                                  <Link to={`/super-admin/sub-category/${item.id}`}>Sub categories</Link>
+                                  <Link to={`/super-admin/sub-category/${item.id}type=course`}>Sub categories</Link>
                                   </span>
                                 </MenuItem>
                               </MenuList>

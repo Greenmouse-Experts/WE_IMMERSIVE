@@ -21,19 +21,22 @@ export function getEnrolledCourseDetails(courseId: string | undefined) {
   });
 }
 
-export function saveCourseProgress() {
+export function saveCourseProgress(courseId: string) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data) => {
+    mutationFn: async (data:any) => {
       const response = await axios.post(`student/course-progress/save`, data);
-      return response.data.data;
+      return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: [""] });
+      queryClient.invalidateQueries({
+        queryKey: ["enrolled-courses-details", courseId],
+      });
       toast.success(res.message);
     },
-    onError: (error) => {
-      toast.error(error.message);
+    onError: (error:any) => {
+      console.log(error)
+      toast.error(error.response.data.error);
     },
   });
 }

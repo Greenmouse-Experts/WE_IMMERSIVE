@@ -297,7 +297,7 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
           />
         </div>
       </form>
-      <Dialog handler={handleDeleteModal} open={deleteDialog} size="lg">
+      <Dialog handler={handleDeleteModal} open={deleteDialog} size="xl">
         <div className="">
           <CreateWithAISelect />
         </div>

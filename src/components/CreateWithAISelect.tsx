@@ -13,19 +13,34 @@ const CreateWithAISelect = () => {
       id: "text-to-model",
     },
     {
-      title: " Image to 3D",
+      title: "Image to 3D",
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1742306202/image_5_kanpax.png",
       desc: "CTurn your image, artwork  detailed asset from simple text prompts",
       selected: false,
       id: "image-to-model",
     },
+    {
+      title: "Text to Speech",
+      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1743089279/image_10_qhekmz.png",
+      desc: "Turn your text to speech and voices in different languages and voice textures",
+      selected: false,
+      id: "text-to-speech",
+    },
   ];
-  const [selectedType, setSelectedType] = useState("text-to-model");
+  const [selectedType, setSelectedType] = useState("Text to 3D");
   const handleSelect = (itemName: string) => {
+    console.log("handleSelect", itemName)
     setSelectedType(itemName);
   };
   const queryParams =
-    selectedType === "Text to 3D" ? "text-to-3d" : "image-to-3d";
+    selectedType === "Text to 3D"
+      ? "text-to-3d"
+      : selectedType === "Image to 3D"
+      ? "image-to-3d"
+      : selectedType === "Text to Speech"
+      ? "text-to-speech"
+      : "";
+      console.log(queryParams)
   const navigate = useNavigate();
   return (
     <div className="p-14">

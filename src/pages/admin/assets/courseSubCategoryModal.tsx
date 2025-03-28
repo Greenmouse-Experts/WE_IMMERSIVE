@@ -5,10 +5,10 @@ import Button from "../../../components/ui/Button";
 import { BeatLoader } from "react-spinners";
 import {
   addAdminCourseSubCategory,
-  editAdminCourseCategory,
+  updateAdminCourseSubCategory,
 } from "../../../api/admin";
 import { ICourseSubCategory } from "../../../types/course.types";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const CourseSubCategoryModal = ({
   onClose,
@@ -19,9 +19,11 @@ const CourseSubCategoryModal = ({
 }) => {
   const { mutate: addCategory, isPending } = addAdminCourseSubCategory();
   const { mutate: editCategory, isPending: isEditting } =
-    editAdminCourseCategory();
+  updateAdminCourseSubCategory();
 
   const { categoryId } = useParams();
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type"); 
 
   const {
     control,
@@ -34,11 +36,11 @@ const CourseSubCategoryModal = ({
       description: selected?.description || "",
     },
   });
-console.log(isValid)
+
   const onSubmit = (formData: any) => {
     if (selected) {
       editCategory(
-        { ...formData, id: selected.id, parentId: categoryId, type: "course" },
+        { ...formData, id: selected.id, type },
         {
           onSuccess: () => {
             onClose(false);
@@ -47,7 +49,7 @@ console.log(isValid)
       );
     } else {
       addCategory(
-        { ...formData, parentId: categoryId, type: "course" },
+        { ...formData, parentId: categoryId, type },
         {
           onSuccess: () => {
             onClose(false);
@@ -74,13 +76,13 @@ console.log(isValid)
                     rules={{
                       required: {
                         value: true,
-                        message: "Please enter Category name",
+                        message: "Please enter sub category name",
                       },
                     }}
                     render={({ field }) => (
                       <TextInput
-                        label="Category"
-                        placeholder="Enter name of category"
+                        label="Name"
+                        placeholder="Enter name of sub category"
                         type={InputType.text}
                         error={errors.name?.message}
                         {...field}

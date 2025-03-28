@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { UserAdminData } from "../types/userDetails.types";
+import { ICategory } from "../types/category.types";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const token = localStorage.getItem("we-immersiveUser");
@@ -268,7 +269,7 @@ export function getAdminCourseSubCategory(courseId: string) {
     queryKey: ["admin-course-sub-category"],
     queryFn: async () => {
       const response = await axios.get(`/category/${courseId}?includeChildren=true`);
-      return response.data.data;
+      return response.data.data as ICategory;
     },
   });
 }
@@ -277,6 +278,48 @@ export function addAdminCourseSubCategory() {
   return useMutation({
     mutationFn: async (data: any) => {
       const response = await axios.post(`/category`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-course-sub-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function deleteAdminSubCourseCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (categoryId: string) => {
+      const response = await axios.delete(
+        `admin/course/category/delete?id=${categoryId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-course-sub-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function updateAdminCourseSubCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/category/${data.id}`, data);
       return response.data;
     },
     onSuccess: (res) => {

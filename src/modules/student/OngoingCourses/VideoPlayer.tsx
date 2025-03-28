@@ -1,6 +1,8 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaPlay, FaPause, FaForward, FaBackward } from "react-icons/fa";
 import { ILesson } from "../../../pages/students/lesson.types";
+import { saveCourseProgress } from "../../../api/student";
+import { useParams } from "react-router-dom";
 
 interface IVideoPlayerProps {
   selectedLesson: ILesson | null;
@@ -9,14 +11,21 @@ interface IVideoPlayerProps {
   disableNext: boolean;
   disablePrev: boolean;
 }
+
 const VideoPlayer = ({
   selectedLesson,
   handleNextLesson,
   handlePreviousLesson,
 }: IVideoPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const { courseId } = useParams();
+  const { mutate: saveProgress } = saveCourseProgress(courseId!);
+
+  // Toggle Play/Pause
   const togglePlayPause = () => {
     if (videoRef.current) {
       if (isPlaying) {
@@ -26,6 +35,32 @@ const VideoPlayer = ({
       }
       setIsPlaying(!isPlaying);
     }
+  };
+
+  // Update video progress
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+      setDuration(videoRef.current.duration);
+
+      // Check if video is almost finished (e.g., 5 seconds before end)
+      if (videoRef.current.duration - videoRef.current.currentTime <= 5) {
+        console.log("Video is almost finished!");
+        if (courseId && selectedLesson?.id) {
+          saveProgress({
+            courseId,
+            lessonId: selectedLesson?.id,
+          });
+        }
+        // You can trigger an action here, like a notification or auto-advance
+      }
+    }
+  };
+
+  // Handle when video ends
+  const handleVideoEnd = () => {
+    console.log("Video has ended!");
+    handleNextLesson(); // Automatically move to the next lesson
   };
 
   return (
@@ -40,6 +75,9 @@ const VideoPlayer = ({
                 src={selectedLesson.contentUrl}
                 className="w-full rounded-lg h-[500px]"
                 controls
+                onTimeUpdate={handleTimeUpdate}
+                onEnded={handleVideoEnd}
+                onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)} // Set video duration on load
               />
               <button
                 onClick={togglePlayPause}
@@ -58,18 +96,26 @@ const VideoPlayer = ({
       </div>
 
       {/* Video Controls */}
-
       <div className="flex justify-between items-center mt-3 text-gray-700 dark:text-white">
         <button onClick={handlePreviousLesson}>
           <FaBackward size={20} />
         </button>
-        <p className="text-sm">0:00 / 1:45</p>
+        <p className="text-sm">
+          {formatTime(currentTime)} / {formatTime(duration)}
+        </p>
         <button onClick={handleNextLesson}>
           <FaForward size={20} />
         </button>
       </div>
     </div>
   );
+};
+
+// Format time helper function (e.g., 1:30)
+const formatTime = (time: number) => {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 };
 
 export default VideoPlayer;

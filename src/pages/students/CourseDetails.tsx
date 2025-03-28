@@ -44,6 +44,7 @@ const App: React.FC = () => {
 
   const { data: courseDetails, isLoading } = getEnrolledCourseDetails(courseId);
 
+
   if (isLoading) return <Loader />;
   const courseModules = courseDetails.course.modules;
   console.log(courseModules);
