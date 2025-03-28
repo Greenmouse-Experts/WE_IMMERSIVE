@@ -23,7 +23,8 @@ const CourseSubCategoryModal = ({
 
   const { categoryId } = useParams();
   const [searchParams] = useSearchParams();
-  const type = searchParams.get("type"); 
+  const parentId = categoryId
+  const type = searchParams.get("type");
 
   const {
     control,
@@ -49,7 +50,7 @@ const CourseSubCategoryModal = ({
       );
     } else {
       addCategory(
-        { ...formData, parentId: categoryId, type },
+        { ...formData, parentId, type },
         {
           onSuccess: () => {
             onClose(false);

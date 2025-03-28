@@ -2,7 +2,11 @@ import { getDigitalAssets, getPhysicalAssets } from "../../../../api";
 import { useGetData } from "../../../../hooks/useGetData";
 import AssetList from "../../homepage/marketplace/components/asset-list";
 
-const StoreContent = () => {
+interface MarketBodyProps {
+  activeTab: string;
+}
+
+const StoreContent = ({ activeTab }: MarketBodyProps) => {
   const digitalAssetsQuery = useGetData(["digitalAssets"], getDigitalAssets);
   const physicalAssetsQuery = useGetData(["physicalAssets"], getPhysicalAssets);
 
@@ -20,16 +24,18 @@ const StoreContent = () => {
         <div className="box grid gap-12">
           {/* assets categories */}
           <div>
-            <AssetList
-              name="Explore Digital Assets 📈"
-              data={digitalAssetsQuery.data.data}
-              classStyle={"text-black dark:text-white"}
-            />
+            {activeTab === "3D Models" && (
+              <AssetList
+                name="Explore Digital Assets 📈"
+                data={digitalAssetsQuery?.data?.data}
+                classStyle={"text-black dark:text-white"}
+              />
+            )}
           </div>
           <div className="mt-5">
             <AssetList
               name="Explore Physical Assets 📈"
-              data={physicalAssetsQuery.data.data}
+              data={physicalAssetsQuery?.data?.data}
               classStyle={"text-black dark:text-white"}
             />
           </div>

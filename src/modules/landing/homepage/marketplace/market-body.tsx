@@ -17,7 +17,6 @@ const MarketBody = ({activeTab}:MarketBodyProps) => {
     return <p>Error occurred while fetching data!</p>;
   }
 
-  console.log("active", activeTab)
 
   return (
     <div>

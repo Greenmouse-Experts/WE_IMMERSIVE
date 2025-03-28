@@ -1,7 +1,12 @@
 import MarketSearch from "../../homepage/marketplace/components/market-search";
 import CategoryScroll from "./category-scroll";
 
-const StoreBanner = () => {
+interface MarketHeaderProp{
+  activeTab: string;
+  setActiveTab: (tab: string) => void;  
+}
+
+const StoreBanner = ({activeTab, setActiveTab}:MarketHeaderProp) => {
   return (
     <div className="h-[450px] store-banner bg-cover">
       <div className="box">
@@ -13,7 +18,7 @@ const StoreBanner = () => {
             <MarketSearch/>
         </div>
         <div className="mt-6 lg:mt-10">
-            <CategoryScroll/>
+            <CategoryScroll activeTab={activeTab} setActiveTab={setActiveTab}/>
         </div>
       </div>
     </div>

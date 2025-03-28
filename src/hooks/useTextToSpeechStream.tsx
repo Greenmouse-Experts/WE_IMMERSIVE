@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ElevenLabsClient } from "elevenlabs";
 
-const ELEVENLABS_API_KEY = "sk_9dfc90e22e185ea9713781c2f327b7c55b22cb58e20f00ef"; // Replace with your actual API key
+const ELEVENLABS_API_KEY = "sk_ebe73bf0c9c006feffbf5b6529ecd309624e57de95b2a625"; // Replace with your actual API key
 
 const useTextToSpeechStream = () => {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);

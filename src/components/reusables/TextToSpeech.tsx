@@ -5,11 +5,13 @@ import useTextToSpeechStream from "../../hooks/useTextToSpeechStream";
 import useVoices from "../../hooks/useVioces";
 import Select, { SingleValue } from "react-select";
 import Loader from "./loader";
+import { IoReload } from "react-icons/io5";
 
 const TextToSpeech = () => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -19,7 +21,7 @@ const TextToSpeech = () => {
     },
   });
   const [speed, setSpeed] = useState(1.0);
-  const [stability, setStability] = useState(50); 
+  const [stability, setStability] = useState(50);
   const [similarity, setSimilarity] = useState(50);
 
   const onSubmit = (data: any) => {
@@ -33,22 +35,18 @@ const TextToSpeech = () => {
     });
   };
 
-  const { audioUrl, isLoading, convertTextToSpeech } =
-    useTextToSpeechStream();
-  const {
-    voices,
-    isLoading: isGettingVoices,
-  } = useVoices();
+  const { audioUrl, isLoading, convertTextToSpeech } = useTextToSpeechStream();
+  const { voices, isLoading: isGettingVoices } = useVoices();
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const playAudio = () => {
-    if (audioUrl) {
-      const audio = new Audio(audioUrl);
-      audio
-        .play()
-        .catch((error) => console.error("Audio playback error:", error));
-    }
-  };
+  // const playAudio = () => {
+  //   if (audioUrl) {
+  //     const audio = new Audio(audioUrl);
+  //     audio
+  //       .play()
+  //       .catch((error) => console.error("Audio playback error:", error));
+  //   }
+  // };
   useEffect(() => {
     if (audioUrl) {
       audioRef.current = new Audio(audioUrl);
@@ -66,14 +64,21 @@ const TextToSpeech = () => {
     }
   };
 
-  console.log(selectedOption);
   useEffect(() => {
     if (options.length > 0 && !selectedOption) {
       setSelectedOption(options[0]);
     }
   }, [options, selectedOption]);
 
-  if(isGettingVoices) return <Loader/>
+  const handleReset = () =>{
+    setSpeed(1.0);
+    setStability(50);
+    setSimilarity(50);
+    setSelectedOption(options[0]);
+    reset();
+  }
+
+  if (isGettingVoices) return <Loader />;
 
   return (
     <div className="flex mt-5 w-full gap-10 items-center">
@@ -137,19 +142,25 @@ const TextToSpeech = () => {
           {isLoading ? "Generating Audio..." : "Convert to Speech"}
         </button>
         {audioUrl && (
-          <audio key={audioUrl} ref={audioRef} controls autoPlay className="mt-2 w-full">
+          <audio
+            key={audioUrl}
+            ref={audioRef}
+            controls
+            autoPlay
+            className="mt-2 w-full"
+          >
             <source src={audioUrl} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
         )}
-        {audioUrl && (
+        {/* {audioUrl && (
           <button
             className="mt-2 px-4 py-2 bg-green text-white rounded"
             onClick={playAudio}
           >
             Play Audio
           </button>
-        )}
+        )} */}
       </form>
       <div className="flex-1 w-full ">
         <div>
@@ -218,6 +229,13 @@ const TextToSpeech = () => {
           <span className="absolute top-2 left-1/2 transform -translate-x-1/2 text-sm bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
             {similarity}%
           </span>
+        </div>
+
+        <div className="mt-10">
+          <div onClick={handleReset} className="flex items-center gap-2 border border-[#AFAEAE] rounded-[10px] w-fit h-10 px-5 ml-auto">
+            <IoReload className="text-[#696767]" />
+            <p className="text-sm text-[#696767]">Reset Values</p>
+          </div>
         </div>
       </div>
     </div>
