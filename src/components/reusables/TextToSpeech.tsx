@@ -70,19 +70,19 @@ const TextToSpeech = () => {
     }
   }, [options, selectedOption]);
 
-  const handleReset = () =>{
+  const handleReset = () => {
     setSpeed(1.0);
     setStability(50);
     setSimilarity(50);
     setSelectedOption(options[0]);
     reset();
-  }
+  };
 
   if (isGettingVoices) return <Loader />;
 
   return (
-    <div className="flex mt-5 w-full gap-10 items-center">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex-1">
+    <div className="flex pt-7 mt-7 w-full gap-10 items-center xl:flex-row flex-col-reverse border-t border-[#EEEEEE]">
+      <form onSubmit={handleSubmit(onSubmit)} className=" xl:w-[65%] w-full border-r-[2px] border-[#EEEEEE] pr-6">
         <div>
           <Controller
             name="name"
@@ -162,8 +162,12 @@ const TextToSpeech = () => {
           </button>
         )} */}
       </form>
-      <div className="flex-1 w-full ">
+      <div className=" xl:w-[35%] w-full">
+        <div className=" mb-7">
+          <p className="text-primary fw-600">Settings</p>
+        </div>
         <div>
+          <p className="text-[#343333] mb-3">Voices</p>
           <Select
             value={selectedOption}
             defaultValue={options[0]}
@@ -232,7 +236,10 @@ const TextToSpeech = () => {
         </div>
 
         <div className="mt-10">
-          <div onClick={handleReset} className="flex items-center gap-2 border border-[#AFAEAE] rounded-[10px] w-fit h-10 px-5 ml-auto">
+          <div
+            onClick={handleReset}
+            className="flex items-center gap-2 border border-[#AFAEAE] rounded-[10px] w-fit h-10 px-5 ml-auto"
+          >
             <IoReload className="text-[#696767]" />
             <p className="text-sm text-[#696767]">Reset Values</p>
           </div>
