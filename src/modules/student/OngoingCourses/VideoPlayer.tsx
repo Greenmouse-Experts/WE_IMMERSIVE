@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { FaPlay, FaPause, FaForward, FaBackward } from "react-icons/fa";
 import { ILesson } from "../../../pages/students/lesson.types";
 import { saveCourseProgress } from "../../../api/student";

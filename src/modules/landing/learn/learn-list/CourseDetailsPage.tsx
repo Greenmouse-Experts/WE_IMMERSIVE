@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { enrollForACourse } from "../../../../api/student";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
 import { BeatLoader } from "react-spinners";
-import { getGeneralCourseDetails, getGeneralUserDetails } from "../../../../api/general";
+import { getGeneralCourseDetails } from "../../../../api/general";
 import Loader from "../../../../components/reusables/loader";
-import { usePaystackPayment } from "react-paystack";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { addProduct } from "../../../../reducers/cartSlice";
 
@@ -20,6 +19,8 @@ const CourseDetailsPage: React.FC = () => {
 
   const { mutate: enroll, isPending } = enrollForACourse();
   const{data:courseDetails, isLoading} =getGeneralCourseDetails(courseId);
+
+  console.log(enroll)
 
   if (isLoading) {
     return <Loader />;

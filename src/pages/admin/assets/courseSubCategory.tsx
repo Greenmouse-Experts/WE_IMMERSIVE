@@ -3,7 +3,6 @@ import Loader from "../../../components/reusables/loader";
 import { dateFormat } from "../../../helpers/dateHelper";
 import Button from "../../../components/ui/Button";
 import {
-  deleteAdminCourseCategory,
   deleteAdminSubCourseCategory,
   getAdminCourseSubCategory,
 } from "../../../api/admin";

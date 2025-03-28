@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import useTextToSpeechStream from "../../hooks/useTextToSpeechStream";
 import useVoices from "../../hooks/useVioces";
 import Select, { SingleValue } from "react-select";
+import Loader from "./loader";
 
 const TextToSpeech = () => {
   const {
@@ -17,8 +18,8 @@ const TextToSpeech = () => {
       text: "",
     },
   });
-  const [speed, setSpeed] = useState(1.0); // Default 1.0 (between 0.7 - 2)
-  const [stability, setStability] = useState(50); // Percentage (0 - 100)
+  const [speed, setSpeed] = useState(1.0);
+  const [stability, setStability] = useState(50); 
   const [similarity, setSimilarity] = useState(50);
 
   const onSubmit = (data: any) => {
@@ -32,16 +33,13 @@ const TextToSpeech = () => {
     });
   };
 
-  const { audioUrl, isLoading, error, convertTextToSpeech } =
+  const { audioUrl, isLoading, convertTextToSpeech } =
     useTextToSpeechStream();
   const {
     voices,
     isLoading: isGettingVoices,
-    error: vioceError,
-    refetch,
   } = useVoices();
 
-  console.log(voices);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const playAudio = () => {
     if (audioUrl) {
@@ -74,6 +72,8 @@ const TextToSpeech = () => {
       setSelectedOption(options[0]);
     }
   }, [options, selectedOption]);
+
+  if(isGettingVoices) return <Loader/>
 
   return (
     <div className="flex mt-5 w-full gap-10 items-center">
