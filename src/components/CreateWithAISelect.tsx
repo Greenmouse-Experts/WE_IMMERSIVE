@@ -40,10 +40,10 @@ const CreateWithAISelect = () => {
       : selectedType === "Text to Speech"
       ? "text-to-speech"
       : "";
-      console.log(queryParams)
+     
   const navigate = useNavigate();
   return (
-    <div className="p-14">
+    <div className="p-14 bg-white dark:bg-[#15171E]">
       <div className="mb-14">
         <h4 className="unbound text-[#06052A]">Create with AI</h4>
         <p className="text-base fw-600 text-[#06052A] mt-3">

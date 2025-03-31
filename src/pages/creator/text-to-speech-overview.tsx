@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ArrowsIcon from "../../assets/svg-components/arrows";
 import TextToSpeech from "../../components/reusables/TextToSpeech";
+import VoiceChanger from "../../components/reusables/VoiceChanger";
 
 const TextToSpeechOverview = () => {
   const barItems = ["Text to Speech", "Voice Changer", "Sound Effect"];
@@ -29,7 +30,8 @@ const TextToSpeechOverview = () => {
           ))}
         </div>
       </div>
-      <TextToSpeech />
+      {activeTab === "Text to Speech" && <TextToSpeech />}
+      {activeTab === "Voice Changer" && <VoiceChanger />}
     </div>
   );
 };
