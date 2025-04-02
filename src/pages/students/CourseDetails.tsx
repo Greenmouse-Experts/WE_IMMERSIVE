@@ -10,28 +10,8 @@ import { ILesson } from "./lesson.types";
 
 const App: React.FC = () => {
   const { courseId } = useParams();
-  // const modules = [
-  //   {
-  //     title: "Introduction to Physics",
-  //     lessons: [
-  //       "Lesson 1: Overview",
-  //       "Lesson 2: Basic Concepts",
-  //       "Lesson 3: Motion and Forces",
-  //       "Lesson 4: Energy and Work",
-  //       "Lesson 5: Waves and Sound",
-  //     ],
-  //   },
-  //   {
-  //     title: "Advanced Physics",
-  //     lessons: [
-  //       "Lesson 1: Thermodynamics",
-  //       "Lesson 2: Quantum Mechanics",
-  //       "Lesson 3: Relativity",
-  //       "Lesson 4: Nuclear Physics",
-  //       "Lesson 5: Astrophysics",
-  //     ],
-  //   },
-  // ];
+
+
 
   // State to track active module and lesson
   const [selectedLesson, setSelectedLesson] = useState<ILesson | null>(null);
@@ -44,10 +24,9 @@ const App: React.FC = () => {
 
   const { data: courseDetails, isLoading } = getEnrolledCourseDetails(courseId);
 
-
   if (isLoading) return <Loader />;
   const courseModules = courseDetails.course.modules;
-  console.log(courseModules);
+ 
 
   const findLessonIndex = () => {
     for (let module of courseModules) {
@@ -110,6 +89,7 @@ const App: React.FC = () => {
           className={`md:block ${isSidebarOpen ? "block" : "hidden"} md:w-1/4`}
         >
           <CourseSidebar
+            courseId={courseDetails.courseId}
             course={courseDetails}
             handleSelectLesson={handleSelectLesson}
           />
@@ -118,6 +98,7 @@ const App: React.FC = () => {
         {/* Main Content (Video + Lesson Details) */}
         <div className="flex-1 space-y-6">
           <VideoPlayer
+            courseId={courseDetails.courseId}
             selectedLesson={selectedLesson}
             handleNextLesson={handleNextLesson}
             handlePreviousLesson={handlePreviousLesson}

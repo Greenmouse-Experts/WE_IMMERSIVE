@@ -3,6 +3,7 @@ interface KycDocument {
     userId: string;
     documentType: string;
     documentUrl: string;
+    documentUrlBack: string;
     uploadedAt: string;
     vettingStatus: string;
     reason: string | null;

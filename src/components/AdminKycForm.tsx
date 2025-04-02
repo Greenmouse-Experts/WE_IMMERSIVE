@@ -18,7 +18,7 @@ const AdminKycForm = ({ userDetails }: { userDetails: UserAdminData }) => {
   const { mutate: rejectKyc, isPending: isRejecting } = adminKycAction();
 
   const handleReject = () => {
-    if(rejectReason === ""){
+    if (rejectReason === "") {
       toast.warning("Please enter a reason for rejection");
       handleOpen();
       return;
@@ -81,7 +81,11 @@ const AdminKycForm = ({ userDetails }: { userDetails: UserAdminData }) => {
                     <p className="mb-2">Document (Back)</p>
                     <div className="h-[274px]  border-primary border-dashed border rounded-[10px] bg-lightPrimary p-4">
                       <div className=" border-primary border-dashed border rounded-[10px] h-full">
-                        <p>Back Card</p>
+                        <img
+                          src={kycData?.documentUrlBack}
+                          alt=""
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                     </div>
                   </div>
@@ -112,7 +116,9 @@ const AdminKycForm = ({ userDetails }: { userDetails: UserAdminData }) => {
               type={InputType.textarea}
               className="bg-[#E9EBFB] w-full rounded-[10px]"
               value={rejectReason}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setRejectReason(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setRejectReason(e.target.value)
+              }
             />
           </div>
           <div>

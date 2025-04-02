@@ -3,86 +3,28 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { ICourseData, IModule } from "../../../pages/students/lesson.types";
 import { IoIosCheckbox } from "react-icons/io";
 import { Progress } from "@material-tailwind/react";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { saveCourseProgress } from "../../../api/student";
 
 interface ISidebarProps {
   course: ICourseData;
   handleSelectLesson: (lesson: any) => void;
+  courseId: string;
 }
 
-const Sidebar = ({ course, handleSelectLesson }: ISidebarProps) => {
+const Sidebar = ({ course, handleSelectLesson, courseId }: ISidebarProps) => {
   const [openModule, setOpenModule] = useState<number | null>(0);
   const [showModules, setShowModules] = useState(false);
 
   const courseModules = course.course.modules;
+  const { mutate: saveProgress } = saveCourseProgress(courseId!);
 
-  //   tutor: "Dr. Farah S.",
-  //   progress: "80% Completed",
-  //   modules: [
-  //     {
-  //       title: "Introduction to Physics",
-  //       lessons: [
-  //         "What is Physics?",
-  //         "Basic Concepts in Physics",
-  //         "Introduction to Measurements",
-  //         "Scientific Methods in Physics",
-  //         "Physics and Technology",
-  //       ],
-  //     },
-  //     {
-  //       title: "Kinematics",
-  //       lessons: [
-  //         "Motion and Types of Motion",
-  //         "Speed, Velocity, and Acceleration",
-  //         "Graphical Representation of Motion",
-  //       ],
-  //     },
-  //     {
-  //       title: "Forces and Motion",
-  //       lessons: [
-  //         "Newton’s Laws of Motion",
-  //         "Friction and Its Effects",
-  //         "Work, Energy, and Power",
-  //         "Momentum and Impulse",
-  //       ],
-  //     },
-  //     {
-  //       title: "Introduction to Programming",
-  //       lessons: [
-  //         "Getting Started with HTML",
-  //         "CSS Fundamentals",
-  //         "JavaScript Basics",
-  //         "Introduction to Python",
-  //       ],
-  //     },
-  //     {
-  //       title: "Thermodynamics",
-  //       lessons: [
-  //         "Introduction to Thermodynamics",
-  //         "Laws of Thermodynamics",
-  //         "Heat and Work",
-  //         "Entropy and Energy Transfer",
-  //       ],
-  //     },
-  //     {
-  //       title: "Electricity and Magnetism",
-  //       lessons: [
-  //         "Electric Charge and Fields",
-  //         "Ohm’s Law and Circuits",
-  //         "Magnetism and Electromagnetic Induction",
-  //         "Applications of Electricity in Daily Life",
-  //       ],
-  //     },
-  //     {
-  //       title: "Web Development Basics",
-  //       lessons: [
-  //         "Introduction to Web Development",
-  //         "HTML & CSS Basics",
-  //         "JavaScript and DOM Manipulation",
-  //         "Version Control with Git & GitHub",
-  //       ],
-  //     },
-  //   ],
-  // };
+  const handleSaveCourse = (lessonId: string) => {
+    saveProgress({
+      courseId,
+      lessonId,
+    });
+  };
 
   return (
     <div className="bg-white dark:bg-[#15171E] w-full p-6 rounded-lg">
@@ -92,7 +34,7 @@ const Sidebar = ({ course, handleSelectLesson }: ISidebarProps) => {
           {course.course.title}
         </h2>
         <p className="text-gray-500 dark:text-gray-400">Tutor</p>
-        <Progress size="sm" value={20} color="blue"  />
+        <Progress size="sm" value={20} color="blue" />
       </div>
 
       {/* Modules & Lessons */}
@@ -136,8 +78,18 @@ const Sidebar = ({ course, handleSelectLesson }: ISidebarProps) => {
                           className="flex items-center gap-2 py-2 cursor-pointer"
                         >
                           {lesson?.title}
-                          <div className="ml-auto">
-                            <IoIosCheckbox className="text-primary" size={18} />
+                          <div
+                            className="ml-auto"
+                            onClick={() => handleSaveCourse(lesson.id)}
+                          >
+                            {lesson.completed === null ? (
+                              <MdCheckBoxOutlineBlank size={20} />
+                            ) : (
+                              <IoIosCheckbox
+                                className="text-primary"
+                                size={20}
+                              />
+                            )}
                           </div>
                         </li>
                       ))}

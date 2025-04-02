@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { FaPlay, FaPause, FaForward, FaBackward } from "react-icons/fa";
 import { ILesson } from "../../../pages/students/lesson.types";
 import { saveCourseProgress } from "../../../api/student";
-import { useParams } from "react-router-dom";
 
 interface IVideoPlayerProps {
   selectedLesson: ILesson | null;
@@ -10,9 +9,11 @@ interface IVideoPlayerProps {
   handlePreviousLesson: () => void;
   disableNext: boolean;
   disablePrev: boolean;
+  courseId: string;
 }
 
 const VideoPlayer = ({
+  courseId,
   selectedLesson,
   handleNextLesson,
   handlePreviousLesson,
@@ -22,7 +23,7 @@ const VideoPlayer = ({
   const [duration, setDuration] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const { courseId } = useParams();
+  // const { courseId } = useParams();
   const { mutate: saveProgress } = saveCourseProgress(courseId!);
 
   // Toggle Play/Pause
@@ -38,13 +39,18 @@ const VideoPlayer = ({
   };
 
   // Update video progress
+  const [hasSavedProgress, setHasSavedProgress] = useState(false);
+
   const handleTimeUpdate = () => {
     if (videoRef.current) {
       setCurrentTime(videoRef.current.currentTime);
       setDuration(videoRef.current.duration);
 
-      // Check if video is almost finished (e.g., 5 seconds before end)
-      if (videoRef.current.duration - videoRef.current.currentTime <= 5) {
+      // Check if video is almost finished and has not been saved yet
+      if (
+        !hasSavedProgress &&
+        videoRef.current.duration - videoRef.current.currentTime <= 5
+      ) {
         console.log("Video is almost finished!");
         if (courseId && selectedLesson?.id) {
           saveProgress({
@@ -52,7 +58,7 @@ const VideoPlayer = ({
             lessonId: selectedLesson?.id,
           });
         }
-        // You can trigger an action here, like a notification or auto-advance
+        setHasSavedProgress(true); // Prevent further executions
       }
     }
   };
