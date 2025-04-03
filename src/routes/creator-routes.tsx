@@ -17,6 +17,8 @@ import JobDetails from "../pages/creator/Job-details";
 import CreateAssetImageTo3d from "../pages/creator/create-asset-image-to-3d";
 import CreateAssetTextTo3d from "../pages/creator/create-asset-text-to-3d";
 import TextToSpeechOverview from "../pages/creator/text-to-speech-overview";
+import Subscriptions from "../pages/creator/subscriptions";
+import Coupon from "../pages/creator/coupon";
 
 export const creatorRoutes = [
   {
@@ -91,9 +93,18 @@ export const creatorRoutes = [
         element: <EditJob />,
       },
       {
+        path: "subscriptions",
+        element: <Subscriptions />,
+      },
+      {
         path: "settings",
         element: <SettingsTable />,
       },
+      {
+        path: "coupon",
+        element: <Coupon />,
+      },
+
       {
         path: "portfolio",
         element: <CreatorPortfolio />, // Add this when profile page is ready

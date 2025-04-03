@@ -7,7 +7,7 @@ import Select, { SingleValue } from "react-select";
 import Loader from "./loader";
 import { IoReload } from "react-icons/io5";
 
-const TextToSpeech = () => {
+const SoundEffect = () => {
   const {
     control,
     handleSubmit,
@@ -82,7 +82,10 @@ const TextToSpeech = () => {
 
   return (
     <div className="flex pt-7 mt-7 w-full gap-10 items-center xl:flex-row flex-col-reverse border-t border-[#EEEEEE]">
-      <form onSubmit={handleSubmit(onSubmit)} className=" xl:w-[65%] w-full border-r-[2px] border-[#EEEEEE] pr-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className=" xl:w-[65%] w-full border-r-[2px] border-[#EEEEEE] pr-6"
+      >
         <div>
           <Controller
             name="name"
@@ -121,7 +124,7 @@ const TextToSpeech = () => {
                   className="bg-[#E9EBFB] h-[400px] rounded-[10px]"
                   fullWidth={true}
                   type={InputType.textarea}
-                  label="Prompt"
+                  label="Describe Sound"
                   placeholder="Enter prompt to generate asset "
                   error={errors.text?.message}
                   //   disabled={isInitializing || isProcessing}
@@ -136,6 +139,7 @@ const TextToSpeech = () => {
 
         <button
           // disabled={isPending || isInitializing}
+          disabled={true}
           type="submit"
           className="btn-primary text-xs unbound fw-500 w-full h-10 mt-10 disabled:cursor-not-allowed"
         >
@@ -249,4 +253,4 @@ const TextToSpeech = () => {
   );
 };
 
-export default TextToSpeech;
+export default SoundEffect;

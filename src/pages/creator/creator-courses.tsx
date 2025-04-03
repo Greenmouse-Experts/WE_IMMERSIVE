@@ -84,7 +84,7 @@ const CreatorCoursesScreen = () => {
   };
   const handleCloseCourseInfo = () => {
     setSelected(null);
-    setOpenCourseInfo(false)
+    setOpenCourseInfo(false);
   };
 
   const handleOpenThumbnail = () => setOpenThumbnail(!openThumbnail);
@@ -97,6 +97,9 @@ const CreatorCoursesScreen = () => {
           if (courseId) {
             queryClient.invalidateQueries({ queryKey: ["courses"] });
           }
+        },
+        onError: () => {
+          handleOpen();
         },
       });
     }
@@ -307,7 +310,10 @@ const CreatorCoursesScreen = () => {
           </p>
         </DialogBody>
         <div className=" overflow-y-auto h-[90vh]">
-          <UpdateCourseInfo selected={selected} handleCloseCourseInfo={handleCloseCourseInfo} />
+          <UpdateCourseInfo
+            selected={selected}
+            handleCloseCourseInfo={handleCloseCourseInfo}
+          />
         </div>
       </Dialog>
 

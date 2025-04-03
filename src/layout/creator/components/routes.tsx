@@ -1,9 +1,8 @@
-
 import { GrHomeRounded } from "react-icons/gr";
 // import { HiOutlineShoppingBag } from "react-icons/hi";
 import { LuCreditCard } from "react-icons/lu";
 // import { MdOutlineFeaturedPlayList } from "react-icons/md";
-import { PiBookBookmark} from "react-icons/pi";
+import { PiBookBookmark } from "react-icons/pi";
 import { RiHeart2Line } from "react-icons/ri";
 export interface RouteType {
   name: string;
@@ -26,15 +25,13 @@ export const Routes = [
     name: "Create",
     icon: <RiHeart2Line className="text-xl text-grey" />,
     route: "/creator/asset/create",
-    submenu: [
-    ],
+    submenu: [],
   },
   {
     name: "Assets",
     icon: <RiHeart2Line className="text-xl text-grey" />,
     route: "/creator/assets",
-    submenu: [
-    ],
+    submenu: [],
   },
   {
     name: "Courses",
@@ -72,10 +69,33 @@ export const Routes = [
     route: "/creator/notification",
     submenu: [],
   },
+  // {
+  //   name: "Subscription",
+  //   icon: <LuCreditCard className="text-lg text-grey" />,
+  //   route: "/",
+  //   submenu: [],
+  // },
   {
     name: "Subscription",
+    icon: <LuCreditCard className="text-xl" />,
+    route: "#",
+    submenu: [
+      {
+        name: "All Subscriptions",
+        icon: <LuCreditCard className="text-lg" />,
+        route: "/creator/subscriptions",
+      },
+      {
+        name: "Active Subscription",
+        icon: <LuCreditCard className="text-lg" />,
+        route: "/creator/active-subscriptions",
+      },
+    ],
+  },
+  {
+    name: "Coupon",
     icon: <LuCreditCard className="text-lg text-grey" />,
-    route: "/",
+    route: "/creator/coupon",
     submenu: [],
   },
   {

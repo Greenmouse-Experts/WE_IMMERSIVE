@@ -9,7 +9,7 @@
 .unbound {
   font-family: "Unbounded", sans-serif;
 }
-.mulish{
+.mulish {
   font-family: "Mulish", sans-serif !important;
 }
 .roboto {
@@ -35,7 +35,7 @@ body {
   margin: 0;
   width: 100%;
 }
-h4{
+h4 {
   font-weight: 600;
   font-size: 1.5rem;
   font-family: "Unbounded", sans-serif;
@@ -478,6 +478,16 @@ input.PhoneInputInput {
   }
   .bg-contact-3 {
     background: linear-gradient(180deg, #6f0aff 0%, #6f32c7 100%);
+  }
+
+  /* .css-14xmt93 > .ps-menu-button {
+    background: #242EF21A !important;
+} */
+
+  @media (prefers-color-scheme: dark) {
+    .css-14xmt93 > .ps-menu-button {
+      background: #242EF21A !important;
+    }
   }
 
   .auth-shadow {

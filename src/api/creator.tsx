@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { IAsset } from "../types/asset.types";
 import { IJob } from "../types/job.types";
+import { ICourse } from "../types/course.types";
 
 export function publishLesson() {
   const queryClient = useQueryClient();
@@ -38,6 +39,25 @@ export function getAssetDetails(assetId: string | undefined) {
   });
 }
 
+// export function publishCourseApi() {
+//   const queryClient = useQueryClient();
+//   return useMutation({
+//     mutationFn: async (data: ICourse) => {
+//       const response = await axios.post(
+//         `/creator/course/publish?courseId=${data.id}`,
+//         data
+//       );
+//       return response.data;
+//     },
+//     onSuccess: (res) => {
+//       queryClient.invalidateQueries({ queryKey: ["courses"] });
+//       toast.success(res.message);
+//     },
+//     onError: (error) => {
+//       toast.error(error?.message);
+//     },
+//   });
+// }
 export function editDigitalAsset() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -157,5 +177,3 @@ export function getCreatorAssetCategory() {
     },
   });
 }
-
-

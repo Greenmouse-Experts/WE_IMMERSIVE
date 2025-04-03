@@ -45,8 +45,8 @@ interface Props {
   onFocus?: () => void;
   onKeyUp?: React.KeyboardEventHandler<HTMLInputElement> | undefined;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement> | undefined;
-  min?: number;
-  max?: number;
+  min?: number | string;
+  max?: number | string;
   customRightElement?: React.ReactNode;
   altClassName?: string;
   icon?: JSX.Element;

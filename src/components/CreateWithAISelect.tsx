@@ -15,7 +15,7 @@ const CreateWithAISelect = () => {
     {
       title: "Image to 3D",
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1742306202/image_5_kanpax.png",
-      desc: "CTurn your image, artwork  detailed asset from simple text prompts",
+      desc: "Turn your image, artwork  detailed asset from simple text prompts",
       selected: false,
       id: "image-to-model",
     },
