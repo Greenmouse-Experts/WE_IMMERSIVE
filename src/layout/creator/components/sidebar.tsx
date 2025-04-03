@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "/logo.svg";
 import logo2 from "/logo-white.svg";
 import { FC, useState } from "react";
-import { Routes, RouteType } from "./routes";
+import { Routes } from "./routes";
 import { PiGear } from "react-icons/pi";
 import { LuArrowRightCircle } from "react-icons/lu";
 import ThemeSwitch from "../../../components/ui/theme-switch";

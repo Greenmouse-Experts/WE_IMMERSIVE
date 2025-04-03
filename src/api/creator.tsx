@@ -3,7 +3,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { IAsset } from "../types/asset.types";
 import { IJob } from "../types/job.types";
-import { ICourse } from "../types/course.types";
 
 export function publishLesson() {
   const queryClient = useQueryClient();
