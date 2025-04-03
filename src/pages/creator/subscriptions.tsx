@@ -5,6 +5,7 @@ import { ISubscription } from "../../types/subscription.types";
 import Button from "../../components/ui/Button";
 import { Dialog } from "@material-tailwind/react";
 import { IoClose } from "react-icons/io5";
+import Loader from "../../components/reusables/loader";
 
 const Subscriptions = () => {
   const { data: subscriptions, isLoading } = getSubscriptions();
@@ -32,14 +33,16 @@ const Subscriptions = () => {
     }
   };
 
+
   const [deleteDialog, setShowDeleteDialog] = useState<boolean>(false);
 
+  if(isLoading) return <Loader/>
   const handleModal = () => setShowDeleteDialog(!deleteDialog);
 
   const handleSelect = (item: ISubscription) => {
-    console.log("handleSelect", item);
     setSelected(item);
   };
+
 
   return (
     <div>
