@@ -49,7 +49,7 @@ export const uploadFile = async (event:any, type:any ) => {
     return { isLoading: false, isError: true, isSuccess: false, fileUrl: null };
   }
 };
-export const uploadImage = async (file: File) => {
+export const uploadImage = async (file: File ) => {
   try {
     const formData = new FormData();
     formData.append("file", file);
@@ -67,6 +67,33 @@ export const uploadImage = async (file: File) => {
     return { isSuccess: false };
   }
 };
+
+export const uploadAudio = async (audioBlob: Blob) => {
+  let isLoading = true;
+  try {
+    const formData = new FormData();
+    formData.append("file", audioBlob);
+    formData.append("upload_preset", "mobil_holder");
+    formData.append("resource_type", "video"); // Cloudinary treats audio as "video"
+
+    const response = await fetch("https://api.cloudinary.com/v1_1/do2kojulq/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+    isLoading = false;
+
+    return response.ok
+      ? { isSuccess: true, fileUrl: data.secure_url, isLoading }
+      : { isSuccess: false, isLoading };
+  } catch (error) {
+    console.error("Audio upload failed:", error);
+    isLoading = false;
+    return { isSuccess: false, isLoading };
+  }
+};
+
 
 export const upload3DModel = async (event: React.ChangeEvent<HTMLInputElement>) => {
   try {

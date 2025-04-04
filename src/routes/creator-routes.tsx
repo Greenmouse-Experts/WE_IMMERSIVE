@@ -19,6 +19,7 @@ import CreateAssetTextTo3d from "../pages/creator/create-asset-text-to-3d";
 import TextToSpeechOverview from "../pages/creator/text-to-speech-overview";
 import Subscriptions from "../pages/creator/subscriptions";
 import Coupon from "../pages/creator/coupon";
+import TransactionsScreen from "../pages/shared/transactions";
 
 export const creatorRoutes = [
   {
@@ -104,10 +105,13 @@ export const creatorRoutes = [
         path: "coupon",
         element: <Coupon />,
       },
-
       {
         path: "portfolio",
         element: <CreatorPortfolio />, // Add this when profile page is ready
+      },
+      {
+        path: "transactions",
+        element: <TransactionsScreen />,
       },
     ],
   },

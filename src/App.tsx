@@ -15,6 +15,7 @@ import CreatorDashboardLayout from "./layout/creator";
 import InstitutionDashboardLayout from "./layout/institution";
 import StudentsDashboardLayout from "./layout/students";
 import PageNotFound from "./pages/PageNotFound";
+import PaymentCallback from "./pages/shared/payment-callback";
 
 const App = () => {
   const user = useSelector((state: any) => state.userData.data); // Assuming user.role exists in userData
@@ -58,6 +59,11 @@ const App = () => {
         </AuthMiddleware>
       ),
       children: studentRoutes,
+    },
+    {
+      path: "/payment/callback",
+      element: <PaymentCallback />,
+      // Add super-admin routes here if required
     },
     {
       path: "*",

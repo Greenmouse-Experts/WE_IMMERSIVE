@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { MdPerson, MdEmail, MdLocationPin } from "react-icons/md";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 import { GrUserManager } from "react-icons/gr";
+import BankDetailsForm from '../../../components/BankDetailsForm';
 
 const SubSetting = () => {
 
@@ -133,138 +134,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
             )}
 
             {activeTab === 'bank-details' && (
-              <div className="space-y-4">
-         
-                {/* Example input */}
-
-                <div className='xl:flex items-center justify-between pt-4'>
-                  <div className='w-[100%] xl:w-[48%]'>
-                    <label
-                        htmlFor="name"
-                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
-                    >
-                        Account Name
-                    </label>
-                    <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder='Enter account name'
-                        className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                    />
-                    <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
-                        <TbBuildingSkyscraper className="text-[#A6A4A4] text-[25px]" />
-                    </div>
-                  </div>
-            
-                  <div className='w-[100%] xl:w-[48%] pt-3 lg:pt-0'>
-                    <label
-                        htmlFor="email"
-                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
-                    >
-                        Bank Name
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder='Enter bank name'
-                        className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                    />
-                    <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
-                        <MdEmail className="text-[#A6A4A4] text-[25px]" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className='xl:flex items-center justify-between pt-0 md:pt-0 xl:pt-4'>
-                  <div className='w-[100%] xl:w-[48%]'>
-                    <label
-                        htmlFor="name"
-                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
-                    >
-                        Account Number
-                    </label>
-                    <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder='Enter account number'
-                        className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                    />
-                    <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
-                        <TbBuildingSkyscraper className="text-[#A6A4A4] text-[25px]" />
-                    </div>
-                  </div>
-            
-                  <div className='w-[100%] xl:w-[48%] pt-3 lg:pt-0'>
-                    <label
-                        htmlFor="email"
-                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
-                    >
-                        Card Number
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder='Enter card number'
-                        className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                    />
-                    <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
-                        <MdEmail className="text-[#A6A4A4] text-[25px]" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className='xl:flex items-center justify-between pt-0 md:pt-0 xl:pt-4'>
-                  <div className='w-[100%] xl:w-[48%]'>
-                    <label
-                        htmlFor="name"
-                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
-                    >
-                        Expiry Date
-                    </label>
-                    <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder='mm/yy'
-                        className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                    />
-                    <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
-                        <TbBuildingSkyscraper className="text-[#A6A4A4] text-[25px]" />
-                    </div>
-                  </div>
-            
-                  <div className='w-[100%] xl:w-[48%] pt-3 lg:pt-0'>
-                    <label
-                        htmlFor="email"
-                        className="Mulish block text-[14px] xl:text-[18px] mb-2 font-[400] text-gray-700"
-                    >
-                        CVV
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder='Enter your cvv'
-                        className="mt-1 w-full bg-[#E9EBFB] pl-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-                    />
-                    <div className="relative -top-9 flex items-center pl-3 pointer-events-none">
-                        <MdEmail className="text-[#A6A4A4] text-[25px]" />
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                    type="button"
-                    className="unbound bg-gradient-to-r from-[#5f27f7] to-[#268cdb] text-white font-[500]
-                            px-4 py-2 text-[12px] md:text-[13px] rounded-md shadow-md transition-colors w-[100%] lg:w-[350px] h-[50px]"
-                >
-                     Add Bank Details 
-                </button>
-              </div>
+             <BankDetailsForm/>
             )}
 
             {activeTab === "pair-gear" && (

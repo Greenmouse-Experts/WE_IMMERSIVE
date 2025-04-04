@@ -17,7 +17,7 @@ const StudentCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(cart);
+  // console.log(cart);
 
   const user = useSelector((state: any) => state.userData.data);
   const { data: userData, isLoading: isgettingUser } = getGeneralUserDetails();
@@ -48,8 +48,6 @@ const StudentCart = () => {
       navigate("/auth/login");
       return;
     }
-
-    console.log("Initializing Payment...");
 
     try {
       initializePayment({

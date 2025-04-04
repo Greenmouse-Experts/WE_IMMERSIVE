@@ -32,3 +32,44 @@ export function subscribe() {
     },
   });
 }
+export function verifyPayment() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/subscription/verify-payment`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["subscriptions-general"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function addBankDetails() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/withdrawal/account/create`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["bank-details"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+

@@ -101,7 +101,7 @@ export const Routes = [
   {
     name: "Transactions",
     icon: <LuCreditCard className="text-lg text-grey" />,
-    route: "/",
+    route: "/creator/transactions",
     submenu: [],
   },
 ];
