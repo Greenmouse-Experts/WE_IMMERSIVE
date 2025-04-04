@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ElevenLabsClient } from "elevenlabs";
 
-const ELEVENLABS_API_KEY = "sk_ebe73bf0c9c006feffbf5b6529ecd309624e57de95b2a625"; // Replace with your actual API key
+const ELEVENLABS_API_KEY = "sk_b986ff032f529b5b6c7fec597520509049658071cb6ea3e9"; // Replace with your actual API key
 
 const useVoices = () => {
   const [voices, setVoices] = useState<any[]>([]);

@@ -8,21 +8,20 @@ import {
 } from "@material-tailwind/react";
 import { FaSearch } from "react-icons/fa";
 import CreateAsset from "./create-asset";
-import { getGeneralCourses } from "../../../api/general";
 import Loader from "../../../components/reusables/loader";
 import { ICourse } from "../../../types/course.types";
 import { dateFormat } from "../../../helpers";
 import { MoreVertical } from "lucide-react";
 import useDialog from "../../../hooks/useDialog";
 import Publish from "../../../components/reusables/Publish";
-import { publishCourse } from "../../../api/admin";
+import { getAdminCourses, publishCourse } from "../../../api/admin";
 
 const Courses = () => {
   const [active, setActive] = useState(true);
   const { Dialog, setShowDialog } = useDialog();
   const [selected, setSelected] = useState<any>(null);
 
-  const { data, isLoading } = getGeneralCourses();
+  const { data, isLoading } = getAdminCourses();
   const { mutate: publish, isPending } = publishCourse();
   const openPublish = (course: ICourse) => {
     setSelected(course);

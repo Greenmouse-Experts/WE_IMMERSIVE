@@ -122,13 +122,13 @@ export const updatePhysicalRequests = async (payload: any, headers = {}) => {
     .then((response) => response.data);
 };
 
-export function getUserDetails(userId:string) {
+export function getUserDetails(userId: string) {
   return useQuery({
     queryFn: async () => {
       const response = await axios.get(`/admin/user-details/${userId}`);
       return response.data.data as UserAdminData;
     },
-    queryKey: ["users-details", userId]
+    queryKey: ["users-details", userId],
   });
 }
 export function adminKycAction() {
@@ -150,7 +150,6 @@ export function adminKycAction() {
     },
   });
 }
-
 
 export function getAllAdminDigitalAssets() {
   return useQuery({
@@ -268,7 +267,9 @@ export function getAdminCourseSubCategory(courseId: string) {
   return useQuery({
     queryKey: ["admin-course-sub-category"],
     queryFn: async () => {
-      const response = await axios.get(`/category/${courseId}?includeChildren=true`);
+      const response = await axios.get(
+        `/category/${courseId}?includeChildren=true`
+      );
       return response.data.data as ICategory;
     },
   });
@@ -449,6 +450,16 @@ export function editAdminJobCategory() {
   });
 }
 
+export function getAdminCourses() {
+  return useQuery({
+    queryKey: ["admin-courses"],
+    queryFn: async () => {
+      const response = await axios.get(`/admin/course/fetch`);
+      return response.data.data;
+    },
+  });
+}
+
 export function publishCourse() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -460,7 +471,7 @@ export function publishCourse() {
       console.log(res);
       toast.success(res.message);
       queryClient.invalidateQueries({
-        queryKey: ["general-courses"],
+        queryKey: ["admin-courses"],
       });
     },
     onError: (error: any) => {
