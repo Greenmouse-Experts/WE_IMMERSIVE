@@ -26,6 +26,7 @@ const AssetDetails: React.FC = () => {
         price: assetDetails?.amount,
         name: assetDetails?.assetName,
         productId: id,
+        quantity: 1,
         unitPrice: assetDetails?.amount,
         image: assetDetails?.assetThumbnail,
       })

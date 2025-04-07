@@ -11,6 +11,7 @@ import LearnPage from "../pages/landing/learn";
 import CoursesDetails from "../pages/landing/courses-details";
 import StorePage from "../pages/landing/store";
 import AboutPage from "../pages/landing/about";
+import StudentCartTable from "../pages/students/studentCartTable";
 
 export const landingRoutes = [
   {
@@ -58,13 +59,17 @@ export const landingRoutes = [
         element: <BlogPage />,
       },
       {
-        path:"/jobs",
-        element: <JobsPage/>
+        path: "/jobs",
+        element: <JobsPage />,
       },
       {
         path: "/jobs/view/:id",
-        element: <ViewJobIndex />
-      }
+        element: <ViewJobIndex />,
+      },
+      {
+        path: "/cart",
+        element: <StudentCartTable />,
+      },
     ],
   },
 ];

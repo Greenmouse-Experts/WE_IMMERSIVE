@@ -25,7 +25,7 @@ const Subscriptions = () => {
   //   reference: new Date().getTime().toString(),
   //   email: userData?.email,
   //   amount: parseInt(selected?.price!) * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-  //   publicKey: "pk_test_3f234638ebbeabcef38b57c1c8137e63886f6288",
+  //   publicKey: "pk_test_77297b93cbc01f078d572fed5e2d58f4f7b518d7",
   // };
   // const initializePayment = usePaystackPayment(config);
 
@@ -44,7 +44,7 @@ const Subscriptions = () => {
           if (data?.payment?.reference) {
             // Open Paystack inline payment
             const handler = window.PaystackPop.setup({
-              key: "pk_test_3f234638ebbeabcef38b57c1c8137e63886f6288", // Replace with your Paystack public key
+              key: "pk_test_77297b93cbc01f078d572fed5e2d58f4f7b518d7", // Replace with your Paystack public key
               email: userData?.email,
               amount: parseInt(selected?.price!) * 100,
               currency: "NGN",
@@ -132,11 +132,11 @@ const Subscriptions = () => {
           <h4 className="text-black dark:text-white text-base">
             Do you want plan auto renewal?
           </h4>
-          <div
-            className="flex gap-4 justify-end mt-4"
-            onClick={() => handleSubscribe(false)}
-          >
-            <button className="text-white  bg-gray-600 w-[200px] fw-600 rounded-lg text-nowrap">
+          <div className="flex gap-4 justify-end mt-4">
+            <button
+              onClick={() => handleSubscribe(false)}
+              className="text-white  bg-gray-600 w-[200px] fw-600 rounded-lg text-nowrap"
+            >
               No, dont renew
             </button>
             <Button
@@ -160,7 +160,7 @@ export default Subscriptions;
 //     if (data?.payment?.reference) {
 //       // Open Paystack inline payment
 //       const handler = window.PaystackPop.setup({
-//         key: "pk_test_3f234638ebbeabcef38b57c1c8137e63886f6288", // Replace with your Paystack public key
+//         key: "pk_test_77297b93cbc01f078d572fed5e2d58f4f7b518d7", // Replace with your Paystack public key
 //         email: userData?.email,
 //         amount: parseInt(selected?.price!) * 100,
 //         currency: "NGN",

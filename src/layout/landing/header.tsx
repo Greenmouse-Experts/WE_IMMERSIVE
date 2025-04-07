@@ -10,6 +10,8 @@ import CalloutMenu from "./extras/callout-menu";
 import useDialog from "../../hooks/useDialog";
 import LoginPopup from "./extras/login-popup";
 import { useSelector } from "react-redux";
+import { FaShoppingCart } from "react-icons/fa";
+import { getTotalCartQuantity } from "../../reducers/cartSlice";
 
 const LandingHeader = () => {
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
@@ -18,6 +20,7 @@ const LandingHeader = () => {
   const { Dialog, setShowDialog } = useDialog();
   const user = useSelector((state: any) => state.userData.data);
   const navigate = useNavigate();
+  const cartQuantity = useSelector(getTotalCartQuantity);
 
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
@@ -50,8 +53,7 @@ const LandingHeader = () => {
       navigate("/students");
     } else if (accountType === "institution") {
       navigate("/institution");
-    }
-    else {
+    } else {
       navigate("/super-admin");
     }
   };
@@ -98,7 +100,7 @@ const LandingHeader = () => {
               <div className="hidden lg:flex w-[300px]">
                 <HeaderSearchBox />
               </div>
-              <div className="hidden lg:flex items-center gap-x-4 lg:gap-x-7 min-w-[220px]">
+              <div className="hidden lg:flex items-center gap-x-4 lg:gap-x-7 min-w-[200px]">
                 {!user ? (
                   <>
                     <Button
@@ -122,6 +124,17 @@ const LandingHeader = () => {
                   />
                 )}
               </div>
+              {user && cartQuantity >= 1 && (
+                <div
+                  className="bg-lightPrimary w-12 h-12 flex justify-center items-center rounded-2xl cursor-pointer relative"
+                  onClick={() => navigate("/cart")}
+                >
+                  <p className="absolute -top-[5px] right-0 bg-red-700 text-white w-4 h-4 text-xs flex justify-center items-center rounded-full">
+                    {cartQuantity}
+                  </p>
+                  <FaShoppingCart className="text-primary" size={25} />
+                </div>
+              )}
               <div>
                 <ThemeSwitch />
               </div>

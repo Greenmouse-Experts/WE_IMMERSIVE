@@ -523,12 +523,14 @@ const VoiceChanger = () => {
               defaultChecked
               label="Remove Background Noise"
               className="mulish"
+              value={remove_background_noise}
             />
             <Switch
               defaultChecked
               label="Speaker boost"
               className="mulish"
               onChange={() => setUse_speaker_boost(!use_speaker_boost)}
+              value={remove_background_noise}
             />
           </div>
           <button

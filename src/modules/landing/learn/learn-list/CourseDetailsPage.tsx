@@ -38,6 +38,7 @@ const CourseDetailsPage: React.FC = () => {
         price: courseDetails?.price,
         name: courseDetails?.title,
         productId: courseDetails?.id,
+        quantity: 1,
         unitPrice: courseDetails?.price,
         image: courseDetails?.image,
       })

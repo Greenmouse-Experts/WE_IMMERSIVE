@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { ISubscription } from "../types/subscription.types";
+import { IBankDetails, ISubscription } from "../types/subscription.types";
 import { toast } from "react-toastify";
 
 export function getSubscriptions() {
@@ -71,5 +71,37 @@ export function addBankDetails() {
     },
   });
 }
+
+
+export function requestWithdrawal() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/withdrawal/request`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["bank-details"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function getAllAccounts() {
+  return useQuery({
+    queryKey: ["bank-details"],
+    queryFn: async () => {
+      const response = await axios.get(`/withdrawal/account`);
+      return response.data.data as IBankDetails[];
+    },
+  });
+}
+
 
 

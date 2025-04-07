@@ -30,7 +30,7 @@ const StudentCart = () => {
     reference: new Date().getTime().toString(),
     email: userData?.email,
     amount: totalPrice * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: "pk_test_3f234638ebbeabcef38b57c1c8137e63886f6288",
+    publicKey: "pk_test_77297b93cbc01f078d572fed5e2d58f4f7b518d7",
   };
   const initializePayment = usePaystackPayment(config);
 

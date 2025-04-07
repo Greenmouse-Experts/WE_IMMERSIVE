@@ -44,10 +44,10 @@ export const studentRoutes = [
         path: "cart",
         element: <StudentCartTable />,
       },
-      {
-        path: "cart",
-        element: <StudentCartTable />,
-      },
+      // {
+      //   path: "cart",
+      //   element: <StudentCartTable />,
+      // },
       {
         path: "settings",
         element: <SettingsTable />,
