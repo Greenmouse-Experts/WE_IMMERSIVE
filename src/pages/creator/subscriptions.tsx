@@ -91,6 +91,7 @@ const Subscriptions = () => {
     // }
   };
 
+  
   if (isLoading || isgettingUser) return <Loader />;
   const handleModal = () => setShowDeleteDialog(!deleteDialog);
 

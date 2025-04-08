@@ -35,11 +35,11 @@ const CourseDetailsPage: React.FC = () => {
   const addToCart = () => {
     dispatch(
       addProduct({
-        price: courseDetails?.price,
+        price: parseInt(courseDetails?.price!),
         name: courseDetails?.title,
         productId: courseDetails?.id,
         quantity: 1,
-        unitPrice: courseDetails?.price,
+        unitPrice: parseInt(courseDetails?.price!),
         image: courseDetails?.image,
       })
     );

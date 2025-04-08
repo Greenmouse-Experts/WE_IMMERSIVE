@@ -46,11 +46,21 @@ const TransactionsScreen = () => {
   });
 
   const onSubmit = (formData: { amount: string }) => {
-    makeRequest({
-      amount: formData.amount,
-      currency: "NGN",
-      paymentProvider: "paystack",
-    });
+    makeRequest(
+      {
+        amount: formData.amount,
+        currency: "NGN",
+        paymentProvider: "paystack",
+      },
+      {
+        onSuccess: () => {
+          handleModal();
+        },
+        onError: () => {
+          handleModal();
+        },
+      }
+    );
   };
 
   if (isLoading) return <Loader />;

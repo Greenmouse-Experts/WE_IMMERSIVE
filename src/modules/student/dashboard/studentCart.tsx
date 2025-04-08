@@ -1,15 +1,20 @@
 import { Trash } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearCart,
   deleteProduct,
   getCart,
   getTotalCartPrice,
   ICartItem,
 } from "../../../reducers/cartSlice";
-import { usePaystackPayment } from "react-paystack";
 import { getGeneralUserDetails } from "../../../api/general";
 import Loader from "../../../components/reusables/loader";
 import { useNavigate } from "react-router-dom";
+import {
+  initiatePurchase as initiatePurchaseApi,
+  verifyPurchase as verifyPurchaseApi,
+} from "../../../api/purchase";
+import { toast } from "react-toastify";
 
 const StudentCart = () => {
   const cart = useSelector(getCart);
@@ -17,7 +22,9 @@ const StudentCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // console.log(cart);
+  const { mutate: initiatePurchase, isPending } = initiatePurchaseApi();
+  const { mutate: verifyPurchase, isPending: isVerifying } =
+    verifyPurchaseApi();
 
   const user = useSelector((state: any) => state.userData.data);
   const { data: userData, isLoading: isgettingUser } = getGeneralUserDetails();
@@ -25,14 +32,6 @@ const StudentCart = () => {
   if (isgettingUser) {
     return <Loader />;
   }
-
-  const config = {
-    reference: new Date().getTime().toString(),
-    email: userData?.email,
-    amount: totalPrice * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: "pk_test_77297b93cbc01f078d572fed5e2d58f4f7b518d7",
-  };
-  const initializePayment = usePaystackPayment(config);
 
   // const onSuccess = (reference: any) => {
   //   console.log("Payment Successful, Reference:", reference);
@@ -42,26 +41,58 @@ const StudentCart = () => {
   // const onClose = () => {
   //   console.log("Payment window closed.");
   // };
-
+  const purchaseItem = cart.items[0];
   const handlePayment = () => {
     if (!user) {
       navigate("/auth/login");
       return;
     }
 
-    try {
-      initializePayment({
-        onSuccess: (reference: any) => {
-          console.log("Payment Successful, Reference:", reference);
-          // alert(`Payment Successful! Reference: ${JSON.stringify(reference)}`);
+    initiatePurchase(
+      {
+        productType: "course",
+        productId: purchaseItem.productId,
+        paymentMethod: "paystack",
+        amount: totalPrice.toFixed(2),
+        currency: "₦",
+      },
+      {
+        onSuccess: (data) => {
+          if (data?.data?.paymentLink?.reference) {
+            // Open Paystack inline payment
+            const handler = window.PaystackPop.setup({
+              key: "pk_test_77297b93cbc01f078d572fed5e2d58f4f7b518d7", // Replace with your Paystack public key
+              email: userData?.email,
+              amount: totalPrice * 100,
+              currency: "NGN",
+              ref: data?.data?.paymentLink?.reference, // Reference from backend
+              callback: (response) => {
+                // Redirect manually after payment
+                // window.location.href = `/payment/callback?reference=${response.reference}`;
+                verifyPurchase(
+                  { reference: response.reference },
+                  {
+                    onSuccess: () => {
+                      dispatch(clearCart());
+                      navigate("/");
+                    },
+                  }
+                );
+              },
+              onClose: () => {
+                // alert("Transaction was not completed, window closed.");
+                //  toast.error('Opps Something went wrong')
+              },
+            });
+
+            handler.openIframe(); // Open the inline Paystack payment modal
+          }
         },
-        onClose: () => {
-          console.log("Payment window closed.");
+        onError: () => {
+          // toast.error("Opps Something went wrong");
         },
-      });
-    } catch (error) {
-      console.error("Payment Error:", error);
-    }
+      }
+    );
   };
 
   return (
@@ -91,7 +122,7 @@ const StudentCart = () => {
                     />
                     {item.name}
                   </span>
-                  <span className="">N {item.price.toLocaleString()}</span>
+                  <span className="">N {item?.price?.toLocaleString()}</span>
                   {/* <div className="flex items-center gap-2 w-[50%] justify-center rounded-[100px] bg-[#E9EAFE]">
                         <button
                        
@@ -139,11 +170,15 @@ const StudentCart = () => {
             <div className="border-t mt-2 pt-2 flex justify-between text-[#5B5959] text-[17px] mb-5">
               <span>Total</span>
               <span className="unbound text-[17px] font-[500]">
-                N {totalPrice}
+                N{totalPrice}
               </span>
             </div>
           </div>
-          <button onClick={handlePayment} className="unbound w-[100%] xl:w-[320px] h-[50px] mt-4 rounded-[9px] bg-gradient-to-r from-[#6F0AFF] to-[#1D9CD7] text-[13px] font-[500] text-white">
+          <button
+            onClick={handlePayment}
+            disabled={isPending || isVerifying}
+            className="unbound w-[100%] xl:w-[320px] h-[50px] mt-4 rounded-[9px] bg-gradient-to-r from-[#6F0AFF] to-[#1D9CD7] text-[13px] font-[500] text-white"
+          >
             Proceed To Checkout
           </button>
         </div>
