@@ -1,17 +1,5 @@
 const StatTab = () => {
-  const projects = [
-    {
-      image: "https://placekitten.com/100/100", // replace with actual image URL
-      title: "3D Stuffed Animal Render",
-      category: "Digital Asset",
-      date: "02-12-24",
-      likes: 12,
-      rating: 4.5,
-      sold: 17,
-      income: "N 2M",
-    },
-    // Add more items as needed
-  ];
+
 
   return (
     <div className=" overflow-x-auto">
