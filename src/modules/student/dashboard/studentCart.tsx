@@ -14,8 +14,6 @@ import {
   initiatePurchase as initiatePurchaseApi,
   verifyPurchase as verifyPurchaseApi,
 } from "../../../api/purchase";
-import { toast } from "react-toastify";
-
 const StudentCart = () => {
   const cart = useSelector(getCart);
   const totalPrice = useSelector(getTotalCartPrice);
