@@ -4,6 +4,41 @@ import { toast } from "react-toastify";
 import { IAsset } from "../types/asset.types";
 import { IJob } from "../types/job.types";
 
+
+export function getModuleLessons(lessonId: string | undefined) {
+  return useQuery({
+    queryKey: ["lessonModules", lessonId],
+    queryFn: async () => {
+      const response = await axios.get(
+        `/creator/course/module/lessons?moduleId=${lessonId}`
+      );
+      return response.data.data as any;
+    },
+  });
+}
+
+
+
+export function createQuiz() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data:any) => {
+      const response = await axios.post(
+        `creator/course/lesson/quiz/question/create`,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
+      toast.success(res.message);
+    },
+    onError: (error:any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
 export function publishLesson() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -25,6 +60,7 @@ export function publishLesson() {
 }
 
 // creator/digital/asset/view?id
+
 
 export function getAssetDetails(assetId: string | undefined) {
   return useQuery({

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { enrollForACourse } from "../../../../api/student";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
 import { BeatLoader } from "react-spinners";
 import { getGeneralCourseDetails } from "../../../../api/general";
@@ -16,16 +16,15 @@ const CourseDetailsPage: React.FC = () => {
 
   const { courseId } = useParams();
 
-
   const { mutate: enroll, isPending } = enrollForACourse();
-  const{data:courseDetails, isLoading} =getGeneralCourseDetails(courseId);
+  const { data: courseDetails, isLoading } = getGeneralCourseDetails(courseId);
+  const navigate = useNavigate();
 
-  console.log(enroll)
+  console.log(enroll);
 
   if (isLoading) {
     return <Loader />;
   }
-
 
   // const handleEnroll = () => {
   //   enroll(courseId);
@@ -46,7 +45,21 @@ const CourseDetailsPage: React.FC = () => {
     toast.success(`${courseDetails?.title} added successfully`);
   };
 
- 
+  const handleBuy = () => {
+    dispatch(
+      addProduct({
+        price: parseInt(courseDetails?.price!),
+        name: courseDetails?.title,
+        productId: courseDetails?.id,
+        quantity: 1,
+        unitPrice: parseInt(courseDetails?.price!),
+        image: courseDetails?.image,
+      })
+    );
+    navigate("/cart");
+    toast.success(`${courseDetails?.title} added successfully`);
+  };
+
   return (
     <div className="box pt-20 pb-20">
       {/* Course Title & Metadata */}
@@ -69,10 +82,10 @@ const CourseDetailsPage: React.FC = () => {
           <div className="bg-[#F7F8FD] p-6 rounded-xl shadow-sm dark:bg-[#15171E]">
             <p className="font-bold text-lg text-black mb-4 unbound">Payment</p>
             <p className="text-gray-600 text-base mb-3">
-             {courseDetails?.title}
+              {courseDetails?.title}
             </p>
             <p className="text-gray-600 text-base mb-3">
-            {courseDetails?.subtitle}
+              {courseDetails?.subtitle}
             </p>
             <div className="border-b border-gray-600"></div>
             <p className="text-base font-bold mt-4">₦{courseDetails?.price}</p>
@@ -86,9 +99,12 @@ const CourseDetailsPage: React.FC = () => {
               }
               altClassName="btn-primary w-full py-3"
               disabled={isPending}
-              onClick={addToCart}
+              onClick={handleBuy}
             />
-            <button onClick={addToCart} className="w-full border border-purple-600 text-purple-600 py-3 rounded-lg mt-4">
+            <button
+              onClick={addToCart}
+              className="w-full border border-purple-600 text-purple-600 py-3 rounded-lg mt-4"
+            >
               Add to Cart
             </button>
           </div>
@@ -144,7 +160,7 @@ const CourseDetailsPage: React.FC = () => {
             {activeTab === "description" && (
               <>
                 <p className="text-black leading-loose">
-                 {courseDetails?.description}
+                  {courseDetails?.description}
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
@@ -286,8 +302,12 @@ const CourseDetailsPage: React.FC = () => {
               className="w-14 h-14 rounded-full"
             />
             <div>
-              <h4 className="font-medium text-gray-800">{courseDetails?.creator.name}</h4>
-              <p className="text-sm text-gray-500">{courseDetails?.creator.professionalSkill}</p>
+              <h4 className="font-medium text-gray-800">
+                {courseDetails?.creator.name}
+              </h4>
+              <p className="text-sm text-gray-500">
+                {courseDetails?.creator.professionalSkill}
+              </p>
               <div className="flex gap-1 mt-1 text-yellow-500">
                 ⭐️⭐️⭐️⭐️⭐️
               </div>

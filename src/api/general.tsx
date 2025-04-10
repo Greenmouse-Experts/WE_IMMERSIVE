@@ -63,10 +63,7 @@ export function updateGeneralUserPhoto() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await axios.patch(
-        `/general/profile/photo/update`,
-        data
-      );
+      const response = await axios.patch(`/general/profile/photo/update`, data);
       return response.data;
     },
     onSuccess: (res) => {
@@ -81,7 +78,6 @@ export function updateGeneralUserPhoto() {
     },
   });
 }
-
 
 export function getGeneralCourseDetails(courseId: string | undefined) {
   return useQuery({
@@ -188,4 +184,12 @@ export function getSubCategories() {
   });
 }
 
-
+export function getOrderHistory() {
+  return useQuery({
+    queryKey: ["orders"],
+    queryFn: async () => {
+      const response = await axios.get(`/purchase/history`);
+      return response.data.data as any;
+    },
+  });
+}

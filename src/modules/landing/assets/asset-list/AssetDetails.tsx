@@ -1,8 +1,6 @@
 import React from "react";
-import {
-  getGeneralAssetDetails,
-} from "../../../../api/general";
-import {  useParams } from "react-router-dom";
+import { getGeneralAssetDetails } from "../../../../api/general";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../../components/reusables/loader";
 import { ThreeDViewer } from "../asset-details";
 import { useDispatch } from "react-redux";
@@ -10,12 +8,11 @@ import { toast } from "react-toastify";
 import { addProduct } from "../../../../reducers/cartSlice";
 
 const AssetDetails: React.FC = () => {
- 
-  
   const { id } = useParams();
-  
+  const navigate = useNavigate();
+
   const { data: assetDetails, isLoading } = getGeneralAssetDetails(id);
-  
+
   if (isLoading) {
     return <Loader />;
   }
@@ -33,7 +30,21 @@ const AssetDetails: React.FC = () => {
     );
     toast.success(`${assetDetails?.assetName} added successfully`);
   };
- 
+
+  const handleBuy = () => {
+    dispatch(
+      addProduct({
+        price: assetDetails?.amount,
+        name: assetDetails?.assetName,
+        productId: id,
+        quantity: 1,
+        unitPrice: assetDetails?.amount,
+        image: assetDetails?.assetThumbnail,
+      })
+    );
+    navigate("/cart");
+    toast.success(`${assetDetails?.assetName} added successfully`);
+  };
 
   return (
     <div className="box px-4 py-8">
@@ -84,7 +95,7 @@ const AssetDetails: React.FC = () => {
             <p className="text-xl font-bold">₦{assetDetails?.amount}</p>
             <button
               className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg"
-              onClick={addToCart}
+              onClick={handleBuy}
             >
               Buy Now
             </button>

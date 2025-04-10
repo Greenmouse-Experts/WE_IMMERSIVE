@@ -13,7 +13,7 @@ import {
   getSingleCourse,
 } from "../../../api";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGetData } from "../../../hooks/useGetData";
 import { MoreVertical, GripVertical } from "lucide-react";
 import {
@@ -226,8 +226,8 @@ const CreateModules = () => {
         CREATE MODULES ON {course?.title}
       </p>
 
-      {modules.length > 0 &&
-        modules.map((module, index) => (
+      {modules?.length > 0 &&
+        modules?.map((module, index) => (
           <div
             className="bg-gray-100 rounded-xl mt-5 shadow-sm border border-gray-200"
             key={index}
@@ -259,13 +259,15 @@ const CreateModules = () => {
                         Delete Module
                       </span>
                     </MenuItem>
-                    <MenuItem className="flex flex-col gap-3">
-                      <span
-                        className="cursor-pointer w-full"
-                        onClick={() => handleDisplayLessons(module.id)}
-                      >
-                        View Lessons
-                      </span>
+                    <MenuItem
+                      onClick={() => handleDisplayLessons(module.id)}
+                      className="flex flex-col gap-3"
+                    >
+                      {/* <Link 
+                      // to={`/creator/courses/create/modules/view-lesson/${module.id}`}
+                      > */}
+                      View Lessons
+                      {/* </Link> */}
                     </MenuItem>
                   </MenuList>
                 </Menu>
@@ -274,13 +276,16 @@ const CreateModules = () => {
 
             {/* Content Section */}
             <div className="p-4">
-              {lessonsArr.length > 0 && selectedId === module.id ? (
+              {lessonsArr?.length > 0 && selectedId === module.id ? (
                 <div className="flex flex-col gap-3 p-2 mb-3">
                   {lessonsArr.map((lesson, index) => (
                     <LessonItem
                       item={lesson}
                       key={index}
                       handleView={() => {
+                        navigate(
+                          `/creator/courses/create/modules/view-lesson/${module.id}`
+                        );
                         handleViewLessons();
                         setSelectedLesson(lesson);
                       }}

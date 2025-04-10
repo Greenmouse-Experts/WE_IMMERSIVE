@@ -1,33 +1,14 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
+import { getOrderHistory } from "../../api/general";
+import Loader from "../../components/reusables/loader";
 
 const Orders = () => {
-  const data = [
-    {
-      name: "Physics Vol.1",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_10_hsicwi.png",
-      category: "Course",
-      price: "-N10,000",
-    },
-    {
-      name: "Physics Vol.1",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_11_vzeysg.png",
-      category: "Course",
-      price: "-N10,000",
-    },
-    {
-      name: "Physics Vol.1",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_12_c53ldv.png",
-      category: "Course",
-      price: "-N10,000",
-    },
-    {
-      name: "Physics Vol.1",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/Rectangle_19409_j4mzhx.png",
-      category: "Tour",
-      price: "-N10,000",
-    },
-  ];
+ 
+
+  const { data: orders, isLoading } = getOrderHistory();
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className="bg-white dark:bg-[#15171E] p-6 lg:py-6 rounded-[20px]">
@@ -56,17 +37,17 @@ const Orders = () => {
                 <td className="unbound p-5">#</td>
                 <td className="unbound p-5 pb-2">Name</td>
                 <td className="unbound p-5 pb-2">Image</td>
-                <td className="unbound p-5 pb-2">Category</td>
+
                 <td className="unbound p-5 pb-2">Price</td>
                 <td className="unbound p-5 pb-2">Status</td>
                 <td className="unbound p-5 pb-2">Action</td>
               </tr>
             </thead>
             <tbody>
-              {data.map((item, i) => (
+              {orders.data.map((item: any, i:number) => (
                 <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
                   <td className="p-4">{`0${i + 1}`}</td>
-                  <td className="p-4">{item.name}</td>
+                  <td className="p-4">{item.metadata.productName}</td>
                   <td className="pl-1 p-4">
                     <img
                       src={item.img}
@@ -74,9 +55,9 @@ const Orders = () => {
                       className="w-[70px] h-auto"
                     />
                   </td>
-                  <td className="p-4">{item.category}</td>
-                  <td className="p-4">{item.price}</td>
-                  <td className="p-4 text-[#4FCC36]">Completed</td>
+
+                  <td className="p-4">{item.amount}</td>
+                  <td className="p-4 text-[#4FCC36]">{item.status}</td>
                   <td className="p-4 pl-4">
                     <PiDotsThreeOutlineFill className="cursor-pointer" />
                   </td>

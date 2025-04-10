@@ -1,51 +1,14 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
+import { getOrderHistory } from "../../api/general";
+import Loader from "../../components/reusables/loader";
 
 const TransactionList = () => {
-  const data = [
-    {
-      transactionId: "#ASDF234324",
-      description: "Earned EV Token : Phyis...",
-      date: "12-12-24",
-      amount: "+4EV",
-      status: "Completed",
-    },
-    {
-      transactionId: "#ASDF234324",
-      description: "Purchased Course: AR D...",
-      date: "12-12-24",
-      amount: "+4EV",
-      status: "Completed",
-    },
-    {
-      transactionId: "#ASDF234324",
-      description: "Earned EV Token : Phyis...",
-      date: "12-12-24",
-      amount: "+4EV",
-      status: "Completed",
-    },
-    {
-      transactionId: "#ASDF234324",
-      description: "Purchased Course: AR D...",
-      date: "12-12-24",
-      amount: "+4EV",
-      status: "Completed",
-    },
-    {
-      transactionId: "#ASDF234324",
-      description: "Earned EV Token : Phyis...",
-      date: "12-12-24",
-      amount: "+4EV",
-      status: "Completed",
-    },
-    {
-      transactionId: "#ASDF234324",
-      description: "Purchased Course: AR D...",
-      date: "12-12-24",
-      amount: "+4EV",
-      status: "Completed",
-    },
-  ];
+ 
+
+  const { data: orders, isLoading } = getOrderHistory();
+
+  if (isLoading) return <Loader />;
 
   return (
     <div>
@@ -80,7 +43,7 @@ const TransactionList = () => {
               </tr>
             </thead>
             <tbody className="">
-              {data.map((item, i) => (
+              {orders.data.map((item, i) => (
                 <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
                   <td className={`p-2 pl-4`}>{`0${i + 1}`}</td>
                   <td className="p-2">{item.transactionId}</td>
