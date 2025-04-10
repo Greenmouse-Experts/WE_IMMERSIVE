@@ -2,6 +2,7 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import { getOrderHistory } from "../../api/general";
 import Loader from "../../components/reusables/loader";
+import { dateFormat } from "../../helpers";
 
 const TransactionList = () => {
  
@@ -35,7 +36,7 @@ const TransactionList = () => {
               <tr>
                 <td className="unbound pl-4 p-1 pb-2">#</td>
                 <td className="unbound p-1 pb-2">Transaction ID</td>
-                <td className="unbound p-1 pb-2">Description</td>
+                {/* <td className="unbound p-1 pb-2">Description</td> */}
                 <td className="unbound p-1 pb-2">Date</td>
                 <td className="unbound p-1 pb-2">Amount</td>
                 <td className="unbound p-1 pb-2">Status</td>
@@ -43,12 +44,12 @@ const TransactionList = () => {
               </tr>
             </thead>
             <tbody className="">
-              {orders.data.map((item, i) => (
+              {orders.data.map((item:any, i:number) => (
                 <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
                   <td className={`p-2 pl-4`}>{`0${i + 1}`}</td>
-                  <td className="p-2">{item.transactionId}</td>
-                  <td className="pl-1 p-2">{item.description}</td>
-                  <td className="p-2">{item.date}</td>
+                  <td className="p-2">{item.gatewayReference.slice(0, 14)}</td>
+                  {/* <td className="pl-1 p-2">{item.description}</td> */}
+                  <td className="p-2">{dateFormat(item.createdAt)}</td>
                   <td className="p-2">{item.amount}</td>
                   <td className="p-2 py-4 text-[#4FCC36]">{item.status}</td>
                   <td className="p-2 pl-4">
