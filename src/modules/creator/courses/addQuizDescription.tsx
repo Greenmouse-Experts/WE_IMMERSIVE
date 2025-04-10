@@ -1,7 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import { createAssignment, createQuizBasic } from "../../../api/creator";
-import { toast } from "react-toastify";
+import {  createQuizBasic } from "../../../api/creator";
+// import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Button from "../../../components/ui/Button";
@@ -9,7 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
 const AddQuizDescription = ({
-  lessonQuizId,
+  // lessonQuizId,
   handleOpen,
 }: {
   lessonQuizId: string;

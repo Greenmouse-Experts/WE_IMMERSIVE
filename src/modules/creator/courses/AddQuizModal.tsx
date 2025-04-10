@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const QuizCreator = ({
   lessonQuizId,
-  handleOpen,
+  // handleOpen,
 }: {
   lessonQuizId: string;
   handleOpen: () => void;
@@ -16,7 +16,7 @@ const QuizCreator = ({
     null
   );
   const [question, setQuestion] = useState("");
-  const [tab, setTab] = useState(1);
+  // const [tab, setTab] = useState(1);
   const { mutate: createquiz, isPending } = createQuizQuestion();
 
   const handleAnswerChange = (index: number, value: string) => {

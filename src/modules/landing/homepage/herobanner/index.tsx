@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Button from "../../../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 
 const slides = [
   {
