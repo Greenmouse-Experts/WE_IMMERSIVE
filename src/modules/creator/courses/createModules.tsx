@@ -13,7 +13,7 @@ import {
   getSingleCourse,
 } from "../../../api";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useGetData } from "../../../hooks/useGetData";
 import { MoreVertical, GripVertical } from "lucide-react";
 import {
