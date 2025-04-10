@@ -13,7 +13,7 @@ import {
   getSingleCourse,
 } from "../../../api";
 import { toast } from "react-toastify";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGetData } from "../../../hooks/useGetData";
 import { MoreVertical, GripVertical } from "lucide-react";
 import {
@@ -49,8 +49,8 @@ const CreateModules = () => {
     async () => (selectedId ? getModulesLesson(selectedId) : null),
     {
       queryKey: ["lessonModules", selectedId],
-      enabled: !!selectedId, // Prevents fetching when selectedId is null
-      staleTime: 1000 * 60, // Optional: Keeps data fresh for 1 minute
+      enabled: !!selectedId, 
+      staleTime: 1000 * 60, 
     }
   );
 
@@ -251,6 +251,20 @@ const CreateModules = () => {
                     <MoreVertical />
                   </MenuHandler>
                   <MenuList>
+                    <MenuItem
+                      onClick={() =>
+                        navigate(
+                          `/creator/courses/create/modules/view-lesson/${module.id}`
+                        )
+                      }
+                      className="flex flex-col gap-3"
+                    >
+                      {/* <Link 
+                      // to={`/creator/courses/create/modules/view-lesson/${module.id}`}
+                      > */}
+                      View Module
+                      {/* </Link> */}
+                    </MenuItem>
                     <MenuItem className="flex flex-col gap-3">
                       <span
                         className="cursor-pointer w-full"
@@ -259,14 +273,16 @@ const CreateModules = () => {
                         Delete Module
                       </span>
                     </MenuItem>
-                    <MenuItem
-                      onClick={() => handleDisplayLessons(module.id)}
-                      className="flex flex-col gap-3"
-                    >
+                    <MenuItem className="flex flex-col gap-3">
+                      <span
+                        onClick={() => handleDisplayLessons(module.id)}
+                        className="cursor-pointer w-full"
+                      >
+                        View Lessons
+                      </span>
                       {/* <Link 
                       // to={`/creator/courses/create/modules/view-lesson/${module.id}`}
                       > */}
-                      View Lessons
                       {/* </Link> */}
                     </MenuItem>
                   </MenuList>
@@ -283,9 +299,9 @@ const CreateModules = () => {
                       item={lesson}
                       key={index}
                       handleView={() => {
-                        navigate(
-                          `/creator/courses/create/modules/view-lesson/${module.id}`
-                        );
+                        // navigate(
+                        //   `/creator/courses/create/modules/view-lesson/${module.id}`
+                        // );
                         handleViewLessons();
                         setSelectedLesson(lesson);
                       }}

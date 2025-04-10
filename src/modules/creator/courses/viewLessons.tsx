@@ -2,7 +2,7 @@
 // import SelectInput from "../../../components/ui/SelectInput";
 import Button from "../../../components/ui/Button";
 
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getModuleLessons } from "../../../api/creator";
 import {
   Dialog,
@@ -16,17 +16,25 @@ import AddQuiz from "./add-quiz";
 import { useState } from "react";
 import QuizCreator from "./AddQuizModal";
 import Loader from "../../../components/reusables/loader";
+import AssignmentCreator from "./AddAssignmentModal";
+import AddQuizDescription from "./addQuizDescription";
+import LessonItem from "./lesson-Item";
 
 const ViewLessons = () => {
   // const navigate = useNavigate();
 
   const { id } = useParams();
   const [contentType, setContentType] = useState("Quiz");
+  const [openQuizDesc, setOpenQuizDesc] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openAssignment, setOpenAssignment] = useState(false);
+  const [selectLesson, setSelectLesson] = useState<any>(null);
 
   const { data: moduleLessons, isLoading } = getModuleLessons(id);
 
+  const handleOpenQuizDesc = () => setOpenQuizDesc(!openQuizDesc);
   const handleOpen = () => setOpen(!open);
+  const handleOpenAssignment = () => setOpenAssignment(!openAssignment);
 
   console.log(moduleLessons);
 
@@ -46,12 +54,18 @@ const ViewLessons = () => {
   //   },
   // });
 
-  
-  if(isLoading) return <Loader/>
+  if (isLoading) return <Loader />;
 
-  const selectedLesson = moduleLessons? moduleLessons[0] :{}
+  const selectedLesson = moduleLessons ? moduleLessons[0] : {};
 
   // console.log(selectedLesson)
+
+  console.log(contentType);
+
+  const handleAddQuestion = (lesson: any) => {
+    setSelectLesson(lesson);
+    handleOpen();
+  };
 
   return (
     <>
@@ -75,7 +89,9 @@ const ViewLessons = () => {
                 </div>
 
                 {/* Module Title */}
-                <h3 className="flex-1 text-gray-800 font-medium">{selectedLesson?.title}</h3>
+                <h3 className="flex-1 text-gray-800 font-medium">
+                  {selectedLesson?.title}
+                </h3>
 
                 {/* More Options Button */}
                 <button className="text-gray-500 hover:text-gray-700">
@@ -108,12 +124,36 @@ const ViewLessons = () => {
               {/* Content Section */}
             </div>
 
+            <div>
+              {moduleLessons &&
+                moduleLessons?.map((lesson: any, index: number) => (
+                  <LessonItem
+                    item={lesson}
+                    key={index}
+                    handleView={() => {
+                      // navigate(
+                      //   `/creator/courses/create/modules/view-lesson/${module.id}`
+                      // );
+                      // handleViewLessons();
+                      // setSelectedLesson(lesson);
+                    }}
+                    handleAddQuestion={() => handleAddQuestion(lesson)}
+                  />
+                ))}
+            </div>
+
             <div className="mt-10 mb-8 gap-8 text-center flex flex-col items-center justify-center w-full ">
               <p className="">
                 Turn your knowledge to Impact – create and share your course!{" "}
               </p>
               <Button
-                onClick={handleOpen}
+                onClick={() => {
+                  if (contentType === "quiz") {
+                    handleOpenQuizDesc();
+                  } else {
+                    handleOpenAssignment();
+                  }
+                }}
                 title="Add Content"
                 withArrows
                 style={{ width: 211 }}
@@ -129,9 +169,28 @@ const ViewLessons = () => {
         </div>
       </div>
 
+      <Dialog open={openQuizDesc} handler={handleOpenQuizDesc}>
+        <div>
+          <AddQuizDescription
+            lessonQuizId={selectedLesson?.id}
+            handleOpen={handleOpenQuizDesc}
+          />
+        </div>
+      </Dialog>
       <Dialog open={open} handler={handleOpen}>
         <div>
-          <QuizCreator lessonQuizId={selectedLesson?.id} handleOpen={handleOpen} />
+          <QuizCreator
+            lessonQuizId={selectLesson?.id}
+            handleOpen={handleOpen}
+          />
+        </div>
+      </Dialog>
+      <Dialog open={openAssignment} handler={handleOpenAssignment}>
+        <div>
+          <AssignmentCreator
+            lessonQuizId={selectedLesson?.id}
+            handleOpen={handleOpenAssignment}
+          />
         </div>
       </Dialog>
     </>

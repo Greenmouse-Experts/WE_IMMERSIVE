@@ -19,12 +19,50 @@ export function getModuleLessons(lessonId: string | undefined) {
 
 
 
-export function createQuiz() {
+export function createQuizBasic() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data:any) => {
+      const response = await axios.post(
+        `creator/course/lesson/quiz/create`,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
+      toast.success(res.message);
+    },
+    onError: (error:any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+export function createQuizQuestion() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data:any) => {
       const response = await axios.post(
         `creator/course/lesson/quiz/question/create`,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
+      toast.success(res.message);
+    },
+    onError: (error:any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+export function createAssignment() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data:any) => {
+      const response = await axios.post(
+        `/creator/course/lesson/assignment/create`,
         data
       );
       return response.data;

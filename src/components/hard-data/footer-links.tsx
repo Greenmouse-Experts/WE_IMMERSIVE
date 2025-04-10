@@ -84,7 +84,7 @@ export const contactLink = [
         route: ""
     },
     {
-        name: "help@weimmersive.com",
+        name: "support@weimmersive.io",
         route: ""
     },
 ]

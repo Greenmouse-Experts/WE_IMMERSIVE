@@ -88,8 +88,8 @@ const AssetDetails: React.FC = () => {
 
         {/* Payment & Profile */}
         <div className="space-y-6">
-          <div className="p-6 bg-gray-100 rounded-lg shadow-sm space-y-4">
-            <h3 className="text-lg font-semibold">Payment</h3>
+          <div className="p-6 bg-gray-100 dark:bg-darkMode rounded-lg shadow-sm space-y-4">
+            <h3 className="text-lg font-semibold dark:text-white">Payment</h3>
             <p className="text-gray-600">{assetDetails?.assetName}</p>
             <hr />
             <p className="text-xl font-bold">₦{assetDetails?.amount}</p>
@@ -107,7 +107,7 @@ const AssetDetails: React.FC = () => {
             </button>
           </div>
 
-          <div className="p-6 bg-gray-100 rounded-lg shadow-sm space-y-4">
+          <div className="p-6 bg-gray-100 dark:bg-darkMode rounded-lg shadow-sm space-y-4">
             <span className="bg-purple-600 text-white px-3 py-1 text-sm rounded-full">
               Creator’s Profile
             </span>
