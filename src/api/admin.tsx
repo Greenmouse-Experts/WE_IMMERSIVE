@@ -599,3 +599,22 @@ export function updateSubscriptionPlan() {
     },
   });
 }
+
+export function getAdminAnalytics() {
+  return useQuery({
+    queryKey: ["admin-analytics"],
+    queryFn: async () => {
+      const response = await axios.get(`/analysis/admin/yearly/landing`);
+      return response.data;
+    },
+  });
+}
+export function getAdminStats() {
+  return useQuery({
+    queryKey: ["admin-stats"],
+    queryFn: async () => {
+      const response = await axios.get(`/stat/admin/landing`);
+      return response.data;
+    },
+  });
+}

@@ -1,32 +1,39 @@
+import { getAdminStats } from "../../../api/admin";
+import Loader from "../../../components/reusables/loader";
 import { formatAsNgnMoney } from "../../../components/utils/formatHelp";
 
 const StatisticList = () => {
+  const { data: adminStats, isLoading } = getAdminStats();
+
+  if (isLoading) return <Loader />;
   const list = [
     {
       name: "Total Users",
-      count: 7,
+      count: adminStats.totalUsers,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716454/WE%20Immersive/learning-2_xy21e0.png",
       color: "#FFC7F0",
     },
     {
       name: "Total Income",
-      count: `$${formatAsNgnMoney(107000)}`,
+      count: `₦${formatAsNgnMoney(adminStats.totalIncome)}`,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/coin-2_qcugc2.png",
-      color: "#D0FFC7",
+      color: "D0FFC7",
     },
     {
       name: "Active Users",
-      count: 37,
+      count: adminStats.totalActiveUsers,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1732618852/Group_1171275331_lcfrkq.png",
       color: "#FFD7C7",
     },
     {
       name: "Subscriptions",
-      count: `20K`,
+      count: adminStats.totalSubscriptions,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716404/WE%20Immersive/books_hkqetx.png",
       color: "#C7C8FF",
     },
   ];
+
+
   return (
     <div>
       <div className="grid md:grid-cols-4 grid-cols-1 gap-6 mt-10">

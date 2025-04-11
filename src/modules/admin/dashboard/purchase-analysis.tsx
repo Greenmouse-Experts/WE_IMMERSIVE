@@ -1,104 +1,113 @@
-import ApexCharts from "apexcharts";
 import Chart from "react-apexcharts";
 import { MdArrowOutward } from "react-icons/md";
+import { getAdminAnalytics } from "../../../api/admin";
+import Loader from "../../../components/reusables/loader";
 
 const PurchaseAnalysis = () => {
-     const options = {
-       colors: ["#553CF0", "#2598D8"],
-       legend: {
-         show: true,
-       },
-       toolbar: {
-         show: false,
-       },
-       tooltip: {
-         theme: "dark",
-         marker: {
-           show: true,
-         },
-         style: {
-           fontSize: "12px",
-           color: "#0000",
-           fontFamily: undefined,
-         },
-       },
-       grid: {
-         show: true,
-       },
-       stroke: {
-         show: true,
-         colors: ["transparent"],
-         width: 5,
-       },
-       dataLabels: {
-         enabled: false,
-       },
-       yaxis: {
-         labels: {
-           show: true,
-           style: {
-             colors: "#A3A3A3",
-             fontSize: "12px",
-             cssClass: "apexcharts-xaxis-label",
-           },
-         },
-         axisBorder: {
-           show: true,
-         },
-         axisTicks: {
-           show: true,
-         },
-       },
-       xaxis: {
-         labels: {
-           show: true,
-           style: {
-             colors: "#A3A3A3",
-             fontSize: "12px",
-             cssClass: "apexcharts-xaxis-label",
-           },
-         },
-         categories: [
-           "Jan",
-           "Feb",
-           "Mar",
-           "Apr",
-           "May",
-           "Jun",
-           "Jul",
-           "Aug",
-           "Sep",
-           "Oct",
-           "Nov",
-           "Dec",
-         ],
-       },
-     } as ApexCharts.ApexOptions;
+  const { data: adminAnalytics, isLoading } = getAdminAnalytics();
 
-     const series = [
-       {
-         name: "Ads",
-         data: [40, 90, 110, 50, 110, 20, 150, 50, 110, 40, 20, 10],
-       },
-       {
-         name: "Subscriptions",
-         data: [70, 120, 100, 50, 90, 130, 80, 50, 60, 120, 10, 10],
-       },
-     ];
+  if (isLoading) return <Loader />;
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const series = [
+    {
+      name: "Courses Revenue",
+      data: adminAnalytics?.monthlyTrends.map(
+        (item: any) => item.coursesRevenue
+      ),
+    },
+    {
+      name: "Subscription Revenue",
+      data: adminAnalytics?.monthlyTrends.map(
+        (item: any) => item.subscriptionRevenue
+      ),
+    },
+    {
+      name: "Total Revenue",
+      data: adminAnalytics?.monthlyTrends.map((item: any) => item.totalRevenue),
+    },
+  ];
+
+  const options = {
+    colors: ["#553CF0", "#2598D8", "#14CA74"],
+    chart: {
+      toolbar: { show: false },
+    },
+    legend: { show: true },
+    tooltip: {
+      theme: "dark",
+      marker: { show: true },
+      style: {
+        fontSize: "12px",
+      },
+    },
+    grid: { show: true },
+    stroke: {
+      show: true,
+      width: 5,
+      colors: ["transparent"],
+    },
+    dataLabels: { enabled: false },
+    yaxis: {
+      labels: {
+        show: true,
+        style: {
+          colors: "#A3A3A3",
+          fontSize: "12px",
+          cssClass: "apexcharts-yaxis-label",
+        },
+      },
+      axisBorder: { show: true },
+      axisTicks: { show: true },
+    },
+    xaxis: {
+      categories: months,
+      labels: {
+        show: true,
+        style: {
+          colors: "#A3A3A3",
+          fontSize: "12px",
+          cssClass: "apexcharts-xaxis-label",
+        },
+      },
+    },
+  };
+
+  const totalRevenue = adminAnalytics?.monthlyTrends.reduce(
+    (sum:any, item:any) => sum + item.totalRevenue,
+    0
+  );
+
   return (
     <div>
-      <div className="bg-white md:w-[100%] lg:w-[100%] dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
-      <p className="text-sm text-[#7F7F7F]">Total profit</p>
-
-      <div className="flex items-center justify-between">
+      <div className="bg-white md:w-full lg:w-full dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
+        <p className="text-sm text-[#7F7F7F]">Total Revenue</p>
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <p className="unbound text-[#06052A] fw-600">$144.6K</p>
-            <p className="text-[#14CA74] bg-[#05C16833] px-1 text-[10px] border border-[#05C16833] rounded-[2px] flex items-center">24.6% <MdArrowOutward /></p>
+            <p className="unbound text-[#06052A] fw-600">
+              ₦{(totalRevenue / 1000).toFixed(1)}K
+            </p>
+            <p className="text-[#14CA74] bg-[#05C16833] px-1 text-[10px] border border-[#05C16833] rounded-[2px] flex items-center">
+              24.6% <MdArrowOutward />
+            </p>
           </div>
           <div className="flex items-center gap-x-4 mt-2">
-            <div className=" cursor-pointer">
+            <div className="cursor-pointer">
               <p className="text-[#553CF0] text-sm fs-300">View Report</p>
-             
             </div>
           </div>
         </div>
@@ -116,6 +125,6 @@ const PurchaseAnalysis = () => {
       </div>
     </div>
   );
-}
+};
 
-export default PurchaseAnalysis
+export default PurchaseAnalysis;
