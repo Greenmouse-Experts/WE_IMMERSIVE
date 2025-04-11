@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import {  createQuizBasic } from "../../../api/creator";
+import { createQuizBasic } from "../../../api/creator";
 // import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -100,12 +100,6 @@ const AddQuizDescription = ({
               />
             )}
           />
-          {/* 
-          <ReactQuill
-            value={description}
-            onChange={setDescription}
-            style={{ backgroundColor: "#E9EBFB" }}
-          /> */}
           <Controller
             name="description"
             control={control}

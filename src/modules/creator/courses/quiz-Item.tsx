@@ -6,7 +6,7 @@ import {
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
-import { publishLesson } from "../../../api/creator";
+// import { publishLesson } from "../../../api/creator";
 import { Link } from "react-router-dom";
 // import { duration } from "@mui/material";
 
@@ -14,21 +14,22 @@ interface IQuizItemProps {
   item: ICourseItem;
   handleView?: () => void;
   handleAddQuestion?: () => void;
+  handleDelete?:() => void;
 }
 
-const QuizItem = ({ item, handleAddQuestion }: IQuizItemProps) => {
-  const { mutate: publish, isPending } = publishLesson();
-  console.log(isPending);
+const QuizItem = ({ item, handleAddQuestion, handleDelete }: IQuizItemProps) => {
+  // const { mutate: publish, isPending } = publishLesson();
+  // console.log(isPending);
 
-  const handlePublish = () => {
-    const payload: any = {
-      lessonId: item.id,
-      ...item,
-      status: "published",
-      duration: 51,
-    };
-    publish({ ...payload });
-  };
+  // const handlePublish = () => {
+  //   const payload: any = {
+  //     lessonId: item.id,
+  //     ...item,
+  //     status: "published",
+  //     duration: 51,
+  //   };
+  //   publish({ ...payload });
+  // };
 
   return (
     <div className="flex items-center gap-3 bg-white dark:bg-darkMode p-4 rounded-[10px]">
@@ -70,7 +71,7 @@ const QuizItem = ({ item, handleAddQuestion }: IQuizItemProps) => {
             </MenuItem>
 
             <MenuItem className="flex flex-col gap-3">
-              <span className="cursor-pointer w-full" onClick={handlePublish}>
+              <span className="cursor-pointer w-full" onClick={handleDelete}>
                 Delete Quiz
               </span>
             </MenuItem>

@@ -1,11 +1,12 @@
-// import {  useForm } from "react-hook-form";
-// import SelectInput from "../../../components/ui/SelectInput";
 import Button from "../../../components/ui/Button";
 
 import { useParams } from "react-router-dom";
-import { getModuleLessons } from "../../../api/creator";
+import { deleteQuizBasic, getModuleLessons } from "../../../api/creator";
 import {
+  ButtonGroup,
   Dialog,
+  DialogBody,
+  DialogFooter,
   Menu,
   MenuHandler,
   MenuItem,
@@ -20,53 +21,67 @@ import AssignmentCreator from "./AddAssignmentModal";
 import AddQuizDescription from "./addQuizDescription";
 import LessonItem from "./lesson-Item";
 import QuizItem from "./quiz-Item";
+import { BeatLoader } from "react-spinners";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { deleteLessonApi } from "../../../api";
+import Publish from "../../../components/reusables/Publish";
 
 const ViewLessons = () => {
   // const navigate = useNavigate();
 
   const { id } = useParams();
-  const [contentType, setContentType] = useState("Quiz");
+  const [contentType, setContentType] = useState("quiz");
   const [openQuizDesc, setOpenQuizDesc] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [openAssignment, setOpenAssignment] = useState(false);
   const [selectLesson, setSelectLesson] = useState<any>(null);
   const [tab, setTab] = useState(0);
-
+  const [viewLesson, setViewLesson] = useState(false);
+  const handleViewLessons = () => setViewLesson(!viewLesson);
+  const queryClient = useQueryClient();
   const { data: moduleLessons, isLoading } = getModuleLessons(id);
 
   const handleOpenQuizDesc = () => setOpenQuizDesc(!openQuizDesc);
   const handleOpen = () => setOpen(!open);
   const handleOpenAssignment = () => setOpenAssignment(!openAssignment);
+  const handleDelete = () => setOpenDelete(!openDelete);
 
-  // console.log(moduleLessons);
+  const { mutate: deleteQuiz, isPending: isDeletingQuiz } = deleteQuizBasic();
 
-  // const {
-  //   control,
-  //   handleSubmit,
-  //   setValue,
-  //   formState: { errors, isValid },
-  // } = useForm({
-  //   mode: "onChange",
-  //   defaultValues: {
-  //     title: "",
-  //     contentType: "",
-  //     content: "",
-  //     duration: "",
-  //     contentUrl: "",
-  //   },
-  // });
+  const { mutate: deleteLesson, isPending: isDeleting } = useMutation({
+    mutationFn: deleteLessonApi,
+    onSuccess: (data) => {
+      toast.success(data.message);
+      queryClient.invalidateQueries({
+        queryKey: ["lessonModules", selectLesson.id],
+      });
+      handleViewLessons();
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast.error(error.response.data.message);
+    },
+  });
 
   if (isLoading) return <Loader />;
 
-  const selectedLesson = moduleLessons ? moduleLessons[0] : {};
+  // const selectedLesson = moduleLessons ? moduleLessons[0] : {};
 
   // console.log(selectedLesson)
-
-  console.log(moduleLessons[0]);
 
   const handleAddQuestion = (lesson: any) => {
     setSelectLesson(lesson);
     handleOpen();
+  };
+
+  const handleDeleteQuizBasic = () => {
+    deleteQuiz(selectLesson.id, {
+      onSuccess: () => {
+        handleDelete();
+      },
+    });
   };
 
   return (
@@ -110,12 +125,12 @@ const ViewLessons = () => {
 
                   {/* Module Title */}
                   <h3 className="flex-1 text-gray-800 font-medium">
-                    {selectedLesson?.title}
+                    {moduleLessons[0]?.title}
                   </h3>
 
                   {/* More Options Button */}
                   <button className="text-gray-500 hover:text-gray-700">
-                    <Menu placement="left">
+                    {/* <Menu placement="left">
                       <MenuHandler>
                         <MoreVertical />
                       </MenuHandler>
@@ -137,7 +152,7 @@ const ViewLessons = () => {
                           </span>
                         </MenuItem>
                       </MenuList>
-                    </Menu>
+                    </Menu> */}
                   </button>
                 </div>
 
@@ -154,11 +169,11 @@ const ViewLessons = () => {
                             item={lesson}
                             key={index}
                             handleView={() => {
+                              setSelectLesson(lesson);
                               // navigate(
                               //   `/creator/courses/create/modules/view-lesson/${module.id}`
                               // );
-                              // handleViewLessons();
-                              // setSelectedLesson(lesson);
+                              handleViewLessons();
                             }}
                             handleAddQuestion={() => handleAddQuestion(lesson)}
                           />
@@ -176,7 +191,7 @@ const ViewLessons = () => {
                   onClick={() => {
                     if (contentType === "quiz") {
                       handleOpenQuizDesc();
-                    } else {
+                    } else if (contentType === "assignment") {
                       handleOpenAssignment();
                     }
                   }}
@@ -246,9 +261,12 @@ const ViewLessons = () => {
                           //   `/creator/courses/create/modules/view-lesson/${module.id}`
                           // );
                           // handleViewLessons();
-                          // setSelectedLesson(lesson);
                         }}
                         handleAddQuestion={() => handleAddQuestion(lesson)}
+                        handleDelete={() => {
+                          setSelectLesson(lesson);
+                          handleDelete();
+                        }}
                       />
                     )
                   )}
@@ -285,7 +303,7 @@ const ViewLessons = () => {
       <Dialog open={openQuizDesc} handler={handleOpenQuizDesc}>
         <div>
           <AddQuizDescription
-            lessonQuizId={selectedLesson?.id}
+            lessonQuizId={selectLesson?.id}
             handleOpen={handleOpenQuizDesc}
           />
         </div>
@@ -301,8 +319,70 @@ const ViewLessons = () => {
       <Dialog open={openAssignment} handler={handleOpenAssignment}>
         <div>
           <AssignmentCreator
-            lessonQuizId={selectedLesson?.id}
+            lessonQuizId={id}
             handleOpen={handleOpenAssignment}
+          />
+        </div>
+      </Dialog>
+      <Dialog
+        open={viewLesson}
+        handler={handleViewLessons}
+        size="md"
+        className="dark:bg-darkMood "
+      >
+        <DialogBody>
+          <div className="">
+            <p className=" font-medium text-black mb-4">
+              {selectLesson?.title}
+            </p>
+            {selectLesson?.contentType === "video" && (
+              <video
+                controls
+                className="h-[500px] mx-auto w-full"
+                src={selectLesson?.contentUrl}
+              ></video>
+            )}
+            {selectLesson?.contentType === "text" && (
+              <div className="h-[300px]">
+                <p className="text-black">{selectLesson?.content}</p>
+              </div>
+            )}
+          </div>
+        </DialogBody>
+        <DialogFooter>
+          <div className="flex gap-4">
+            <ButtonGroup
+              variant="text"
+              color="red"
+              onClick={handleViewLessons}
+              className="mr-1 px-10 py-1 rounded-md whitespace-nowrap border"
+            >
+              <span>Cancel</span>
+            </ButtonGroup>
+            <Button
+              style={{ width: "fit-content" }}
+              title={
+                isDeleting ? (
+                  <BeatLoader size={12} color="white" />
+                ) : (
+                  "Delete Lessson"
+                )
+              }
+              withArrows
+              size={14}
+              onClick={() => deleteLesson(selectLesson?.id)}
+              altClassName="btn-primary px-10 py-2 whitespace-nowrap"
+            />
+          </div>
+        </DialogFooter>
+      </Dialog>
+      <Dialog className="" open={openDelete} handler={handleDelete} size="md">
+        <div className="p-6 bg-white rounded-xl overflow-hidden">
+          <Publish
+            handleCancel={handleDelete}
+            title={`Are you sure you want to delete this quiz?`}
+            handleProceed={handleDeleteQuizBasic}
+            isLoading={isDeletingQuiz}
           />
         </div>
       </Dialog>

@@ -49,6 +49,24 @@ export function createQuizBasic() {
     },
   });
 }
+export function deleteQuizBasic() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (quizId) => {
+      const response = await axios.delete(
+        `creator/course/lesson/quiz/delete?quizId=${quizId}`);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
+      toast.success(res.message);
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
 export function createQuizQuestion() {
   const queryClient = useQueryClient();
   return useMutation({
