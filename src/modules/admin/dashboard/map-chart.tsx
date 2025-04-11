@@ -4,7 +4,7 @@ import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import { MdArrowOutward, MdOutlineArrowDropDown } from "react-icons/md";
-import { getUserByCountry } from "../../../api/admin";
+import { getAdminAnalytics, getUserByCountry } from "../../../api/admin";
 import Loader from "../../../components/reusables/loader";
 
 const MapChart = () => {
@@ -71,8 +71,15 @@ const MapChart = () => {
 
     return () => root.dispose();
   }, []);
+  const { data: adminAnalytics, isLoading:gettingAnalytics } = getAdminAnalytics();
 
-  if (isLoading) return <Loader />;
+
+  if (isLoading || gettingAnalytics) return <Loader />;
+
+  const totalRevenue = adminAnalytics?.monthlyTrends.reduce(
+    (sum:any, item:any) => sum + item.totalRevenue,
+    0
+  );
 
   return (
     <div className="flex gap-4 bg-white dark:bg-[#15171E] rounded-[20px]">
@@ -81,7 +88,7 @@ const MapChart = () => {
         <p className="text-sm text-[#7F7F7F]">Total revenue</p>
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
-            <p className="unbound text-[#06052A] fw-600">$240.8K </p>
+            <p className="unbound text-[#06052A] fw-600">₦{(totalRevenue / 1000).toFixed(1)}K</p>
             <p className="text-[#14CA74] bg-[#05C16833] px-1 text-[10px] border border-[#05C16833] rounded-[2px] flex items-center">24.6% <MdArrowOutward /></p>
           </div>
           <div className="flex items-center gap-x-4 mt-2">
