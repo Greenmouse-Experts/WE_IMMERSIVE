@@ -206,6 +206,24 @@ export function viewCreatorJobDetails(jobId: string | undefined) {
     },
   });
 }
+export function getCreatorAnalytics() {
+  return useQuery({
+    queryKey: ["creator-analytics"],
+    queryFn: async () => {
+      const response = await axios.get(`/analysis/creator/yearly/landing`);
+      return response.data;
+    },
+  });
+}
+export function getCreatorStats() {
+  return useQuery({
+    queryKey: ["creator-stats"],
+    queryFn: async () => {
+      const response = await axios.get(`/stat/creator/landing`);
+      return response.data.data;
+    },
+  });
+}
 
 export function deleteCreatorJob() {
   const queryClient = useQueryClient();

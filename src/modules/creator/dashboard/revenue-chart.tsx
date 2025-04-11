@@ -1,14 +1,30 @@
 import { MdArrowOutward, MdOutlineArrowDropDown } from "react-icons/md";
 import Chart from "react-apexcharts";
 
-const RevenueChart = () => {
-  const options: ApexCharts.ApexOptions  = {
+const RevenueChart = ({monthlyTrends}:any) => {
+  // const monthlyTrends = [
+  //   { month: 1, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 2, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 3, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 4, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 5, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 6, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 7, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 8, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 9, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 10, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 11, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  //   { month: 12, coursesRevenue: 0, digitalRevenue: 0, physicalRevenue: 0, totalRevenue: 0, transactions: 0 },
+  // ];
+
+
+  const options: ApexCharts.ApexOptions = {
     chart: {
       type: "area",
       toolbar: { show: false },
       animations: { enabled: true },
     },
-    colors: ["#A855F7", "#38BDF8"], // Custom colors for lines
+    colors: ["#A855F7", "#38BDF8"],
     dataLabels: { enabled: false },
     stroke: { curve: "smooth", width: 2 },
     fill: {
@@ -23,7 +39,7 @@ const RevenueChart = () => {
     grid: { borderColor: "#e7e7e7" },
     markers: { size: 5 },
     tooltip: {
-      theme:"dark",
+      theme: "dark",
       shared: true,
       intersect: false,
       y: {
@@ -55,25 +71,27 @@ const RevenueChart = () => {
               background: "#F9FAFB",
               color: "#10B981",
               fontSize: "7px",
-
             },
           },
         },
       ],
     },
   };
+
   const series = [
     {
-      name: "Subscriptions",
-      data: [20, 40, 35, 50, 49, 60, 70, 91, 125, 140, 150, 240], // Ensure data matches the x-axis categories
+      name: "Courses",
+      data: monthlyTrends?.map((item:any) => item.coursesRevenue),
     },
     {
-      name: "Commissions & Ads",
-      data: [15, 30, 40, 55, 65, 75, 80, 100, 115, 125, 140, 190],
+      name: "Digital Products",
+      data: monthlyTrends?.map((item:any) => item.digitalRevenue),
+    },
+    {
+      name: "Physical Products",
+      data: monthlyTrends?.map((item:any) => item.physicalRevenue),
     },
   ];
-
-
 
   return (
     <div>
@@ -81,7 +99,7 @@ const RevenueChart = () => {
         <p className="text-sm text-[#7F7F7F]">Total revenue</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <p className="unbound text-[#06052A] fw-600">Income VS Expenses</p>
+            <p className="unbound text-[#06052A] fw-600">Income</p>
             <p className="text-[#14CA74] bg-[#05C16833] px-1 text-[10px] border border-[#05C16833] rounded-[2px] flex items-center">24.6% <MdArrowOutward /></p>
           </div>
           <div className="flex items-center gap-x-4 mt-2">
@@ -92,15 +110,13 @@ const RevenueChart = () => {
           </div>
         </div>
         <div className="mt-6">
-          <div className="mt-6">
-            {typeof window !== "undefined" && (
-              <Chart options={options} series={series} width="100%" type="area" height={400} />
-            )}
-          </div>
+          {typeof window !== "undefined" && (
+            <Chart options={options} series={series} width="100%" type="area" height={400} />
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default RevenueChart
+export default RevenueChart;

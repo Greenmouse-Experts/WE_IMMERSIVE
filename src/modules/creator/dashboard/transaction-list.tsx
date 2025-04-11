@@ -2,38 +2,14 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 
 const TransactionList = () => {
-  const data = [
-    {
-      name: "Franka Yusuf",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_10_hsicwi.png",
-      category: "Physical Product",
-      creators: "Samsung",
-    },
-    {
-      name: "Zeb Phoebe",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_11_vzeysg.png",
-      category: "Courses",
-      creators: "ProLab",
-    },
-    {
-      name: "Chukka Uzo",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_12_c53ldv.png",
-      category: "Digital Asset",
-      creators: "Chukka",
-    },
-    {
-      name: "Frank Hamzy",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/Rectangle_19409_j4mzhx.png",
-      category: "Tour",
-      creators: "WEimmersive",
-    },
+  const data:any = [
   ];
 
   return (
     <div className="w-full">
       <div className="bg-white w-full dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
         <div className="flex w-full justify-between md:py-1 py-4 items-center">
-          <p className="unbound text-[#06052A]">New Users</p>
+          <p className="unbound text-[#06052A]">All Orders</p>
           <div className="md:flex hidden items-center gap-x-2">
             <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
               <p className="text-[#2C3E50] fs-300">Export As</p>
@@ -63,7 +39,7 @@ const TransactionList = () => {
                 </tr>
               </thead>
               <tbody className="">
-                {data.map((item, i) => {
+                {data.map((item:any, i:number) => {
                   console.log(item);
                   return (
                     <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>

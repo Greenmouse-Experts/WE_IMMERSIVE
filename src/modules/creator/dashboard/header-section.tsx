@@ -40,9 +40,9 @@ const HeaderSection = () => {
             </div>
           </div>
           <div className="mt-8 flex items-center justify-between">
-            <MetricTag figure={100} title="Followers" />
-            <MetricTag figure={4.5} title="Rating" />
-            <MetricTag figure={100} title="Total Likes" />
+            <MetricTag figure={0} title="Followers" />
+            <MetricTag figure={0} title="Rating" />
+            <MetricTag figure={0} title="Total Likes" />
           </div>
         </div>
       </div>

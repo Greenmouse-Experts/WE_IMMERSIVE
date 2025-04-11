@@ -160,7 +160,7 @@ const AboutAssetEdit = ({
             }}
             render={({ field }) => (
               <TextInput
-                className="bg-[#E9EBFB] h-[150px] rounded-[10px]"
+                className="bg-[#E9EBFB] text-black h-[150px] rounded-[10px]"
                 fullWidth={true}
                 type={InputType.textarea}
                 label="Asset Details"

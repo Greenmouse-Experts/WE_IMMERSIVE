@@ -2,26 +2,50 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import Chart from "react-apexcharts";
 import React from "react";
 
-const TransactionChart: React.FC = () => {
-  // Define chart options
+interface AnalysisData {
+  courses: {
+    revenue: number;
+    count: number;
+    topCourses: any[];
+  };
+  digitalAssets: {
+    revenue: number;
+    count: number;
+    topAssets: any[];
+  };
+  physicalAssets: {
+    revenue: number;
+    count: number;
+    topAssets: any[];
+  };
+}
+
+const TransactionChart: React.FC<{ analysisData: AnalysisData }> = ({ analysisData }) => {
+  // Extract revenue values from analysisData
+  const series: number[] = [
+    analysisData?.courses?.revenue || 0,
+    analysisData?.digitalAssets?.revenue || 0,
+    analysisData?.physicalAssets?.revenue || 0,
+  ];
+
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "donut",
     },
-    colors: ["#7BFF53", "#7DD2F9", "#FF8BF5"], // Colors for the chart
-    labels: ["Courses", "Digital Assets", "Physical Assets"], // Labels for the legend
+    colors: ["#7BFF53", "#7DD2F9", "#FF8BF5"],
+    labels: ["Courses", "Digital Assets", "Physical Assets"],
     plotOptions: {
       pie: {
         donut: {
-          size: "60%", // Adjusting the donut size
+          size: "60%",
         },
       },
     },
     legend: {
-      show: false, // Hiding the default legend
+      show: false,
     },
     dataLabels: {
-      enabled: false, // Disabling data labels
+      enabled: false,
     },
     responsive: [
       {
@@ -34,8 +58,6 @@ const TransactionChart: React.FC = () => {
       },
     ],
   };
-
-  const series: number[] = [615, 315, 200]; // Values corresponding to each label
 
   return (
     <div className="bg-white dark:bg-[#15171E] w-full rounded-[20px] p-6">
@@ -63,19 +85,14 @@ const TransactionChart: React.FC = () => {
         {/* Custom Legend */}
         <div className="flex flex-col gap-3 w-full">
           {options.labels?.map((label, index) => (
-            <div
-              key={index}
-              className="flex justify-between items-center text-sm"
-            >
+            <div key={index} className="flex justify-between items-center text-sm">
               <div className="flex items-center gap-2">
-                {/* Color indicator */}
                 <span
-                  className="w-3 h-3"
+                  className="w-3 h-3 rounded-full"
                   style={{ backgroundColor: options.colors![index] }}
                 ></span>
                 <span className="text-gray-700">{label}</span>
               </div>
-              {/* Value */}
               <span className="text-gray-600">{series[index]}</span>
             </div>
           ))}

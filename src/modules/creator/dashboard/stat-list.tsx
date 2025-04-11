@@ -1,32 +1,42 @@
+import { getCreatorStats } from "../../../api/creator";
+import Loader from "../../../components/reusables/loader";
 import { formatAsNgnMoney } from "../../../components/utils/formatHelp";
 
-const StatisticList = () => {
+const StatisticList = ({analysisData}:any) => {
+  const { data: stats, isLoading } = getCreatorStats();
+
+  if (isLoading) return <Loader />;
+  console.log(analysisData?.totalRevenue)
   const list = [
     {
-      name: "Created Asset",
-      count: 7,
+      name: "Total Enrollment",
+      count: stats.totalEnrollments,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716454/WE%20Immersive/learning-2_xy21e0.png",
       color: "#FFC7F0",
     },
     {
       name: "Created Courses",
-      count: `37`,
+      count: stats.totalCourses,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1732618852/Group_1171275331_lcfrkq.png",
       color: "#FFD7C7",
     },
     {
-      name: "Total Orders",
-      count: 37,
+      name: "Total Transaction",
+      count: stats.totalTransactions,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1732618852/Group_1171275331_lcfrkq.png",
       color: "#FFD7C7",
     },
     {
-      name: "Subscriptions",
-      count: `$${formatAsNgnMoney(107000)}`,
+      name: "Total Revenue",
+      count: `₦${ analysisData?.totalRevenue > 0 ? formatAsNgnMoney(analysisData?.totalRevenue) : 0}`,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/coin-2_qcugc2.png",
       color: "#D0FFC7",
     },
   ];
+
+
+
+
   return (
     <div>
       <div className="grid md:grid-cols-4 grid-cols-1 gap-6 mt-10">

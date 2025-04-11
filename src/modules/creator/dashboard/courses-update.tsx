@@ -2,35 +2,35 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 
 
 const CoursesUpdate = () => {
-  const updates = [
-    {
-      title: "Cartoon Family",
-      duration:"N 300,000",
-      name: "10 Purchases",
-      value: 80,
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_7_vsjd0q.png",
-    },
-    {
-      title: "Cartoon Family",
-      duration: "N 300,000",
-      name: "10 Purchases",
-      value: 70,
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
-    },
-    {
-      title: "Cartoon Family",
-      duration: "N 300,000",
-      name: "10 Purchases",
-      value: 70,
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
-    },
-    {
-      title: "Cartoon Family",
-      duration: "N 300,000",
-      name: "10 Purchases",
-      value: 70,
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
-    },
+  const updates:any = [
+    // {
+    //   title: "Cartoon Family",
+    //   duration:"N 300,000",
+    //   name: "10 Purchases",
+    //   value: 80,
+    //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_7_vsjd0q.png",
+    // },
+    // {
+    //   title: "Cartoon Family",
+    //   duration: "N 300,000",
+    //   name: "10 Purchases",
+    //   value: 70,
+    //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
+    // },
+    // {
+    //   title: "Cartoon Family",
+    //   duration: "N 300,000",
+    //   name: "10 Purchases",
+    //   value: 70,
+    //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
+    // },
+    // {
+    //   title: "Cartoon Family",
+    //   duration: "N 300,000",
+    //   name: "10 Purchases",
+    //   value: 70,
+    //   img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279178/WE%20Immersive/image_8_ejx9cb.png",
+    // },
   ];
 
   return (
@@ -42,7 +42,7 @@ const CoursesUpdate = () => {
           <MdOutlineArrowDropDown className="text-gray-600" />
         </div>
         <div className="mt-6 grid gap-5">
-          {updates.map((item, i) => (
+          {updates?.map((item:any, i:number) => (
             <div className="flex items-center gap-x-2" key={i}>
               <div className="">
                 <img src={item.img} alt="course-img" className=" w-[75px] h-[76px]" />
