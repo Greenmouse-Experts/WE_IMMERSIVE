@@ -630,3 +630,14 @@ export function getAdminNewUsers(accountType: string) {
     },
   });
 }
+export function getUserByCountry() {
+  return useQuery({
+    queryKey: ["admin-user-country"],
+    queryFn: async () => {
+      const response = await axios.get(
+        `/analysis/admin/users-by-country`
+      );
+      return response.data 
+    },
+  });
+}

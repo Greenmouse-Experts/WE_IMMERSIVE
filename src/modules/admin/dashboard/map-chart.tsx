@@ -4,15 +4,29 @@ import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import { MdArrowOutward, MdOutlineArrowDropDown } from "react-icons/md";
+import { getUserByCountry } from "../../../api/admin";
+import Loader from "../../../components/reusables/loader";
 
 const MapChart = () => {
-  const countryData = [
-    { name: "Nigeria", percentage: 30, color: "bg-purple-500" },
-    { name: "United Kingdom", percentage: 20, color: "bg-yellow-500" },
-    { name: "Canada", percentage: 20, color: "bg-blue-500" },
-    { name: "Ghana", percentage: 15, color: "bg-green-500" },
-    { name: "Spain", percentage: 15, color: "bg-red-500" },
-  ];
+  const { data: newUsers, isLoading } = getUserByCountry();
+
+  function getColor(percentage: number): string {
+    if (percentage >= 80) return "bg-green";
+    if (percentage >= 50) return "bg-yellow-500";
+    if (percentage >= 20) return "bg-orange-500";
+    return "bg-red-500";
+  }
+  
+  const transformed = newUsers?.map((item:any) => {
+    const numericValue = parseInt(item.value.replace('%', ''));
+    return {
+      ...item,
+      color: getColor(numericValue),
+    };
+  });
+
+
+
 
   useEffect(() => {
     let root = am5.Root.new("chartdiv");
@@ -53,16 +67,12 @@ const MapChart = () => {
       })
     );
 
-    pointSeries.data.setAll([
-      { latitude: 9.082, longitude: 8.6753, name: "Nigeria", value: "30%" },
-      { latitude: 55.3781, longitude: -3.436, name: "United Kingdom", value: "20%" },
-      { latitude: 56.1304, longitude: -106.3468, name: "Canada", value: "20%" },
-      { latitude: 7.9465, longitude: -1.0232, name: "Ghana", value: "15%" },
-      { latitude: 40.4637, longitude: -3.7492, name: "Spain", value: "15%" },
-    ]);
+    pointSeries.data.setAll(newUsers!);
 
     return () => root.dispose();
   }, []);
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className="flex gap-4 bg-white dark:bg-[#15171E] rounded-[20px]">
@@ -82,16 +92,16 @@ const MapChart = () => {
           </div>
         </div>
         <ul className="space-y-4">
-          {countryData.map((country, index) => (
+          {transformed?.map((country:any, index:number) => (
             <li key={index} className="flex items-center">
               <span className="flex-1 text-base">{country.name}</span>
               <div className="flex-1 bg-gray-300 h-1 rounded overflow-hidden">
                 <div
                   className={`${country.color} h-full`}
-                  style={{ width: `${country.percentage}%` }}
+                  style={{ width: `${country?.value.replace('%', '')}` }}
                 ></div>
               </div>
-              <span className="ml-2 text-sm">{country.percentage}%</span>
+              <span className="ml-2 text-sm">{country?.value} </span>
             </li>
           ))}
         </ul>
