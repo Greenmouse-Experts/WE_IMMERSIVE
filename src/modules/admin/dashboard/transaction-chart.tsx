@@ -41,7 +41,7 @@ const TransactionChart: React.FC = () => {
     ],
   };
 
-  const series: number[] = [615, 315, 3200, 200, 94]; // Values corresponding to each label
+  const series: number[] = [615, 315, 3200, 200, 94]; 
 
   return (
     <div className="bg-white dark:bg-[#15171E] w-full rounded-[20px] p-6">

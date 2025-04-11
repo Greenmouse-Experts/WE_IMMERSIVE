@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { UserAdminData } from "../types/userDetails.types";
 import { ICategory } from "../types/category.types";
+import { IAdminNewUser } from "../types/dashboard.types";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const token = localStorage.getItem("we-immersiveUser");
@@ -615,6 +616,17 @@ export function getAdminStats() {
     queryFn: async () => {
       const response = await axios.get(`/stat/admin/landing`);
       return response.data;
+    },
+  });
+}
+export function getAdminNewUsers(accountType: string) {
+  return useQuery({
+    queryKey: ["admin-new-users", accountType],
+    queryFn: async () => {
+      const response = await axios.get(
+        `/analysis/admin/recent-signups?userType=${accountType || ""}`
+      );
+      return response.data as IAdminNewUser[];
     },
   });
 }
