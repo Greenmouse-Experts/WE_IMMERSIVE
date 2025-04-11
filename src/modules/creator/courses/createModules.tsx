@@ -44,6 +44,8 @@ const CreateModules = () => {
     null
   );
 
+  console.log(setSelectedId)
+
   const lessons = useGetData(
     ["lessonModules", selectedId], // Correct query key placement
     async () => (selectedId ? getModulesLesson(selectedId) : null),
