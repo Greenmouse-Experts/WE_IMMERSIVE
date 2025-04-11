@@ -73,7 +73,7 @@ console.log(setSelectLesson)
 
           <div>
             <div className="max-w-4xl mx-auto mt-10">
-              {moduleQuiz.map((quiz:any,) => (
+              {moduleQuiz?.map((quiz:any,) => (
                 <QuizCard key={quiz.id} quiz={quiz}  />
               ))}
             </div>
