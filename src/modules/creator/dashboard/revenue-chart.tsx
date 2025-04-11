@@ -43,7 +43,7 @@ const RevenueChart = ({monthlyTrends}:any) => {
       shared: true,
       intersect: false,
       y: {
-        formatter: (value) => `$${value.toFixed(1)}k`,
+        formatter: (value) => `₦${value.toFixed(1)}k`,
       },
     },
     xaxis: {
@@ -66,7 +66,7 @@ const RevenueChart = ({monthlyTrends}:any) => {
           x: "Jun",
           seriesIndex: 0,
           label: {
-            text: "$125.2k\nJune 21, 2023",
+            text: "₦125.2k\nJune 21, 2023",
             style: {
               background: "#F9FAFB",
               color: "#10B981",
