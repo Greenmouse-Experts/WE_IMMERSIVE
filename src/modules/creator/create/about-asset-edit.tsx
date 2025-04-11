@@ -1,7 +1,7 @@
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import Button from "../../../components/ui/Button";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { upload3DModel, uploadImage } from "../../../helpers";
 import { ThreeDViewer } from "../../landing/assets/asset-details";
@@ -85,16 +85,30 @@ const AboutAssetEdit = ({
       assetName: assetDetails?.assetName,
       assetDetails: assetDetails?.assetDetails,
       categoryId: assetDetails?.categoryId,
+      subcategoryId: assetDetails?.categoryId,
+      
     },
   });
 
-  // const handleDrop = (data: any) => {
-  //   setFiles(data);
-  // };
+  const selectedCategoryId = useWatch({ control, name: "categoryId" });
+
+  const [childCategories, setChildCategories] = useState([]);
+
+  // Update children when parent changes
+  useEffect(() => {
+    if (selectedCategoryId) {
+      const selectedCategory = assetCategory.find(
+        (cat: any) => cat.id === selectedCategoryId
+      );
+      setChildCategories(selectedCategory?.children || []);
+    } else {
+      setChildCategories([]);
+    }
+  }, [selectedCategoryId, assetCategory]);
 
   const onSubmit = (formData: any) => {
     payload({
-      categoryId: formData.categoryId,
+      categoryId: formData.subcategoryId,
       assetName: formData.assetName,
       assetDetails: formData.assetDetails,
       assetUpload: modelUrl,
@@ -157,31 +171,54 @@ const AboutAssetEdit = ({
               />
             )}
           />
-            {isGettingCategory ? (
-            <p>Loading asset categories {<BeatLoader />}</p>
+          {isGettingCategory ? (
+            <p>
+              Loading asset categories <BeatLoader size={8} />
+            </p>
           ) : (
-            <Controller
-              name="categoryId"
-              control={control}
-              rules={{
-                required: {
-                  value: true,
-                  message: "This field is required",
-                },
-              }}
-              render={({ field }) => (
-                <SelectInput
-                  label="Asset Category"
-                  list={assetCategory}
-                  placeholder="Choose medium"
-                  // icon={
-                  //   <IoCallOutline className="mx-3 relative top-[1px] text-[#89888D]" />
-                  // }
-                  error={errors.categoryId?.message}
-                  {...field}
+            <>
+              <Controller
+                name="categoryId"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "This field is required",
+                  },
+                }}
+                render={({ field }) => (
+                  <SelectInput
+                    label="Asset Category"
+                    list={assetCategory}
+                    placeholder="Choose category"
+                    error={errors.categoryId?.message}
+                    {...field}
+                  />
+                )}
+              />
+
+              {childCategories.length > 0 && (
+                <Controller
+                  name="subcategoryId"
+                  control={control}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                  }}
+                  render={({ field }) => (
+                    <SelectInput
+                      label="Subcategory"
+                      list={childCategories}
+                      placeholder="Choose subcategory"
+                      error={errors.subcategoryId?.message}
+                      {...field}
+                    />
+                  )}
                 />
               )}
-            />
+            </>
           )}
           <div>
             {/* Upload Thumbnail Section */}
