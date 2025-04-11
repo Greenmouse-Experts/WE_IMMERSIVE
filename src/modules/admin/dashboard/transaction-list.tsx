@@ -61,7 +61,7 @@ const TransactionList = () => {
                   <td className="unbound p-1 pb-2">User Type </td>
                   <td className="unbound p-1 pb-2">Date Created</td>
                   <td className="unbound p-1 pb-2">Last LoggedIn</td>
-                  <td className="unbound p-1 pb-2">Action</td>
+                  {/* <td className="unbound p-1 pb-2">Action</td> */}
                 </tr>
               </thead>
               <tbody className="">
@@ -76,9 +76,9 @@ const TransactionList = () => {
                     <td className="p-2 py-4 text-[#F03CE0] capitalize">{item.type}</td>
                     <td className="p-2 py-4">{dateFormat(item.createdAt)} </td>
                     <td className="p-2 py-4">{dateFormat(item.lastLogin)} {dateFormat(item.lastLogin, "HH:mm")}</td>
-                    <td className="p-2 py-4 pl-4">
+                    {/* <td className="p-2 py-4 pl-4">
                       <PiDotsThreeOutlineFill className="cursor-pointer" />
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
