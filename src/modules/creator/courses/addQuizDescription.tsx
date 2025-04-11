@@ -12,7 +12,7 @@ const AddQuizDescription = ({
   // lessonQuizId,
   handleOpen,
 }: {
-  lessonQuizId: string;
+  lessonQuizId?: string;
   handleOpen: () => void;
 }) => {
   const { id: moduleId } = useParams();

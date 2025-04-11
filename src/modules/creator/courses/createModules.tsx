@@ -216,9 +216,9 @@ const CreateModules = () => {
   //     }
   //   };
 
-  const handleDisplayLessons = (id: any) => {
-    setSelectedId(id);
-  };
+  // const handleDisplayLessons = (id: any) => {
+  //   setSelectedId(id);
+  // };
 
   return (
     <div className="rounded-[20px] py-5 px-7 md:w-3/4 w-full bg-white dark:bg-black">
@@ -273,18 +273,15 @@ const CreateModules = () => {
                         Delete Module
                       </span>
                     </MenuItem>
-                    <MenuItem className="flex flex-col gap-3">
+                    {/* <MenuItem className="flex flex-col gap-3">
                       <span
                         onClick={() => handleDisplayLessons(module.id)}
                         className="cursor-pointer w-full"
                       >
                         View Lessons
                       </span>
-                      {/* <Link 
-                      // to={`/creator/courses/create/modules/view-lesson/${module.id}`}
-                      > */}
-                      {/* </Link> */}
-                    </MenuItem>
+                    
+                    </MenuItem> */}
                   </MenuList>
                 </Menu>
               </button>

@@ -21,6 +21,7 @@ import Subscriptions from "../pages/creator/subscriptions";
 import Coupon from "../pages/creator/coupon";
 import TransactionsScreen from "../pages/shared/transactions";
 import ViewLessons from "../modules/creator/courses/viewLessons";
+import ViewQuiz from "../modules/creator/courses/viewQuiz";
 
 export const creatorRoutes = [
   {
@@ -57,6 +58,10 @@ export const creatorRoutes = [
       {
         path: "courses/create/modules/view-lesson/:id",
         element: <ViewLessons />,
+      },
+      {
+        path: "courses/create/modules/view-quiz/:id",
+        element: <ViewQuiz />,
       },
       {
         path: "courses/create",

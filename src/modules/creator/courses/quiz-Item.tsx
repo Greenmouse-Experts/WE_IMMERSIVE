@@ -7,26 +7,16 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { publishLesson } from "../../../api/creator";
+import { Link } from "react-router-dom";
 // import { duration } from "@mui/material";
 
-interface ILessonItemProps {
+interface IQuizItemProps {
   item: ICourseItem;
   handleView?: () => void;
   handleAddQuestion?: () => void;
 }
 
-const LessonItem = ({
-  item,
-  handleView,
-  handleAddQuestion,
-}: ILessonItemProps) => {
-  const icon: any = {
-    text: "https://res.cloudinary.com/do2kojulq/image/upload/v1740561768/Group_2_sfbum4.png",
-    video:
-      "https://res.cloudinary.com/do2kojulq/image/upload/v1740561768/Vector_5_hd67rz.png",
-    quiz: "https://res.cloudinary.com/do2kojulq/image/upload/v1740561768/Group_2_sfbum4.png",
-  };
-
+const QuizItem = ({ item, handleAddQuestion }: IQuizItemProps) => {
   const { mutate: publish, isPending } = publishLesson();
   console.log(isPending);
 
@@ -44,7 +34,13 @@ const LessonItem = ({
     <div className="flex items-center gap-3 bg-white dark:bg-darkMode p-4 rounded-[10px]">
       <div className="flex items-center gap-10">
         <div className="">
-          <img src={icon[item.contentType]} alt="icon" className="h-7" />
+          <img
+            src={
+              "https://res.cloudinary.com/do2kojulq/image/upload/v1740561768/Group_2_sfbum4.png"
+            }
+            alt="icon"
+            className="h-7"
+          />
           <p className="capitalize mt-2">{item.contentType}</p>
         </div>
         <p>{item.title}</p>
@@ -55,34 +51,27 @@ const LessonItem = ({
             <MoreVertical />
           </MenuHandler>
           <MenuList>
-            {item.contentType !== "quiz" && (
-              <MenuItem className="flex flex-col gap-3">
-                <span className="cursor-pointer w-full" onClick={handleView}>
-                  View Lesson
-                </span>
-              </MenuItem>
-            )}
-            {item.contentType == "quiz" && (
-              <MenuItem className="flex flex-col gap-3">
-                <span
-                  className="cursor-pointer w-full"
-                  onClick={handleAddQuestion}
-                >
-                  Add Question
-                </span>
-              </MenuItem>
-            )}
-            <MenuItem className="flex flex-col gap-3">
-              <span className="cursor-pointer w-full" onClick={handlePublish}>
-                Publish Lesson
-              </span>
-            </MenuItem>
             <MenuItem className="flex flex-col gap-3">
               <span
                 className="cursor-pointer w-full"
-                // onClick={() => handleDisplayLessons(module.id)}
+                onClick={handleAddQuestion}
               >
-                Delete Lessons
+                Add Question
+              </span>
+            </MenuItem>
+            <MenuItem className="flex flex-col gap-3">
+              <Link
+                to={`/creator/courses/create/modules/view-quiz/${item.id}`}
+                className="cursor-pointer w-full"
+                onClick={handleAddQuestion}
+              >
+                View Questions
+              </Link>
+            </MenuItem>
+
+            <MenuItem className="flex flex-col gap-3">
+              <span className="cursor-pointer w-full" onClick={handlePublish}>
+                Delete Quiz
               </span>
             </MenuItem>
           </MenuList>
@@ -92,4 +81,4 @@ const LessonItem = ({
   );
 };
 
-export default LessonItem;
+export default QuizItem;

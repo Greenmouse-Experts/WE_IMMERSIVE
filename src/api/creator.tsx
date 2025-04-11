@@ -4,25 +4,36 @@ import { toast } from "react-toastify";
 import { IAsset } from "../types/asset.types";
 import { IJob } from "../types/job.types";
 
-
 export function getModuleLessons(lessonId: string | undefined) {
   return useQuery({
     queryKey: ["lessonModules", lessonId],
     queryFn: async () => {
       const response = await axios.get(
-        `/creator/course/module/lessons?moduleId=${lessonId}`
+        // `/creator/course/module/lessons?moduleId=${lessonId}`'
+        `creator/course/module/${lessonId}/details`
       );
       return response.data.data as any;
     },
   });
 }
 
-
+export function getModuleQuizzes(lessonQuizId: string | undefined) {
+  return useQuery({
+    queryKey: ["modulesQuiz", lessonQuizId],
+    queryFn: async () => {
+      const response = await axios.get(
+        // `/creator/course/module/lessons?moduleId=${lessonId}`'
+        `creator/course/lesson/quiz/questions?lessonQuizId=${lessonQuizId}`
+      );
+      return response.data.data as any;
+    },
+  });
+}
 
 export function createQuizBasic() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data:any) => {
+    mutationFn: async (data: any) => {
       const response = await axios.post(
         `creator/course/lesson/quiz/create`,
         data
@@ -33,7 +44,7 @@ export function createQuizBasic() {
       queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
       toast.success(res.message);
     },
-    onError: (error:any) => {
+    onError: (error: any) => {
       toast.error(error.response.data.message);
     },
   });
@@ -41,7 +52,7 @@ export function createQuizBasic() {
 export function createQuizQuestion() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data:any) => {
+    mutationFn: async (data: any) => {
       const response = await axios.post(
         `creator/course/lesson/quiz/question/create`,
         data
@@ -52,7 +63,7 @@ export function createQuizQuestion() {
       queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
       toast.success(res.message);
     },
-    onError: (error:any) => {
+    onError: (error: any) => {
       toast.error(error.response.data.message);
     },
   });
@@ -60,7 +71,7 @@ export function createQuizQuestion() {
 export function createAssignment() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data:any) => {
+    mutationFn: async (data: any) => {
       const response = await axios.post(
         `/creator/course/lesson/assignment/create`,
         data
@@ -71,7 +82,7 @@ export function createAssignment() {
       queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
       toast.success(res.message);
     },
-    onError: (error:any) => {
+    onError: (error: any) => {
       toast.error(error.response.data.message);
     },
   });
@@ -98,7 +109,6 @@ export function publishLesson() {
 }
 
 // creator/digital/asset/view?id
-
 
 export function getAssetDetails(assetId: string | undefined) {
   return useQuery({

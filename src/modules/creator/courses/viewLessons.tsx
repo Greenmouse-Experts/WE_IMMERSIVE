@@ -19,6 +19,7 @@ import Loader from "../../../components/reusables/loader";
 import AssignmentCreator from "./AddAssignmentModal";
 import AddQuizDescription from "./addQuizDescription";
 import LessonItem from "./lesson-Item";
+import QuizItem from "./quiz-Item";
 
 const ViewLessons = () => {
   // const navigate = useNavigate();
@@ -29,6 +30,7 @@ const ViewLessons = () => {
   const [open, setOpen] = useState(false);
   const [openAssignment, setOpenAssignment] = useState(false);
   const [selectLesson, setSelectLesson] = useState<any>(null);
+  const [tab, setTab] = useState(0);
 
   const { data: moduleLessons, isLoading } = getModuleLessons(id);
 
@@ -36,7 +38,7 @@ const ViewLessons = () => {
   const handleOpen = () => setOpen(!open);
   const handleOpenAssignment = () => setOpenAssignment(!openAssignment);
 
-  console.log(moduleLessons);
+  // console.log(moduleLessons);
 
   // const {
   //   control,
@@ -60,7 +62,7 @@ const ViewLessons = () => {
 
   // console.log(selectedLesson)
 
-  console.log(contentType);
+  console.log(moduleLessons[0]);
 
   const handleAddQuestion = (lesson: any) => {
     setSelectLesson(lesson);
@@ -75,91 +77,202 @@ const ViewLessons = () => {
           <p className="fw-600 text-sm text-grey mt-3">
             Lets add content to this lesson
           </p>
-
-          <div className="w-full border-[#C4C4C4] border rounded-[20px] overflow-hidden mt-8">
+          <div className="flex items-center gap-8 fw-600 mt-4">
             <div
-              className="bg-gray-100 rounded-xl shadow-sm border border-gray-200"
-              // key={index}
+              onClick={() => setTab(0)}
+              className={` cursor-pointer ${
+                tab === 0 && "border-b-2 border-primary fw-700"
+              }`}
             >
-              {/* Module Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-indigo-50 rounded-t-xl">
-                {/* Drag Handle */}
-                <div className="cursor-grab p-2">
-                  <GripVertical className="text-gray-500" />
-                </div>
-
-                {/* Module Title */}
-                <h3 className="flex-1 text-gray-800 font-medium">
-                  {selectedLesson?.title}
-                </h3>
-
-                {/* More Options Button */}
-                <button className="text-gray-500 hover:text-gray-700">
-                  <Menu placement="left">
-                    <MenuHandler>
-                      <MoreVertical />
-                    </MenuHandler>
-                    <MenuList>
-                      <MenuItem className="flex flex-col gap-3">
-                        <span
-                          className="cursor-pointer w-full"
-                          // onClick={() => handleModuleDelete(module.id)}
-                        >
-                          Edit Lesson
-                        </span>
-                      </MenuItem>
-                      <MenuItem className="flex flex-col gap-3">
-                        <span
-                          className="cursor-pointer w-full"
-                          // onClick={() => handleModuleDelete(module.id)}
-                        >
-                          Delete Lesson
-                        </span>
-                      </MenuItem>
-                    </MenuList>
-                  </Menu>
-                </button>
-              </div>
-
-              {/* Content Section */}
+              <p>Lessons</p>
             </div>
-
-            <div>
-              {moduleLessons &&
-                moduleLessons?.map((lesson: any, index: number) => (
-                  <LessonItem
-                    item={lesson}
-                    key={index}
-                    handleView={() => {
-                      // navigate(
-                      //   `/creator/courses/create/modules/view-lesson/${module.id}`
-                      // );
-                      // handleViewLessons();
-                      // setSelectedLesson(lesson);
-                    }}
-                    handleAddQuestion={() => handleAddQuestion(lesson)}
-                  />
-                ))}
-            </div>
-
-            <div className="mt-10 mb-8 gap-8 text-center flex flex-col items-center justify-center w-full ">
-              <p className="">
-                Turn your knowledge to Impact – create and share your course!{" "}
-              </p>
-              <Button
-                onClick={() => {
-                  if (contentType === "quiz") {
-                    handleOpenQuizDesc();
-                  } else {
-                    handleOpenAssignment();
-                  }
-                }}
-                title="Add Content"
-                withArrows
-                style={{ width: 211 }}
-              />
+            <div
+              onClick={() => setTab(1)}
+              className={` cursor-pointer ${
+                tab === 1 && "border-b-2 border-primary fw-700"
+              }`}
+            >
+              <p>Quiz</p>
             </div>
           </div>
+          {tab === 0 && (
+            <div className="w-full border-[#C4C4C4] border rounded-[20px] overflow-hidden mt-8">
+              <div
+                className="bg-gray-100 rounded-xl shadow-sm border border-gray-200"
+                // key={index}
+              >
+                {/* Module Header */}
+                <div className="flex items-center justify-between px-4 py-3 bg-indigo-50 rounded-t-xl">
+                  {/* Drag Handle */}
+                  <div className="cursor-grab p-2">
+                    <GripVertical className="text-gray-500" />
+                  </div>
+
+                  {/* Module Title */}
+                  <h3 className="flex-1 text-gray-800 font-medium">
+                    {selectedLesson?.title}
+                  </h3>
+
+                  {/* More Options Button */}
+                  <button className="text-gray-500 hover:text-gray-700">
+                    <Menu placement="left">
+                      <MenuHandler>
+                        <MoreVertical />
+                      </MenuHandler>
+                      <MenuList>
+                        <MenuItem className="flex flex-col gap-3">
+                          <span
+                            className="cursor-pointer w-full"
+                            // onClick={() => handleModuleDelete(module.id)}
+                          >
+                            Edit Lesson
+                          </span>
+                        </MenuItem>
+                        <MenuItem className="flex flex-col gap-3">
+                          <span
+                            className="cursor-pointer w-full"
+                            // onClick={() => handleModuleDelete(module.id)}
+                          >
+                            Delete Lesson
+                          </span>
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </button>
+                </div>
+
+                {/* Content Section */}
+              </div>
+
+              <div>
+                {moduleLessons &&
+                  moduleLessons[0]?.lessons?.map(
+                    (lesson: any, index: number) => {
+                      if (lesson.contentType !== "quiz") {
+                        return (
+                          <LessonItem
+                            item={lesson}
+                            key={index}
+                            handleView={() => {
+                              // navigate(
+                              //   `/creator/courses/create/modules/view-lesson/${module.id}`
+                              // );
+                              // handleViewLessons();
+                              // setSelectedLesson(lesson);
+                            }}
+                            handleAddQuestion={() => handleAddQuestion(lesson)}
+                          />
+                        );
+                      }
+                    }
+                  )}
+              </div>
+
+              <div className="mt-10 mb-8 gap-8 text-center flex flex-col items-center justify-center w-full ">
+                <p className="">
+                  Turn your knowledge to Impact – create and share your course!{" "}
+                </p>
+                <Button
+                  onClick={() => {
+                    if (contentType === "quiz") {
+                      handleOpenQuizDesc();
+                    } else {
+                      handleOpenAssignment();
+                    }
+                  }}
+                  title="Add Content"
+                  withArrows
+                  style={{ width: 211 }}
+                />
+              </div>
+            </div>
+          )}
+          {tab === 1 && (
+            <div className="w-full border-[#C4C4C4] border rounded-[20px] overflow-hidden mt-8">
+              <div
+                className="bg-gray-100 rounded-xl shadow-sm border border-gray-200"
+                // key={index}
+              >
+                {/* Module Header */}
+                <div className="flex items-center justify-between px-4 py-3 bg-indigo-50 rounded-t-xl">
+                  {/* Drag Handle */}
+                  <div className="cursor-grab p-2">
+                    <GripVertical className="text-gray-500" />
+                  </div>
+
+                  {/* Module Title */}
+                  <h3 className="flex-1 text-gray-800 font-medium">Quiz</h3>
+
+                  {/* More Options Button */}
+                  <button className="text-gray-500 hover:text-gray-700">
+                    <Menu placement="left">
+                      <MenuHandler>
+                        <MoreVertical />
+                      </MenuHandler>
+                      <MenuList>
+                        <MenuItem className="flex flex-col gap-3">
+                          <span
+                            className="cursor-pointer w-full"
+                            // onClick={() => handleModuleDelete(module.id)}
+                          >
+                            Edit Quiz
+                          </span>
+                        </MenuItem>
+                        <MenuItem className="flex flex-col gap-3">
+                          <span
+                            className="cursor-pointer w-full"
+                            // onClick={() => handleModuleDelete(module.id)}
+                          >
+                            Delete Quiz
+                          </span>
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </button>
+                </div>
+
+                {/* Content Section */}
+              </div>
+
+              <div>
+                {moduleLessons &&
+                  moduleLessons[0]?.quizzes?.map(
+                    (lesson: any, index: number) => (
+                      <QuizItem
+                        item={lesson}
+                        key={index}
+                        handleView={() => {
+                          // navigate(
+                          //   `/creator/courses/create/modules/view-lesson/${module.id}`
+                          // );
+                          // handleViewLessons();
+                          // setSelectedLesson(lesson);
+                        }}
+                        handleAddQuestion={() => handleAddQuestion(lesson)}
+                      />
+                    )
+                  )}
+              </div>
+
+              <div className="mt-10 mb-8 gap-8 text-center flex flex-col items-center justify-center w-full ">
+                <p className="">
+                  Turn your knowledge to Impact – create and share your course!{" "}
+                </p>
+                <Button
+                  onClick={() => {
+                    if (contentType === "quiz") {
+                      handleOpenQuizDesc();
+                    } else {
+                      handleOpenAssignment();
+                    }
+                  }}
+                  title="Add Content"
+                  withArrows
+                  style={{ width: 211 }}
+                />
+              </div>
+            </div>
+          )}
         </div>
         <div className=" w-1/4">
           <AddQuiz
