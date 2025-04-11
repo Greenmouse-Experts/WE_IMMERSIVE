@@ -1,7 +1,7 @@
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import Button from "../../../components/ui/Button";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { upload3DModel, uploadImage } from "../../../helpers";
 import { ThreeDViewer } from "../../landing/assets/asset-details";
@@ -10,6 +10,7 @@ import CreateWithAISelect from "../../../components/CreateWithAISelect";
 import { getCreatorAssetCategory } from "../../../api/creator";
 import SelectInput from "../../../components/ui/SelectInput";
 import { BeatLoader } from "react-spinners";
+// import { getSubCategories } from "../../../api/general";
 
 interface AboutAssetProps {
   handleStepper: (direction: string) => void;
@@ -24,6 +25,9 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
   const modelInputRef = useRef<HTMLInputElement>(null);
   const { data: assetCategory, isLoading: isGettingCategory } =
     getCreatorAssetCategory();
+
+  // const { data: generalCategory, isPending: isGettingGeneralCategory } =
+  //   getSubCategories();
 
   const handleThumbnailChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -79,14 +83,33 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
       assetName: "",
       assetDetails: "",
       categoryId: "",
+      subcategoryId:""
     },
   });
+
+  const selectedCategoryId = useWatch({ control, name: "categoryId" });
+
+  const [childCategories, setChildCategories] = useState([]);
+
+  // Update children when parent changes
+  useEffect(() => {
+    if (selectedCategoryId) {
+      const selectedCategory = assetCategory.find(
+        (cat: any) => cat.id === selectedCategoryId
+      );
+      setChildCategories(selectedCategory?.children || []);
+    } else {
+      setChildCategories([]);
+    }
+  }, [selectedCategoryId, assetCategory]);
+
+
 
   const onSubmit = (formData: any) => {
     payload({
       assetName: formData.assetName,
       assetDetails: formData.assetDetails,
-      categoryId: formData.categoryId,
+      categoryId: formData.subcategoryId,
       assetUpload: modelUrl,
       assetThumbnail: thumbnail,
     });
@@ -168,7 +191,7 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
               />
             )}
           />
-          {isGettingCategory ? (
+          {/* {isGettingCategory ? (
             <p>Loading asset categories {<BeatLoader />}</p>
           ) : (
             <Controller
@@ -193,7 +216,58 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
                 />
               )}
             />
+          )} */}
+
+          {isGettingCategory ? (
+            <p>
+              Loading asset categories <BeatLoader size={8} />
+            </p>
+          ) : (
+            <>
+              <Controller
+                name="categoryId"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "This field is required",
+                  },
+                }}
+                render={({ field }) => (
+                  <SelectInput
+                    label="Asset Category"
+                    list={assetCategory}
+                    placeholder="Choose category"
+                    error={errors.categoryId?.message}
+                    {...field}
+                  />
+                )}
+              />
+
+              {childCategories.length > 0 && (
+                <Controller
+                  name="subcategoryId"
+                  control={control}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                  }}
+                  render={({ field }) => (
+                    <SelectInput
+                      label="Subcategory"
+                      list={childCategories}
+                      placeholder="Choose subcategory"
+                      error={errors.subcategoryId?.message}
+                      {...field}
+                    />
+                  )}
+                />
+              )}
+            </>
           )}
+
           <div className="mt-5">
             {/* Upload Thumbnail Section */}
             <div>
