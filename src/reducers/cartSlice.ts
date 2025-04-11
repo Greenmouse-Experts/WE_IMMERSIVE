@@ -7,6 +7,7 @@ export type ICartItem = {
   name: string;
   quantity: number;
   unitPrice: number;
+  productType:string;
   price: number;
 };
 export type CartTyping = {

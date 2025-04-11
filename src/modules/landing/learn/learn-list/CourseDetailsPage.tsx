@@ -40,6 +40,7 @@ const CourseDetailsPage: React.FC = () => {
         quantity: 1,
         unitPrice: parseInt(courseDetails?.price!),
         image: courseDetails?.image,
+        productType:"course",
       })
     );
     toast.success(`${courseDetails?.title} added successfully`);
@@ -52,6 +53,7 @@ const CourseDetailsPage: React.FC = () => {
         name: courseDetails?.title,
         productId: courseDetails?.id,
         quantity: 1,
+        productType:"course",
         unitPrice: parseInt(courseDetails?.price!),
         image: courseDetails?.image,
       })

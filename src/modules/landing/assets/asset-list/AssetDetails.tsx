@@ -26,6 +26,7 @@ const AssetDetails: React.FC = () => {
         quantity: 1,
         unitPrice: assetDetails?.amount,
         image: assetDetails?.assetThumbnail,
+        productType:"digital_asset"
       })
     );
     toast.success(`${assetDetails?.assetName} added successfully`);
@@ -40,6 +41,7 @@ const AssetDetails: React.FC = () => {
         quantity: 1,
         unitPrice: assetDetails?.amount,
         image: assetDetails?.assetThumbnail,
+        productType:"digital_asset"
       })
     );
     navigate("/cart");

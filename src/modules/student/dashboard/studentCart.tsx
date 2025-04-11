@@ -14,6 +14,7 @@ import {
   initiatePurchase as initiatePurchaseApi,
   verifyPurchase as verifyPurchaseApi,
 } from "../../../api/purchase";
+import { useState } from "react";
 const StudentCart = () => {
   const cart = useSelector(getCart);
   const totalPrice = useSelector(getTotalCartPrice);
@@ -21,6 +22,7 @@ const StudentCart = () => {
   const navigate = useNavigate();
 
   const { mutate: initiatePurchase, isPending } = initiatePurchaseApi();
+  const [couponCode, setCouponCode] = useState("");
   const { mutate: verifyPurchase, isPending: isVerifying } =
     verifyPurchaseApi();
 
@@ -39,7 +41,13 @@ const StudentCart = () => {
   // const onClose = () => {
   //   console.log("Payment window closed.");
   // };
-  const purchaseItem = cart.items[0];
+
+  const formattedItems = cart.items.map((item) => ({
+    ...item,
+    amount: item.unitPrice != null ? item.unitPrice.toFixed(2) : "0.00",
+  }));
+
+  console.log(formattedItems);
   const handlePayment = () => {
     if (!user) {
       navigate("/auth/login");
@@ -48,10 +56,9 @@ const StudentCart = () => {
 
     initiatePurchase(
       {
-        productType: "course",
-        productId: purchaseItem.productId,
+        items: formattedItems,
         paymentMethod: "paystack",
-        amount: totalPrice.toFixed(2),
+        couponCode,
         currency: "₦",
       },
       {
@@ -162,6 +169,8 @@ const StudentCart = () => {
               <input
                 type="text"
                 className="rounded-[10px] w-[128px] h-[42px] text-[14px]"
+                value={couponCode}
+                onChange={(e) => setCouponCode(e.target.value)}
               />
             </div>
             <hr className="border-t-2 border-gray-400 border-dashed my-11"></hr>

@@ -6,7 +6,7 @@ export function initiatePurchase() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await axios.post(`/purchase/initiate`, data);
+      const response = await axios.post(`/purchase/initiate-trx`, data);
       return response.data;
     },
     onSuccess: (res) => {
@@ -25,7 +25,7 @@ export function verifyPurchase() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await axios.post(`/purchase/verify`, data);
+      const response = await axios.post(`/purchase/verify-trx`, data);
       return response.data;
     },
     onSuccess: (res) => {
