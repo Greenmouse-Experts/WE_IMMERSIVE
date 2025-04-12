@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
@@ -25,14 +25,15 @@ const MapChart = () => {
     };
   });
 
-
-
+  const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let root = am5.Root.new("chartdiv");
-
+    if (!chartRef.current || !newUsers) return;
+  
+    let root = am5.Root.new(chartRef.current);
+  
     root.setThemes([am5themes_Animated.new(root)]);
-
+  
     let chart = root.container.children.push(
       am5map.MapChart.new(root, {
         panX: "none",
@@ -40,8 +41,7 @@ const MapChart = () => {
         projection: am5map.geoMercator(),
       })
     );
-
-
+  
     let polygonSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, {
         geoJSON: am5geodata_worldLow,
@@ -49,14 +49,14 @@ const MapChart = () => {
     );
 
     console.log(polygonSeries)
-
+  
     let pointSeries = chart.series.push(
       am5map.MapPointSeries.new(root, {
         latitudeField: "latitude",
         longitudeField: "longitude",
       })
     );
-
+  
     pointSeries.bullets.push(() =>
       am5.Bullet.new(root, {
         sprite: am5.Circle.new(root, {
@@ -66,11 +66,12 @@ const MapChart = () => {
         }),
       })
     );
-
-    pointSeries.data.setAll(newUsers!);
-
+  
+    pointSeries.data.setAll(newUsers);
+  
     return () => root.dispose();
-  }, []);
+  }, [newUsers]);
+  
   const { data: adminAnalytics, isLoading:gettingAnalytics } = getAdminAnalytics();
 
 
