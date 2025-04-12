@@ -1,33 +1,45 @@
-import { MdOutlineArrowDropDown } from "react-icons/md";
+// import { MdOutlineArrowDropDown } from "react-icons/md";
 import Chart from "react-apexcharts";
 import React from "react";
+import { getUserStats } from "../../../api/admin";
+import Loader from "../../../components/reusables/loader";
 
 const TransactionChart: React.FC = () => {
-  // Define chart options
+  const { data: userStats, isPending } = getUserStats();
+
+  if (isPending) return <Loader />;
+
+  // Map stats to categories in the same order as labels
+  const series: number[] = [
+    userStats.totalUsers || 0, // General User
+    userStats.totalCreators || 0, // Creator
+    userStats.totalStudents || 0, // Student
+    userStats.totalInstitutions || 0, // Institution
+  ];
+
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: "donut",
     },
-    colors: ["#A78BFA", "#38BDF8", "#F472B6", "#4ADE80", "#FBBF24"], // Colors for the chart
+    colors: ["#A78BFA", "#38BDF8", "#F472B6", "#4ADE80", "#FBBF24"],
     labels: [
       "General User",
       "Creator",
       "Student",
-      "Professional",
       "Institution",
-    ], // Labels for the legend
+    ],
     plotOptions: {
       pie: {
         donut: {
-          size: "60%", // Adjusting the donut size
+          size: "60%",
         },
       },
     },
     legend: {
-      show: false, // Hiding the default legend
+      show: false,
     },
     dataLabels: {
-      enabled: false, // Disabling data labels
+      enabled: false,
     },
     responsive: [
       {
@@ -41,16 +53,14 @@ const TransactionChart: React.FC = () => {
     ],
   };
 
-  const series: number[] = [615, 315, 3200, 200, 94]; 
-
   return (
     <div className="bg-white dark:bg-[#15171E] w-full rounded-[20px] p-6">
       <div className="flex lg:flex-col xl:flex-row items-center justify-between mb-4">
         <p className="font-semibold text-gray-800 text-lg">User Analysis</p>
-        <div className="flex items-center gap-x-2 px-3 py-1 bg-gray-100 rounded-full cursor-pointer w-fit">
+        {/* <div className="flex items-center gap-x-2 px-3 py-1 bg-gray-100 rounded-full cursor-pointer w-fit">
           <span className="text-sm text-gray-600">Monthly</span>
           <MdOutlineArrowDropDown className="text-gray-600" />
-        </div>
+        </div> */}
       </div>
 
       <div className="flex flex-col gap-6 items-center">
@@ -74,14 +84,12 @@ const TransactionChart: React.FC = () => {
               className="flex justify-between items-center text-sm"
             >
               <div className="flex items-center gap-2">
-                {/* Color indicator */}
                 <span
-                  className="w-3 h-3"
+                  className="w-3 h-3 rounded-full"
                   style={{ backgroundColor: options.colors![index] }}
                 ></span>
                 <span className="text-gray-700">{label}</span>
               </div>
-              {/* Value */}
               <span className="text-gray-600">{series[index]}</span>
             </div>
           ))}

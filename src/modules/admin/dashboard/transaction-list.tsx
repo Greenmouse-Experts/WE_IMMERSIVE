@@ -36,17 +36,17 @@ const TransactionList = () => {
             />
           </div>
           <div className="flex items-center gap-x-4">
-            <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+            {/* <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
               <p className="text-[#2C3E50] fs-300">Export As</p>
               <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-            </div>
-            <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+            </div> */}
+            {/* <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
               <p className="text-[#2C3E50] fs-300">
                 <span className="text-[#2C3E50] fs-200">Sort:</span> Newest
                 First
               </p>
               <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="mt-6 w-full overflow-x-auto overflow-y-auto max-h-[400px]">

@@ -92,10 +92,10 @@ const RevenueChart = () => {
             </p>
           </div>
           <div className="flex items-center gap-x-4 mt-2">
-            <div className="flex items-center gap-x-1 btn-shadow px-4 py-2 rounded-full cursor-pointer">
+            {/* <div className="flex items-center gap-x-1 btn-shadow px-4 py-2 rounded-full cursor-pointer">
               <p className="text-[#7F7F7F] text-[10px] fs-300">Jan 2024 - Dec 2024</p>
               <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="mt-6">

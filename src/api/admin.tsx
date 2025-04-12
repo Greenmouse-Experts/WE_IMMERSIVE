@@ -641,3 +641,14 @@ export function getUserByCountry() {
     },
   });
 }
+export function getUserStats() {
+  return useQuery({
+    queryKey: ["admin-user-stats"],
+    queryFn: async () => {
+      const response = await axios.get(
+        `/analysis/admin/user-stats`
+      );
+      return response.data 
+    },
+  });
+}

@@ -106,9 +106,9 @@ const PurchaseAnalysis = () => {
             </p>
           </div>
           <div className="flex items-center gap-x-4 mt-2">
-            <div className="cursor-pointer">
+            {/* <div className="cursor-pointer">
               <p className="text-[#553CF0] text-sm fs-300">View Report</p>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="mt-6">
@@ -118,7 +118,7 @@ const PurchaseAnalysis = () => {
               series={series}
               type="bar"
               width="100%"
-              height="180px"
+              height="300px"
             />
           )}
         </div>

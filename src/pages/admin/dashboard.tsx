@@ -20,17 +20,17 @@ const SuperAdminDashboard = () => {
           </div>
         </div>
       </div>
-      <div className="w-[100%] xl:flex gap-9 mt-6">
-        <div className="w-[100%] xl:w-[60%] grid gap-6">
+      <div className="w-[100%]  gap-9 mt-6">
+        <div className="w-[100%]  grid gap-6">
           <RevenueChart />
         </div>
-        <div className="xl:w-[40%] md:mt-0 mt-10 grid gap-6">
+        <div className=" md:mt-0 mt-10 grid gap-6">
           <div className="w-[96%] md:w-[100%] md:mt-4 overflow-x-auto ">
             <PurchaseAnalysis />  
           </div>
-          <div className="">
+          {/* <div className="">
             <SalesCommissionChart />
-          </div>
+          </div> */}
         </div>
       </div>
 

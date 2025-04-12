@@ -3,7 +3,7 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import { MdArrowOutward, MdOutlineArrowDropDown } from "react-icons/md";
+import { MdArrowOutward } from "react-icons/md";
 import { getAdminAnalytics, getUserByCountry } from "../../../api/admin";
 import Loader from "../../../components/reusables/loader";
 
@@ -93,10 +93,10 @@ const MapChart = () => {
             <p className="text-[#14CA74] bg-[#05C16833] px-1 text-[10px] border border-[#05C16833] rounded-[2px] flex items-center">24.6% <MdArrowOutward /></p>
           </div>
           <div className="flex items-center gap-x-4 mt-2">
-            <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
+            {/* <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
               <p className="text-[#2C3E50] fs-300">Export As</p>
               <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-            </div>
+            </div> */}
           </div>
         </div>
         <ul className="space-y-4">
@@ -116,7 +116,8 @@ const MapChart = () => {
       </div>
 
       {/* Map */}
-      <div id="chartdiv" style={{ width: "60%", height: "400px" }}></div>
+      <div ref={chartRef} className="min-h-[400px] w-[60%]"></div>
+
     </div>
   );
 };
