@@ -1,7 +1,7 @@
 import MapChart from "../../modules/admin/dashboard/map-chart";
 import PurchaseAnalysis from "../../modules/admin/dashboard/purchase-analysis";
 import RevenueChart from "../../modules/admin/dashboard/revenue-chart";
-import SalesCommissionChart from "../../modules/admin/dashboard/sales-commission";
+// import SalesCommissionChart from "../../modules/admin/dashboard/sales-commission";
 import StatisticList from "../../modules/admin/dashboard/stat-list";
 import TransactionChart from "../../modules/admin/dashboard/transaction-chart";
 import TransactionList from "../../modules/admin/dashboard/transaction-list";
