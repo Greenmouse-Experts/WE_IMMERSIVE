@@ -1,126 +1,154 @@
-import { useEffect, useState } from "react";
-import { getSingleJob } from "../../../api";
-import Button from "../../../components/ui/Button";
-import { useGetData } from "../../../hooks/useGetData";
-import JobsBanner from "./herobanner";
+import { useState } from "react";
 import Loader from "../../../components/reusables/loader";
-import { useParams } from "react-router-dom";
-import { GrLocation } from "react-icons/gr";
+import { useNavigate, useParams } from "react-router-dom";
 import { dateFormat } from "../../../helpers/dateHelper";
+import { toast } from "react-toastify";
+import { submitApplication, viewJobDetails } from "../../../api/general";
+import { uploadImage } from "../../../helpers";
+import { useSelector } from "react-redux";
+import { BeatLoader } from "react-spinners";
 
 const ViewJobIndex = () => {
-    const [data, setData] = useState<any>({});
-    const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [resume, setResume] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const user = useSelector((state: any) => state.userData.data);
+  const { data: jobDetails, isLoading } = viewJobDetails(id);
+  const navigate = useNavigate();
+  // console.log(jobDetails);
+  const handleThumbnailChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setLoading(true);
+    setError(null);
 
-    const { id } = useParams();
-
-    // Assuming getSingleJob returns a promise, let useGetData handle it
-    const jobsData = useGetData(["singleJob", id], () => getSingleJob(id));
-
-    useEffect(() => {
-        if (jobsData?.data) {
-            setData(jobsData.data.data);
-            setLoading(false);
-        }
-    }, [jobsData?.data]); // Run effect only when jobsData.data changes
-
-
-    if (loading) {
-        return (
-            // Loading spinner or placeholder
-            <Loader />
-        )
+    const file = event.target.files?.[0];
+    if (!file) {
+      setLoading(false);
+      return;
     }
 
-    return (
-        <div>
-            <div>
-                <JobsBanner />
-            </div>
-            <div className="mt-7 lg:mt-12 box">
-                <div className="flex gap-x-4 justify-between p-2 lg:p-3 w-full bg-white z-10 relative rounded-[12px] div-shadow">
-                    <div className="w-full">
-                        <input
-                            type="text"
-                            placeholder="Search by keyword, name, etc"
-                            className="p-2 w-full outline-none border-none"
-                        />
-                    </div>
-                    <div className="flex items-stretch gap-x-3 justify-end ">
+    const result = await uploadImage(file);
+    setLoading(false);
 
-                        <div className="">
-                            <Button
-                                title={"Search"}
-                                withArrows
-                                altClassName="btn-primary px-4 lg:px-8 py-2"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div className="section">
-                    <div className="box grid xl:grid-cols-4  gap-x-6 gap-y-10">
-                        <div className="xl:col-span-4 col-span-5 grid lg:grid-cols-2  gap-6">
-                            <div
-                                className="form-shadow rounded-[30px] p-6 dark:bg-[#15171E]"
-                                style={{ alignSelf: 'flex-start' }} // Ensure the card doesn't stretch in a flex container
-                            >
-                                <div className="flex items-center gap-3">
-                                    <img
-                                        src={`${data.logo}`}
-                                        className="rounded-full w-[106px] h-[106px] border border-[#C4C4C4] object-cover"
-                                        alt=""
-                                    />
-                                    <div>
-                                        <p className="text-sm text-[#696767]">{data.company}</p>
-                                        <p className="unbound fw-400 dark:text-white text-lg">{data.title}</p>
-                                        <p className="text-lg text-[#6F0AFF] dark:!text-[#6F0AFF] flex items-center gap-1 capitalize">
-                                            <GrLocation size={18} />{data.workplaceType}
-                                        </p>
-                                    </div>
-                                </div>
+    if (result.isSuccess) {
+      setResume(result.fileUrl);
+    } else {
+      setError("Thumbnail upload failed.");
+    }
+  };
 
-                                <p className="text-[#676767] mt-7">{data.description}</p>
+  const { mutate: apply, isPending: isSubmitting } = submitApplication();
 
-                                <div className="mt-7">
-                                    <p className="text-[#1D9CD7] dark:!text-[#1D9CD7] capitalize mb-2">Location</p>
-                                    <p className="text-[#676767] mt-1">{data.location}</p>
-                                </div>
-
-                                <div className="mt-7">
-                                    <p className="text-[#1D9CD7] dark:!text-[#1D9CD7] capitalize mb-2">Skills Required</p>
-                                    <p className="text-[#676767] mt-1">{data.skills}</p>
-                                </div>
-
-                                <div className="mt-7">
-                                    <p className="text-[#1D9CD7] dark:!text-[#1D9CD7] capitalize">{data.jobType}</p>
-
-                                    <div className="fldatas-center justify-between py-4 border-t-[2px] border-[#C4C4C4] mt-4">
-                                        <p className="text-[#676767]">
-                                            Posted: {dateFormat(data?.createdAt, "dd MMMM yyyy")}
-                                        </p>
-                                    </div>
-
-                                    <div className="mt-3">
-                                        <a href={data.applyLink} target="_blank"
-                                            className="btn-primary px-2 py-4 text-center justify-center flex flex-grow whitespace-nowrap"
-                                        >
-                                            Apply here
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* <div className="bg-[#F7F8FD] dark:bg-black rounded-[30px] h-fit p-4 lg:block hidden">
-          <JobFilter />
-        </div> */}
-                    </div>
-                </div>
-            </div>
-        </div>
+  const handleSubmit = async () => {
+    if (!user) {
+      toast.warn("Signin to apply for this job.");
+      return navigate("/auth/login");
+    }
+    if (!resume) {
+      toast.error("Kindly upload your resume.");
+      return;
+    }
+    apply(
+      {
+        jobId: id,
+        email: user.email,
+        phone: user.phoneNumber,
+        resume: resume,
+      },
+      {
+        onSuccess() {
+          navigate(-1);
+        },
+      }
     );
-}
+  };
+  if (isLoading) return <Loader />;
 
-export default ViewJobIndex
+  return (
+    <>
+      <div className=" p-6 rounded-lg box mt-8">
+        <h2 className="text-2xl font-bold mb-6">Job Description</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Sidebar Card */}
+          <div className="bg-white dark:bg-darkMode p-6 border rounded-lg flex flex-col items-center text-center">
+            <img
+              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png"
+              alt="GreenMouse Tech Logo"
+              className="w-32 h-32 rounded-full mb-4"
+            />
+            <h3 className="text-lg font-semibold">{jobDetails?.company}</h3>
+            <p className="text-gray-500">{jobDetails?.location}</p>
+            <div className="mt-4 w-full border-t pt-4">
+              <p className="text-sm text-gray-700 flex items-center gap-2 capitalize">
+                <span className="font-semibold">Job Type:</span>{" "}
+                {jobDetails?.jobType}
+              </p>
+              <p className="text-sm text-gray-700 flex items-center gap-2 mt-4 capitalize">
+                <span className="font-semibold">Job Location:</span>{" "}
+                {jobDetails?.workplaceType}
+              </p>
+              <p className="text-sm text-gray-700 flex items-center gap-2 mt-4">
+                <span className="font-semibold">Posted On:</span>{" "}
+                {dateFormat(jobDetails?.createdAt, "yyyy-MM-dd")}
+              </p>
+            </div>
+          </div>
+          {/* Main Content */}
+          <div className="md:col-span-2 bg-white dark:bg-darkMode rounded-lg p-6 border">
+            <h3 className="text-xl font-semibold mb-2">{jobDetails?.title}</h3>
+
+            {jobDetails?.description && (
+              <div
+                className="text-sm text-black dark:text-white leading-loose"
+                dangerouslySetInnerHTML={{ __html: jobDetails?.description }}
+              ></div>
+            )}
+            {/* <h4 className="text-lg font-semibold mb-2">Qualification</h4>
+          <ul className="list-disc list-inside text-gray-700 space-y-2 mb-4">
+            <li>Develop and elevate brand identities and website designs.</li>
+            <li>
+              Collaborate with the development team to implement designs.
+            </li>
+            <li>
+              Utilize design and web software including Figma, Framer,
+              Illustrator.
+            </li>
+            <li>Create and edit engaging video content and animations.</li>
+            <li>
+              Design presentations, social media graphics, and other marketing
+              materials.
+            </li>
+          </ul>
+          <h4 className="text-lg font-semibold mb-2">Company Description</h4>
+          <p className="text-gray-700 mb-6">
+            GreenMouse is a dynamic software agency based in Lagos, Nigeria.
+            Their services involve mobile app development...
+          </p> */}
+            <div className="my-4">
+              <p>Upload Resume (max 2mb)</p>
+              <input
+                type="file"
+                // ref={thumbnailInputRef}
+                onChange={handleThumbnailChange}
+                accept=".pdf"
+                // className="hidden"
+              />
+              {error && <p className="text-red-600">fail to uploda</p>}
+              <div>{loading && <BeatLoader />}</div>
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:opacity-90"
+            >
+              {isSubmitting ? <BeatLoader /> : "Apply »"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ViewJobIndex;

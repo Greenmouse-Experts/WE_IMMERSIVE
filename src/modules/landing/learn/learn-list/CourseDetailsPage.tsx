@@ -5,7 +5,7 @@ import Button from "../../../../components/ui/Button";
 import { BeatLoader } from "react-spinners";
 import { getGeneralCourseDetails } from "../../../../api/general";
 import Loader from "../../../../components/reusables/loader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addProduct } from "../../../../reducers/cartSlice";
 
@@ -18,6 +18,7 @@ const CourseDetailsPage: React.FC = () => {
 
   const { mutate: enroll, isPending } = enrollForACourse();
   const { data: courseDetails, isLoading } = getGeneralCourseDetails(courseId);
+  const user = useSelector((state: any) => state?.userData?.data);
   const navigate = useNavigate();
 
   console.log(enroll);
@@ -32,6 +33,7 @@ const CourseDetailsPage: React.FC = () => {
 
   const dispatch = useDispatch();
   const addToCart = () => {
+    if (!user) return navigate("/auth/login");
     dispatch(
       addProduct({
         price: parseInt(courseDetails?.price!),
@@ -40,20 +42,21 @@ const CourseDetailsPage: React.FC = () => {
         quantity: 1,
         unitPrice: parseInt(courseDetails?.price!),
         image: courseDetails?.image,
-        productType:"course",
+        productType: "course",
       })
     );
     toast.success(`${courseDetails?.title} added successfully`);
   };
 
   const handleBuy = () => {
+    if (!user) return navigate("/auth/login");
     dispatch(
       addProduct({
         price: parseInt(courseDetails?.price!),
         name: courseDetails?.title,
         productId: courseDetails?.id,
         quantity: 1,
-        productType:"course",
+        productType: "course",
         unitPrice: parseInt(courseDetails?.price!),
         image: courseDetails?.image,
       })

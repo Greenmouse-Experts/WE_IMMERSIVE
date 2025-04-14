@@ -19,6 +19,7 @@ export interface IAsset {
     assetUpload: string;
     assetThumbnail: string;
     specificationSubjectMatter: string;
+    specification: string;
     specificationMedium: string;
     specificationSoftwareUsed: string;
     specificationTags: string[];

@@ -22,6 +22,7 @@ import Coupon from "../pages/creator/coupon";
 import TransactionsScreen from "../pages/shared/transactions";
 import ViewLessons from "../modules/creator/courses/viewLessons";
 import ViewQuiz from "../modules/creator/courses/viewQuiz";
+import CreatePhysicalAsset from "../pages/creator/create-physical-asset";
 
 export const creatorRoutes = [
   {
@@ -72,6 +73,10 @@ export const creatorRoutes = [
         element: <CreateAsset />, // Add this when profile page is ready
       },
       {
+        path: "asset/physical/create",
+        element: <CreatePhysicalAsset />, // Add this when profile page is ready
+      },
+      {
         path: "asset/create/text-to-3d",
         element: <CreateAssetTextTo3d />, // Add this when profile page is ready
       },
@@ -86,6 +91,10 @@ export const creatorRoutes = [
       {
         path: "asset/edit/:assetId",
         element: <EditAsset />, // Add this when profile page is ready
+      },
+      {
+        path: "asset/physical/edit/:assetId",
+        element: <CreatePhysicalAsset />, // Add this when profile page is ready
       },
       {
         path: "jobs",

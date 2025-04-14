@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import CreateAssetItem from "../../components/CreateAssetItem";
 
 const CreateAsset = () => {
- 
-
   const createList = [
     {
       title: "Course",
@@ -31,7 +29,7 @@ const CreateAsset = () => {
 
   const [stepper, setStepper] = useState(1);
   const [assetPayload, setAssetPayload] = useState(null);
-  
+
   const [selectedAsset, setSelectedAsset] = useState("Course");
   const handleSelect = (itemName: string) => {
     setSelectedAsset(itemName);
@@ -42,6 +40,8 @@ const CreateAsset = () => {
   const handleStepper = (direction: string) => {
     if (selectedAsset === "Course") {
       return navigate("/creator/courses/create");
+    } else if (selectedAsset === "Physical Asset") {
+      return navigate("/creator/asset/physical/create");
     }
     setStepper((prev) => prev + (direction === "next" ? 1 : -1));
   };

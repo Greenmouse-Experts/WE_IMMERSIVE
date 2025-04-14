@@ -3,7 +3,7 @@ import { getGeneralAssetDetails } from "../../../../api/general";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../../components/reusables/loader";
 import { ThreeDViewer } from "../asset-details";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addProduct } from "../../../../reducers/cartSlice";
 
@@ -12,12 +12,24 @@ const AssetDetails: React.FC = () => {
   const navigate = useNavigate();
 
   const { data: assetDetails, isLoading } = getGeneralAssetDetails(id);
+  const user = useSelector((state: any) => state?.userData?.data);
 
   if (isLoading) {
     return <Loader />;
   }
+
+  const handleDownload = () => {
+    const downloadUrl = assetDetails?.assetUpload;
+    if (downloadUrl) {
+      window.open(downloadUrl, "_blank");
+      navigate("");
+    } else {
+      console.error("Download URL is missing");
+    }
+  };
   const dispatch = useDispatch();
   const addToCart = () => {
+    if (!user) return navigate("/auth/login");
     dispatch(
       addProduct({
         price: assetDetails?.amount,
@@ -26,13 +38,14 @@ const AssetDetails: React.FC = () => {
         quantity: 1,
         unitPrice: assetDetails?.amount,
         image: assetDetails?.assetThumbnail,
-        productType:"digital_asset"
+        productType: "digital_asset",
       })
     );
     toast.success(`${assetDetails?.assetName} added successfully`);
   };
 
   const handleBuy = () => {
+    if (!user) return navigate("/auth/login");
     dispatch(
       addProduct({
         price: assetDetails?.amount,
@@ -41,7 +54,7 @@ const AssetDetails: React.FC = () => {
         quantity: 1,
         unitPrice: assetDetails?.amount,
         image: assetDetails?.assetThumbnail,
-        productType:"digital_asset"
+        productType: "digital_asset",
       })
     );
     navigate("/cart");
@@ -95,18 +108,29 @@ const AssetDetails: React.FC = () => {
             <p className="text-gray-600">{assetDetails?.assetName}</p>
             <hr />
             <p className="text-xl font-bold">₦{assetDetails?.amount}</p>
-            <button
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg"
-              onClick={handleBuy}
-            >
-              Buy Now
-            </button>
-            <button
-              onClick={addToCart}
-              className="w-full border border-purple-600 text-purple-600 py-2 rounded-lg"
-            >
-              Add to cart
-            </button>
+            {assetDetails?.pricingType !== "Free" ? (
+              <div className="space-y-4">
+                <button
+                  className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg"
+                  onClick={handleBuy}
+                >
+                  Buy Now
+                </button>
+                <button
+                  onClick={addToCart}
+                  className="w-full border border-purple-600 text-purple-600 py-2 rounded-lg"
+                >
+                  Add to cart
+                </button>
+              </div>
+            ) : (
+              <button
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg"
+                onClick={handleDownload}
+              >
+                Download for Free
+              </button>
+            )}
           </div>
 
           <div className="p-6 bg-gray-100 dark:bg-darkMode rounded-lg shadow-sm space-y-4">

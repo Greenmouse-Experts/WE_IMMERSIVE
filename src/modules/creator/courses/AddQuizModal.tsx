@@ -1,23 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Trash2, PlusCircle } from "lucide-react";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import { createQuizQuestion } from "../../../api/creator";
+import { createQuizQuestion, updateQuizQuestion } from "../../../api/creator";
 import { toast } from "react-toastify";
 
 const QuizCreator = ({
   lessonQuizId,
-  // handleOpen,
+  handleOpen,
+  selectedQuestion,
 }: {
   lessonQuizId: string;
   handleOpen: () => void;
+  selectedQuestion?: any;
 }) => {
+  console.log(selectedQuestion);
   const [answers, setAnswers] = useState(["", "", "", ""]);
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number | null>(
     null
   );
   const [question, setQuestion] = useState("");
+
+  useEffect(() => {
+    if (selectedQuestion) {
+      setQuestion(selectedQuestion.question || "");
+
+      const optionValues:any = Object.values(selectedQuestion.options || {});
+      setAnswers(optionValues);
+
+      const correctKey = selectedQuestion.correctOption;
+      const correctIndex = ["A", "B", "C", "D"].indexOf(correctKey);
+      setCorrectAnswerIndex(correctIndex);
+    }
+  }, [selectedQuestion]);
   // const [tab, setTab] = useState(1);
   const { mutate: createquiz, isPending } = createQuizQuestion();
+  const { mutate: updateQuiz, isPending: isUpdating } = updateQuizQuestion();
 
   const handleAnswerChange = (index: number, value: string) => {
     const updatedAnswers = [...answers];
@@ -70,14 +87,25 @@ const QuizCreator = ({
       score: 5, // Adjust the score if needed
     };
 
-    createquiz(quizData, {
-      onSuccess: () => {
-        // handleOpen();
-      },
-      onError: () => {
-        // handleOpen();
-      },
-    });
+    if (selectedQuestion) {
+      updateQuiz({...quizData, questionId:selectedQuestion.id}, {
+        onSuccess: () => {
+          handleOpen();
+        },
+        onError: () => {
+          handleOpen();
+        },
+      });
+    } else {
+      createquiz(quizData, {
+        onSuccess: () => {
+          handleOpen();
+        },
+        onError: () => {
+          handleOpen();
+        },
+      });
+    }
   };
 
   return (
@@ -107,7 +135,7 @@ const QuizCreator = ({
               </span>
             </h3>
 
-            {answers.map((answer, index) => (
+            {answers?.map((answer, index) => (
               <div key={index} className="flex items-center gap-2 mb-3">
                 <input
                   type="text"
@@ -130,14 +158,15 @@ const QuizCreator = ({
                 </button>
               </div>
             ))}
-
-            <button
-              onClick={addAnswer}
-              className="text-purple-600 flex items-center gap-2 mt-3"
-            >
-              <PlusCircle size={20} />
-              <span>Add Answer</span>
-            </button>
+            {answers.length !== 4 && (
+              <button
+                onClick={addAnswer}
+                className="text-purple-600 flex items-center gap-2 mt-3"
+              >
+                <PlusCircle size={20} />
+                <span>Add Answer</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -145,10 +174,10 @@ const QuizCreator = ({
           <button className="text-gray-500 hover:underline">Cancel</button>
           <button
             onClick={handleSave}
-            disabled={isPending}
-            className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg shadow hover:opacity-90"
+            disabled={isPending || isUpdating}
+            className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg shadow hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-85"
           >
-            Save &gt;&gt;
+            {selectedQuestion ? "Update" : "Save"} &gt;&gt;
           </button>
         </div>
       </div>

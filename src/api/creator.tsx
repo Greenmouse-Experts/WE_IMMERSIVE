@@ -19,13 +19,31 @@ export function getModuleLessons(lessonId: string | undefined) {
 
 export function getModuleQuizzes(lessonQuizId: string | undefined) {
   return useQuery({
-    queryKey: ["modulesQuiz", lessonQuizId],
+    queryKey: ["modulesQuiz"],
     queryFn: async () => {
       const response = await axios.get(
         // `/creator/course/module/lessons?moduleId=${lessonId}`'
         `creator/course/lesson/quiz/questions?lessonQuizId=${lessonQuizId}`
       );
       return response.data.data as any;
+    },
+  });
+}
+export function deleteQuizQuestion() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (quizId) => {
+      const response = await axios.delete(
+        `creator/course/lesson/quiz/question/delete?questionId=${quizId}`);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      queryClient.invalidateQueries({ queryKey: ["modulesQuiz"] });
+      toast.success(res.message);
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
     },
   });
 }
@@ -78,7 +96,26 @@ export function createQuizQuestion() {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
+      queryClient.invalidateQueries({ queryKey: ["lessonModules", "modulesQuiz"] });
+      toast.success(res.message);
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+export function updateQuizQuestion() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(
+        `/creator/course/lesson/quiz/question/update`,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: [ "modulesQuiz"] });
       toast.success(res.message);
     },
     onError: (error: any) => {
@@ -134,6 +171,17 @@ export function getAssetDetails(assetId: string | undefined) {
     queryFn: async () => {
       const response = await axios.get(
         `/creator/digital/asset/view?id=${assetId}`
+      );
+      return response.data.data as IAsset;
+    },
+  });
+}
+export function getPhysicalAssetDetails(assetId: string | undefined) {
+  return useQuery({
+    queryKey: ["physical-asset-details", assetId],
+    queryFn: async () => {
+      const response = await axios.get(
+        `/creator/physical/asset/view?id=${assetId}`
       );
       return response.data.data as IAsset;
     },
