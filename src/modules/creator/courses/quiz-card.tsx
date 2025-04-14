@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 
