@@ -14,7 +14,6 @@ import {
 // import { GripVertical, MoreVertical } from "lucide-react";
 // import AddQuiz from "./add-quiz";
 import { useState } from "react";
-import QuizCreator from "./AddQuizModal";
 import Loader from "../../../components/reusables/loader";
 import AddQuizDescription from "./addQuizDescription";
 import Publish from "../../../components/reusables/Publish";
