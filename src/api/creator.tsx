@@ -9,10 +9,39 @@ export function getModuleLessons(lessonId: string | undefined) {
     queryKey: ["lessonModules", lessonId],
     queryFn: async () => {
       const response = await axios.get(
-        // `/creator/course/module/lessons?moduleId=${lessonId}`'
         `creator/course/module/${lessonId}/details`
       );
       return response.data.data as any;
+    },
+  });
+}
+export function getModuleAssignments(moduleId: string | undefined) {
+  return useQuery({
+    queryKey: ["moduleAssignment"],
+    queryFn: async () => {
+      const response = await axios.get(
+        `creator/course/lesson/assignments?moduleId=${moduleId}`
+      );
+      return response.data.data as any;
+    },
+  });
+}
+
+export function deleteAssignment() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (assignmentId) => {
+      const response = await axios.delete(
+        `creator/course/lesson/assignment/delete?assignmentId=${assignmentId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["moduleAssignment"] });
+      toast.success(res.message);
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
     },
   });
 }
@@ -34,7 +63,8 @@ export function deleteQuizQuestion() {
   return useMutation({
     mutationFn: async (quizId) => {
       const response = await axios.delete(
-        `creator/course/lesson/quiz/question/delete?questionId=${quizId}`);
+        `creator/course/lesson/quiz/question/delete?questionId=${quizId}`
+      );
       return response.data;
     },
     onSuccess: (res) => {
@@ -72,7 +102,8 @@ export function deleteQuizBasic() {
   return useMutation({
     mutationFn: async (quizId) => {
       const response = await axios.delete(
-        `creator/course/lesson/quiz/delete?quizId=${quizId}`);
+        `creator/course/lesson/quiz/delete?quizId=${quizId}`
+      );
       return response.data;
     },
     onSuccess: (res) => {
@@ -96,7 +127,9 @@ export function createQuizQuestion() {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ["lessonModules", "modulesQuiz"] });
+      queryClient.invalidateQueries({
+        queryKey: ["lessonModules", "modulesQuiz"],
+      });
       toast.success(res.message);
     },
     onError: (error: any) => {
@@ -115,7 +148,7 @@ export function updateQuizQuestion() {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: [ "modulesQuiz"] });
+      queryClient.invalidateQueries({ queryKey: ["modulesQuiz"] });
       toast.success(res.message);
     },
     onError: (error: any) => {
@@ -134,7 +167,26 @@ export function createAssignment() {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ["lessonModules"] });
+      queryClient.invalidateQueries({ queryKey: ["moduleAssignment"] });
+      toast.success(res.message);
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+export function updateAssignment() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(
+        `/creator/course/lesson/assignment/update`,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({ queryKey: ["moduleAssignment"] });
       toast.success(res.message);
     },
     onError: (error: any) => {

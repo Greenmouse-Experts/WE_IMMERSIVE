@@ -1,21 +1,27 @@
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import { createAssignment } from "../../../api/creator";
+import { createAssignment, updateAssignment } from "../../../api/creator";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Controller, useForm } from "react-hook-form";
+import { useEffect } from "react";
 
 const AssignmentCreator = ({
   lessonQuizId,
   handleOpen,
+  selectedAssignment,
 }: {
   lessonQuizId?: string;
   handleOpen: () => void;
+  selectedAssignment?: any;
 }) => {
   const { mutate: createassignment, isPending } = createAssignment();
+  const { mutate: updateassignment, isPending: pendingUpdate } =
+    updateAssignment();
 
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors /*isValid*/ },
   } = useForm({
     mode: "onChange",
@@ -27,19 +33,39 @@ const AssignmentCreator = ({
     },
   });
 
+  useEffect(() => {
+    setValue("lessonTitle", selectedAssignment.title);
+    setValue("title", selectedAssignment.title);
+    setValue("description", selectedAssignment.description);
+    setValue("dueDate", selectedAssignment.dueDate);
+  }, [selectedAssignment]);
+
   const onSubmit = (formData: any) => {
-    console.log(formData);
-    createassignment(
-      { ...formData, moduleId: lessonQuizId },
-      {
-        onSuccess: () => {
-          handleOpen();
-        },
-        onError: () => {
-          handleOpen();
-        },
-      }
-    );
+    if (selectedAssignment) {
+      updateassignment(
+        { ...formData, assignmentId: selectedAssignment.id },
+        {
+          onSuccess: () => {
+            handleOpen();
+          },
+          onError: () => {
+            handleOpen();
+          },
+        }
+      );
+    } else {
+      createassignment(
+        { ...formData, moduleId: lessonQuizId },
+        {
+          onSuccess: () => {
+            handleOpen();
+          },
+          onError: () => {
+            handleOpen();
+          },
+        }
+      );
+    }
   };
 
   return (
@@ -50,26 +76,28 @@ const AssignmentCreator = ({
         onSubmit={handleSubmit(onSubmit)}
         className="border rounded-xl p-6 bg-violet-50"
       >
-        <Controller
-          name="lessonTitle"
-          control={control}
-          rules={{
-            required: {
-              value: true,
-              message: "Lesson title is required",
-            },
-          }}
-          render={({ field }) => (
-            <TextInput
-              type={InputType["text"]}
-              label="Lesson Title"
-              placeholder="Enter the main title for this quiz"
-              error={errors.lessonTitle?.message}
-              {...field}
-              ref={null}
-            />
-          )}
-        />
+        {!selectedAssignment && (
+          <Controller
+            name="lessonTitle"
+            control={control}
+            rules={{
+              required: {
+                value: true,
+                message: "Lesson title is required",
+              },
+            }}
+            render={({ field }) => (
+              <TextInput
+                type={InputType["text"]}
+                label="Lesson Title"
+                placeholder="Enter the main title for this quiz"
+                error={errors.lessonTitle?.message}
+                {...field}
+                ref={null}
+              />
+            )}
+          />
+        )}
 
         <Controller
           name="title"
@@ -148,10 +176,10 @@ const AssignmentCreator = ({
           </button>
           <button
             type="submit"
-            disabled={isPending}
+            disabled={isPending || pendingUpdate}
             className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-2 rounded-lg shadow hover:opacity-90"
           >
-            Save &gt;&gt;
+            {selectedAssignment ? "Update" : "Save"}&gt;&gt;
           </button>
         </div>
       </form>

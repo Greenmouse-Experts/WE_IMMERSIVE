@@ -23,6 +23,7 @@ import TransactionsScreen from "../pages/shared/transactions";
 import ViewLessons from "../modules/creator/courses/viewLessons";
 import ViewQuiz from "../modules/creator/courses/viewQuiz";
 import CreatePhysicalAsset from "../pages/creator/create-physical-asset";
+import ViewAssignment from "../modules/creator/courses/viewAssignment";
 
 export const creatorRoutes = [
   {
@@ -63,6 +64,10 @@ export const creatorRoutes = [
       {
         path: "courses/create/modules/view-quiz/:id",
         element: <ViewQuiz />,
+      },
+      {
+        path: "courses/create/modules/view-assignment/:id",
+        element: <ViewAssignment />,
       },
       {
         path: "courses/create",
