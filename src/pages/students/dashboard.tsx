@@ -1,8 +1,8 @@
-import StackedBarChart from "../../modules/student/dashboard/components/stackedBarChart";
+
 import ContinueCourse from "../../modules/student/dashboard/continue-course";
 import CoursesUpdate from "../../modules/student/dashboard/courses-update";
 import Notifications from "../../modules/student/dashboard/notifications";
-import GuageProgress from "../../modules/student/dashboard/components/guageProgress";
+
 import { getStudentStats } from "../../api/student";
 import Loader from "../../components/reusables/loader";
 

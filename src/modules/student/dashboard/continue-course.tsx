@@ -1,29 +1,7 @@
 import { Progress } from "@material-tailwind/react";
 
 const ContinueCourse = ({statData}:any) => {
-    const courses = [
-      {
-        name: "Human Anatomy V2",
-        chapter: "Chapter 1",
-        img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-        tutor: "Bryan Silva",
-        value: 30,
-      },
-      {
-        name: "Human Anatomy V4",
-        chapter: "Chapter 5",
-        img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-        tutor: "Bryan Silva",
-        value: 50,
-      },
-      {
-        name: "Human Anatomy V5",
-        chapter: "Chapter 6",
-        img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279184/WE%20Immersive/image_2_s034ah.png",
-        tutor: "Bryan Silva",
-        value: 35
-      },
-    ];
+    
   return (
     <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
       <p className="unbound text-lg">Continue Course</p>
