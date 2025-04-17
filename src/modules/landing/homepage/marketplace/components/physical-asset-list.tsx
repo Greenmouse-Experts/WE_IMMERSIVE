@@ -9,7 +9,7 @@ interface Props {
   classStyle?: any;
   activeTab?: string;
 }
-const PhysicalAssetList: FC<Props> = ({ name, data, addFilter, classStyle, activeTab }) => {
+const PhysicalAssetList: FC<Props> = ({ name, data, addFilter, activeTab }) => {
   // const arrayStar = new Array(5).fill("");
 
   console.log("activeTab", activeTab)
