@@ -80,7 +80,7 @@ const CategoryScroll = ({ activeTab, setActiveTab }: MarketHeaderProp) => {
                 {item.name}
               </Button> */}
                 <div
-                  className={`bg-[#15171E] dark:bg-[rgba(238,238,238,1)] cursor-pointer w-fit rounded-[8px] flex items-center whitespace-nowrap gap-x-4 px-4 lg:px-6 text-[#696767] py-2 border ${
+                  className={`bg-[#15171E] dark:bg-[rgba(238,238,238,1)] text-white cursor-pointer w-fit rounded-[8px] flex items-center whitespace-nowrap gap-x-4 px-4 lg:px-6 py-2 border ${
                     activeTab === item.id
                       ? "border-gray-600"
                       : "border-transparent"

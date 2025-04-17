@@ -1,24 +1,24 @@
 import { Link } from "react-router-dom";
 
-const StatisticList = () => {
+const StatisticList = ({statsData}:any) => {
   const list = [
     {
       name: "Ongoing Courses",
-      count: 7,
+      count: statsData.ongoing,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716454/WE%20Immersive/learning-2_xy21e0.png",
       color: "#FFC7F0",
       route: "/students/ongoing-courses",
     },
     {
       name: "All Courses",
-      count: 22,
+      count: statsData?.all,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716404/WE%20Immersive/books_hkqetx.png",
       color: "#C7C8FF",
       route: "/students/all-courses",
     },
     {
       name: "Completed Courses",
-      count: 37,
+      count: statsData?.completed,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1734263437/WE%20Immersive/Group_1171275333_v5nnqw.png",
       color: "#FFD7C7",
       route: "#",

@@ -285,7 +285,7 @@ const AboutAsset = ({ handleStepper, payload }: AboutAssetProps) => {
                   />
                 ) : (
                   <img
-                    src="https://res.cloudinary.com/do2kojulq/image/upload/v1741179955/Group_1171275478_ftrg7a.png"
+                    src="https://res.cloudinary.com/do2kojulq/image/upload/v1744902410/Group_1171275478_1_jzfh6b.png"
                     alt="Image Placeholder"
                     className="h-full w-full object-cover"
                   />

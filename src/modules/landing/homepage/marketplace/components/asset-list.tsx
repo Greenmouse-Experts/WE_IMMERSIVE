@@ -1,25 +1,49 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { IoCaretDown } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
   name: string;
-  data: any;
+  data: any[];
   addFilter?: boolean;
   classStyle?: any;
   activeTab?: string;
 }
+
 const AssetList: FC<Props> = ({
   name,
   data,
   addFilter,
   classStyle,
-  activeTab,
+  activeTab = "",
 }) => {
-  // const arrayStar = new Array(5).fill("");
-
-  console.log("activeTab", activeTab);
   const navigate = useNavigate();
+  const itemsPerPage = 12;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  console.log(data);
+  // Filtered data by activeTab
+  const filteredData = data?.filter(
+    (item) => item.categoryId === activeTab || activeTab === ""
+  );
+
+  // Pagination logic
+  const totalItems = filteredData.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentItems = filteredData.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  const handleNavigate = (type: string, id: string) => {
+    if (type === "digital") {
+      navigate(`/asset/${id}`);
+    } else {
+      navigate(`/physical/asset/${id}`);
+    }
+  };
+
   return (
     <div>
       {addFilter ? (
@@ -37,36 +61,59 @@ const AssetList: FC<Props> = ({
           </Link>
         </div>
       )}
+
       <div className="mt-6">
         <div className="grid lg:grid-cols-4 gap-10 lg:gap-6">
-          {data?.map((item: any) => {
-            if (item.categoryId === activeTab || activeTab === "") {
-              return (
-                <div
-                  onClick={() => navigate(`/asset/${item.id}`)}
-                  className=" cursor-pointer"
-                >
-                  <img
-                    src={item?.assetThumbnail}
-                    alt="image-banner"
-                    className="rounded-md h-[230px] object-cover w-full"
-                  />
-                  <div className="mt-4">
-                    <span className={`${classStyle}`}>{item.assetName}</span>
-                  </div>
-                  <div className="mt-4 flex gap-1">
-                    <span className={`capitalize ${classStyle}`}>
-                      {item.currency === "" ? item.pricingType : item.currency}
-                    </span>
-                    <span className={`${classStyle}`}>
-                      {item.currency === "" ? "" : item.amount}
-                    </span>
-                  </div>
-                </div>
-              );
-            }
-          })}
+          {currentItems.map((item) => (
+            <div
+              key={item.id}
+              onClick={() => handleNavigate(item.type, item.id)}
+              className="cursor-pointer"
+            >
+              <img
+                src={item.assetThumbnail}
+                alt="image-banner"
+                className="rounded-md h-[230px] object-cover w-full"
+              />
+              <div className="mt-4">
+                <span className={`${classStyle}`}>{item.assetName}</span>
+              </div>
+              <div className="mt-4 flex gap-1">
+                <span className={`capitalize ${classStyle}`}>
+                  {item.currency === "" ? item.pricingType : item.currency}
+                </span>
+                <span className={`${classStyle}`}>
+                  {item.currency === "" ? "" : item.amount}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8 gap-3">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-1 rounded bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Prev
+            </button>
+            <span className="self-center text-black dark:text-white">
+              {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+              className="px-4 py-1 rounded bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

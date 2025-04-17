@@ -5,6 +5,8 @@ import Calendar from "./components/calendar";
 import StatisticList from "./stat-list";
 import { todayDate } from "../../../helpers/dateHelper";
 import { getGeneralUserDetails } from "../../../api/general";
+import { getStudentStats } from "../../../api/student";
+import Loader from "../../../components/reusables/loader";
 
 const HeaderSection = ({ openBar }: any) => {
   const { data: userData, isLoading } = getGeneralUserDetails();
@@ -12,6 +14,9 @@ const HeaderSection = ({ openBar }: any) => {
   const openSideBar = () => {
     openBar(true);
   };
+  const {data:stats, isLoading:isLoadingStats} = getStudentStats();
+
+  if(isLoadingStats) return <Loader/>
 
   return (
     <div className="w-full flex">
@@ -97,7 +102,7 @@ const HeaderSection = ({ openBar }: any) => {
           </div>
 
           <div className="mt-1 w-full flex">
-            <StatisticList />
+            <StatisticList statsData={stats?.courseStats} />
           </div>
         </div>
         <div className="w-[35%] bg-white dark:bg-[#15171E] rounded-[14px] p-4 md:block hidden">

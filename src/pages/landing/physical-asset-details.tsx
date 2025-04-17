@@ -16,15 +16,7 @@ const PhysicalAssetDetails = () => {
     return <Loader />;
   }
 
-  const handleDownload = () => {
-    const downloadUrl = assetDetails?.assetUpload;
-    if (downloadUrl) {
-      window.open(downloadUrl, "_blank");
-      navigate("");
-    } else {
-      console.error("Download URL is missing");
-    }
-  };
+  
   const dispatch = useDispatch();
   const addToCart = () => {
     if (!user) return navigate("/auth/login");
@@ -106,7 +98,7 @@ const PhysicalAssetDetails = () => {
             <p className="text-gray-600">{assetDetails?.assetName}</p>
             <hr />
             <p className="text-xl font-bold">₦{assetDetails?.amount}</p>
-            {assetDetails?.pricingType !== "Free" ? (
+        
               <div className="space-y-4">
                 <button
                   className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg"
@@ -121,14 +113,7 @@ const PhysicalAssetDetails = () => {
                   Add to cart
                 </button>
               </div>
-            ) : (
-              <button
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg"
-                onClick={handleDownload}
-              >
-                Download for Free
-              </button>
-            )}
+          
           </div>
 
           <div className="p-6 bg-gray-100 dark:bg-darkMode rounded-lg shadow-sm space-y-4">

@@ -62,3 +62,15 @@ export function enrollForACourse() {
     },
   });
 }
+
+export function getStudentStats() {
+  return useQuery({
+    queryKey: ["student-stats"],
+    queryFn: async () => {
+      const response = await axios.get(
+        `/analysis/student/yearly`
+      );
+      return response.data 
+    },
+  });
+}

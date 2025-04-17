@@ -15,7 +15,7 @@ const Publish = ({
   handleCancel,
 }: IPublishProps) => {
   return (
-    <div>
+    <div className="p-6 bg-white dark:bg-darkMode rounded-xl overflow-hidden ">
       <p className="unbound">{title}</p>
       {text && <p>{text}</p>}
       <div className="flex gap-4 justify-end mt-4">

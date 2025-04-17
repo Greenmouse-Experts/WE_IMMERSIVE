@@ -22,6 +22,7 @@ const AssetDetails: React.FC = () => {
     const downloadUrl = assetDetails?.assetUpload;
     if (downloadUrl) {
       window.open(downloadUrl, "_blank");
+      toast.success("Download Successful");
       navigate("");
     } else {
       console.error("Download URL is missing");
@@ -107,7 +108,9 @@ const AssetDetails: React.FC = () => {
             <h3 className="text-lg font-semibold dark:text-white">Payment</h3>
             <p className="text-gray-600">{assetDetails?.assetName}</p>
             <hr />
-            <p className="text-xl font-bold">₦{assetDetails?.amount}</p>
+            {assetDetails?.amount && (
+              <p className="text-xl font-bold">₦{assetDetails?.amount}</p>
+            )}
             {assetDetails?.pricingType !== "Free" ? (
               <div className="space-y-4">
                 <button
