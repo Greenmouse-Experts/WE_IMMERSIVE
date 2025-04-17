@@ -42,7 +42,7 @@ export const getApprovedDigitalAssets = async (headers = {}) => {
 };
 
 export const getApprovedPhysicalAssets = async (headers = {}) => {
-  const response = await axios.get(`${baseURL}/fetch/physical/assets`, {
+  const response = await axios.get(`${baseURL}/admin/all/physical/assets`, {
     headers: {
       ...headers, // Merge custom headers
       Authorization: `Bearer ${token}`, // Add Authorization token
@@ -157,6 +157,15 @@ export function getAllAdminDigitalAssets() {
     queryKey: ["admin-digital-assets"],
     queryFn: async () => {
       const response = await axios.get(`/admin/all/digital/assets`);
+      return response.data.data;
+    },
+  });
+}
+export function getAllAdminPhysicalAssets() {
+  return useQuery({
+    queryKey: ["admin-physical-assets"],
+    queryFn: async () => {
+      const response = await axios.get(`/admin/all/physical/assets`);
       return response.data.data;
     },
   });
@@ -518,6 +527,50 @@ export function deleteDigitalAsset() {
       toast.success(res.message);
       queryClient.invalidateQueries({
         queryKey: ["admin-digital-assets"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+export function publishPhysicalAsset() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.patch(
+        `/admin/physical/asset/update/status`,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-physical-assets"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function deletePhysicalAsset() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (assetId) => {
+      const response = await axios.delete(
+        `/admin/physical/asset/delete?id=${assetId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-physical-assets"],
       });
     },
     onError: (error: any) => {

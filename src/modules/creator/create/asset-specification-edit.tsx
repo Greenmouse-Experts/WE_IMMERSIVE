@@ -235,8 +235,8 @@ const AssetSpecificationEdit = ({
                   <SelectInput
                     label="Currency"
                     list={[
-                      { id: "USD", name: "USD" },
-                      { id: "NGN", name: "NGN" },
+                      { id: "$", name: "$" },
+                      { id: "₦", name: "₦" },
                     ]}
                     placeholder="Choose currency"
                     // icon={

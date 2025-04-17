@@ -29,6 +29,7 @@ export interface IAsset {
     amount: number;
     status: string;
     adminNote: string | null;
+    creatorName: string;
     createdAt: string;
     updatedAt: string;
     assetCategory: AssetCategory;

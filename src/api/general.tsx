@@ -98,6 +98,15 @@ export function getGeneralAssetDetails(assetId: string | undefined) {
     },
   });
 }
+export function getGeneralAssetPhysicalDetails(assetId: string | undefined) {
+  return useQuery({
+    queryKey: ["general-asset-details", assetId],
+    queryFn: async () => {
+      const response = await axios.get(`view/physical/asset?id=${assetId}`);
+      return response.data.data as IAsset;
+    },
+  });
+}
 export function getGeneralCourses() {
   return useQuery({
     queryKey: ["general-courses"],

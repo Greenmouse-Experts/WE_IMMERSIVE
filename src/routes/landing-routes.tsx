@@ -12,6 +12,7 @@ import CoursesDetails from "../pages/landing/courses-details";
 import StorePage from "../pages/landing/store";
 import AboutPage from "../pages/landing/about";
 import StudentCartTable from "../pages/students/studentCartTable";
+import PhysicalAssetDetails from "../pages/landing/physical-asset-details";
 
 export const landingRoutes = [
   {
@@ -45,6 +46,10 @@ export const landingRoutes = [
       {
         path: "/asset/:id",
         element: <AssetDetailsPage />,
+      },
+      {
+        path: "/physical/asset/:id",
+        element: <PhysicalAssetDetails />,
       },
       {
         path: "/learn",

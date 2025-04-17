@@ -44,7 +44,7 @@ const MarketBar = ({ activeTab, setActiveTab }: MarketHeaderProp) => {
               <MenuList className="bg-[#15171E] dark:bg-[rgba(238,238,238,1)] text-white dark:text-black">
                 {item?.children!.map((subItem) => (
                   <MenuItem
-                    onClick={() => setActiveTab(subItem.name)}
+                    onClick={() => setActiveTab(subItem.id)}
                     key={subItem.id}
                     className={`${
                       activeTab === subItem.name && "bg-primary text-white dark:!text-[#696767]"

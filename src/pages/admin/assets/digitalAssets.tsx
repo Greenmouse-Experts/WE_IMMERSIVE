@@ -66,7 +66,7 @@ const DigitalAssets = () => {
   const handleDelete = () => {
     deleteAsset(selected.id, {
       onSuccess() {
-        setShowDialog(false);
+        setDeleteDialog(false);
       },
     });
   };

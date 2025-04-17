@@ -1,11 +1,12 @@
 import AssetList from "./components/asset-list";
 import { getDigitalAssets, getPhysicalAssets } from "../../../../api";
 import { useGetData } from "../../../../hooks/useGetData";
+import PhysicalAssetList from "./components/physical-asset-list";
 
-interface MarketBodyProps{
+interface MarketBodyProps {
   activeTab: string;
 }
-const MarketBody = ({activeTab}:MarketBodyProps) => {
+const MarketBody = ({ activeTab }: MarketBodyProps) => {
   const digitalAssetsQuery = useGetData(["digitalAssets"], getDigitalAssets);
   const physicalAssetsQuery = useGetData(["physicalAssets"], getPhysicalAssets);
 
@@ -17,33 +18,29 @@ const MarketBody = ({activeTab}:MarketBodyProps) => {
     return <p>Error occurred while fetching data!</p>;
   }
 
-
   return (
     <div>
       <div className="grid gap-4 lg:gap-7 mt-6">
         {/* assets categories */}
         <div>{/* <AssetList name="Hot Trending 🔥" data={hotTrends}/> */}</div>
-        {activeTab ==="3D Models" && digitalAssetsQuery?.data?.data?.length > 0 && (
-          <div className="md:px-20 px-4">
-            <AssetList
-              name="Explore Digital Assets 📈"
-              data={digitalAssetsQuery.data.data}
-              classStyle={"text-black dark:text-white"}
-            />
-          </div>
-        )}
-        {physicalAssetsQuery?.data?.data?.length > 0 && (
-          <div className="mt-5 md:px-20 px-4 py-7 dark:bg-[rgba(233,235,251,1)] bg-[#000000]">
-            <AssetList
-              name="Explore Physical Assets 📈"
-              data={physicalAssetsQuery.data.data}
-              classStyle={"text-white dark:text-black"}
-            />
-          </div>
-        )}
-        {/*<div>
-          <AssetList name="Trending Courses 🧑‍🏫" data={trendsCourses} />
-  </div>*/}
+
+        <div className="md:px-20 px-4">
+          <AssetList
+            activeTab={activeTab}
+            name="Explore Digital Assets 📈"
+            data={digitalAssetsQuery.data.data}
+            classStyle={"text-black dark:text-white"}
+          />
+        </div>
+
+        <div className="mt-5 md:px-20 px-4 py-7 dark:bg-[rgba(233,235,251,1)] bg-[#000000]">
+          <PhysicalAssetList
+            activeTab={activeTab}
+            name="Explore Physical Assets 📈"
+            data={physicalAssetsQuery.data.data}
+            classStyle={"text-white dark:text-black"}
+          />
+        </div>
       </div>
     </div>
   );

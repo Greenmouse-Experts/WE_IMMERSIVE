@@ -3,7 +3,7 @@ import MarketBody from "./market-body";
 import MarketHeader from "./market-header";
 
 const MarketPlace = () => {
-  const [activeTab, setActiveTab] = useState("3D Models");
+  const [activeTab, setActiveTab] = useState("");
 
   
   return (

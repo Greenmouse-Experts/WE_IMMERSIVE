@@ -96,9 +96,9 @@ const CategoryScroll = ({ activeTab, setActiveTab }: MarketHeaderProp) => {
                   {item?.children!.map((subItem) => (
                     <MenuItem
                       key={subItem.id}
-                      onClick={() => setActiveTab(subItem.name)}
+                      onClick={() => setActiveTab(subItem.id)}
                       className={`${
-                        activeTab === subItem.name && "bg-primary text-white"
+                        activeTab === subItem.id && "bg-primary text-white"
                       }`}
                     >
                       <p className="dark:!text-[#696767]">{subItem.name}</p>
