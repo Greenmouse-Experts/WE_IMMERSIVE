@@ -489,6 +489,25 @@ export function publishCourse() {
     },
   });
 }
+export function unPublishCourse() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (courseId: string) => {
+      const response = await axios.post(`/admin/course/${courseId}/unpublish`);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-courses"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
 
 export function publishDigitalAsset() {
   const queryClient = useQueryClient();

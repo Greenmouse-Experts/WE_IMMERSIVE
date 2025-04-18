@@ -14,7 +14,7 @@ import { dateFormat } from "../../../helpers";
 import { MoreVertical } from "lucide-react";
 import useDialog from "../../../hooks/useDialog";
 import Publish from "../../../components/reusables/Publish";
-import { getAdminCourses, publishCourse } from "../../../api/admin";
+import { getAdminCourses, publishCourse, unPublishCourse } from "../../../api/admin";
 
 const Courses = () => {
   const [active, setActive] = useState(true);
@@ -23,16 +23,27 @@ const Courses = () => {
 
   const { data, isLoading } = getAdminCourses();
   const { mutate: publish, isPending } = publishCourse();
+  const { mutate:unpublish, isPending:isUnPublishing } = unPublishCourse();
   const openPublish = (course: ICourse) => {
     setSelected(course);
     setShowDialog(true);
   };
+
+  console.log(selected.published)
   const handlePublish = () => {
-    publish(selected?.id, {
-      onSuccess() {
-        setShowDialog(false);
-      },
-    });
+    if(selected.status === "unpublished"){
+      publish(selected?.id, {
+        onSuccess() {
+          setShowDialog(false);
+        },
+      });
+    }else{
+      unpublish(selected?.id, {
+        onSuccess() {
+          setShowDialog(false);
+        },
+      });
+    }
   };
 
   if (isLoading) return <Loader />;
@@ -144,7 +155,8 @@ const Courses = () => {
                                 className="cursor-pointer w-full"
                                 onClick={() => openPublish(item)}
                               >
-                                Publish Course
+                                 {item.status === "unpublished" ? 'Publish Course' :'unpublish Course'}
+                                
                               </span>
                             </MenuItem>
                             <MenuItem className="flex flex-col gap-3">
@@ -173,9 +185,9 @@ const Courses = () => {
       <Dialog title="" size="md">
         <Publish
           handleCancel={() => setShowDialog(false)}
-          title="Are you sure you want to publish this course"
+          title={`Are you sure you want to ${selected.status === "unpublished" ? 'unpublish' :'publish'} this course`}
           handleProceed={handlePublish}
-          isLoading={isPending}
+          isLoading={isPending || isUnPublishing}
         />
       </Dialog>
     </div>

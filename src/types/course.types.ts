@@ -58,11 +58,11 @@ interface ILesson {
     price: string;
     requirement: string;
     whatToLearn: string;
-    published: boolean;
     status: string;
     createdAt: string;
     updatedAt: string;
     creator: ICreator;
+    published:boolean;
     modules: IModule[];
   }
 
