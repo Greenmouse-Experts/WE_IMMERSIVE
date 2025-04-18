@@ -2,7 +2,7 @@ import CreateLessons from "../modules/creator/courses/createLessons";
 import CreateModules from "../modules/creator/courses/createModules";
 import CreateAsset from "../pages/creator/create-asset";
 import CreateCourses from "../pages/creator/create-courses";
-import CreatorAssetsScreen from "../pages/creator/creator-asset";
+import CreatorAssetsScreen from "../pages/creator/creator-digital-asset";
 import CreatorCoursesScreen from "../pages/creator/creator-courses";
 import CreatorPortfolio from "../pages/creator/creator-portfolio";
 import CreatorDashboard from "../pages/creator/dashboard";
@@ -24,6 +24,8 @@ import ViewLessons from "../modules/creator/courses/viewLessons";
 import ViewQuiz from "../modules/creator/courses/viewQuiz";
 import CreatePhysicalAsset from "../pages/creator/create-physical-asset";
 import ViewAssignment from "../modules/creator/courses/viewAssignment";
+import CreatorPhysicalAssetsScreen from "../pages/creator/creator-physical-asset";
+import EditPhysicalAsset from "../pages/creator/edit-physical-asset";
 
 export const creatorRoutes = [
   {
@@ -42,8 +44,12 @@ export const creatorRoutes = [
         element: <CreatorOrders />,
       },
       {
-        path: "assets",
+        path: "digital-assets",
         element: <CreatorAssetsScreen />,
+      },
+      {
+        path: "physical-assets",
+        element: <CreatorPhysicalAssetsScreen />,
       },
       {
         path: "courses",
@@ -99,7 +105,7 @@ export const creatorRoutes = [
       },
       {
         path: "asset/physical/edit/:assetId",
-        element: <CreatePhysicalAsset />, // Add this when profile page is ready
+        element: <EditPhysicalAsset />, // Add this when profile page is ready
       },
       {
         path: "jobs",

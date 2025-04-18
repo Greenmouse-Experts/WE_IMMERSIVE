@@ -67,7 +67,6 @@ const AssetSpecificationEdit = ({
       ...payload,
       ...restFormData,
       id: assetDetails?.id,
-      categoryId: "7430cb38-326f-4708-a143-0648d76b53c2",
       amount: parseInt(formData.amount),
       specificationTags:
         typeof specificationTags === "string"

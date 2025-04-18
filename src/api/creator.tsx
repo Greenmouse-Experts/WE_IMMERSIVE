@@ -262,12 +262,32 @@ export function getPhysicalAssetDetails(assetId: string | undefined) {
 export function editDigitalAsset() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data) => {
+    mutationFn: async (data: any) => {
       const response = await axios.put(`/creator/digital/asset/update`, data);
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries({ queryKey: ["asset-details", res.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["digitalAssets", res.id],
+      });
+      toast.success(res.message);
+    },
+    onError: (error) => {
+      toast.error(error?.message);
+    },
+  });
+}
+export function editPhysicalAsset() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/creator/physical/asset/update`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({
+        queryKey: ["asset-details", "physicalAssets", res.id],
+      });
       toast.success(res.message);
     },
     onError: (error) => {
@@ -392,6 +412,16 @@ export function getCreatorAssetCategory() {
     queryKey: ["creator-asset-category"],
     queryFn: async () => {
       const response = await axios.get(`/creator/asset/categories`);
+      return response.data.data;
+    },
+  });
+}
+
+export function getCourseCategory() {
+  return useQuery({
+    queryKey: ["course-category"],
+    queryFn: async () => {
+      const response = await axios.get(`/creator/course/categories`);
       return response.data.data;
     },
   });

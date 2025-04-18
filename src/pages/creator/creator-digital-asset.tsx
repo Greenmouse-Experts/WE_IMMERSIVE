@@ -3,18 +3,20 @@ import { useGetData } from "../../hooks/useGetData";
 import { useEffect, useState } from "react";
 import Loader from "../../components/reusables/loader";
 import { dateFormat } from "../../helpers/dateHelper";
-import { getCreatorDigitalAssets, getCreatorPhysicalAssets } from "../../api";
+import { getCreatorDigitalAssets } from "../../api";
 import {
   Menu,
   MenuHandler,
   MenuItem,
   MenuList,
+  Dialog,
 } from "@material-tailwind/react";
 import { MoreVertical } from "lucide-react";
 import { Link } from "react-router-dom";
 import useDialog from "../../hooks/useDialog";
 import Publish from "../../components/reusables/Publish";
-import { deleteDigitalAsset } from "../../api/creator";
+import { deleteDigitalAsset, editDigitalAsset } from "../../api/creator";
+import { IAsset } from "../../types/asset.types";
 
 const CreatorAssetsScreen = () => {
   // Fetch data for each group
@@ -22,16 +24,22 @@ const CreatorAssetsScreen = () => {
     ["digitalAssets"],
     getCreatorDigitalAssets
   );
-  const physicalAssetsQuery = useGetData(
-    ["physicalAssets"],
-    getCreatorPhysicalAssets
-  );
 
   const [selected, setSelected] = useState<any>(null);
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
   const { Dialog: DeleteDialog, setShowDialog: setDeleteDialog } = useDialog();
   const { mutate: deleteAsset, isPending: isDeleting } = deleteDigitalAsset();
+
+  const [open, setopen] = useState(false);
+
+  const { mutate: update, isPending } = editDigitalAsset();
+  const [selectedAsset, setselectedAsset] = useState<IAsset | null>(null);
+  const handleOpenModal = (asset: IAsset) => {
+    setselectedAsset(asset);
+    setopen(!open);
+  };
 
   const openDelete = (asset: any) => {
     setSelected(asset);
@@ -46,18 +54,28 @@ const CreatorAssetsScreen = () => {
     });
   };
 
+  const handleUpdate = () => {
+    update(
+      { ...selectedAsset, isPublished: !selectedAsset?.isPublished },
+      {
+        onSuccess: () => {
+          setopen(false);
+        },
+        onError: () => {
+          setopen(false);
+        },
+      }
+    );
+  };
+
   useEffect(() => {
-    // Check if all data is available before merging
-    if (digitalAssetsQuery.data && physicalAssetsQuery.data) {
-      const assetsData = [
-        ...digitalAssetsQuery.data.data,
-        ...physicalAssetsQuery.data.data,
-      ];
+    if (digitalAssetsQuery.data) {
+      const assetsData = [...digitalAssetsQuery.data.data];
 
       setData(assetsData);
       setLoading(false);
     }
-  }, [digitalAssetsQuery.data, physicalAssetsQuery.data]); // Dependency array ensures this runs when data updates
+  }, [digitalAssetsQuery.data]);
 
   return (
     <>
@@ -95,7 +113,7 @@ const CreatorAssetsScreen = () => {
                       <td className="unbound p-1 pb-2">Image</td>
                       <td className="unbound p-1 pb-2">Price</td>
                       <td className="unbound p-1 pb-2">Published On</td>
-                      <td className="unbound p-1 pb-2">Copies Sold</td>
+                      <td className="unbound p-1 pb-2">Status</td>
                       <td className="unbound p-1 pb-2">Action</td>
                     </tr>
                   </thead>
@@ -120,7 +138,9 @@ const CreatorAssetsScreen = () => {
                             <td className="p-2 py-4 capitalize">
                               {dateFormat(item?.createdAt, "dd-MM-yyyy")}
                             </td>
-                            <td className="p-2 py-4 capitalize">---</td>
+                            <td className="p-2 py-4 capitalize">
+                              {item.isPublished ? "Live" : "Unpublish"}
+                            </td>
                             <td className="p-2 py-4 pl-4">
                               <Menu placement="left">
                                 <MenuHandler>
@@ -136,6 +156,16 @@ const CreatorAssetsScreen = () => {
                                         Edit Asset
                                       </span>
                                     </Link>
+                                  </MenuItem>
+                                  <MenuItem className="flex flex-col gap-3">
+                                    <span
+                                      className="cursor-pointer w-full"
+                                      onClick={() => handleOpenModal(item)}
+                                    >
+                                      {item.isPublished
+                                        ? "Unpublish Asset"
+                                        : "Publish Asset"}
+                                    </span>
                                   </MenuItem>
                                   <MenuItem className="flex flex-col gap-3">
                                     <span
@@ -174,6 +204,16 @@ const CreatorAssetsScreen = () => {
           isLoading={isDeleting}
         />
       </DeleteDialog>
+      <Dialog open={open} size="md" handler={() => setopen(!open)}>
+        <Publish
+          handleCancel={() => setopen(false)}
+          title={`Are you sure you want to ${
+            selectedAsset?.isPublished ? "upublish" : "publish"
+          } this asset`}
+          handleProceed={handleUpdate}
+          isLoading={isPending}
+        />
+      </Dialog>
     </>
   );
 };

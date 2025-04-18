@@ -22,8 +22,8 @@ const AboutPhysicalAssetEdit = ({
   payload,
   assetDetails,
 }: AboutPhysicalAssetEditProps) => {
-  const [thumbnail, setThumbnail] = useState<string | null>(null);
-  const [assetUpload, setAssetUpload] = useState<string | null>(null);
+  const [thumbnail, setThumbnail] = useState<any>(null);
+  const [assetUpload, setAssetUpload] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
@@ -104,14 +104,18 @@ const AboutPhysicalAssetEdit = ({
   // Update children when parent changes
   useEffect(() => {
     if (selectedCategoryId) {
-      const selectedCategory = assetCategory.find(
+      const selectedCategory = assetCategory?.find(
         (cat: any) => cat.id === selectedCategoryId
       );
       setChildCategories(selectedCategory?.children || []);
     } else {
       setChildCategories([]);
     }
+
+    setThumbnail(assetDetails?.assetThumbnail)
+    setAssetUpload(assetDetails?.assetUpload)
   }, [selectedCategoryId, assetCategory]);
+
 
   const onSubmit = (formData: any) => {
     payload({

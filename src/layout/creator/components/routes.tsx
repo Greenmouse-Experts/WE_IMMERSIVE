@@ -28,9 +28,15 @@ export const Routes = [
     submenu: [],
   },
   {
-    name: "Assets",
+    name: "Physical Assets",
     icon: <RiHeart2Line className="text-xl text-grey" />,
-    route: "/creator/assets",
+    route: "/creator/physical-assets",
+    submenu: [],
+  },
+  {
+    name: "Digital Assets",
+    icon: <RiHeart2Line className="text-xl text-grey" />,
+    route: "/creator/digital-assets",
     submenu: [],
   },
   {

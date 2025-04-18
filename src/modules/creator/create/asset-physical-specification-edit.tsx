@@ -2,13 +2,10 @@ import { Controller, useForm } from "react-hook-form";
 import Button from "../../../components/ui/Button";
 import SelectInput from "../../../components/ui/SelectInput";
 import TextInput, { InputType } from "../../../components/ui/TextInput";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import { useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { createPhysicalAsset } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { IAsset } from "../../../types/asset.types";
+import { editPhysicalAsset } from "../../../api/creator";
 
 interface PhysicalAssetSpecificationEditProps {
   payload: any;
@@ -18,9 +15,9 @@ interface PhysicalAssetSpecificationEditProps {
 const PhysicalAssetSpecificationEdit = ({
   handleSteeper,
   payload,
-  assetDetails
+  assetDetails,
 }: PhysicalAssetSpecificationEditProps) => {
-  const [isBusy, setIsBusy] = useState<boolean>(false);
+ 
   const navigate = useNavigate();
 
   const {
@@ -45,37 +42,29 @@ const PhysicalAssetSpecificationEdit = ({
   console.log("errors", errors);
   const pricingType = watch("pricingType");
 
-  // React Query: Define mutation
-  const mutation = useMutation({
-    mutationFn: createPhysicalAsset,
-    onSuccess: (data: any) => {
-      toast.success(data.message);
-      setIsBusy(false); // Hide loader
-      navigate(-1);
-    },
-    onError: (error: any) => {
-      toast.error(error.response.data.message);
-      setIsBusy(false); // Hide loader
-    },
-    onSettled: () => {
-      setIsBusy(false); // Hide loader
-    },
-  });
+ 
 
-  console.log(payload);
+  const { mutate: update, isPending } = editPhysicalAsset();
 
+  console.log(errors)
   const onSubmit = (formData: any) => {
-    setIsBusy(true);
+ 
     const { specificationTags, ...restFormData } = formData; // Destructure specificationTags from formData
 
     const newPayload = {
       ...payload,
       ...restFormData,
       amount: parseInt(formData.amount),
+      id: assetDetails?.id,
       specificationTags:
         specificationTags?.split(",").map((tag: string) => tag.trim()) || [], // Convert to an array
     };
-    mutation.mutate(newPayload);
+    // console.log('i ran')
+    update(newPayload, {
+      onSuccess() {
+        navigate(-1);
+      },
+    });
   };
 
   return (
@@ -261,10 +250,11 @@ const PhysicalAssetSpecificationEdit = ({
 
         <div className=" mt-16 flex w-full justify-between ">
           <Button
+          type="submit"
             style={{ width: "fit-content" }}
             withArrows
             size={14}
-            title={isBusy ? <BeatLoader size={12} color="white" /> : "Submit"}
+            title={isPending ? <BeatLoader size={12} color="white" /> : "Submit"}
             altClassName="btn-primary px-10 py-2 flex flex-grow whitespace-nowrap"
           />
 

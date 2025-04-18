@@ -33,6 +33,7 @@ export interface IAsset {
     createdAt: string;
     updatedAt: string;
     assetCategory: AssetCategory;
+    isPublished: boolean;
     user: User;
     admin: string | null;
 }
