@@ -2,7 +2,6 @@ import { useState } from "react";
 import { getPhysicalAssetDetails } from "../../api/creator";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/reusables/loader";
-import AssetSpecificationEdit from "../../modules/creator/create/asset-specification-edit";
 import AboutPhysicalAssetEdit from "../../modules/creator/create/about-physical-asset-edit";
 import PhysicalAssetSpecificationEdit from "../../modules/creator/create/asset-physical-specification-edit";
 

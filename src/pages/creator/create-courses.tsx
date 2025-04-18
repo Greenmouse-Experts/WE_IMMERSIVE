@@ -15,7 +15,7 @@ const CreateCourses = () => {
     getCourseCategory();
 
   const [stepper, setStepper] = useState(1);
-  const [categoryOptions, setCategoryOptions] = useState<any>([]);
+
   const [isBusy, setIsBusy] = useState<boolean>(false);
 
   //   useEffect(() => {

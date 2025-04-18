@@ -39,8 +39,10 @@ const AssetList: FC<Props> = ({
   const handleNavigate = (type: string, id: string) => {
     if (type === "digital") {
       navigate(`/asset/${id}`);
-    } else {
+    } else if(type === "physical") {
       navigate(`/physical/asset/${id}`);
+    }else if(type === "courses"){
+      navigate(`/learn/view-course/${id}`);
     }
   };
 
@@ -71,19 +73,19 @@ const AssetList: FC<Props> = ({
               className="cursor-pointer"
             >
               <img
-                src={item.assetThumbnail}
+                src={item.assetThumbnail || item.image}
                 alt="image-banner"
                 className="rounded-md h-[230px] object-cover w-full"
               />
               <div className="mt-4">
-                <span className={`${classStyle}`}>{item.assetName}</span>
+                <span className={`${classStyle}`}>{item.assetName || item.title}</span>
               </div>
               <div className="mt-4 flex gap-1">
                 <span className={`capitalize ${classStyle}`}>
                   {item.currency === "" ? item.pricingType : item.currency}
                 </span>
                 <span className={`${classStyle}`}>
-                  {item.currency === "" ? "" : item.amount}
+                  {item.currency === "" ? "" : item.amount || item.price}
                 </span>
               </div>
             </div>

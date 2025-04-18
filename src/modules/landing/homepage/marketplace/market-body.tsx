@@ -2,26 +2,41 @@ import AssetList from "./components/asset-list";
 import { getDigitalAssets, getPhysicalAssets } from "../../../../api";
 import { useGetData } from "../../../../hooks/useGetData";
 import { IAsset } from "../../../../types/asset.types";
+import { getGeneralCourses } from "../../../../api/general";
+import Loader from "../../../../components/reusables/loader";
 // import PhysicalAssetList from "./components/physical-asset-list";
 
 interface MarketBodyProps {
   activeTab: string;
 }
 const MarketBody = ({ activeTab }: MarketBodyProps) => {
+  const { data: courses, isLoading } = getGeneralCourses();
   const digitalAssetsQuery = useGetData(["digitalAssets"], getDigitalAssets);
   const physicalAssetsQuery = useGetData(["physicalAssets"], getPhysicalAssets);
 
-  
-  if (digitalAssetsQuery.isLoading || physicalAssetsQuery.isLoading) {
-    return <p>Loading...</p>;
+  console.log(courses);
+
+  if (
+    digitalAssetsQuery.isLoading ||
+    physicalAssetsQuery.isLoading ||
+    isLoading
+  ) {
+    return <div className=""><Loader/></div>;
   }
-  
+
   if (digitalAssetsQuery.error || physicalAssetsQuery.error) {
     return <p>Error occurred while fetching data!</p>;
   }
   const mergedAssets = [
-    ...(digitalAssetsQuery?.data?.data || []).map((item:IAsset) => ({ ...item, type: "digital" })),
-    ...(physicalAssetsQuery?.data?.data || []).map((item:IAsset) => ({ ...item, type: "physical" })),
+    ...(digitalAssetsQuery?.data?.data || []).map((item: IAsset) => ({
+      ...item,
+      type: "digital",
+    })),
+    ...(physicalAssetsQuery?.data?.data || []).map((item: IAsset) => ({
+      ...item,
+      type: "physical",
+    })),
+    ...(courses || []).map((item: IAsset) => ({ ...item, type: "courses" })),
   ];
 
   return (
