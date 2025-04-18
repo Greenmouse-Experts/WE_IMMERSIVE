@@ -21,7 +21,7 @@ const MarketBody = ({ activeTab }: MarketBodyProps) => {
     physicalAssetsQuery.isLoading ||
     isLoading
   ) {
-    return <div className=""><Loader/></div>;
+    return <div className="flex items-center justify-center"><Loader/></div>;
   }
 
   if (digitalAssetsQuery.error || physicalAssetsQuery.error) {
