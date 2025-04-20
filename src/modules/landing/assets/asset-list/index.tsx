@@ -55,8 +55,6 @@ const AllAssetList = () => {
         </div>
         <div className="mt-12 lg:mt-16">
           <AssetList
-            name="All Assets 🪩"
-            addFilter
             data={assetsData}
             classStyle={"text-black dark:text-white"}
           />
