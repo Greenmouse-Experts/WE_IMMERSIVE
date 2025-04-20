@@ -1,18 +1,15 @@
 import { FC, useState } from "react";
-import { IoCaretDown } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { ICategoryChildren } from "../../../../../types/category.types";
 
 interface Props {
   data: any[];
-  addFilter?: boolean;
   classStyle?: any;
   activeTab?: ICategoryChildren | null;
 }
 
 const AssetList: FC<Props> = ({
   data,
-  addFilter,
   classStyle,
   activeTab = null,
 }) => {
@@ -47,26 +44,14 @@ const AssetList: FC<Props> = ({
 
   return (
     <div>
-      {addFilter ? (
-        <div className="flex items-center gap-x-5">
-          <span className={`unbound fw-500 ${classStyle}`}>
-            {" "}
-            {!activeTab ? "All Assets" : activeTab.name}
-          </span>
-          <div className="bg-[#EFEFEF] text-[#757171] whitespace-nowrap cursor-pointer flex item-center gap-x-2 px-2 py-[4px] rounded-[6px] items-center">
-            Best Sellers <IoCaretDown />
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-center justify-between">
-          <span className={`unbound fw-500 ${classStyle}`}>
-            {!activeTab ? "All Assets" : activeTab.name}
-          </span>
-          <Link to={"/explore"} className="text-[#5E2AF7] fs-500 underline">
-            See More
-          </Link>
-        </div>
-      )}
+      <div className="flex items-center justify-between">
+        <span className={`unbound fw-500 ${classStyle}`}>
+          {!activeTab ? "All Assets" : activeTab.name}
+        </span>
+        <Link to={"/explore"} className="text-[#5E2AF7] fs-500 underline">
+          See More
+        </Link>
+      </div>
 
       <div className="mt-6">
         <div className="grid lg:grid-cols-4 gap-10 lg:gap-6">

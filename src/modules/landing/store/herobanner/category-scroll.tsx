@@ -31,8 +31,6 @@ const CategoryScroll = ({ activeTab, setActiveTab }: MarketHeaderProp) => {
   //   "Animated Courses",
   // ];
 
-  console.log(activeTab)
-
   const { data: subCategories, isLoading } = getSubCategories();
 
   if (isLoading) {
