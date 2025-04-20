@@ -1,23 +1,31 @@
 import { getDigitalAssets, getPhysicalAssets } from "../../../../api";
+import { getGeneralCourses } from "../../../../api/general";
+import Loader from "../../../../components/reusables/loader";
 import { useGetData } from "../../../../hooks/useGetData";
 import { IAsset } from "../../../../types/asset.types";
+import { ICategoryChildren } from "../../../../types/category.types";
 import AssetList from "../../homepage/marketplace/components/asset-list";
 // import PhysicalAssetList from "../../homepage/marketplace/components/physical-asset-list";
 
 interface MarketBodyProps {
-  activeTab: string;
+  activeTab: ICategoryChildren | null;
 }
 
 const StoreContent = ({ activeTab }: MarketBodyProps) => {
   const digitalAssetsQuery = useGetData(["digitalAssets"], getDigitalAssets);
   const physicalAssetsQuery = useGetData(["physicalAssets"], getPhysicalAssets);
+  const { data: courses, isLoading } = getGeneralCourses();
 
-  if (digitalAssetsQuery.isLoading || physicalAssetsQuery.isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (digitalAssetsQuery.error || physicalAssetsQuery.error) {
-    return <p>Error occurred while fetching data!</p>;
+  if (
+    digitalAssetsQuery.isLoading ||
+    physicalAssetsQuery.isLoading ||
+    isLoading
+  ) {
+    return (
+      <div className="flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   const mergedAssets = [
@@ -29,6 +37,7 @@ const StoreContent = ({ activeTab }: MarketBodyProps) => {
       ...item,
       type: "physical",
     })),
+    ...(courses || []).map((item: IAsset) => ({ ...item, type: "courses" })),
   ];
 
   return (
@@ -39,7 +48,6 @@ const StoreContent = ({ activeTab }: MarketBodyProps) => {
           <div>
             <AssetList
               activeTab={activeTab}
-              name="Explore Digital Assets 📈"
               data={mergedAssets}
               classStyle={"text-black dark:text-white"}
             />

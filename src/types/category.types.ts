@@ -1,4 +1,4 @@
-interface ICategoryChildren {
+export interface ICategoryChildren {
   id: string;
   name: string;
   description: string;

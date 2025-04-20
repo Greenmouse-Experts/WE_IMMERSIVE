@@ -1,9 +1,10 @@
 import { useState } from "react";
 import MarketBody from "./market-body";
 import MarketHeader from "./market-header";
+import { ICategoryChildren } from "../../../../types/category.types";
 
 const MarketPlace = () => {
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState<ICategoryChildren | any>(null);
 
   
   return (

@@ -1,9 +1,10 @@
+import { ICategoryChildren } from "../../../../types/category.types";
 import MarketSearch from "../../homepage/marketplace/components/market-search";
 import CategoryScroll from "./category-scroll";
 
 interface MarketHeaderProp{
-  activeTab: string;
-  setActiveTab: (tab: string) => void;  
+  activeTab: ICategoryChildren | null;
+  setActiveTab: (tab: ICategoryChildren) => void;  
 }
 
 const StoreBanner = ({activeTab, setActiveTab}:MarketHeaderProp) => {

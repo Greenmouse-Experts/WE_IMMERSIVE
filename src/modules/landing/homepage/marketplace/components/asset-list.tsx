@@ -1,30 +1,29 @@
 import { FC, useState } from "react";
 import { IoCaretDown } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import { ICategoryChildren } from "../../../../../types/category.types";
 
 interface Props {
-  name: string;
   data: any[];
   addFilter?: boolean;
   classStyle?: any;
-  activeTab?: string;
+  activeTab?: ICategoryChildren | null;
 }
 
 const AssetList: FC<Props> = ({
-  name,
   data,
   addFilter,
   classStyle,
-  activeTab = "",
+  activeTab = null,
 }) => {
   const navigate = useNavigate();
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log(data);
+  // console.log(data);
   // Filtered data by activeTab
   const filteredData = data?.filter(
-    (item) => item.categoryId === activeTab || activeTab === ""
+    (item) => item.categoryId === activeTab?.id || activeTab === null
   );
 
   // Pagination logic
@@ -39,9 +38,9 @@ const AssetList: FC<Props> = ({
   const handleNavigate = (type: string, id: string) => {
     if (type === "digital") {
       navigate(`/asset/${id}`);
-    } else if(type === "physical") {
+    } else if (type === "physical") {
       navigate(`/physical/asset/${id}`);
-    }else if(type === "courses"){
+    } else if (type === "courses") {
       navigate(`/learn/view-course/${id}`);
     }
   };
@@ -50,14 +49,19 @@ const AssetList: FC<Props> = ({
     <div>
       {addFilter ? (
         <div className="flex items-center gap-x-5">
-          <span className={`unbound fw-500 ${classStyle}`}>{name}</span>
+          <span className={`unbound fw-500 ${classStyle}`}>
+            {" "}
+            {!activeTab ? "All Assets" : activeTab.name}
+          </span>
           <div className="bg-[#EFEFEF] text-[#757171] whitespace-nowrap cursor-pointer flex item-center gap-x-2 px-2 py-[4px] rounded-[6px] items-center">
             Best Sellers <IoCaretDown />
           </div>
         </div>
       ) : (
         <div className="flex items-center justify-between">
-          <span className={`unbound fw-500 ${classStyle}`}>{name}</span>
+          <span className={`unbound fw-500 ${classStyle}`}>
+            {!activeTab ? "All Assets" : activeTab.name}
+          </span>
           <Link to={"/explore"} className="text-[#5E2AF7] fs-500 underline">
             See More
           </Link>
@@ -78,7 +82,9 @@ const AssetList: FC<Props> = ({
                 className="rounded-md h-[230px] object-cover w-full"
               />
               <div className="mt-4">
-                <span className={`${classStyle}`}>{item.assetName || item.title}</span>
+                <span className={`${classStyle}`}>
+                  {item.assetName || item.title}
+                </span>
               </div>
               <div className="mt-4 flex gap-1">
                 <span className={`capitalize ${classStyle}`}>

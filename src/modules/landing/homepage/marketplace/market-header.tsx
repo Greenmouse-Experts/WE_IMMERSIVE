@@ -1,8 +1,9 @@
+import { ICategoryChildren } from "../../../../types/category.types";
 import MarketBar from "./components/market-bar";
 
 interface MarketHeaderProp{
-  activeTab: string;
-  setActiveTab: (tab: string) => void;  
+  activeTab: ICategoryChildren;
+  setActiveTab: (tab: ICategoryChildren) => void;  
 }
 const MarketHeader = ({activeTab, setActiveTab}:MarketHeaderProp) => {
   return (

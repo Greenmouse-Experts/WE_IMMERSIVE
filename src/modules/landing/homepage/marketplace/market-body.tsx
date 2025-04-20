@@ -4,24 +4,27 @@ import { useGetData } from "../../../../hooks/useGetData";
 import { IAsset } from "../../../../types/asset.types";
 import { getGeneralCourses } from "../../../../api/general";
 import Loader from "../../../../components/reusables/loader";
+import { ICategoryChildren } from "../../../../types/category.types";
 // import PhysicalAssetList from "./components/physical-asset-list";
 
 interface MarketBodyProps {
-  activeTab: string;
+  activeTab: ICategoryChildren;
 }
 const MarketBody = ({ activeTab }: MarketBodyProps) => {
   const { data: courses, isLoading } = getGeneralCourses();
   const digitalAssetsQuery = useGetData(["digitalAssets"], getDigitalAssets);
   const physicalAssetsQuery = useGetData(["physicalAssets"], getPhysicalAssets);
 
-  console.log(courses);
-
   if (
     digitalAssetsQuery.isLoading ||
     physicalAssetsQuery.isLoading ||
     isLoading
   ) {
-    return <div className="flex items-center justify-center"><Loader/></div>;
+    return (
+      <div className="flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   if (digitalAssetsQuery.error || physicalAssetsQuery.error) {
@@ -48,7 +51,6 @@ const MarketBody = ({ activeTab }: MarketBodyProps) => {
         <div className="md:px-20 px-4">
           <AssetList
             activeTab={activeTab}
-            name="Explore Digital Assets 📈"
             data={mergedAssets}
             classStyle={"text-black dark:text-white"}
           />
