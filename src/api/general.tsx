@@ -202,3 +202,12 @@ export function getOrderHistory() {
     },
   });
 }
+export function getOrderDetails(paymentId: string) {
+  return useQuery({
+    queryKey: ["orders-details", paymentId],
+    queryFn: async () => {
+      const response = await axios.get(`/purchase/details/${paymentId}`);
+      return response.data.data as any;
+    },
+  });
+}

@@ -1,15 +1,19 @@
 import Chart from "react-apexcharts";
 
-const TransactionChart = () => {
+const TransactionChart = ({ transactionChart }: any) => {
+  const courseRevenue = transactionChart?.courses?.revenue || 0;
+  const digitalRevenue = transactionChart?.digitalAssets?.revenue || 0;
+  const physicalRevenue = transactionChart?.physicalAssets?.revenue || 0;
+
   const options = {
     chart: {
       type: "donut",
     },
-    colors: ["#7353FF", "#FF5353", "#7BFF53"],
+    colors: ["#7353FF", "#53C1FF", "#FF5353"],
     legend: {
       position: "bottom",
     },
-    labels: ["Digital Assets", "Tours & Spaces", "Physical Products"],
+    labels: ["Courses", "Digital Assets", "Physical Products"],
     plotOptions: {
       pie: {
         startAngle: -90,
@@ -37,21 +41,15 @@ const TransactionChart = () => {
     ],
   } as ApexCharts.ApexOptions;
 
-  const series = [4315, 3200, 1200];
+  const series = [courseRevenue, digitalRevenue, physicalRevenue];
 
   return (
     <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
       {/* Header Section */}
       <div className="flex justify-between items-center">
-        <p className="unbound text-[#06052A] text-lg">Transaction Analysis</p>
-
-        {/* Hide Export As on Mobile */}
-        {/* <div className="hidden md:flex items-center gap-x-4">
-          <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
-            <p className="text-[#2C3E50] fs-300">Export As</p>
-            <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />
-          </div>
-        </div> */}
+        <p className="unbound text-[#06052A] text-lg dark:text-white">
+          Transaction Analysis
+        </p>
       </div>
 
       {/* Chart Section */}

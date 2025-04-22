@@ -36,7 +36,7 @@ const AllAssetList = () => {
   return (
     <div className="section">
       <div className="box">
-        <div className="mt-7 flex gap--x-4 gap-y-7 flex-wrap justify-center">
+        {/* <div className="mt-7 flex gap--x-4 gap-y-7 flex-wrap justify-center">
           {barItems.map((item, key) => (
             <div
               className={`bg-[#15171E] cursor-pointer w-fit rounded-[8px] flex items-center whitespace-nowrap gap-x-4 px-4 lg:px-6 text-[#AEACAC] py-2 border ${
@@ -52,7 +52,7 @@ const AllAssetList = () => {
           <div className="bg-[#15171E] cursor-pointer rounded-[8px] flex items-center whitespace-nowrap lg:px-6 text-[#AEACAC] py-2">
             Learn More
           </div>
-        </div>
+        </div> */}
         <div className="mt-12 lg:mt-16">
           <AssetList
             data={assetsData}

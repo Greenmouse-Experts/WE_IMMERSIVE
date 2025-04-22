@@ -7,6 +7,7 @@ import Orders from "../pages/students/orders";
 import TransactionList from "../pages/students/transactions";
 import StudentCartTable from "../pages/students/studentCartTable";
 import SettingsTable from "../pages/students/settingsTable";
+import OrderDetails from "../pages/students/orders-details";
 
 export const studentRoutes = [
   {
@@ -31,6 +32,10 @@ export const studentRoutes = [
       {
         path: "orders",
         element: <Orders />,
+      },
+      {
+        path: "orders/:orderId",
+        element: <OrderDetails />,
       },
       {
         path: "notification",

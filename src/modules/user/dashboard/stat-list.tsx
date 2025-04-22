@@ -1,28 +1,28 @@
 import { formatAsNgnMoney } from "../../../components/utils/formatHelp";
 
-const StatisticList = () => {
+const StatisticList = ({userStats}:any) => {
   const list = [
     {
       name: "Ongoing Courses",
-      count: 7,
+      count: userStats?.ongoingCourses,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716454/WE%20Immersive/learning-2_xy21e0.png",
       color: "#FFC7F0",
     },
     {
       name: "All Courses",
-      count: 22,
+      count: userStats?.totalCourses,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716404/WE%20Immersive/books_hkqetx.png",
       color: "#C7C8FF",
     },
     {
-      name: "Purchased Assets",
-      count: 37,
+      name: "Total Transactions",
+      count: userStats?.totalTransactions,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716112/WE%20Immersive/3d-modeling_hbesow.png",
       color: "#FFD7C7",
     },
     {
       name: "Total Spend",
-      count: `$${formatAsNgnMoney(107000)}`,
+      count: `₦${formatAsNgnMoney(userStats?.totalSpends)}`,
       img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/coin-2_qcugc2.png",
       color: "#D0FFC7",
     },

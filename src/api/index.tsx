@@ -412,6 +412,20 @@ export const publishCourseApi = async (
   return axios
     .post(`${baseURL}/creator/course/publish?courseId=${id}`, {}, {
       headers: {
+        ...headers, 
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json", 
+      },
+    })
+    .then((response) => response.data);
+};
+export const unPublishCourseApi = async (
+  id: string | undefined,
+  headers = {}
+) => {
+  return axios
+    .post(`${baseURL}/creator/course/unpublish?courseId=${id}`, {}, {
+      headers: {
         ...headers, // Merge custom headers
         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
         "Content-Type": "application/json", // Example for setting content type

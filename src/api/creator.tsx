@@ -426,3 +426,91 @@ export function getCourseCategory() {
     },
   });
 }
+
+export function publishCourseApi() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const response = await axios.post(`/creator/course/publish?courseId=${id}`, {});
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["courses"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function unPublishCourseApi() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const response = await axios.post(`/creator/course/unpublish?courseId=${id}`, {});
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["courses"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+export function deleteCourseApi() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const response = await axios.delete(`/creator/course/delete/${id}`, {});
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["courses"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+// export const publishCourseApi = async (
+//   id: string | undefined,
+//   headers = {}
+// ) => {
+//   return axios
+//     .post(`${baseURL}/creator/course/publish?courseId=${id}`, {}, {
+//       headers: {
+//         ...headers, 
+//         Authorization: `Bearer ${token}`,
+//         "Content-Type": "application/json", 
+//       },
+//     })
+//     .then((response) => response.data);
+// };
+// export const unPublishCourseApi = async (
+//   id: string | undefined,
+//   headers = {}
+// ) => {
+//   return axios
+//     .post(`${baseURL}/creator/course/unpublish?courseId=${id}`, {}, {
+//       headers: {
+//         ...headers, // Merge custom headers
+//         Authorization: `Bearer ${token}`, // Example for adding an Authorization token
+//         "Content-Type": "application/json", // Example for setting content type
+//       },
+//     })
+//     .then((response) => response.data);
+// };

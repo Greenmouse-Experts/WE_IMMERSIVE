@@ -1,6 +1,6 @@
 import LearnBanner from "./herobanner";
 import ExploreCategory from "./learn-list/explore-category";
-import NewCourses from "./learn-list/new-courses";
+// import NewCourses from "./learn-list/new-courses";
 import StudentReviews from "./reviews";
 import Revolution from "./revolution";
 
@@ -12,7 +12,7 @@ const LearnIndex = () => {
       </div>
       <div>
         <ExploreCategory/>
-        <NewCourses/>
+        {/* <NewCourses/> */}
       </div>
       <div>
         <Revolution/>

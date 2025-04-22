@@ -21,7 +21,7 @@ const NewCourses = () => {
   return (
     <div className="">
       <div className="box">
-        <CoursesList name="New  Courses 🧑‍🏫" data={data} />
+        <CoursesList data={data} />
       </div>
     </div>
   );

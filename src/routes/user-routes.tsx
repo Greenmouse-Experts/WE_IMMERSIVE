@@ -6,11 +6,12 @@ import Notifications from "../pages/user/Notifications";
 import Transactions from "../pages/user/Transactions";
 import AvailableJobs from "../pages/user/AllJobs";
 import SaveJobs from "../pages/user/SavedJobs";
-import CartPage from "../pages/user/CartPage";
 import Orders from "../pages/user/Orders";
 import JobDescription from "../pages/user/JobDescription";
 import Settings from "../pages/user/ProfilePage";
 import AvailableCourses from "../pages/students/allCourses";
+import OrderDetails from "../pages/students/orders-details";
+import StudentCart from "../modules/student/dashboard/studentCart";
 
 
 export const userRoutes = [
@@ -51,15 +52,15 @@ export const userRoutes = [
       },
       {
         path: 'cart',
-        element: <CartPage />,
+        element: <StudentCart />,
       },
       {
         path: 'orders',
         element: <Orders />,
       },
       {
-        path: 'orders',
-        element: <Orders />,
+        path: "orders/:orderId",
+        element: <OrderDetails />,
       },
       {
         path: 'settings',

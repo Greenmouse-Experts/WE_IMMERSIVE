@@ -1,21 +1,30 @@
 import { useState } from "react";
 import ArrowsIcon from "../../../../assets/svg-components/arrows";
+import { getGeneralCourses, getSubCategories } from "../../../../api/general";
+import Loader from "../../../../components/reusables/loader";
+import { ICategoryChildren } from "../../../../types/category.types";
+import CoursesList from "./courses-list";
 
 const ExploreCategory = () => {
-  const [activeTab, setActiveTab] = useState("VR Gear");
-  const barItems = [
-    "Game Development",
-    "3D Illustrations",
-    "Character Animation",
-    "AI Design Basic",
-    "Blueprint Scripting",
-    "Fine Art",
-    "Agriculture",
-    "Basic Science",
-    "3D Characters",
-    "Photography",
-    "Sea Animals",
-  ];
+  const [activeTab, setActiveTab] = useState<ICategoryChildren | null>(null);
+
+  const { data: subCategories, isLoading } = getSubCategories();
+
+  const {data:courses, isLoading:isLoadingCourse } = getGeneralCourses();
+
+  if (isLoading || isLoadingCourse) {
+    return <Loader/>;
+  }
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  const filteredCategory = subCategories?.filter(
+    (cat) => cat.name === "XR Learning and Experiences"
+  )[0].children;
+
+  console.log(filteredCategory);
 
   return (
     <div className="section">
@@ -24,22 +33,28 @@ const ExploreCategory = () => {
           <p className="unbound fw-500">Explore by Category 🧑‍🏫</p>
         </div>
         <div className="mt-7 flex gap-4 flex-wrap">
-          {barItems.map((item, key) => (
+          {filteredCategory?.map((item, key) => (
             <div
-              className={`bg-[#EEEEEE] dark:bg-[#15171E] cursor-pointer w-fit rounded-[8px] flex items-center whitespace-nowrap gap-x-4 px-4 lg:px-6 text-[#696767] dark:text-[#AEACAC] py-2 border ${
-                activeTab === item ? "border-gray-600" : "border-transparent"
-              }`}
+              className={`bg-[#EEEEEE] dark:bg-[#15171E] cursor-pointer w-fit rounded-[8px] flex items-center whitespace-nowrap gap-x-4 px-4 lg:px-6 text-[#696767] dark:text-[#AEACAC] py-2 border 
+                ${
+                  activeTab?.name === item.name
+                    ? "border-gray-600"
+                    : "border-transparent"
+                }
+              `}
               key={key}
               onClick={() => setActiveTab(item)}
             >
               <ArrowsIcon color="#AEACAC" />
-              {item}
+              {item.name}
             </div>
           ))}
-          <div className="dark:bg-[#15171E] bg-[#EEEEEE] cursor-pointer rounded-[8px] flex items-center whitespace-nowrap lg:px-6 text-[#AEACAC] py-2">
-            Learn More
-          </div>
+         
         </div>
+      </div>
+
+      <div className="box">
+      <CoursesList data={courses} activeTab={activeTab} />
       </div>
     </div>
   );

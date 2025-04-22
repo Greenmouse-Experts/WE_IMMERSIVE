@@ -1,90 +1,66 @@
-import ApexCharts from "apexcharts";
+//@ts-nocheck
 import Chart from "react-apexcharts";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 
-const PurchaseAnalysis = () => {
-     const options = {
-       colors: ["#553CF0", "#2598D8"],
-       legend: {
-         show: true,
-       },
-       toolbar: {
-         show: false,
-       },
-       tooltip: {
-         theme: "dark",
-         marker: {
-           show: true,
-         },
-         style: {
-           fontSize: "12px",
-           color: "#0000",
-           fontFamily: undefined,
-         },
-       },
-       grid: {
-         show: true,
-       },
-       stroke: {
-         show: true,
-         colors: ["transparent"],
-         width: 5,
-       },
-       dataLabels: {
-         enabled: false,
-       },
-       yaxis: {
-         labels: {
-           show: true,
-           style: {
-             colors: "#A3A3A3",
-             fontSize: "12px",
-             cssClass: "apexcharts-xaxis-label",
-           },
-         },
-         axisBorder: {
-           show: true,
-         },
-         axisTicks: {
-           show: true,
-         },
-       },
-       xaxis: {
-         labels: {
-           show: true,
-           style: {
-             colors: "#A3A3A3",
-             fontSize: "12px",
-             cssClass: "apexcharts-xaxis-label",
-           },
-         },
-         categories: [
-           "Jan",
-           "Feb",
-           "Mar",
-           "Apr",
-           "May",
-           "Jun",
-           "Jul",
-           "Aug",
-           "Sep",
-           "Oct",
-           "Nov",
-           "Dec",
-         ],
-       },
-     } as ApexCharts.ApexOptions;
 
-     const series = [
-       {
-         name: "Assets",
-         data: [40, 90, 110, 50, 110, 20, 150, 50, 110, 40, 20, 10],
-       },
-       {
-         name: "Courses",
-         data: [70, 120, 100, 50, 90, 130, 80, 50, 60, 120, 10, 10],
-       },
-     ];
+const PurchaseAnalysis = ({monthlyTrends}:any) => {
+  const coursesRevenue = monthlyTrends.map((item:any) => item.coursesRevenue);
+  const digitalRevenue = monthlyTrends.map((item:any) => item.digitalRevenue);
+  const physicalRevenue = monthlyTrends.map((item:any) => item.physicalRevenue);
+
+  const options = {
+    colors: ["#553CF0", "#2598D8", "#00C49F"],
+    legend: { show: true },
+    toolbar: { show: false },
+    tooltip: {
+      theme: "dark",
+      marker: { show: true },
+      style: {
+        fontSize: "12px",
+        color: "#0000",
+      },
+    },
+    grid: { show: true },
+    stroke: {
+      show: true,
+      colors: ["transparent"],
+      width: 5,
+    },
+    dataLabels: { enabled: false },
+    yaxis: {
+      labels: {
+        show: true,
+        style: {
+          colors: "#A3A3A3",
+          fontSize: "12px",
+          cssClass: "apexcharts-yaxis-label",
+        },
+      },
+      axisBorder: { show: true },
+      axisTicks: { show: true },
+    },
+    xaxis: {
+      labels: {
+        show: true,
+        style: {
+          colors: "#A3A3A3",
+          fontSize: "12px",
+          cssClass: "apexcharts-xaxis-label",
+        },
+      },
+      categories: [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+      ],
+    },
+  } as const;
+
+  const series = [
+    { name: "Courses", data: coursesRevenue },
+    { name: "Digital Assets", data: digitalRevenue },
+    { name: "Physical Assets", data: physicalRevenue },
+  ];
+
   return (
     <div>
       <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
@@ -109,6 +85,6 @@ const PurchaseAnalysis = () => {
       </div>
     </div>
   );
-}
+};
 
-export default PurchaseAnalysis
+export default PurchaseAnalysis;

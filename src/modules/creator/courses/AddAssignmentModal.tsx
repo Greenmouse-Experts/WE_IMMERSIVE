@@ -34,10 +34,10 @@ const AssignmentCreator = ({
   });
 
   useEffect(() => {
-    setValue("lessonTitle", selectedAssignment.title);
-    setValue("title", selectedAssignment.title);
-    setValue("description", selectedAssignment.description);
-    setValue("dueDate", selectedAssignment.dueDate);
+    setValue("lessonTitle", selectedAssignment?.title);
+    setValue("title", selectedAssignment?.title);
+    setValue("description", selectedAssignment?.description);
+    setValue("dueDate", selectedAssignment?.dueDate);
   }, [selectedAssignment]);
 
   const onSubmit = (formData: any) => {

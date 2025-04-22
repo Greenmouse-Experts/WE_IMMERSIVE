@@ -3,11 +3,7 @@ import { useGetData } from "../../hooks/useGetData";
 import { useEffect, useState } from "react";
 import Loader from "../../components/reusables/loader";
 import { dateFormat } from "../../helpers/dateHelper";
-import {
-  courseThumbnail,
-  getAllCreatorCourses,
-  publishCourseApi,
-} from "../../api";
+import { courseThumbnail, getAllCreatorCourses } from "../../api";
 import Button from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 import {
@@ -27,6 +23,12 @@ import { MoreVertical } from "lucide-react";
 import DropZone from "../../components/DropZone";
 import UpdateCourseInfo from "../../modules/creator/courses/updateCourseInfo";
 import { ICourse } from "../../types/course.types";
+import {
+  deleteCourseApi,
+  publishCourseApi,
+  unPublishCourseApi,
+} from "../../api/creator";
+import Publish from "../../components/reusables/Publish";
 
 const CreatorCoursesScreen = () => {
   const queryClient = useQueryClient();
@@ -36,8 +38,11 @@ const CreatorCoursesScreen = () => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [courseId, setCourseId] = useState<string>("");
+  // const [selectedCourse, setSelectedCourse] = useState<ICourse | null>(null);
   const [open, setOpen] = useState(false);
   const [openThumbnail, setOpenThumbnail] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+
   const [openCourseInfo, setOpenCourseInfo] = useState(false);
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const [files, setFiles] = useState("");
@@ -45,20 +50,24 @@ const CreatorCoursesScreen = () => {
 
   const navigate = useNavigate();
 
-  const mutationPublish = useMutation({
-    mutationFn: (courseId: string) => publishCourseApi(courseId),
-    onSuccess: (data: any) => {
-      toast.success(data.message);
-      setIsBusy(false); // Hide loader
-    },
-    onError: (error: any) => {
-      toast.error(error.response.data.message);
-      setIsBusy(false); // Hide loader
-    },
-    onSettled: () => {
-      setIsBusy(false); // Hide loader
-    },
-  });
+  // const mutationPublish = useMutation({
+  //   mutationFn: (courseId: string) => publishCourseApi(courseId),
+  //   onSuccess: (data: any) => {
+  //     toast.success(data.message);
+  //     setIsBusy(false); // Hide loader
+  //   },
+  //   onError: (error: any) => {
+  //     toast.error(error.response.data.message);
+  //     setIsBusy(false); // Hide loader
+  //   },
+  //   onSettled: () => {
+  //     setIsBusy(false); // Hide loader
+  //   },
+  // });
+
+  const { mutate: publish, isPending: isPublishing } = publishCourseApi();
+  const { mutate: unpublish, isPending: isUnPublishing } = unPublishCourseApi();
+  const { mutate: deleteCourse, isPending: isDeleting } = deleteCourseApi();
 
   useEffect(() => {
     if (creatorCoursesQuery.data) {
@@ -67,8 +76,8 @@ const CreatorCoursesScreen = () => {
     }
   }, [creatorCoursesQuery.data]); // Dependency array ensures this runs when data updates
 
-  const handleModulePublish = (moduleId: string) => {
-    setCourseId(moduleId);
+  const handleModulePublish = (course: ICourse) => {
+    setSelected(course);
     setOpen(true);
   };
 
@@ -87,22 +96,43 @@ const CreatorCoursesScreen = () => {
     setOpenCourseInfo(false);
   };
 
+  const handleOpenDelete = (course: ICourse) => {
+    setSelected(course);
+    setDeleteModal(true);
+  };
+
   const handleOpenThumbnail = () => setOpenThumbnail(!openThumbnail);
 
   const publishCourse = () => {
-    if (courseId) {
-      mutationPublish.mutate(courseId, {
+    if (selected?.published) {
+      unpublish(selected?.id!, {
         onSuccess: () => {
           handleOpen();
-          if (courseId) {
-            queryClient.invalidateQueries({ queryKey: ["courses"] });
-          }
+        },
+        onError: () => {
+          handleOpen();
+        },
+      });
+    } else {
+      publish(selected?.id!, {
+        onSuccess: () => {
+          handleOpen();
         },
         onError: () => {
           handleOpen();
         },
       });
     }
+  };
+  const handleDelete = () => {
+    deleteCourse(selected?.id!, {
+      onSuccess: () => {
+        setDeleteModal(!deleteModal);
+      },
+      onError: () => {
+        setDeleteModal(!deleteModal);
+      },
+    });
   };
 
   const handleDrop = (data: any) => {
@@ -188,7 +218,7 @@ const CreatorCoursesScreen = () => {
                 </thead>
                 <tbody>
                   {data?.length > 0
-                    ? data.map((item, i) => (
+                    ? data.map((item: ICourse, i) => (
                         <tr
                           className="odd:bg-[#E9EBFB] odd:dark:bg-black"
                           key={i}
@@ -216,18 +246,15 @@ const CreatorCoursesScreen = () => {
                                   <MoreVertical />
                                 </MenuHandler>
                                 <MenuList>
-                                  {item?.status === "draft" && (
-                                    <MenuItem className="flex flex-col gap-3">
-                                      <span
-                                        className="cursor-pointer w-full"
-                                        onClick={() =>
-                                          handleModulePublish(item.id)
-                                        }
-                                      >
-                                        Publish
-                                      </span>
-                                    </MenuItem>
-                                  )}
+                                  <MenuItem className="flex flex-col gap-3">
+                                    <span
+                                      className="cursor-pointer w-full"
+                                      onClick={() => handleModulePublish(item)}
+                                    >
+                                      {item.published ? "Unpublish" : "Publish"}
+                                    </span>
+                                  </MenuItem>
+
                                   <MenuItem className="flex flex-col gap-3">
                                     <span
                                       className="cursor-pointer w-full"
@@ -260,6 +287,14 @@ const CreatorCoursesScreen = () => {
                                       Add Thumbnail
                                     </span>
                                   </MenuItem>
+                                  <MenuItem className="flex flex-col gap-3">
+                                    <span
+                                      className="cursor-pointer w-full"
+                                      onClick={() => handleOpenDelete(item)}
+                                    >
+                                      Delete Course
+                                    </span>
+                                  </MenuItem>
                                 </MenuList>
                               </Menu>
                             </button>
@@ -277,7 +312,8 @@ const CreatorCoursesScreen = () => {
       <Dialog open={open} handler={handleOpen}>
         <DialogBody>
           <p className="unbound w-full text-center p-2">
-            Are you sure you want to publish this course?
+            Are you sure you want to{" "}
+            {selected?.published ? "unpublish" : "publish"} this course?
           </p>
         </DialogBody>
         <DialogFooter>
@@ -293,7 +329,11 @@ const CreatorCoursesScreen = () => {
             <Button
               style={{ width: "fit-content" }}
               title={
-                isBusy ? <BeatLoader size={12} color="white" /> : "Publish"
+                isPublishing || isUnPublishing ? (
+                  <BeatLoader size={12} color="white" />
+                ) : (
+                  "Publish"
+                )
               }
               withArrows
               size={14}
@@ -363,6 +403,14 @@ const CreatorCoursesScreen = () => {
             />
           </div>
         </DialogFooter>
+      </Dialog>
+      <Dialog open={deleteModal} handler={() => setDeleteModal(!deleteModal)}>
+        <Publish
+          title="Are you sure you want to delete this course"
+          handleProceed={handleDelete}
+          handleCancel={() => setDeleteModal(!deleteModal)}
+          isLoading={isDeleting}
+        />
       </Dialog>
     </div>
   );

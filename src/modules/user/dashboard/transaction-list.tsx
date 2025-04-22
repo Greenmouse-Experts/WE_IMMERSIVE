@@ -1,39 +1,14 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { PiDotsThreeOutlineFill } from "react-icons/pi";
+import {
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
+import { MoreVertical } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const TransactionList = () => {
-  const data = [
-    {
-      name: "Samsung Gear",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_10_hsicwi.png",
-      category: "Physical Product",
-      creators: "Samsung",
-    },
-    {
-      name: "Human Anatomy V2",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_11_vzeysg.png",
-      category: "Courses",
-      creators: "ProLab",
-    },
-    {
-      name: "Chukka Uzo",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/image_12_c53ldv.png",
-      category: "Digital Asset",
-      creators: "Chukka",
-    },
-    {
-      name: "Frank Hamzy",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/Rectangle_19409_j4mzhx.png",
-      category: "Tour",
-      creators: "WEimmersive",
-    },
-    {
-      name: "Chukka Uzo",
-      img: "https://res.cloudinary.com/do2kojulq/image/upload/v1730279177/WE%20Immersive/Rectangle_19409_j4mzhx.png",
-      category: "Space",
-      creators: "WEimmersive",
-    },
-  ];
+const TransactionList = ({ latestTrx }: any) => {
 
   return (
     <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
@@ -58,33 +33,43 @@ const TransactionList = () => {
       <div className="mt-6 overflow-x-auto">
         <table className="table-auto w-full min-w-[600px]">
           <thead>
-            <tr className="border-b border-gray-300">
-              <th className="p-4 text-left">#</th>
-              <th className="p-4 text-left">Name</th>
-              <th className="p-4 text-left">Image</th>
-              <th className="p-4 text-left">Category</th>
-              <th className="p-4 text-left">Creators</th>
-              <th className="p-4 text-left">Action</th>
+            <tr className="bg-gray-100 dark:bg-gray-800">
+              <td className="unbound p-5">#</td>
+              <td className="unbound p-5 pb-2">Ref</td>
+              <td className="unbound p-5 pb-2">Payment Method</td>
+
+              <td className="unbound p-5 pb-2">Price</td>
+              <td className="unbound p-5 pb-2">Status</td>
+              <td className="unbound p-5 pb-2">Action</td>
             </tr>
           </thead>
           <tbody>
-            {data.map((item, i) => (
-              <tr key={i} className="odd:bg-[#E9EBFB] odd:dark:bg-black">
-                <td className="p-3">{`0${i + 1}`}</td>
-                <td className="p-3 text-sm">{item.name}</td>
-                <td className="p-3 text-sm">
-                  <img
-                    src={item.img}
-                    alt="purchase-image"
-                    className="w-[60px] h-[40px] object-cover rounded-md"
-                  />
-                </td>
-                <td className="p-3 text-sm">{item.category}</td>
-                <td className="p-3 text-sm">{item.creators}</td>
-                <td className="p-3 text-sm">
-                  <PiDotsThreeOutlineFill className="cursor-pointer text-lg" />
-                </td>
-              </tr>
+            {latestTrx.map((item: any, i: number) => (
+               <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
+               <td className="p-4">{`0${i + 1}`}</td>
+               <td className="p-4">{item.gatewayReference.slice(0, 10)}</td>
+               <td className="pl-1 p-4">{item.paymentMethod}</td>
+
+               <td className="p-4">{item.amount}</td>
+               <td className="p-4 text-[#4FCC36]">{item.status}</td>
+               <td className="p-4 pl-4">
+                 <Menu placement="left">
+                   <MenuHandler>
+                     <MoreVertical />
+                   </MenuHandler>
+                   <MenuList>
+                     <MenuItem className="flex flex-col gap-3">
+                       <Link
+                         to={`/user/orders/${item.id}`}
+                         className="cursor-pointer w-full"
+                       >
+                         View Details
+                       </Link>
+                     </MenuItem>
+                   </MenuList>
+                 </Menu>
+               </td>
+             </tr>
             ))}
           </tbody>
         </table>

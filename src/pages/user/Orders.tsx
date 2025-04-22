@@ -1,67 +1,26 @@
 import { useState } from "react";
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import Navbar from "../../layout/user/components/navbar";
+import { getOrderHistory } from "../../api/general";
+import Loader from "../../components/reusables/loader";
+import {
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
+import { MoreVertical } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const OrderList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("Newest First");
-  const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
+ 
 
-  const orders = [
-    {
-      id: "ORD001",
-      name: "John Doe",
-      image:
-        "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739968690/We-Immersive/p_n1z7uw.png",
-      category: "Electronics",
-      price: "$299.99",
-      status: "Completed",
-    },
-    {
-      id: "ORD002",
-      name: "Jane Smith",
-      image:
-        "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739968690/We-Immersive/p_n1z7uw.png",
-      category: "Books",
-      price: "$19.99",
-      status: "Pending",
-    },
-    {
-      id: "ORD002",
-      name: "Jane Smith",
-      image:
-        "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739968690/We-Immersive/p_n1z7uw.png",
-      category: "Books",
-      price: "$19.99",
-      status: "Pending",
-    },
-    {
-      id: "ORD002",
-      name: "Jane Smith",
-      image:
-        "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739968690/We-Immersive/p_n1z7uw.png",
-      category: "Books",
-      price: "$19.99",
-      status: "Pending",
-    },
-    {
-      id: "ORD001",
-      name: "John Doe",
-      image:
-        "https://res.cloudinary.com/greenmouse-tech/image/upload/v1739968690/We-Immersive/p_n1z7uw.png",
-      category: "Electronics",
-      price: "$299.99",
-      status: "Completed",
-    },
-  ];
+  const { data: orders, isLoading } = getOrderHistory();
 
-  const filteredOrders = orders.filter(
-    (order) =>
-      order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  if (isLoading) return <Loader />;
+ 
 
   return (
     <>
@@ -98,68 +57,44 @@ const OrderList = () => {
           </div>
         </div>
 
-        <div className="overflow-auto">
-          <table className="w-full min-w-[600px] border-collapse">
+        <div className="overflow-x-auto">
+          <table className="table-auto md:w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-300">
-                <th className="p-4 text-left">#</th>
-                <th className="p-4 text-left">Name</th>
-                <th className="p-4 text-left">Image</th>
-                <th className="p-4 text-left">Category</th>
-                <th className="p-4 text-left">Price</th>
-                <th className="p-4 text-left">Status</th>
-                <th className="p-4 text-left">Action</th>
+              <tr className="bg-gray-100 dark:bg-gray-800">
+                <td className="unbound p-5">#</td>
+                <td className="unbound p-5 pb-2">Ref</td>
+                <td className="unbound p-5 pb-2">Payment Method</td>
+
+                <td className="unbound p-5 pb-2">Price</td>
+                <td className="unbound p-5 pb-2">Status</td>
+                <td className="unbound p-5 pb-2">Action</td>
               </tr>
             </thead>
             <tbody>
-              {filteredOrders.map((order, index) => (
-                <tr
-                  key={order.id}
-                  className="odd:bg-[#E9EBFB] odd:dark:bg-black"
-                >
-                  <td className="p-3">{index + 1}</td>
-                  <td className="p-3">{order.name}</td>
-                  <td className="p-3">
-                    <img
-                      src={order.image}
-                      alt="Customer"
-                      className="w-14 h-10 rounded-lg"
-                    />
-                  </td>
-                  <td className="p-3">{order.category}</td>
-                  <td className="p-3">{order.price}</td>
-                  <td className="p-3">
-                    <span
-                      className={`px-3 py-3 rounded-lg text-sm font-medium ${
-                        order.status === "Completed"
-                          ? "bg-[#2EF91333] text-[#249B2C]"
-                          : "bg-[#F9F91333] text-[#BEA40E]"
-                      }`}
-                    >
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="p-4 relative">
-                    <div className="relative inline-block">
-                      <PiDotsThreeOutlineFill
-                        className="cursor-pointer text-lg"
-                        onClick={() =>
-                          setDropdownIndex(
-                            dropdownIndex === index ? null : index
-                          )
-                        }
-                      />
-                      {dropdownIndex === index && (
-                        <div className="absolute right-0 mt-2 w-36 bg-white shadow-lg rounded-lg p-2 z-10 dark:bg-[#15171E]">
-                          <button className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:bg-[#15171E]">
+              {orders.data.map((item: any, i: number) => (
+                <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
+                  <td className="p-4">{`0${i + 1}`}</td>
+                  <td className="p-4">{item.gatewayReference.slice(0, 10)}</td>
+                  <td className="pl-1 p-4">{item.paymentMethod}</td>
+
+                  <td className="p-4">{item.amount}</td>
+                  <td className="p-4 text-[#4FCC36]">{item.status}</td>
+                  <td className="p-4 pl-4">
+                    <Menu placement="left">
+                      <MenuHandler>
+                        <MoreVertical />
+                      </MenuHandler>
+                      <MenuList>
+                        <MenuItem className="flex flex-col gap-3">
+                          <Link
+                            to={`/user/orders/${item.id}`}
+                            className="cursor-pointer w-full"
+                          >
                             View Details
-                          </button>
-                          <button className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:bg-[#15171E]">
-                            Cancel Order
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                          </Link>
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
                   </td>
                 </tr>
               ))}

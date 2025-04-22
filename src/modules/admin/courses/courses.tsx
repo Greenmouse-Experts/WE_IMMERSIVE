@@ -29,9 +29,8 @@ const Courses = () => {
     setShowDialog(true);
   };
 
-  console.log(selected.published)
   const handlePublish = () => {
-    if(selected.status === "unpublished"){
+    if(selected?.status === "unpublished"){
       publish(selected?.id, {
         onSuccess() {
           setShowDialog(false);
@@ -185,7 +184,7 @@ const Courses = () => {
       <Dialog title="" size="md">
         <Publish
           handleCancel={() => setShowDialog(false)}
-          title={`Are you sure you want to ${selected.status === "unpublished" ? 'unpublish' :'publish'} this course`}
+          title={`Are you sure you want to ${selected?.status === "unpublished" ? 'unpublish' :'publish'} this course`}
           handleProceed={handlePublish}
           isLoading={isPending || isUnPublishing}
         />
