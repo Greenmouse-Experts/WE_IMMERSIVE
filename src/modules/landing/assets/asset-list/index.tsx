@@ -1,24 +1,10 @@
-import { useState } from "react";
-import ArrowsIcon from "../../../../assets/svg-components/arrows";
+
 import AssetList from "../../homepage/marketplace/components/asset-list";
 import { useGetData } from "../../../../hooks/useGetData";
 import { getDigitalAssets, getPhysicalAssets } from "../../../../api";
 
 const AllAssetList = () => {
-  const [activeTab, setActiveTab] = useState("VR Gear");
-  const barItems = [
-    "VR Gear",
-    "Digital Sounds",
-    "3D Animals",
-    "2D Brushes",
-    "Sea Animals",
-    "3D Characters",
-    "Oculus",
-    "Jungle Digs",
-    "3D Render",
-    "Yelin Trays",
-    "Sea Animals",
-  ];
+  
 
   const digitalAssetsQuery = useGetData(["digitalAssets"], getDigitalAssets);
   const physicalAssetsQuery = useGetData(["physicalAssets"], getPhysicalAssets);
