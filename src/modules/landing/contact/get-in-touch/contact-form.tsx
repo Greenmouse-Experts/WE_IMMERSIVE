@@ -23,7 +23,7 @@ const ContactForm = () => {
     setIsBusy(false);
   };
   return (
-    <div className="flex justify-end">
+    <div className="flex lg:justify-end">
       <div className="w-11/12 border border-gray-300 pt-8 p-8 dark:border-[#2E2F36] rounded-[15px]">
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
           <Controller

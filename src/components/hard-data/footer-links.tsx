@@ -36,7 +36,7 @@ export const quickLinks = [
     },
     {
         name: "Courses",
-        route: ""
+        route: "/learn"
     },
     {
         name: "Blog",
@@ -47,19 +47,19 @@ export const quickLinks = [
 export const coursesLink = [
     {
         name: "E-Courses",
-        route: ""
+        route: "/store"
     },
     {
         name: "Digital Assets",
-        route: ""
+        route: "/store"
     },
     {
         name: "XR Equipments",
-        route: ""
+        route: "/store"
     },
     {
         name: "VR Equipments",
-        route: ""
+        route: "/store"
     },
 ]
 
@@ -81,10 +81,10 @@ export const policyLink = [
 export const contactLink = [
     {
         name: "+2347000330333",
-        route: ""
+        route: "tel:+2347000330333"
     },
     {
         name: "support@weimmersive.io",
-        route: ""
+        route: "mailto:support@weimmersive.io"
     },
 ]

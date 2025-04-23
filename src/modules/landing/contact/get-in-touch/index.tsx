@@ -4,7 +4,7 @@ const GetInTouch = () => {
   return (
     <div className="section">
       <div className="box pt-5">
-        <div className="grid items-center grid-cols-2">
+        <div className="grid items-center lg:grid-cols-2 grid-cols-1">
           <div className="">
             <p className="unbound text-xl lg:text-4xl fw-500 lg:w-7/12">
               Get in touch with us today 🚀
