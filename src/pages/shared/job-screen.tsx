@@ -64,8 +64,8 @@ const handleDelete = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between mb-8 mt-10">
-        <div className="w-[55%]">
+      <div className="flex items-center justify-between flex-col md:flex-row mb-8 mt-10">
+        <div className="md:w-[55%] w-full">
           <input
             type="text"
             className="border rounded-[10px] h-9 w-full px-3 border-[#2C3E50]"
@@ -73,7 +73,7 @@ const handleDelete = () => {
           />
         </div>
 
-        <div className=" flex items-center w-[40%] justify-end">
+        <div className=" flex items-center md:w-[40%] w-full justify-end">
           <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
             <p className="text-[#2C3E50] fs-300">Choose Category</p>
             <MdOutlineArrowDropDown className="text-[14px] text-[#2C3E50]" />

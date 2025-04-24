@@ -62,7 +62,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   //   }
   // };
   return (
-    <div className="w-full md:w-1/4 bg-white dark:bg-darkMode rounded-lg p-6">
+    <div className="w-full xl:w-1/4 bg-white dark:bg-darkMode rounded-lg p-6">
       <p className="unbound text-[#06052A] text-lg text-left">Profile</p>
       <div className="flex flex-col items-center w-full">
         <div className="relative">

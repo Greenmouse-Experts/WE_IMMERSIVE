@@ -20,7 +20,7 @@ const Setting = () => {
             <div className="min-h-screen flex flex-col items-center relative">
                 <ProfileHeader />
 
-                <div className="flex flex-col md:flex-row gap-6 px-6 mt-[-80px] w-full relative z-10">
+                <div className="flex flex-col xl:flex-row gap-6 px-6 mt-[-80px] w-full relative z-10">
                     {/* Sidebar */}
                     <ProfileSidebar setActiveSection={setActiveSection} activeSection={activeSection} />
 
