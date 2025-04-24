@@ -30,7 +30,9 @@
 .dark p {
   color: white;
 }
-
+.dark li{
+  color: white;
+}
 body {
   margin: 0;
   width: 100%;

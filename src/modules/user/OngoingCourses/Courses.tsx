@@ -14,7 +14,7 @@ const ContinueCourse = () => {
       <p className="unbound text-lg">Ongoing Courses</p>
 
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {courses.map((item: { course: ICourse; id: string }, i: number) => (
+        {courses?.map((item: { course: ICourse; id: string }, i: number) => (
           <div key={i} className="p-4 rounded-lg bg-gray-50 dark:bg-[#1E1E2E]">
             {/* Course Image */}
             <div>

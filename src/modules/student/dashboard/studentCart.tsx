@@ -101,11 +101,11 @@ const StudentCart = () => {
   };
 
   return (
-    <div className="bg-white p-2 lg:p-8 mx-auto rounded-[20px]">
+    <div className="bg-white dark:bg-darkMode p-2 lg:p-8 mx-auto rounded-[20px]">
       <h1 className="unbound text-[24px] font-[600] mb-6">Cart</h1>
       <div className="flex flex-col xl:flex-row gap-5">
         <div className="overflow-x-auto lg:w-[983px]">
-          <div className="bg-white p-1 md:p-2 lg:p-4 w-[983px] lg:w-[100%] md:w-[100%] rounded-lg">
+          <div className="bg-white dark:bg-black p-1 md:p-2 lg:p-4 w-[983px] lg:w-[100%] md:w-[100%] rounded-lg">
             <div className="grid grid-cols-[1fr_1fr_auto] text-[14px] font-semibold py-2 pl-5">
               <span>PRODUCT</span>
               <span>PRICE</span>
@@ -154,27 +154,27 @@ const StudentCart = () => {
           </div>
         </div>
         <div className="w-[100%] xl:w-[320px] mt-[5%]">
-          <div className="bg-[#E9EAFE] p-6 rounded-lg">
+          <div className="bg-[#E9EAFE] dark:bg-black dark:text-white p-6 rounded-lg">
             <h2 className="text-[15px] font-[600] mb-8">Order Summary</h2>
-            <div className="flex justify-between mt-2 text-[#5B5959] text-[17px] mb-6">
+            <div className="flex justify-between mt-2 text-[#5B5959] dark:text-white text-[17px] mb-6">
               <span>Subtotal</span>
               <span>N {totalPrice}</span>
             </div>
-            <div className="flex justify-between mt-1 text-[#5B5959] text-[17px] mb-6">
+            <div className="flex justify-between mt-1 text-[#5B5959] dark:text-white text-[17px] mb-6">
               <span>Discount</span>
               <span>N 0</span>
             </div>
-            <div className="flex justify-between items-center mt-1 text-[#5B5959] text-[17px] mb-6">
+            <div className="flex justify-between items-center mt-1 text-[#5B5959] dark:text-white text-[17px] mb-6">
               <span>Promo Code</span>
               <input
                 type="text"
-                className="rounded-[10px] w-[128px] h-[42px] text-[14px]"
+                className="rounded-[10px] w-[128px] h-[42px] text-[14px] dark:bg-darkMode p-1"
                 value={couponCode}
                 onChange={(e) => setCouponCode(e.target.value)}
               />
             </div>
             <hr className="border-t-2 border-gray-400 border-dashed my-11"></hr>
-            <div className="border-t mt-2 pt-2 flex justify-between text-[#5B5959] text-[17px] mb-5">
+            <div className="border-t mt-2 pt-2 flex justify-between text-[#5B5959] dark:text-white text-[17px] mb-5">
               <span>Total</span>
               <span className="unbound text-[17px] font-[500]">
                 N{totalPrice}

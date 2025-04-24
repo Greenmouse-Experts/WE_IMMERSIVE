@@ -67,11 +67,11 @@ const JobDescription: React.FC = () => {
       <div className="mx-auto">
         <Navbar />
       </div>
-      <div className="bg-white p-6 rounded-lg">
+      <div className="bg-white dark:bg-darkMode p-6 rounded-lg">
         <h2 className="text-2xl font-bold mb-6">Job Description</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Sidebar Card */}
-          <div className="bg-white p-6 border rounded-lg flex flex-col items-center text-center">
+          <div className="bg-white dark:bg-black p-6 border rounded-lg flex flex-col items-center text-center">
             <img
               src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1739649406/We-Immersive/D6696853-14FC-467D-A319-F71EAEF7C8CF_iighc4.png"
               alt="GreenMouse Tech Logo"
@@ -95,7 +95,7 @@ const JobDescription: React.FC = () => {
             </div>
           </div>
           {/* Main Content */}
-          <div className="md:col-span-2 bg-white rounded-lg p-6 border">
+          <div className="md:col-span-2 bg-white dark:bg-black rounded-lg p-6 border">
             <h3 className="text-xl font-semibold mb-2">{jobDetails?.title}</h3>
 
             {jobDetails?.description && (
