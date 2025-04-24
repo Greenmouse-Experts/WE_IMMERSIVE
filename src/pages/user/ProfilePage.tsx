@@ -25,7 +25,7 @@ const Setting = () => {
                     <ProfileSidebar setActiveSection={setActiveSection} activeSection={activeSection} />
 
                     {/* Dynamic Content Section */}
-                    <div className="flex-1 bg-white p-6 rounded-lg">
+                    <div className="flex-1 bg-white dark:bg-darkMode p-6 rounded-lg">
                         {activeSection === "info" && <ProfileForm />}
                         {activeSection === "settings" && <Settings settingsTab={settingsTab} setSettingsTab={setSettingsTab} />}
                         {activeSection === "support" && <Support />}

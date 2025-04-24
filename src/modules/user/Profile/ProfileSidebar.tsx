@@ -62,7 +62,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   //   }
   // };
   return (
-    <div className="w-full md:w-1/4 bg-white rounded-lg p-6">
+    <div className="w-full md:w-1/4 bg-white dark:bg-darkMode rounded-lg p-6">
       <p className="unbound text-[#06052A] text-lg text-left">Profile</p>
       <div className="flex flex-col items-center w-full">
         <div className="relative">
@@ -141,7 +141,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                 ? "active-class text-purple-600"
                 : danger
                 ? "text-red-600 hover:bg-red-100"
-                : "text-gray-700 hover:bg-gray-200"
+                : "text-gray-700 dark:text-white hover:bg-gray-200 hover:text-black"
             }`}
           >
             <div className="flex items-center gap-3">
