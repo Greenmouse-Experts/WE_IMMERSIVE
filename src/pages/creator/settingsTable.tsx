@@ -55,7 +55,7 @@ const SettingsTable = () => {
             forms={forms}
           />
         </div>
-        <div className="w-[100%] mt-5 md:mt-0 lg:mt-0 md:w-[58%] lg:w-[58%]">
+        <div className="w-[100%]  mt-5 md:mt-0 lg:mt-0 md:w-[58%] lg:w-[58%]">
           {forms === "account-setting" ? (
             <CreatorSettings />
           ) : forms === "ev_token" ? (

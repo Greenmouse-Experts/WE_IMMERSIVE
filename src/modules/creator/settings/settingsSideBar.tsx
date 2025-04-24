@@ -70,7 +70,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({
   }, [userData]);
 
   return (
-    <aside className="bg-white shadow-sm rounded-[20px] px-1 md:p-4 lg:p-4">
+    <aside className="bg-white dark:bg-darkMode shadow-sm rounded-[20px] px-1 md:p-4 lg:p-4">
       <p className="text-[16px] font-[400] mt-2 mb-8">Profile</p>
       <div className="flex flex-col items-center border-b pb-4 mb-4">
         <div className="relative">
@@ -130,7 +130,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({
       <nav className="space-y-2 cursor-pointer">
         <ul>
           <li
-            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-m ${
+            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 hover:dark:bg-[#E0C8FF]  rounded-m ${
               forms === "account-setting" &&
               "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"
             }`}
@@ -143,7 +143,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({
             </span>
           </li>
           <li
-            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md ${
+            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 hover:dark:bg-[#E0C8FF] rounded-md ${
               forms === "ev_token" && "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"
             }`}
             onClick={() => handleSetForms("ev_token")}
@@ -155,7 +155,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({
             </span>
           </li>
           <li
-            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md ${
+            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 hover:dark:bg-[#E0C8FF] rounded-md ${
               forms === "kyc" && "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"
             }`}
             onClick={() => handleSetForms("kyc")}
@@ -167,7 +167,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({
             </span>
           </li>
           <li
-            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md ${
+            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 hover:dark:bg-[#E0C8FF] rounded-md ${
               forms === "sub-setting" &&
               "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"
             }`}
@@ -180,7 +180,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({
             </span>
           </li>
           <li
-            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md ${
+            className={`block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 hover:dark:bg-[#E0C8FF] rounded-md ${
               forms === "support" && "bg-[#E9EAFE] border-l-4 border-[#6F0AFF]"
             }`}
             onClick={() => handleSetForms("support")}
@@ -191,7 +191,7 @@ const SettingsSideBar: React.FC<MyComponentProps> = ({
               <MdChevronRight />
             </span>
           </li>
-          <li className="block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+          <li className="block flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 hover:dark:bg-[#E0C8FF] rounded-md">
             <MdDelete className="text-[#710AFC] bg-[#E0C8FF] w-[51px] h-[47px] p-2 rounded-[10px]" />
             <span className="ml-4 flex items-center justify-between w-[70%]">
               <p>Delete Account</p>

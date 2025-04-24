@@ -26,7 +26,7 @@ const cards = [
 
   return (
     <div className="min-h-screen w-[100%]">
-      <main className="px-0 bg-white rounded-[20px] md:px-4 lg:px-4 py-8 flex flex-col md:flex-row gap-6">
+      <main className="px-0 bg-white dark:bg-darkMode rounded-[20px] md:px-4 lg:px-4 py-8 flex flex-col md:flex-row gap-6">
         <section className="w-[100%] p-3">
             <h1 className="unbound font-[400]">Support</h1>
             <div className="flex flex-col md:flex-row xl:flex-row md:gap-4 md:flex-wrap xl:flex-nowrap xl:gap-4 items-center justify-between md:justify-center mt-11">

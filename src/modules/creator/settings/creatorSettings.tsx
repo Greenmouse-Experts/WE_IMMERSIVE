@@ -54,7 +54,7 @@ const CreatorSettings = () => {
 
   return (
     <div className="min-h-screen w-[100%]">
-      <main className="px-0 bg-white rounded-[20px] md:px-2 xl:px-4 md:py-2 xl:py-8">
+      <main className="px-0 bg-white dark:bg-darkMode rounded-[20px] md:px-2 xl:px-4 md:py-2 xl:py-8">
         <section className="w-[100%]">
           {/* Settings Tabs */}
           <div className="shadow-sm rounded-md p-2 md:p-3 xl:p-8">

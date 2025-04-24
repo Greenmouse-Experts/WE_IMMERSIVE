@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import Button from "../../../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 
-
 const slides = [
   {
     background:
@@ -202,22 +201,8 @@ export default function HeroSlider() {
     }
   }, [activeIndex]);
 
-  // const handleRoute = () => {
-  //   if (user.accountType === "user") {
-  //     navigate("/user");
-  //   } else if (user.accountType === "creator") {
-  //     navigate("/creator");
-  //   } else if (user.accountType === "student") {
-  //     navigate("/students");
-  //   } else if (user.accountType === "institution") {
-  //     navigate("/institution");
-  //   } else {
-  //     navigate("/auth/login");
-  //   }
-  // };
-
   return (
-    <div className="relative h-[400px] md:h-[650px] overflow-hidden">
+    <div className="relative h-[400px] md:h-[680px] overflow-hidden">
       {/* Animated Background */}
       <div
         className={`absolute inset-0 bg-cover bg-center ${
@@ -234,12 +219,14 @@ export default function HeroSlider() {
       {/* Main Content */}
       <div className="relative h-full flex flex-col md:py-16 py-5 items-center text-center text-white px-4">
         <div className="max-w-4xl md:space-y-6 space-y-1">
-          <h1 className="md:text-5xl text-2xl unbound font-bold md:!leading-[4.5rem]">
-            {slides[activeIndex].mainTitle}
-          </h1>
-          <p className="md:text-xl text-lg text-gray-200">
-            {slides[activeIndex].description}
-          </p>
+          <div className=" md:h-[300px]">
+            <h1 className="md:text-5xl text-2xl unbound font-bold md:!leading-[4.5rem]">
+              {slides[activeIndex].mainTitle}
+            </h1>
+            <p className="md:text-xl text-lg text-gray-200">
+              {slides[activeIndex].description}
+            </p>
+          </div>
           <div className="flex justify-center gap-4 md:mt-1 -mt-4">
             <Button
               onClick={() => navigate(slides[activeIndex].link)}
@@ -247,7 +234,7 @@ export default function HeroSlider() {
               withArrows
               size={14}
               title={slides[activeIndex].buttonText}
-              altClassName="btn-primary flex flex-grow whitespace-nowrap mt-8 px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
+              altClassName="btn-primary flex flex-grow whitespace-nowrap px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
             />
           </div>
         </div>
@@ -258,14 +245,14 @@ export default function HeroSlider() {
         <div className="box">
           <div
             ref={containerRef}
-            className="flex md:grid md:grid-cols-4 gap-3 md:gap-4 overflow-x-auto pb-3 md:pb-0 scrollbar-hide snap-x snap-mandatory"
+            className="flex xl:grid xl:grid-cols-4 gap-3 xl:gap-4 overflow-x-auto pb-3 xl:pb-0 scrollbar-hide snap-x snap-mandatory"
           >
             {slides.map((slide, index) => (
               <div
                 ref={(el) => (boxRefs.current[index] = el)}
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`snap-center min-w-[280px] md:min-w-0 relative p-4 md:p-6 border-t-4 border-transparent cursor-pointer bg-[rgba(255,255,255,0.3)] backdrop-blur-lg rounded-xl transition-all`}
+                className={`snap-center min-w-[280px] xl:min-w-[300px] 2xl:min-w-[0] relative p-4 md:p-6 border-t-4 border-transparent cursor-pointer bg-[rgba(255,255,255,0.3)] backdrop-blur-lg rounded-xl transition-all`}
               >
                 {activeIndex === index && (
                   <div className="absolute w-1/3 h-[6px] bg-[rgba(111,10,255,1)] -top-1 left-[3px] rounded-tl-[8.5rem]" />

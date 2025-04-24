@@ -13,7 +13,7 @@ const [activeTab, setActiveTab] = useState<'reset-password' | 'bank-details'| "p
 
   return (
     <div className="min-h-screen w-[100%]">
-      <main className="px-0 bg-white rounded-[20px] md:px-4 xl:px-4 py-8">
+      <main className="px-0 bg-white dark:bg-darkMode rounded-[20px] md:px-4 xl:px-4 py-8">
         <section className="w-[100%]">
           <div className="shadow-sm rounded-md p-2 md:p-3 xl:p-8">
             <p className='unbound text-[16px] font-[400] mb-5'>Settings</p>
