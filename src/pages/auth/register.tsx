@@ -24,6 +24,7 @@ const UserRegister = () => {
           <>
             {activeForm === 0 && (
               <RegisterProfile
+              accountType={accountType}
                 setActiveForm={setActiveForm}
                 setAccountType={setAccountType}
                 handleProceed={handleProceed}

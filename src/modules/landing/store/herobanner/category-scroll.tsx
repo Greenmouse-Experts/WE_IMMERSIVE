@@ -12,9 +12,9 @@ import {
 } from "@material-tailwind/react";
 import { ICategory, ICategoryChildren } from "../../../../types/category.types";
 
-interface MarketHeaderProp{
+interface MarketHeaderProp {
   activeTab: ICategoryChildren | null;
-  setActiveTab: (tab: ICategoryChildren) => void;  
+  setActiveTab: (tab: ICategoryChildren) => void;
 }
 
 const CategoryScroll = ({ activeTab, setActiveTab }: MarketHeaderProp) => {
@@ -80,12 +80,11 @@ const CategoryScroll = ({ activeTab, setActiveTab }: MarketHeaderProp) => {
                 {item.name}
               </Button> */}
                 <div
-                  className={`bg-[#15171E] dark:bg-[rgba(238,238,238,1)] text-white cursor-pointer w-fit rounded-[8px] flex items-center whitespace-nowrap gap-x-4 px-4 lg:px-6 py-2 border ${
+                  className={`bg-[#15171E] dark:bg-darkMode text-white cursor-pointer w-fit rounded-[8px] flex items-center whitespace-nowrap gap-x-4 px-4 lg:px-6 py-2 border ${
                     activeTab === item
                       ? "border-gray-600"
                       : "border-transparent"
                   }`}
-                  
                 >
                   <ArrowsIcon color="#696767" />
                   {item.name}
@@ -93,7 +92,7 @@ const CategoryScroll = ({ activeTab, setActiveTab }: MarketHeaderProp) => {
               </MenuHandler>
               {item?.children?.length! > 0 && (
                 <MenuList className="bg-[#15171E] dark:bg-[rgba(238,238,238,1)] text-white dark:text-black">
-                  {item?.children!.map((subItem:ICategoryChildren) => (
+                  {item?.children!.map((subItem: ICategoryChildren) => (
                     <MenuItem
                       key={subItem.id}
                       onClick={() => setActiveTab(subItem)}
@@ -101,7 +100,15 @@ const CategoryScroll = ({ activeTab, setActiveTab }: MarketHeaderProp) => {
                         activeTab === subItem && "bg-primary text-white"
                       }`}
                     >
-                      <p className="dark:!text-[#696767]">{subItem.name}</p>
+                      <p
+                        className={` ${
+                          activeTab === subItem
+                            ? " !text-white"
+                            : "dark:!text-black "
+                        }`}
+                      >
+                        {subItem.name}
+                      </p>
                     </MenuItem>
                   ))}
                 </MenuList>

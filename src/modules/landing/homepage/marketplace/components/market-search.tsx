@@ -12,9 +12,9 @@ const MarketSearch = () => {
         />
       </div>
       <div className="flex items-stretch gap-x-3 justify-end w-[420px]">
-        <div className="bg-[#EFEFEF] text-[#757171] whitespace-nowrap cursor-pointer flex item-center gap-x-2 px-2 rounded-[6px] items-center">
+        {/* <div className="bg-[#EFEFEF] text-[#757171] whitespace-nowrap cursor-pointer flex item-center gap-x-2 px-2 rounded-[6px] items-center">
           All Categories <IoCaretDown />
-        </div>
+        </div> */}
         <div className="">
           <Button
             title={"Search"}
