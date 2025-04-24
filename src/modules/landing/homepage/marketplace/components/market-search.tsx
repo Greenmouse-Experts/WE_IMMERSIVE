@@ -1,4 +1,4 @@
-import { IoCaretDown } from "react-icons/io5";
+
 import Button from "../../../../../components/ui/Button";
 
 const MarketSearch = () => {
