@@ -530,3 +530,7 @@ input.PhoneInputInput {
 .ql-container {
   height: 10rem !important;
 }
+
+.ps-sidebar-backdrop{
+  background-color: transparent !important;
+}

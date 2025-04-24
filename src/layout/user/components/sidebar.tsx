@@ -35,7 +35,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
     <>
       {/* Hamburger Button (Only visible on mobile) */}
       <button
-        className="fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-200 dark:bg-[#15171E] lg:hidden"
+        className="fixed top-8 right-4 z-50 p-2 rounded-md bg-gray-200 dark:bg-[#15171E] lg:hidden"
         onClick={() => setToggled(!toggled)}
       >
         <LuMenu className="text-xl text-black dark:text-white" />
@@ -49,6 +49,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
           collapsed={collapsed}
           width="256px"
           backgroundColor=""
+          
           toggled={toggled}
           onBackdropClick={() => setToggled(false)} // Close sidebar when clicking outside
           breakPoint="always"
