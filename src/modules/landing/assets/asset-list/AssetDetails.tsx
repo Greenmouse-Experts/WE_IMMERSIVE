@@ -72,7 +72,7 @@ const AssetDetails: React.FC = () => {
 
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Image Gallery */}
-        <div className="md:col-span-2 flex lg:flex-row flex-col-reverse lg:space-x-6 gap-10">
+        <div className="md:col-span-2 flex xl:flex-row flex-col-reverse xl:space-x-6 gap-10 xl:gap-0">
           <div className="flex flex-col space-y-4">
             {/* {images.map((img, index) => (
             

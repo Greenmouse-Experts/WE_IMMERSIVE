@@ -59,9 +59,9 @@ const PhysicalAssetDetails = () => {
         <p className="text-gray-600">(40 ratings)</p>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Image Gallery */}
-        <div className="md:col-span-2 flex space-x-6">
+        <div className="md:col-span-2 flex xl:flex-row flex-col-reverse xl:space-x-6 gap-10 xl:gap-0">
           <div className="flex flex-col space-y-4">
             {/* {images.map((img, index) => (
             
@@ -80,14 +80,14 @@ const PhysicalAssetDetails = () => {
               className="w-full rounded-xl object-cover"
             /> */}
             <img src={assetDetails?.assetUpload} className="w-full h-full object-cover object-center" />
-            <div className="absolute top-4 right-4 flex space-x-3">
+            {/* <div className="absolute top-4 right-4 flex space-x-3">
               <button className="p-2 bg-white rounded-full shadow-md">
                 ❤️
               </button>
               <button className="p-2 bg-white rounded-full shadow-md">
                 🔗
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -123,7 +123,7 @@ const PhysicalAssetDetails = () => {
             <div className="flex items-center space-x-4">
               <img
                 src={
-                  "https://res.cloudinary.com/greenmouse-tech/image/upload/v1740683797/We-Immersive/image_zsbxx6.png"
+                  "https://res.cloudinary.com/do2kojulq/image/upload/v1730286484/default_user_mws5jk.jpg"
                 }
                 alt={assetDetails?.user.name}
                 className="w-12 h-12 rounded-full"
