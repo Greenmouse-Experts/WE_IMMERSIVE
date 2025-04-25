@@ -22,18 +22,7 @@ const CommunityUpdate = () => {
                 </p>
               </div>
             </div>
-            <div className="lg:w-5/12 pb-2 mt-12 lg:mt-0">
-              <div className="div-shadow bg-white p-[6px] rounded-[10px] flex gap-x-2 items-center w-full">
-                <input
-                  type="text"
-                  placeholder="Enter your email to recieve cool stuff "
-                  className="w-full p-2 border-none outline-none"
-                />
-                <div className="w-36">
-                  <Button title={"Send"} withArrows />
-                </div>
-              </div>
-            </div>
+          
           </div>
           <div>
             <CommunityNews/>
