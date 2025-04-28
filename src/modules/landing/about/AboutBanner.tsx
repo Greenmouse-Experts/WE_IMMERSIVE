@@ -11,7 +11,7 @@ const AboutBanner = () => {
         <h1 className="mt-2 text-[20px] md:text-5xl lg:text-[35px] xl:text-5xl font-extrabold text-gray-900 lg:pr-[35%] xl:pr-[35%]">
           The creative hub built for today’s digital artists, designers, and creators.
         </h1>
-        <p className="mt-4 text-gray-600 lg:pr-[40%] xl:text-lg xl:pr-[55%]">
+        <p className="mt-4 text-gray-600 dark:!text-gray-600 lg:pr-[40%] xl:text-lg xl:pr-[55%]">
           WE.IMMERSIVE leverages cutting-edge technology to empower African
           creators through an equitable marketplace and innovative payment systems.
         </p>

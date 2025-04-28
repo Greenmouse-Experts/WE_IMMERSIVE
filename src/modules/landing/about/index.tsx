@@ -49,7 +49,7 @@ const AboutIndex = () => {
                 <p className="text-[10px] unbound fw-600">Creators</p>
             </div>
             <h1 className="unbound md:text-[35px] mt-4 font-[700] dark:text-white text-center lg:text-left">Empowering Creators Everywhere</h1>
-            <p className="text-[12px] md:text-[16px] lg:text-[18px] lg:pr-[30%] xl:pr-[55%] mb-2 mt-5 text-[#747373] text-center lg:text-left">
+            <p className="text-[12px] md:text-[16px] lg:text-[18px] lg:pr-[30%] xl:pr-[55%] mb-2 mt-5 text-[#747373]  text-center lg:text-left">
                We offer advanced analytics to track your growth, custom websites to showcase your portfolio, 
                a community that celebrates and supports your talent, 
                and much more
@@ -78,7 +78,7 @@ const AboutIndex = () => {
                       maxList.map((item, index) => (
                         <div key={index} className="flex items-center list-none mb-10 md:w-[65%] lg:w-[100%] lg:mt-3 xl:pr-[25%]">
                             <img src={item.icon} alt="img" width="24px"/>
-                            <li className="Mulish text-[14px] ml-3 xl:text-[17px] text-[#747373]">{item.content}</li>
+                            <li className="Mulish text-[14px] ml-3 xl:text-[17px] text-[#747373] dark:!text-[#747373]">{item.content}</li>
                         </div>
                       ))
                     }
