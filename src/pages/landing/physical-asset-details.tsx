@@ -4,19 +4,48 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/reusables/loader";
 import { addProduct } from "../../reducers/cartSlice";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { FaShareAlt } from "react-icons/fa";
+import { trackEvent } from "../../helpers/mixpanelClient";
+import { useTrackViewDuration } from "../../hooks/useTrackDuration";
 
 const PhysicalAssetDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [isCopied, setIsCopied] = useState(false);
 
   const { data: assetDetails, isLoading } = getGeneralAssetPhysicalDetails(id);
   const user = useSelector((state: any) => state?.userData?.data);
+
+  const handleShareClick = () => {
+    const shareUrl = window.location.href; // Get current page URL
+    navigator.clipboard
+      .writeText(shareUrl)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000); // Hide message after 2 seconds
+      })
+      .catch((err) => console.error("Failed to copy: ", err));
+  };
+
+  useEffect(() => {
+    if (assetDetails?.id) {
+      trackEvent("Viewed Physical Asset", {
+        id: assetDetails.id,
+        name: assetDetails.assetName,
+        category: assetDetails.categoryId,
+        type: "physical",
+      });
+    }
+   
+  }, [assetDetails?.id]);
+
+  useTrackViewDuration(assetDetails?.id, assetDetails?.assetName, 'Physical Asset');
 
   if (isLoading) {
     return <Loader />;
   }
 
-  
   const dispatch = useDispatch();
   const addToCart = () => {
     if (!user) return navigate("/auth/login");
@@ -79,15 +108,27 @@ const PhysicalAssetDetails = () => {
               alt="Selected sofa"
               className="w-full rounded-xl object-cover"
             /> */}
-            <img src={assetDetails?.assetUpload} className="w-full h-full object-cover object-center" />
-            {/* <div className="absolute top-4 right-4 flex space-x-3">
-              <button className="p-2 bg-white rounded-full shadow-md">
+            <img
+              src={assetDetails?.assetUpload}
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute top-4 right-4 flex space-x-3">
+              {/* <button className="p-2 bg-white dark:bg-darkMode rounded-full shadow-md">
                 ❤️
+              </button> */}
+              <button
+                type="button"
+                onClick={handleShareClick}
+                className="p-2 bg-white dark:bg-darkMode rounded-full shadow-md"
+              >
+                <FaShareAlt className="text-primary" />
               </button>
-              <button className="p-2 bg-white rounded-full shadow-md">
-                🔗
-              </button>
-            </div> */}
+            </div>
+            {isCopied && (
+              <span className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-gray-700 dark:bg-black text-white text-sm rounded">
+                Link copied!
+              </span>
+            )}
           </div>
         </div>
 
@@ -98,22 +139,21 @@ const PhysicalAssetDetails = () => {
             <p className="text-gray-600">{assetDetails?.assetName}</p>
             <hr />
             <p className="text-xl font-bold">₦{assetDetails?.amount}</p>
-        
-              <div className="space-y-4">
-                <button
-                  className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg"
-                  onClick={handleBuy}
-                >
-                  Buy Now
-                </button>
-                <button
-                  onClick={addToCart}
-                  className="w-full border border-purple-600 text-purple-600 py-2 rounded-lg"
-                >
-                  Add to cart
-                </button>
-              </div>
-          
+
+            <div className="space-y-4">
+              <button
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-2 rounded-lg"
+                onClick={handleBuy}
+              >
+                Buy Now
+              </button>
+              <button
+                onClick={addToCart}
+                className="w-full border border-purple-600 text-purple-600 py-2 rounded-lg"
+              >
+                Add to cart
+              </button>
+            </div>
           </div>
 
           <div className="p-6 bg-gray-100 dark:bg-darkMode rounded-lg shadow-sm space-y-4">

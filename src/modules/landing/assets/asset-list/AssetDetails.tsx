@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getGeneralAssetDetails } from "../../../../api/general";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../../components/reusables/loader";
@@ -6,17 +6,47 @@ import { ThreeDViewer } from "../asset-details";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addProduct } from "../../../../reducers/cartSlice";
+import { FaShareAlt } from "react-icons/fa";
+import { trackEvent } from "../../../../helpers/mixpanelClient";
+import { useTrackViewDuration } from "../../../../hooks/useTrackDuration";
 
 const AssetDetails: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [isCopied, setIsCopied] = useState(false);
 
   const { data: assetDetails, isLoading } = getGeneralAssetDetails(id);
   const user = useSelector((state: any) => state?.userData?.data);
 
+  useEffect(() => {
+    if (assetDetails?.id) {
+      trackEvent("Viewed Digital Asset", {
+        id: assetDetails?.id,
+        name: assetDetails?.assetName,
+        category: assetDetails?.categoryId,
+        type: "digital",
+      });
+    }
+  }, [assetDetails?.id]); 
+
+  useTrackViewDuration(assetDetails?.id, assetDetails?.assetName, 'Digital Asset');
+
   if (isLoading) {
     return <Loader />;
   }
+
+  
+
+  const handleShareClick = () => {
+    const shareUrl = window.location.href; // Get current page URL
+    navigator.clipboard
+      .writeText(shareUrl)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000); // Hide message after 2 seconds
+      })
+      .catch((err) => console.error("Failed to copy: ", err));
+  };
 
   const handleDownload = () => {
     const downloadUrl = assetDetails?.assetUpload;
@@ -62,6 +92,19 @@ const AssetDetails: React.FC = () => {
     toast.success(`${assetDetails?.assetName} added successfully`);
   };
 
+  // trackEvent("Clicked Purchase", {
+  //   id: assetDetails.id,
+  //   name: assetDetails.name,
+  //   price: assetDetails.amount,
+  //   type: "digital",
+  // });
+
+  // trackEvent("Added to Wishlist", {
+  //   id: assetDetails.id,
+  //   name: assetDetails.name,
+  //   type: "digital",
+  // });
+
   return (
     <div className="box px-4 py-8">
       <h1 className="text-3xl font-bold">{assetDetails?.assetName}</h1>
@@ -91,14 +134,23 @@ const AssetDetails: React.FC = () => {
               className="w-full rounded-xl object-cover"
             /> */}
             <ThreeDViewer modelUrl={assetDetails?.assetUpload} />
-            {/* <div className="absolute top-4 right-4 flex space-x-3">
-              <button className="p-2 bg-white rounded-full shadow-md">
+            <div className="absolute top-4 right-4 flex space-x-3">
+              {/* <button className="p-2 bg-white dark:bg-darkMode rounded-full shadow-md">
                 ❤️
+              </button> */}
+              <button
+                type="button"
+                onClick={handleShareClick}
+                className="p-2 bg-white dark:bg-darkMode rounded-full shadow-md"
+              >
+                <FaShareAlt className="text-primary" />
               </button>
-              <button className="p-2 bg-white rounded-full shadow-md">
-                🔗
-              </button>
-            </div> */}
+            </div>
+            {isCopied && (
+              <span className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-gray-700 dark:bg-black text-white text-sm rounded">
+                Link copied!
+              </span>
+            )}
           </div>
         </div>
 

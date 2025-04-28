@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { enrollForACourse } from "../../../../api/student";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
-import { BeatLoader } from "react-spinners";
+
 import { getGeneralCourseDetails } from "../../../../api/general";
 import Loader from "../../../../components/reusables/loader";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addProduct } from "../../../../reducers/cartSlice";
+import { FaShareAlt } from "react-icons/fa";
+import { trackEvent } from "../../../../helpers/mixpanelClient";
+import { useTrackViewDuration } from "../../../../hooks/useTrackDuration";
 
 const CourseDetailsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
@@ -15,13 +17,38 @@ const CourseDetailsPage: React.FC = () => {
   >("description");
 
   const { courseId } = useParams();
+  const [isCopied, setIsCopied] = useState(false);
 
-  const { mutate: enroll, isPending } = enrollForACourse();
+  // const { mutate: enroll, isPending } = enrollForACourse();
   const { data: courseDetails, isLoading } = getGeneralCourseDetails(courseId);
   const user = useSelector((state: any) => state?.userData?.data);
   const navigate = useNavigate();
 
-  console.log(enroll);
+  const handleShareClick = () => {
+    const shareUrl = window.location.href; // Get current page URL
+    navigator.clipboard
+      .writeText(shareUrl)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000); // Hide message after 2 seconds
+      })
+      .catch((err) => console.error("Failed to copy: ", err));
+  };
+
+  useEffect(() => {
+    if (courseDetails?.id) {
+      trackEvent("Viewed Course", {
+        id: courseDetails.id,
+        title: courseDetails.title,
+        instructor: courseDetails.creator.name,
+        type: "course",
+      });
+    }
+
+  }, [courseDetails?.id]);
+
+
+  useTrackViewDuration(courseDetails?.id, courseDetails?.title, 'course');
 
   if (isLoading) {
     return <Loader />;
@@ -74,12 +101,26 @@ const CourseDetailsPage: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
         {/* Course Image */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 relative">
           <img
             src={courseDetails?.image}
             alt="Course Cover"
-            className="w-full rounded-xl object-cover"
+            className="w-full rounded-xl object-cover xl:h-[600px]"
           />
+          <div className="absolute top-4 right-4 flex space-x-3">
+            <button
+              type="button"
+              onClick={handleShareClick}
+              className="p-2 bg-white dark:bg-darkMode rounded-full shadow-md"
+            >
+              <FaShareAlt className="text-primary" />
+            </button>
+          </div>
+          {isCopied && (
+            <span className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-gray-700 dark:bg-black text-white text-sm rounded">
+              Link copied!
+            </span>
+          )}
         </div>
 
         {/* Payment Box */}
@@ -99,11 +140,8 @@ const CourseDetailsPage: React.FC = () => {
             </button> */}
             <Button
               withArrows
-              title={
-                isPending ? <BeatLoader size={12} color="white" /> : " Buy Now"
-              }
+              title={" Buy Now"}
               altClassName="btn-primary w-full py-3"
-              disabled={isPending}
               onClick={handleBuy}
             />
             <button

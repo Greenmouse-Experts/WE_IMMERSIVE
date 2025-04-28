@@ -14,6 +14,7 @@ import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
 import { payloadEmail } from "../../reducers/usersSlice";
 import { useDispatch } from "react-redux";
+// import { trackEvent } from "../../helpers/mixpanelClient";
 
 const RegisterForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
@@ -50,6 +51,14 @@ const RegisterForm = () => {
       setIsBusy(false); // Hide loader
     },
   });
+
+  // const handleUserTypeSelect = (userType:string) => {
+  //   trackEvent('User Type Selected', {
+  //     userType: userType.slug,
+  //     userTypeName: userType.name,
+  //     userTypeIndex: userType.index,
+  //   });
+  // };
 
   // Submit handler
   const onSubmit = (formData: any) => {

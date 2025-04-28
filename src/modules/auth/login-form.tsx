@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { login } from "../../api";
 import { useDispatch } from "react-redux";
 import { weImmersiveUser } from "../../reducers/usersSlice";
+import { identifyUser, setUserProperties } from "../../helpers/mixpanelClient";
 
 const LoginForm = () => {
   const [isBusy, setIsBusy] = useState<boolean>(false);
@@ -29,6 +30,14 @@ const LoginForm = () => {
     },
   });
 
+  const handleLogin = (user) => {
+    identifyUser(user.id);
+    setUserProperties({
+      $email: user.email,
+      name: user.name,
+    });
+  };
+
   // React Query: Define mutation
   const mutation = useMutation({
     mutationFn: login,
@@ -38,7 +47,7 @@ const LoginForm = () => {
       delete data.data.token;
 
       dispatch(weImmersiveUser(data.data));
-
+      handleLogin(data.data);
       let route = "/";
       if (data.data.accountType === "user") {
         route = "/user";

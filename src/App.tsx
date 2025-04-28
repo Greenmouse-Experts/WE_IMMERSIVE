@@ -16,9 +16,15 @@ import InstitutionDashboardLayout from "./layout/institution";
 import StudentsDashboardLayout from "./layout/students";
 import PageNotFound from "./pages/PageNotFound";
 import PaymentCallback from "./pages/shared/payment-callback";
+import { useEffect } from "react";
+import { initMixpanel, trackEvent } from "./helpers/mixpanelClient";
 
 const App = () => {
   const user = useSelector((state: any) => state.userData.data); // Assuming user.role exists in userData
+
+  useEffect(() => {
+    initMixpanel();
+  }, []);
 
   const router = createBrowserRouter([
     ...landingRoutes,
@@ -70,6 +76,24 @@ const App = () => {
       element: <PageNotFound />,
     },
   ]);
+
+  useEffect(() => {
+    const unsubscribe = router.subscribe((state) => {
+      if (state.historyAction === "PUSH" || state.historyAction === "POP") {
+        trackEvent("Page Viewed", {
+          path: state.location.pathname,
+          search: state.location.search,
+          fullUrl: window.location.href,
+          title: document.title,
+        });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [router]);
+
 
   return (
     <>
