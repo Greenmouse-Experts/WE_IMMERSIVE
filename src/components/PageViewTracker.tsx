@@ -1,7 +1,7 @@
 // src/components/PageViewTracker.jsx
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { trackEvent } from '../lib/mixpanel';
+import { trackEvent } from '../helpers/mixpanelClient';
 
 const PageViewTracker = () => {
   const location = useLocation();

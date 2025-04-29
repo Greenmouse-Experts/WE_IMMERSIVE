@@ -30,7 +30,7 @@ const LoginForm = () => {
     },
   });
 
-  const handleLogin = (user) => {
+  const handleLogin = (user:any) => {
     identifyUser(user.id);
     setUserProperties({
       $email: user.email,
