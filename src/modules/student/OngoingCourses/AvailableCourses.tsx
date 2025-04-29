@@ -77,7 +77,7 @@ const ContinueCourse = () => {
 
             {/* Progress Bar */}
             <div className="mt-3">
-              <Progress size="sm" value={item.course.progress.progressPercentage} />
+              <Progress size="sm" value={item?.course?.progress?.progressPercentage} />
             </div>
 
             {/* Tutor Info */}

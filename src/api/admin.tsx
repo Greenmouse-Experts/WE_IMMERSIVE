@@ -252,7 +252,57 @@ export function getAdminCourseCategory() {
     },
   });
 }
+export function getAdminBlogCategory() {
+  return useQuery({
+    queryKey: ["admin-blog-category"],
+    queryFn: async () => {
+      const response = await axios.get(`/admin/blog-category`);
+      return response.data.data;
+    },
+  });
+}
 
+export function addAdminBlogCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/admin/blog-category`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-blog-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function deleteAdminBlogCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (blodId: string) => {
+      const response = await axios.delete(
+        `/admin/blog-category/${blodId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-course-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
 export function addAdminCourseCategory() {
   const queryClient = useQueryClient();
   return useMutation({

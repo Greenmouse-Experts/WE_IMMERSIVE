@@ -24,6 +24,7 @@ import JobCategory from "../pages/admin/assets/jobCategory";
 import SubCategory from "../pages/admin/subCategory";
 import UserDetails from "../pages/admin/userDetails";
 import CourseSubCategory from "../pages/admin/assets/courseSubCategory";
+import BlogCategory from "../pages/admin/blog/blogCategory";
 
 export const adminRoutes = [
   {
@@ -117,6 +118,10 @@ export const adminRoutes = [
       {
         path: "courses/category",
         element: <CourseCategory />
+      },
+      {
+        path: "blog/category",
+        element: <BlogCategory />
       },
       {
         path: "sub-category/:categoryId",

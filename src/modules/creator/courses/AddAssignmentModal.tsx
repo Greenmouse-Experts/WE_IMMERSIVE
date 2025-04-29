@@ -69,7 +69,7 @@ const AssignmentCreator = ({
   };
 
   return (
-    <div className="p-6 rounded-xl bg-white w-full max-w-4xl mx-auto shadow-xl text-black">
+    <div className="p-6 rounded-xl bg-white dark:bg-darkMode w-full max-w-4xl mx-auto shadow-xl text-black">
       <h2 className="text-xl font-bold mb-6">Create Assignment</h2>
 
       <form
@@ -134,7 +134,7 @@ const AssignmentCreator = ({
               <ReactQuill
                 value={field.value}
                 onChange={field.onChange}
-                style={{ backgroundColor: "#E9EBFB" }}
+                 
               />
               {errors?.description && (
                 <p className="text-red-500 text-sm mt-1">

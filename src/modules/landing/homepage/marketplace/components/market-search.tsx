@@ -3,7 +3,7 @@ import Button from "../../../../../components/ui/Button";
 
 const MarketSearch = () => {
   return (
-    <div className="flex gap-x-4 justify-between p-2 lg:p-3 w-full bg-white z-10 relative rounded-[12px]">
+    <div className="flex gap-x-4 justify-between p-2 lg:p-3 w-full bg-white dark:bg-inputDark z-10 relative rounded-[12px]">
       <div className="w-full">
         <input
           type="text"

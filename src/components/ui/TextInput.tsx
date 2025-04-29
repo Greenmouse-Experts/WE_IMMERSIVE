@@ -151,7 +151,7 @@ const TextInput: React.FC<Props> = ({
             className={
               altClassName ||
               classNames(
-                fullWidth ? 'w-full bg-transparent' : 'text-black bg-transparent lg:p-3 rounded-[4px] placeholder:text-[13px] placeholder:text-[#999797]',
+                fullWidth ? 'w-full bg-transparent' : 'text-black bg-transparent lg:p-3 rounded-[4px] placeholder:text-[13px] placeholder:text-[#999797] dark:!border-none',
                 className
               )
             }
@@ -200,7 +200,7 @@ const TextInput: React.FC<Props> = ({
             : error
             ? 'border-red-200 border'
             : '',
-          'flex items-center bg-[#E9EBFB]  mt-2 rounded-[6px]'
+          'flex items-center bg-[#E9EBFB] dark:bg-inputDark  mt-2 rounded-[6px]'
         )}
       >
         {icon && icon}

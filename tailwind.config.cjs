@@ -37,6 +37,7 @@ module.exports = withMT({
         green:"#249B2C",
         lightGreen:"#D4F9CE",
         darkMode:"#15171E",
+        inputDark:"#18212f"
       },
       fontFamily: {
         mulish: ["Mulish", "sans-serif"]

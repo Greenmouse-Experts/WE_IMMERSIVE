@@ -28,8 +28,8 @@ const Jobs = () => {
     <div>
       <div>
         {isActive ? (
-          <div className="bg-gray-100 p-2">
-            <div className="mx-auto bg-white rounded-[20px] p-2 md:p-8 lg:px-4 lg:pt-4 lg:pb-[9%] xl:pb-[6%]">
+          <div className="bg-gray-100 dark:bg-darkMode p-2">
+            <div className="mx-auto bg-white dark:bg-darkMode rounded-[20px] p-2 md:p-8 lg:px-4 lg:pt-4 lg:pb-[9%] xl:pb-[6%]">
               <h2 className="unbound text-[24px] text-center md:text-left lg:text-left font-[600]">
                 Posted Jobs
               </h2>

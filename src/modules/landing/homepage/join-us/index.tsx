@@ -1,7 +1,9 @@
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import Tag from "../../../../components/ui/tag";
+import { useNavigate } from "react-router-dom";
 
 const JoinUs = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="section bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728916133/WE%20Immersive/image_17_1_jsmlh2.png')]">
@@ -17,7 +19,7 @@ const JoinUs = () => {
                 </p>
               </div>
               <div className="mt-8">
-                <button className="bg-white flex px-5 py-2 items-center gap-x-2 rounded-[12px] unbound fs-500">
+                <button onClick={() => navigate('/learn')} className="bg-white flex px-5 py-2 items-center gap-x-2 rounded-[12px] unbound fs-500">
                   Join Us
                   <MdKeyboardDoubleArrowRight />
                 </button>

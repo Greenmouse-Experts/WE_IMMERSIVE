@@ -67,8 +67,8 @@ const TransactionsScreen = () => {
 
   return (
     <div className="w-full">
-      <div className=" flex items-center gap-12">
-        <div className="rounded-[20px] p-9 bg-white dark:bg-black flex-1 ">
+      <div className=" flex xl:flex-row flex-col items-center gap-12">
+        <div className="rounded-[20px] p-9 bg-white dark:bg-black flex-1  w-full">
           <p className="text-black fw-700">Wallet</p>
           <div className="h-[171px] mt-3 w-full bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1743689651/Group_1321314947_t3div7.png')] bg-cover bg-center text-white px-10 py-10 rounded-[20px] overflow-hidden ">
             <div className="">
@@ -108,7 +108,7 @@ const TransactionsScreen = () => {
             Withdraw
           </button>
         </div>
-        <div className="rounded-[20px] p-9 bg-white dark:bg-black flex-1 ">
+        <div className="rounded-[20px] p-9 bg-white dark:bg-black flex-1  w-full ">
           <p className="text-black fw-700">EV Token</p>
           <div className="h-[265px] flex flex-col items-center text-center mt-3 w-full bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1743693137/Frame_1618871762_1_lgaaml.png')] bg-center bg-cover text-white px-10 py-2 rounded-[20px] overflow-hidden">
             <img
@@ -167,8 +167,8 @@ const TransactionsScreen = () => {
             </div>
           </div>
         </div>
-        <div className="mt-6">
-          <table className="table-auto w-full">
+        <div className="mt-6 overflow-x-auto">
+          <table className="table-auto  min-w-[1000px]">
             <thead>
               <tr>
                 <td className="unbound pl-4 p-1 pb-2">#</td>

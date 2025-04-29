@@ -1,13 +1,16 @@
 import { MdArrowOutward } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import apple from "../../../../assets/svg/apple-icon.svg";
 import google from "../../../../assets/svg/google-icon.svg";
 
 const RobustGrid = () => {
+  const navigate = useNavigate();
+
+
   return (
     <div className="mt-16 lg:mt-32">
       <div className="grid lg:grid-cols-3 gap-6">
-        <div className="lg:row-span-2 h-[430px] lg:h-auto text-white p-5 bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575678/WE%20Immersive/Group_1000005668_fwfmnp.png')] bg-fit">
+        <div onClick={() => navigate('/store')} className=" cursor-pointer lg:row-span-2 h-[430px] lg:h-auto text-white p-5 bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575678/WE%20Immersive/Group_1000005668_fwfmnp.png')] bg-fit">
           <div className="flex justify-between items-center">
             <p className="roboto text-xl lg:text-3xl fw-400">Store</p>
             <Link to={""}>
@@ -21,7 +24,7 @@ const RobustGrid = () => {
             </p>
           </div>
         </div>
-        <div className="h-[330px] p-5 text-white bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575679/WE%20Immersive/Group_1000005669_rocejk.png')] bg-fit">
+        <div onClick={() => navigate('/store')}  className=" cursor-pointer h-[330px] p-5 text-white bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575679/WE%20Immersive/Group_1000005669_rocejk.png')] bg-fit">
           <div className="flex justify-between items-center">
             <p className="roboto text-xl lg:text-3xl fw-400">Download App</p>
             <Link to={""}>
@@ -43,7 +46,7 @@ const RobustGrid = () => {
             </Link>
           </div>
         </div>
-        <div className="h-[330px] pl-8 pt-4 p-5 text-white bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728901165/WE%20Immersive/Group_1000005670_2_1_g8vrmx.png')] bg-fit">
+        <div onClick={() => navigate('/explore')} className=" cursor-pointer h-[330px] pl-8 pt-4 p-5 text-white bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728901165/WE%20Immersive/Group_1000005670_2_1_g8vrmx.png')] bg-fit">
           <div className="flex justify-between items-center">
             <p className="roboto text-xl lg:text-3xl fw-400">
               Interactive Tours
@@ -59,7 +62,7 @@ const RobustGrid = () => {
             </p>
           </div>
         </div>
-        <div className="lg:col-span-2 p-5 rounded-[20px] lg:rounded-none text-white h-[330px] bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575653/WE%20Immersive/Group_1000005674_1_s1pify.png')] bg-cover bg-center lg:bg-fit">
+        <div onClick={() => navigate('/learn')} className="cursor-pointer lg:col-span-2 p-5 rounded-[20px] lg:rounded-none text-white h-[330px] bg-[url('https://res.cloudinary.com/do2kojulq/image/upload/v1728575653/WE%20Immersive/Group_1000005674_1_s1pify.png')] bg-cover bg-center lg:bg-fit">
           <div className="flex justify-between items-center">
             <p className="roboto text-xl lg:text-3xl fw-400">Create & Sell Content</p>
             <Link to={""}>

@@ -231,11 +231,11 @@ const CreateModules = () => {
       {modules?.length > 0 &&
         modules?.map((module, index) => (
           <div
-            className="bg-gray-100 rounded-xl mt-5 shadow-sm border border-gray-200"
+            className="bg-gray-100 dark:bg-darkMode rounded-xl mt-5 shadow-sm border border-gray-200"
             key={index}
           >
             {/* Module Header */}
-            <div className="flex items-center justify-between px-4 py-3 bg-indigo-50 rounded-t-xl">
+            <div className="flex items-center justify-between px-4 py-3 bg-indigo-50 dark:bg-black rounded-t-xl">
               {/* Drag Handle */}
               <div className="cursor-grab p-2">
                 <GripVertical className="text-gray-500" />

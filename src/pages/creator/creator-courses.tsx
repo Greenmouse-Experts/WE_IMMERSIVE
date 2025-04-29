@@ -309,7 +309,7 @@ const CreatorCoursesScreen = () => {
         </div>
       </div>
 
-      <Dialog open={open} handler={handleOpen}>
+      <Dialog className="dark:bg-darkMode" open={open} handler={handleOpen}>
         <DialogBody>
           <p className="unbound w-full text-center p-2">
             Are you sure you want to{" "}
@@ -343,8 +343,8 @@ const CreatorCoursesScreen = () => {
           </div>
         </DialogFooter>
       </Dialog>
-      <Dialog open={openCourseInfo} handler={handleCloseCourseInfo}>
-        <DialogBody>
+      <Dialog open={openCourseInfo} handler={handleCloseCourseInfo} className=" dark:bg-darkMode">
+        <DialogBody className="">
           <p className="unbound w-full text-center p-2">
             Are you sure you want to publish this course?
           </p>
@@ -357,14 +357,14 @@ const CreatorCoursesScreen = () => {
         </div>
       </Dialog>
 
-      <Dialog open={openThumbnail} handler={handleOpenThumbnail}>
+      <Dialog className="dark:bg-darkMode" open={openThumbnail} handler={handleOpenThumbnail}>
         <DialogBody>
           <div className="w-full flex flex-col items-center justify-center">
             <div className="grid gap-4 w-full max-w-md">
               <div className="flex flex-col gap-4 mt-5 items-center text-center">
                 <p className="w-full">Upload Thumbnail</p>
 
-                <div className="bg-[#E9EBFB] rounded-[10px] w-full max-w-[400px] h-[254px] border border-dashed border-primary flex flex-col justify-center items-center px-10 gap-6">
+                <div className="bg-[#E9EBFB] dark:bg-darkMode rounded-[10px] w-full max-w-[400px] h-[254px] border border-dashed border-primary flex flex-col justify-center items-center px-10 gap-6">
                   <DropZone onUpload={handleDrop} />
                 </div>
 

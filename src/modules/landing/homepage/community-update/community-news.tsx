@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
 
 const CommunityNews = () => {
+  const navigate = useNavigate();
   return (
     <div className="mt-24">
       <div className="flex overflow-x-auto scroll-pro gap-6">
@@ -41,6 +43,7 @@ const CommunityNews = () => {
       <div className="flex mt-8 lg:mt-16 justify-center">
         <div>
           <Button
+          onClick={() => navigate('/blog')}
             title={"See All"}
             withArrows
             altClassName="btn-primary px-6 py-2"

@@ -30,11 +30,69 @@
 .dark p {
   color: white;
 }
+.dark h3 {
+  color: white;
+}
+.dark h2 {
+  color: white;
+}
 .dark li{
+  color: white;
+}
+.dark td{
   color: white;
 }
 .dark span{
   background-color: transparent !important;
+}
+
+.dark input {
+  border: #f4f4f4 1px solid;
+  border-radius: 10px !important;
+  background-color: #18212f;
+  color: white;
+  transition: color 0.3s;
+}
+.dark .quill  {
+  border: #f4f4f4 1px solid;
+  border-radius: 10px !important;
+  background-color: #18212f;
+  color: white;
+  transition: color 0.3s;
+}
+.dark input.PhoneInputInput {
+  border: none;
+  border-radius: 10px !important;
+  background-color: #18212f;
+  color: white;
+  transition: color 0.3s;
+}
+.dark .PhoneInput {
+  border: #f4f4f4 1px solid;
+  border-radius: 10px !important;
+  background-color: #18212f;
+  color: white;
+  transition: color 0.3s;
+}
+.dark select {
+  border: #f4f4f4 1px solid;
+  border-radius: 10px !important;
+  background-color: #18212f;
+  color: white;
+  transition: color 0.3s;
+}
+.dark textarea {
+  border: #f4f4f4 1px solid;
+  border-radius: 10px !important;
+  background-color: #18212f;
+  color: white;
+  transition: color 0.3s;
+}
+.dark .css-1tqrhto >.ps-menu-button{
+  background-color: #18212f;
+}
+.dark .css-1tqrhto >.ps-menu-button:hover{
+  background-color: black;
 }
 body {
   margin: 0;
@@ -44,6 +102,10 @@ h4 {
   font-weight: 600;
   font-size: 1.5rem;
   font-family: "Unbounded", sans-serif;
+}
+
+.quill{
+  background-color: #E9EBFB;
 }
 
 @keyframes delayed-fade {

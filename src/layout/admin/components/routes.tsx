@@ -85,6 +85,21 @@ export const Routes = [
     ],
   },
   {
+    name: "Blog",
+    icon: <RiHeart2Line className="text-xl" />,
+    route: "",
+    submenu: [
+      {
+        name: "Blog",
+        route: "/super-admin/courses",
+      },
+      {
+        name: "Blog Category",
+        route: "/super-admin/blog/category",
+      },
+    ],
+  },
+  {
     name: "Upload Requests",
     icon: <LuUpload className="text-lg" />,
     route: "/super-admin/upload-requests",

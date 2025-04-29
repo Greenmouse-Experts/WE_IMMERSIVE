@@ -125,9 +125,9 @@ const StudentCart = () => {
                       alt="img"
                       className="w-[70px] h-[70px]"
                     />
-                    {item.name}
+                   <p> {item.name}</p>
                   </span>
-                  <span className="">N {item?.price?.toLocaleString()}</span>
+                  <p className="">N {item?.price?.toLocaleString()}</p>
                   {/* <div className="flex items-center gap-2 w-[50%] justify-center rounded-[100px] bg-[#E9EAFE]">
                         <button
                        

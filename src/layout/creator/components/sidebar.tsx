@@ -129,14 +129,14 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
         </div>
       </Sidebar>
       <Dialog className="" open={open} handler={handleOpen} size="md">
-        <div className="p-6 bg-white rounded-xl overflow-hidden">
+      
           <Publish
             handleCancel={handleOpen}
             title={`Are you sure you want to logout?`}
             handleProceed={handleLogOut}
             // isLoading={isDeleting}
           />
-        </div>
+      
       </Dialog>
     </div>
   );

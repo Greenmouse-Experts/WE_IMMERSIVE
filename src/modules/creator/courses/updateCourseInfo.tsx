@@ -73,7 +73,7 @@ const UpdateCourseInfo = ({
   });
 
   return (
-    <div className="rounded-[20px] py-5 px-7 w-full bg-white dark:bg-black">
+    <div className="rounded-[20px] py-5 px-7 w-full bg-white dark:bg-darkMode">
       <p className="fw-600 text-sm text-grey">CREATE COURSE</p>
 
       <div className="w-full">

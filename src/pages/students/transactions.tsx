@@ -13,7 +13,7 @@ const TransactionList = () => {
 
   return (
     <div>
-      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px]">
+      <div className="bg-white dark:bg-[#15171E] px-4 lg:py-6 rounded-[20px] ">
         <div className="flex justify-between items-center">
           <p className="unbound text-[#06052A]">Transactions</p>
           <div className="flex items-center gap-x-4">
@@ -30,8 +30,8 @@ const TransactionList = () => {
             </div>
           </div>
         </div>
-        <div className="mt-6">
-          <table className="table-auto w-full">
+        <div className="mt-6 overflow-x-auto">
+          <table className="table-auto  w-[1000px] ">
             <thead>
               <tr>
                 <td className="unbound pl-4 p-1 pb-2">#</td>

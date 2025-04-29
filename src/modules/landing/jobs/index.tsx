@@ -34,7 +34,7 @@ const JobsIndex = () => {
         <JobsBanner />
       </div>
       <div className="mt-7 lg:mt-12 box">
-        <div className="flex gap-x-4 justify-between p-2 lg:p-3 w-full bg-white z-10 relative rounded-[12px] div-shadow">
+        <div className="flex gap-x-4 justify-between p-2 lg:p-3 w-full bg-white dark:bg-inputDark z-10 relative rounded-[12px] div-shadow">
           <div className="w-full">
             <input
               type="text"

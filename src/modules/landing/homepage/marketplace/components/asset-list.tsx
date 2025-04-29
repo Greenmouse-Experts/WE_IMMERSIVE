@@ -67,12 +67,12 @@ const AssetList: FC<Props> = ({
                 className="rounded-md h-[230px] object-cover w-full"
               />
               <div className="mt-4">
-                <span className={`${classStyle}`}>
+                <span className={`${classStyle} font-bold`}>
                   {item.assetName || item.title}
                 </span>
               </div>
               <div className="mt-4 flex gap-1">
-                <span className={`capitalize ${classStyle}`}>
+                <span className={`capitalize ${classStyle} font-semibold`}>
                   {item.currency === "" ? item.pricingType : item.currency}
                 </span>
                 <span className={`${classStyle}`}>

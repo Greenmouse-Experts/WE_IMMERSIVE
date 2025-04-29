@@ -13,6 +13,8 @@ import MessageTable from "../pages/institution/messageTable";
 import SubscriptionTable from "../pages/institution/subscriptionTable";
 import JobDetails from "../pages/institution/Job-details";
 import EditJob from "../pages/institution/editJobs";
+import Orders from "../pages/students/orders";
+import OrderDetails from "../pages/students/orders-details";
 
 export const institutionRoutes = [
   {
@@ -39,8 +41,12 @@ export const institutionRoutes = [
         element: <AssetTable/>,
       },
       {
-        path:"transaction",
-        element: <TransactionTable/>,
+        path: "orders",
+        element: <Orders />,
+      },
+      {
+        path: "orders/:orderId",
+        element: <OrderDetails />,
       },
       {
         path:"upload",

@@ -134,7 +134,7 @@ const RegisterForm = () => {
                 message: "Please Enter A Valid Number",
               },
             }}
-            className="flex items-center bg-[#E9EBFB]  mt-2 rounded-[6px] text-black lg:p-3 rounded-[4px] placeholder:text-[13px] placeholder:text-[#999797] w-full border-0  outline-none py-2 px-2 rounded"
+            className="flex items-center !bg-inputDark dark:!bg-inputDark  mt-2 rounded-[6px] text-black lg:p-3 rounded-[4px] placeholder:text-[13px] placeholder:text-[#999797] w-full border-0  outline-none py-2 px-2 rounded"
           />
           {errors.phoneNumber && (
             <p className="error text-red-400 text-sm">Invalid Phone Number</p>
