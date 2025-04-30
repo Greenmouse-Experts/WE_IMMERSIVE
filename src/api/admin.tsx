@@ -256,7 +256,7 @@ export function getAdminBlogCategory() {
   return useQuery({
     queryKey: ["admin-blog-category"],
     queryFn: async () => {
-      const response = await axios.get(`/admin/blog-category`);
+      const response = await axios.get(`/general/blog-category`);
       return response.data.data;
     },
   });
@@ -295,7 +295,7 @@ export function deleteAdminBlogCategory() {
       console.log(res);
       toast.success(res.message);
       queryClient.invalidateQueries({
-        queryKey: ["admin-course-category"],
+        queryKey: ["admin-blog-category"],
       });
     },
     onError: (error: any) => {

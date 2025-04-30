@@ -3,7 +3,6 @@ import StudentTable from "../pages/institution/studentTable";
 import TutorsTable from "../pages/institution/tutorsTable";
 import CoursesTable from "../pages/institution/coursesTable";
 import AssetTable from "../pages/institution/assetTable";
-import TransactionTable from "../pages/institution/transactionTable";
 import UploadedStatusTable from "../pages/institution/uploadedStatusTable";
 import Notification from "../modules/institution/dashboard/notification";
 import SettingsTable from "../pages/institution/settingsTable";
