@@ -88,8 +88,12 @@
   color: white;
   transition: color 0.3s;
 }
+.css-1tqrhto >.ps-menu-button .ps-active{
+  background-color: white !important;
+}
 .dark .css-1tqrhto >.ps-menu-button{
   background-color: #18212f;
+  color: white;
 }
 .dark .css-1tqrhto >.ps-menu-button:hover{
   background-color: black;
@@ -600,4 +604,14 @@ input.PhoneInputInput {
 
 .ps-sidebar-backdrop{
   background-color: transparent !important;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .css-14xmt93 > .ps-menu-button {
+      background: #e9ebfb !important;
+  }
+  .dark .css-14xmt93 > .ps-menu-button {
+      background: #18212f !important;
+  }
 }

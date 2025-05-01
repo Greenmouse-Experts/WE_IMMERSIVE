@@ -91,7 +91,7 @@ export const Routes = [
     submenu: [
       {
         name: "Blog",
-        route: "/super-admin/courses",
+        route: "/super-admin/blog",
       },
       {
         name: "Blog Category",

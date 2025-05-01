@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { UserAdminData } from "../types/userDetails.types";
 import { ICategory } from "../types/category.types";
 import { IAdminNewUser } from "../types/dashboard.types";
+import { IBlog } from "../types/blog.types";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const token = localStorage.getItem("we-immersiveUser");
@@ -261,6 +262,15 @@ export function getAdminBlogCategory() {
     },
   });
 }
+export function getAdminBlog() {
+  return useQuery({
+    queryKey: ["admin-blog"],
+    queryFn: async () => {
+      const response = await axios.get(`/admin/blog/fetch-all/view`);
+      return response.data.data as IBlog[];
+    },
+  });
+}
 
 export function addAdminBlogCategory() {
   const queryClient = useQueryClient();
@@ -274,6 +284,66 @@ export function addAdminBlogCategory() {
       toast.success(res.message);
       queryClient.invalidateQueries({
         queryKey: ["admin-blog-category"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+export function addAdminBlog() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.post(`/admin/blog`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-blog"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+
+export function deleteAdminBlog() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (blogId: string) => {
+      const response = await axios.delete(
+        `/admin/blog/${blogId}`
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-blog"],
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+}
+export function publishAdminBlog() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await axios.put(`/admin/blog/${data.id}`, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      toast.success(res.message);
+      queryClient.invalidateQueries({
+        queryKey: ["admin-blog"],
       });
     },
     onError: (error: any) => {

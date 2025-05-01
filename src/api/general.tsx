@@ -211,3 +211,21 @@ export function getOrderDetails(paymentId: string) {
     },
   });
 }
+export function getBlogs() {
+  return useQuery({
+    queryKey: ["blog"],
+    queryFn: async () => {
+      const response = await axios.get(`/general/blogs`);
+      return response.data.data as any;
+    },
+  });
+}
+export function getBlogCategory() {
+  return useQuery({
+    queryKey: ["blog-category"],
+    queryFn: async () => {
+      const response = await axios.get(`/general/blog-category`);
+      return response.data.data as any;
+    },
+  });
+}

@@ -20,7 +20,7 @@ import { ICourseCategory } from "../../../types/course.types";
 import BlogCategoryModal from "./blogCategoryModal";
 
 const BlogCategory = () => {
-  const { data: courseCategory, isLoading } = getAdminBlogCategory();
+  const { data: blogCategory, isLoading } = getAdminBlogCategory();
 
   const [selected, setSelected] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -29,10 +29,10 @@ const BlogCategory = () => {
 
   const handleOpen = () => setOpen(!open);
   const handleDeleteModal = () => setOpen(!deleteDialog);
-  const openEdit = (item: ICourseCategory) => {
-    setSelected(item);
-    handleOpen();
-  };
+  // const openEdit = (item: ICourseCategory) => {
+  //   setSelected(item);
+  //   handleOpen();
+  // };
   const openCreate = () =>{
     setSelected(null);
     handleOpen();
@@ -101,8 +101,8 @@ const BlogCategory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {courseCategory?.length > 0
-                    ? courseCategory.map((item: ICourseCategory, i: number) => (
+                  {blogCategory?.length > 0
+                    ? blogCategory.map((item: ICourseCategory, i: number) => (
                         <tr
                           className="odd:bg-[#E9EBFB] odd:dark:bg-black"
                           key={i}
@@ -118,14 +118,14 @@ const BlogCategory = () => {
                                 <MoreVertical />
                               </MenuHandler>
                               <MenuList>
-                                <MenuItem className="flex flex-col gap-3">
+                                {/* <MenuItem className="flex flex-col gap-3">
                                   <span
                                     className="cursor-pointer w-full"
                                     onClick={() => openEdit(item)}
                                   >
                                     Edit
                                   </span>
-                                </MenuItem>
+                                </MenuItem> */}
                                 <MenuItem className="flex flex-col gap-3">
                                   <span
                                     className="cursor-pointer w-full"

@@ -1,8 +1,14 @@
+import { getBlogCategory, getBlogs } from "../../../api/general";
+import Loader from "../../../components/reusables/loader";
 import PageBanner from "../../../components/reusables/page-banner";
 import BlogNews from "./blog-list";
 import RecentPosts from "./recent-post";
 
 const BlogIndex = () => {
+  const { data: blogs, isLoading } = getBlogs();
+  const {data:blogCategory, isLoading:isLoadingCategory} =getBlogCategory()
+
+  if (isLoading || isLoadingCategory) return <Loader />;
   return (
     <div>
       <div>
@@ -15,15 +21,15 @@ const BlogIndex = () => {
       <div className="section">
         <div className="box">
           <div>
-            <RecentPosts/>
+            <RecentPosts blogs={blogs} />
           </div>
           <div>
-            <BlogNews/>
+            <BlogNews  blogs={blogs} blogCategory={blogCategory} />
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default BlogIndex
+export default BlogIndex;

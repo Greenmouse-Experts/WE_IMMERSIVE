@@ -1,8 +1,12 @@
-
+import { getBlogs } from "../../../../api/general";
+import Loader from "../../../../components/reusables/loader";
 import Tag from "../../../../components/ui/tag";
 import CommunityNews from "./community-news";
 
 const CommunityUpdate = () => {
+  const { data: blogs, isLoading } = getBlogs();
+
+  if (isLoading) return <Loader />;
   return (
     <div>
       <div className="section">
@@ -17,15 +21,14 @@ const CommunityUpdate = () => {
                   Updates from the <br /> community
                 </p>
                 <p className="text-[#9A9999] mt-5">
-                  Be the first to know about latest news and happenings <br className="hidden lg:block"/>{" "}
-                  in the community 📩
+                  Be the first to know about latest news and happenings{" "}
+                  <br className="hidden lg:block" /> in the community 📩
                 </p>
               </div>
             </div>
-          
           </div>
           <div>
-            <CommunityNews/>
+            <CommunityNews blogs={blogs} />
           </div>
         </div>
       </div>
