@@ -1,8 +1,12 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import Chart from "react-apexcharts";
 
-const TransactionChart = () => {
-  const options = {
+interface ExpenseData {
+  length: number;
+}
+
+const TransactionChart = ({ expenseData }: { expenseData: ExpenseData }) => {
+  const options: ApexCharts.ApexOptions = {
     chart: {
       width: 380,
       type: "donut",
@@ -37,9 +41,9 @@ const TransactionChart = () => {
         },
       },
     ],
-  } as ApexCharts.ApexOptions;;
+  };
 
-  const series = [4315, 3200, 1200,]
+  const series = [4315, 3200, 1200];
 
   return (
     <div>
@@ -53,9 +57,10 @@ const TransactionChart = () => {
             </div>
           </div>
         </div>
-        <div className="mt-6">
-          <div className="mt-6 px-6 md:px-0 lg:px-0">
-            {typeof window !== "undefined" && (
+
+        <div className="mt-6 px-6 md:px-0 lg:px-0">
+          {expenseData.length > 0 ? (
+            typeof window !== "undefined" && (
               <Chart
                 options={options}
                 series={series}
@@ -63,12 +68,16 @@ const TransactionChart = () => {
                 width="100%"
                 height="300px"
               />
-            )}
-          </div>
+            )
+          ) : (
+            <div className="flex justify-center items-center h-[110px]">
+              <p className="text-[#A3A3A3] text-[14px]">No data available</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default TransactionChart
+export default TransactionChart;

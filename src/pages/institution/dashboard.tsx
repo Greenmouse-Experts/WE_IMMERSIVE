@@ -23,7 +23,7 @@ const InstitutionDashboard = () => {
           <TransactionList studentsData={analysisData.newAddedStudents} />
         </div>
         <div className="xl:w-[30%] md:grid lg:grid md:gap-6 lg:gap-6">
-          <TransactionChart />
+          <TransactionChart expenseData={analysisData.expensesAnalysis} />
         </div>
       </div>
 
