@@ -224,7 +224,7 @@ const BlogTable = () => {
       </Dialog>
       <Dialog open={deleteModal} handler={() => setDeleteModal(!deleteModal)}>
         <Publish
-          title="Are you sure you want to delete this course"
+          title="Are you sure you want to delete this item"
           handleProceed={handleDelete}
           handleCancel={() => setDeleteModal(!deleteModal)}
           isLoading={isDeleting}

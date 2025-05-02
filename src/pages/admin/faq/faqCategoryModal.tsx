@@ -4,21 +4,21 @@ import TextInput, { InputType } from "../../../components/ui/TextInput";
 import Button from "../../../components/ui/Button";
 import { BeatLoader } from "react-spinners";
 import {
-  addAdminBlogCategory,
-  editAdminBlogCategory,
+  addAdminFaqCategory,
+  editAdminFaqCategory,
 } from "../../../api/admin";
 import { ICourseCategory } from "../../../types/course.types";
 
-const BlogCategoryModal = ({
+const FaqCategoryModal = ({
   onClose,
   selected,
 }: {
   onClose: (status: boolean) => void;
   selected: ICourseCategory;
 }) => {
-  const { mutate: addCategory, isPending } = addAdminBlogCategory();
+  const { mutate: addCategory, isPending } = addAdminFaqCategory();
   const { mutate: editCategory, isPending: isEditting } =
-  editAdminBlogCategory();
+  editAdminFaqCategory();
 
   const {
     control,
@@ -57,7 +57,7 @@ const BlogCategoryModal = ({
           <FormContainer>
             <div className="px-2">
               <p className="unbound fw-500 lg:text-lg mb-4">
-                Add Blog Category
+                Add Faq Category
               </p>
               <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
                 <div className="relative">
@@ -107,4 +107,4 @@ const BlogCategoryModal = ({
   );
 };
 
-export default BlogCategoryModal;
+export default FaqCategoryModal;

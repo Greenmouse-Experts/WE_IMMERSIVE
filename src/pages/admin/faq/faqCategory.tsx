@@ -3,8 +3,8 @@ import Loader from "../../../components/reusables/loader";
 import { dateFormat } from "../../../helpers/dateHelper";
 import Button from "../../../components/ui/Button";
 import {
-  deleteAdminBlogCategory,
-  getAdminBlogCategory,
+  deleteAdminFaqCategory,
+  getAdminFaqCategory,
 } from "../../../api/admin";
 import {
   Menu,
@@ -17,10 +17,10 @@ import { MoreVertical } from "lucide-react";
 import { useState } from "react";
 import { Dialog } from "@material-tailwind/react";
 import { ICourseCategory } from "../../../types/course.types";
-import BlogCategoryModal from "./blogCategoryModal";
+import FaqCategoryModal from "./faqCategoryModal";
 
-const BlogCategory = () => {
-  const { data: blogCategory, isLoading } = getAdminBlogCategory();
+const FaqCategory = () => {
+  const { data: blogCategory, isLoading } = getAdminFaqCategory();
 
   const [selected, setSelected] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -43,7 +43,7 @@ const BlogCategory = () => {
     setShowDeleteDialog(true);
   };
   const { mutate: deleteAsset, isPending: isDeleting } =
-  deleteAdminBlogCategory();
+  deleteAdminFaqCategory();
 
   const handleDelete = () => {
     deleteAsset(selected.id, {
@@ -60,7 +60,7 @@ const BlogCategory = () => {
       <div className="bg-white dark:bg-[#15171E] mt-10 px-4 lg:py-6 rounded-[20px]">
         <div className="flex w-full justify-between md:py-1 py-4 items-center">
           <p className="unbound flex flex-grow text-sm md:text-base text-[#06052A]">
-            Blog Category
+            Faq Category
           </p>
           <div className="md:flex hidden items-center gap-x-2">
             <div className="flex items-center gap-x-1 btn-shadow px-2 py-[2px] rounded-full cursor-pointer">
@@ -79,7 +79,7 @@ const BlogCategory = () => {
               <Button
                 size={14}
                 onClick={openCreate}
-                title="Add Blog Category"
+                title="Add Faq Category"
                 altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
               />
             </div>
@@ -161,7 +161,7 @@ const BlogCategory = () => {
         handler={handleOpen}
         size="md"
       >
-        <BlogCategoryModal onClose={handleOpen} selected={selected} />
+        <FaqCategoryModal onClose={handleOpen} selected={selected} />
       </Dialog>
 
       <Dialog handler={handleDeleteModal} open={deleteDialog} size="md">
@@ -178,4 +178,4 @@ const BlogCategory = () => {
   );
 };
 
-export default BlogCategory;
+export default FaqCategory;

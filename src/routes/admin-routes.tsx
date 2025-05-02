@@ -26,6 +26,8 @@ import UserDetails from "../pages/admin/userDetails";
 import CourseSubCategory from "../pages/admin/assets/courseSubCategory";
 import BlogCategory from "../pages/admin/blog/blogCategory";
 import BlogTable from "../pages/admin/blog/blogTable";
+import FaqTable from "../pages/admin/faq/faqTable";
+import FaqCategory from "../pages/admin/faq/faqCategory";
 
 export const adminRoutes = [
   {
@@ -127,6 +129,14 @@ export const adminRoutes = [
       {
         path: "blog/category",
         element: <BlogCategory />
+      },
+      {
+        path: "faq",
+        element: <FaqTable />
+      },
+      {
+        path: "faq/category",
+        element: <FaqCategory />
       },
       {
         path: "sub-category/:categoryId",
