@@ -30,7 +30,7 @@ const LoginForm = () => {
     },
   });
 
-  const handleLogin = (user:any) => {
+  const handleLogin = (user: any) => {
     identifyUser(user.id);
     setUserProperties({
       $email: user.email,
@@ -47,7 +47,11 @@ const LoginForm = () => {
       delete data.data.token;
 
       dispatch(weImmersiveUser(data.data));
-      handleLogin(data.data);
+
+      if (data.data.accountType !== "institution") {
+        handleLogin(data.data);
+      }
+
       let route = "/";
       if (data.data.accountType === "user") {
         route = "/user";

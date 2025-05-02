@@ -94,3 +94,26 @@ export function editInstitutionJob() {
     },
   });
 }
+
+
+export function getInstitutionStats() {
+  return useQuery({
+    queryKey: ["institution-stats"],
+    queryFn: async () => {
+      const response = await axios.get(`/stat/institution/landing`);
+      return response.data;
+    },
+  });
+}
+
+
+export function getInstitutionAnalysis() {
+  return useQuery({
+    queryKey: ["institution-analysis"],
+    queryFn: async () => {
+      const response = await axios.get(`/analysis/institution/landing`);
+      return response.data;
+    },
+  });
+}
+
