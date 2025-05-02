@@ -12,7 +12,6 @@ interface PurchaseData {
 }
 
 const PurchaseAnalysis = ({ purchaseData }: { purchaseData: PurchaseData }) => {
-  console.log(purchaseData);
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   const { coursesData, assetsData } = useMemo(() => {
