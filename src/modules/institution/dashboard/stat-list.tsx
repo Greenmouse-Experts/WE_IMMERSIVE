@@ -1,28 +1,33 @@
 import { formatAsNgnMoney } from "../../../components/utils/formatHelp";
 
-const StatisticList = () => {
+interface StatisticListProps {
+  data: any; // Replace 'any' with the actual type of 'data' if known
+}
+
+const StatisticList: React.FC<StatisticListProps> = ({ data }) => {
+  console.log(data);
      const list = [
        {
          name: "Total  Students",
-         count: 7,
+         count: data?.totalStudents,
          img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716454/WE%20Immersive/learning-2_xy21e0.png",
          color: "#FFC7F0",
        },
        {
          name: "Bought Courses",
-         count: 22,
+         count: data?.boughtCourses,
          img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716404/WE%20Immersive/books_hkqetx.png",
          color: "#C7C8FF",
        },
        {
          name: "Created Courses",
-         count: 37,
+         count: data?.createdCourses,
          img: "https://res.cloudinary.com/do2kojulq/image/upload/v1732618852/Group_1171275331_lcfrkq.png",
          color: "#FFD7C7",
        },
        {
          name: "Course Sales",
-         count: `$${formatAsNgnMoney(107000)}`,
+         count: `$${formatAsNgnMoney(data?.courseSales.toLocaleString())}`,
          img: "https://res.cloudinary.com/do2kojulq/image/upload/v1729716093/WE%20Immersive/coin-2_qcugc2.png",
          color: "#D0FFC7",
        },
