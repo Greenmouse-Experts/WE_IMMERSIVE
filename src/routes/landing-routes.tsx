@@ -13,6 +13,9 @@ import StorePage from "../pages/landing/store";
 import AboutPage from "../pages/landing/about";
 import StudentCartTable from "../pages/students/studentCartTable";
 import PhysicalAssetDetails from "../pages/landing/physical-asset-details";
+// 
+import TermsPage from "../pages/landing/terms";
+import PolicyPage from "../pages/landing/policy";
 
 export const landingRoutes = [
   {
@@ -64,6 +67,10 @@ export const landingRoutes = [
         element: <BlogPage />,
       },
       {
+        path: "/privacy-policy",
+        element: <PolicyPage />,
+      },
+      {
         path: "/jobs",
         element: <JobsPage />,
       },
@@ -74,6 +81,10 @@ export const landingRoutes = [
       {
         path: "/cart",
         element: <StudentCartTable />,
+      },
+      {
+        path: "/terms",
+        element: <TermsPage />,
       },
     ],
   },

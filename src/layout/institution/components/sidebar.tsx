@@ -5,7 +5,7 @@ import logo2 from "/logo-white.svg";
 import { FC, useState } from "react";
 import { Routes, RouteType } from "./routes";
 import { PiGear } from "react-icons/pi";
-import { LuArrowRightCircle } from "react-icons/lu";
+import { LuArrowRight } from "react-icons/lu";
 import ThemeSwitch from "../../../components/ui/theme-switch";
 import { useLogOut } from "../../../hooks/useLogOut";
 import { Dialog } from "@material-tailwind/react";
@@ -108,7 +108,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled, collapsed }) => {
               className="flex items-center p-2 gap-x-3 text-red-500 cursor-pointer"
               onClick={handleOpen}
             >
-              <LuArrowRightCircle />
+              <LuArrowRight />
               <span>Log out</span>
             </li>
           </ul>

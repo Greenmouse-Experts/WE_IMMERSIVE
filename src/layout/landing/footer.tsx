@@ -1,6 +1,5 @@
-import { contactLink, coursesLink, policyLink, quickLinks, socails } from "../../components/hard-data/footer-links"
 import ExperienceMore from "../../modules/landing/homepage/experience"
-import FooterLinks from "./extras/footer-links"
+import NewFooter from "./extras/new-footer"
 
 const LandingFooter = () => {
   return (
@@ -8,25 +7,7 @@ const LandingFooter = () => {
     <ExperienceMore/>
      <div className="bg-[#010B18]">
       <div className="box">
-        <div className="border-t border-[#C4C4C44D] pt-12 pb-8">
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-0">
-            <div>
-              <FooterLinks name="Socials" list={socails} />
-            </div>
-            <div>
-              <FooterLinks name="Quick Links" list={quickLinks} />
-            </div>
-            <div>
-              <FooterLinks name="Store" list={coursesLink} />
-            </div>
-            <div>
-              <FooterLinks name="Legal" list={policyLink} />
-            </div>
-            <div>
-              <FooterLinks name="Contact" list={contactLink} />
-            </div>
-          </div>
-        </div>
+      <NewFooter/>
       </div>
       <div className="w-full bg-black border-t border-dashed border-spacing-[20px] border-[#646363]">
         <div className="box">
