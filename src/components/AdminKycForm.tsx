@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 
 const AdminKycForm = ({ userDetails }: { userDetails: UserAdminData }) => {
   const kycData = userDetails?.kyc_docs[0];
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
   const [rejectReason, setRejectReason] = useState("");
