@@ -6,7 +6,7 @@ const slides = [
   {
     background:
       "https://res.cloudinary.com/do2kojulq/image/upload/v1738435928/WE%20Immersive/1df52e4b947c9c0b5c721617f0f6dec3_1_1_kjhsao.gif",
-    mainTitle: "Empowering Digital Artists with Seamless Monetization",
+    mainTitle: "Empowering Digital Artists with Seamless Monetiza",
     description:
       "Turn your passion into profit with tools that simplify earning opportunities.",
     buttonText: "Publish Work",
