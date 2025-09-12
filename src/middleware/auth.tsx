@@ -15,7 +15,25 @@ const AuthMiddleware = ({ children, role, allowedRoles }: any) => {
 
   const currentPage = location.pathname.split("/");
 
-  if (!allowedRoles.includes(role)) {
+  // Normalize role and allowedRoles for case-insensitive comparison
+  const normalizedRole = role?.toLowerCase();
+  const normalizedAllowedRoles = allowedRoles.map((r: string) =>
+    r.toLowerCase(),
+  );
+
+  // TEMPORARILY DISABLED FOR DEBUGGING - Log instead of blocking
+  if (!normalizedAllowedRoles.includes(normalizedRole)) {
+    console.log("🚫 AuthMiddleware - Role Check:");
+    console.log("  - Current Role:", role, "-> normalized:", normalizedRole);
+    console.log(
+      "  - Allowed Roles:",
+      allowedRoles,
+      "-> normalized:",
+      normalizedAllowedRoles,
+    );
+    console.log("  - Current Page:", location.pathname);
+    console.log("  - ❌ ACCESS DENIED - Role not in allowed list");
+
     // Show the modal if the role is not allowed
     return (
       <>
@@ -32,15 +50,20 @@ const AuthMiddleware = ({ children, role, allowedRoles }: any) => {
               variant="gradient"
               color="blue"
               onClick={() => {
-                [setShowModal(false), navigate(-1)];
+                setShowModal(false);
+                navigate("/");
               }}
             >
-              Cancel
+              Go Home
             </Button>
           </DialogFooter>
         </Dialog>
       </>
     );
+  } else {
+    console.log("✅ AuthMiddleware - Access Granted:");
+    console.log("  - Role matches allowed roles");
+    console.log("  - Proceeding to protected content");
   }
 
   // If role is allowed, render the children (protected content)

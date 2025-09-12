@@ -11,8 +11,50 @@ import SelectInput from "../../../components/ui/SelectInput";
 
 const TransactionList = () => {
   const [accountType, setAccountType] = useState("");
-  const { data: newUsers, isLoading } = getAdminNewUsers(accountType);
+  const { data: newUsers, isLoading, error } = getAdminNewUsers(accountType);
+
   if (isLoading) return <Loader />;
+
+  if (error) {
+    return (
+      <div className="w-full">
+        <div className="bg-white dark:bg-[#15171E] w-full px-4 lg:py-6 rounded-[20px]">
+          <p className="text-red-500">Error loading users data</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!newUsers || newUsers.length === 0) {
+    return (
+      <div className="w-full">
+        <div className="bg-white dark:bg-[#15171E] w-full px-4 lg:py-6 rounded-[20px]">
+          <div className="md:flex justify-between items-center">
+            <div className="flex items-center gap-10">
+              <p className="unbound text-center md:text-left text-[#06052A]">
+                New Users
+              </p>
+              <SelectInput
+                onChange={(e: any) => setAccountType(e.target.value)}
+                value={accountType}
+                list={[
+                  { name: "user", id: "user" },
+                  { name: "creator", id: "creator" },
+                  { name: "student", id: "student" },
+                  { name: "institution", id: "institution" },
+                ]}
+                placeholder="All Users"
+                style={{ width: 200 }}
+              />
+            </div>
+          </div>
+          <div className="mt-6">
+            <p className="text-gray-500">No users found</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -23,7 +65,7 @@ const TransactionList = () => {
               New Users
             </p>
             <SelectInput
-              onChange={(e:any) => setAccountType(e.target.value)}
+              onChange={(e: any) => setAccountType(e.target.value)}
               value={accountType}
               list={[
                 { name: "user", id: "user" },
@@ -65,7 +107,7 @@ const TransactionList = () => {
                 </tr>
               </thead>
               <tbody className="">
-                {newUsers!.map((item: IAdminNewUser, i) => (
+                {newUsers.map((item: IAdminNewUser, i) => (
                   <tr className="odd:bg-[#E9EBFB] odd:dark:bg-black" key={i}>
                     <td className={`p-2 py-4 pl-4`}>{`0${i + 1}`}</td>
                     <td className="p-2 py-4">{item.name}</td>
@@ -73,9 +115,14 @@ const TransactionList = () => {
                     {/* <td className="pl-1 p-2 py-4">
                     <img src={item.img} alt="purchase-image" className="w-[70px]" />
                   </td> */}
-                    <td className="p-2 py-4 text-[#F03CE0] capitalize">{item.type}</td>
+                    <td className="p-2 py-4 text-[#F03CE0] capitalize">
+                      {item.type}
+                    </td>
                     <td className="p-2 py-4">{dateFormat(item.createdAt)} </td>
-                    <td className="p-2 py-4">{dateFormat(item.lastLogin)} {dateFormat(item.lastLogin, "HH:mm")}</td>
+                    <td className="p-2 py-4">
+                      {dateFormat(item.lastLogin)}{" "}
+                      {dateFormat(item.lastLogin, "HH:mm")}
+                    </td>
                     {/* <td className="p-2 py-4 pl-4">
                       <PiDotsThreeOutlineFill className="cursor-pointer" />
                     </td> */}

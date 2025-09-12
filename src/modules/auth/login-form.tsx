@@ -42,10 +42,34 @@ const LoginForm = () => {
   const mutation = useMutation({
     mutationFn: login,
     onSuccess: (data: any) => {
+      console.log("🔑 LOGIN SUCCESS - FULL RESPONSE:");
+      console.log("📊 Complete API Response:", JSON.stringify(data, null, 2));
+      console.log("📋 Response Structure:");
+      console.log("  - data:", data);
+      console.log("  - data.data:", data.data);
+      console.log("  - data.message:", data.message);
+      console.log("🎫 Token being stored:", data.data.token);
+      console.log("👤 User Account Type:", data.data.accountType);
+      console.log("📧 User Email:", data.data.email);
+      console.log("🏷️ User Name:", data.data.name);
+      console.log("🆔 User ID:", data.data.id);
+
       localStorage.setItem("we-immersiveUser", data.data.token);
+
+      // Log what's actually stored
+      const storedToken = localStorage.getItem("we-immersiveUser");
+      console.log(
+        "💾 Token stored in localStorage:",
+        storedToken ? `${storedToken.substring(0, 20)}...` : "NULL",
+      );
+
       delete data.data.password;
       delete data.data.token;
 
+      console.log(
+        "👤 User data being stored in Redux (after cleanup):",
+        JSON.stringify(data.data, null, 2),
+      );
       dispatch(weImmersiveUser(data.data));
 
       if (data.data.accountType !== "institution") {
@@ -63,6 +87,11 @@ const LoginForm = () => {
         route = "/institution";
       }
 
+      console.log("🚀 Navigating to:", route);
+      console.log(
+        "🎯 Final user data in Redux after login:",
+        JSON.stringify(data.data, null, 2),
+      );
       navigate(route, { replace: true });
       toast.success(data.message);
     },

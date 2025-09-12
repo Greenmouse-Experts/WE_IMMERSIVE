@@ -8,120 +8,60 @@ import { IBlog } from "../types/blog.types";
 import { IFaq } from "../types/faq.types";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
-const token = localStorage.getItem("we-immersiveUser");
+const getToken = () => localStorage.getItem("we-immersiveUser");
 
 export const getAdminDigitalAssets = async (headers = {}) => {
-  const response = await axios.get(`${baseURL}/admin/all/digital/assets`, {
-    headers: {
-      ...headers, // Merge custom headers
-      Authorization: `Bearer ${token}`, // Add Authorization token
-      "Content-Type": "application/json", // Set content type
-    },
-  });
+  const response = await axios.get(`/admin/all/digital/assets`);
   return response.data;
 };
 
 export const getAdminPhysicalAssets = async (headers = {}) => {
-  const response = await axios.get(`${baseURL}/admin/all/physical/assets`, {
-    headers: {
-      ...headers, // Merge custom headers
-      Authorization: `Bearer ${token}`, // Add Authorization token
-      "Content-Type": "application/json", // Set content type
-    },
-  });
+  const response = await axios.get(`/admin/all/physical/assets`);
   return response.data;
 };
 
 export const getApprovedDigitalAssets = async (headers = {}) => {
-  const response = await axios.get(`${baseURL}/fetch/digital/assets`, {
-    headers: {
-      ...headers, // Merge custom headers
-      Authorization: `Bearer ${token}`, // Add Authorization token
-      "Content-Type": "application/json", // Set content type
-    },
-  });
-  return response.data; // Replace with your API endpoint
+  const response = await axios.get(`/fetch/digital/assets`);
+  return response.data;
 };
 
 export const getApprovedPhysicalAssets = async (headers = {}) => {
-  const response = await axios.get(`${baseURL}/admin/all/physical/assets`, {
-    headers: {
-      ...headers, // Merge custom headers
-      Authorization: `Bearer ${token}`, // Add Authorization token
-      "Content-Type": "application/json", // Set content type
-    },
-  });
-  return response.data; // Replace with your API endpoint
+  const response = await axios.get(`/admin/all/physical/assets`);
+  return response.data;
 };
 
 export const createJobCategory = async (payload: any, headers = {}) => {
   return axios
-    .post(`${baseURL}/admin/job/category/create`, payload, {
-      headers: {
-        ...headers, // Merge custom headers
-        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        "Content-Type": "application/json", // Example for setting content type
-      },
-    })
+    .post(`/admin/job/category/create`, payload)
     .then((response) => response.data);
 };
 
 export const getJobCategory = async (headers = {}) => {
-  const response = await axios.get(`${baseURL}/admin/job/categories`, {
-    headers: {
-      ...headers, // Merge custom headers
-      Authorization: `Bearer ${token}`, // Add Authorization token
-      "Content-Type": "application/json", // Set content type
-    },
-  });
-  return response.data; // Replace with your API endpoint
+  const response = await axios.get(`/admin/job/categories`);
+  return response.data;
 };
 
 export const createJob = async (payload: any, headers = {}) => {
   return axios
-    .post(`${baseURL}/creator/job/add`, payload, {
-      headers: {
-        ...headers, // Merge custom headers
-        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        "Content-Type": "application/json", // Example for setting content type
-      },
-    })
+    .post(`/creator/job/add`, payload)
     .then((response) => response.data);
 };
 
 export const createSubscription = async (payload: any, headers = {}) => {
   return axios
-    .post(`${baseURL}/admin/subscription/plan/create`, payload, {
-      headers: {
-        ...headers, // Merge custom headers
-        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        "Content-Type": "application/json", // Example for setting content type
-      },
-    })
+    .post(`/admin/subscription/plan/create`, payload)
     .then((response) => response.data);
 };
 
 export const updateDigitalRequests = async (payload: any, headers = {}) => {
   return axios
-    .patch(`${baseURL}/admin/digital/asset/update/status`, payload, {
-      headers: {
-        ...headers, // Merge custom headers
-        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        "Content-Type": "application/json", // Example for setting content type
-      },
-    })
+    .patch(`/admin/digital/asset/update/status`, payload)
     .then((response) => response.data);
 };
 
 export const updatePhysicalRequests = async (payload: any, headers = {}) => {
   return axios
-    .patch(`${baseURL}/admin/physical/asset/update/status`, payload, {
-      headers: {
-        ...headers, // Merge custom headers
-        Authorization: `Bearer ${token}`, // Example for adding an Authorization token
-        "Content-Type": "application/json", // Example for setting content type
-      },
-    })
+    .patch(`/admin/physical/asset/update/status`, payload)
     .then((response) => response.data);
 };
 
@@ -208,7 +148,7 @@ export function deleteAdminAssetCategory() {
   return useMutation({
     mutationFn: async (categoryId: string) => {
       const response = await axios.delete(
-        `admin/asset/category/delete?id=${categoryId}`
+        `admin/asset/category/delete?id=${categoryId}`,
       );
       return response.data;
     },
@@ -411,9 +351,7 @@ export function deleteAdminBlog() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (blogId: string) => {
-      const response = await axios.delete(
-        `/admin/blog/${blogId}`
-      );
+      const response = await axios.delete(`/admin/blog/${blogId}`);
       return response.data;
     },
     onSuccess: (res) => {
@@ -432,9 +370,7 @@ export function deleteAdminFaq() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (blogId: string) => {
-      const response = await axios.delete(
-        `/admin/faq/${blogId}`
-      );
+      const response = await axios.delete(`/admin/faq/${blogId}`);
       return response.data;
     },
     onSuccess: (res) => {
@@ -492,9 +428,7 @@ export function deleteAdminBlogCategory() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (blodId: string) => {
-      const response = await axios.delete(
-        `/admin/blog-category/${blodId}`
-      );
+      const response = await axios.delete(`/admin/blog-category/${blodId}`);
       return response.data;
     },
     onSuccess: (res) => {
@@ -513,9 +447,7 @@ export function deleteAdminFaqCategory() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (blodId: string) => {
-      const response = await axios.delete(
-        `/admin/faq-category/${blodId}`
-      );
+      const response = await axios.delete(`/admin/faq-category/${blodId}`);
       return response.data;
     },
     onSuccess: (res) => {
@@ -555,7 +487,7 @@ export function getAdminCourseSubCategory(courseId: string) {
     queryKey: ["admin-course-sub-category"],
     queryFn: async () => {
       const response = await axios.get(
-        `/category/${courseId}?includeChildren=true`
+        `/category/${courseId}?includeChildren=true`,
       );
       return response.data.data as ICategory;
     },
@@ -586,7 +518,7 @@ export function deleteAdminSubCourseCategory() {
   return useMutation({
     mutationFn: async (categoryId: string) => {
       const response = await axios.delete(
-        `admin/course/category/delete?id=${categoryId}`
+        `admin/course/category/delete?id=${categoryId}`,
       );
       return response.data;
     },
@@ -628,7 +560,7 @@ export function deleteAdminCourseCategory() {
   return useMutation({
     mutationFn: async (categoryId: string) => {
       const response = await axios.delete(
-        `admin/course/category/delete?id=${categoryId}`
+        `admin/course/category/delete?id=${categoryId}`,
       );
       return response.data;
     },
@@ -700,7 +632,7 @@ export function deleteAdminJobCategory() {
   return useMutation({
     mutationFn: async (categoryId: string) => {
       const response = await axios.delete(
-        `admin/job/category/delete?id=${categoryId}`
+        `admin/job/category/delete?id=${categoryId}`,
       );
       return response.data;
     },
@@ -792,7 +724,7 @@ export function publishDigitalAsset() {
     mutationFn: async (data: any) => {
       const response = await axios.patch(
         `/admin/digital/asset/update/status`,
-        data
+        data,
       );
       return response.data;
     },
@@ -814,7 +746,7 @@ export function deleteDigitalAsset() {
   return useMutation({
     mutationFn: async (assetId) => {
       const response = await axios.delete(
-        `/admin/digital/asset/delete?id=${assetId}`
+        `/admin/digital/asset/delete?id=${assetId}`,
       );
       return response.data;
     },
@@ -836,7 +768,7 @@ export function publishPhysicalAsset() {
     mutationFn: async (data: any) => {
       const response = await axios.patch(
         `/admin/physical/asset/update/status`,
-        data
+        data,
       );
       return response.data;
     },
@@ -858,7 +790,7 @@ export function deletePhysicalAsset() {
   return useMutation({
     mutationFn: async (assetId) => {
       const response = await axios.delete(
-        `/admin/physical/asset/delete?id=${assetId}`
+        `/admin/physical/asset/delete?id=${assetId}`,
       );
       return response.data;
     },
@@ -891,7 +823,7 @@ export function addSubscriptionPlan() {
     mutationFn: async (data: any) => {
       const response = await axios.post(
         `/admin/subscription/plan/create`,
-        data
+        data,
       );
       return response.data;
     },
@@ -913,7 +845,7 @@ export function deleteSubscriptionPlan() {
   return useMutation({
     mutationFn: async (categoryId: string) => {
       const response = await axios.delete(
-        `/admin/subscription/plan/delete?planId=${categoryId}`
+        `/admin/subscription/plan/delete?planId=${categoryId}`,
       );
       return response.data;
     },
@@ -973,31 +905,29 @@ export function getAdminNewUsers(accountType: string) {
     queryKey: ["admin-new-users", accountType],
     queryFn: async () => {
       const response = await axios.get(
-        `/analysis/admin/recent-signups?userType=${accountType || ""}`
+        `/analysis/admin/recent-signups?userType=${accountType || ""}`,
       );
-      return response.data as IAdminNewUser[];
+      return response.data.data || (response.data as IAdminNewUser[]);
     },
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 }
 export function getUserByCountry() {
   return useQuery({
     queryKey: ["admin-user-country"],
     queryFn: async () => {
-      const response = await axios.get(
-        `/analysis/admin/users-by-country`
-      );
-      return response.data 
+      const response = await axios.get(`/analysis/admin/users-by-country`);
+      return response.data;
     },
   });
 }
-export function getUserStats() {
+export function getAdminUserStats() {
   return useQuery({
     queryKey: ["admin-user-stats"],
     queryFn: async () => {
-      const response = await axios.get(
-        `/analysis/admin/user-stats`
-      );
-      return response.data 
+      const response = await axios.get(`/analysis/admin/user-stats`);
+      return response.data;
     },
   });
 }

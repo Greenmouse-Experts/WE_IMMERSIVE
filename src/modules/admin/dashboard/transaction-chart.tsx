@@ -1,13 +1,29 @@
 // import { MdOutlineArrowDropDown } from "react-icons/md";
 import Chart from "react-apexcharts";
 import React from "react";
-import { getUserStats } from "../../../api/admin";
+import { getAdminUserStats } from "../../../api/admin";
 import Loader from "../../../components/reusables/loader";
 
 const TransactionChart: React.FC = () => {
-  const { data: userStats, isPending } = getUserStats();
+  const { data: userStats, isPending, error } = getAdminUserStats();
 
   if (isPending) return <Loader />;
+
+  if (error) {
+    return (
+      <div className="bg-white dark:bg-[#15171E] w-full rounded-[20px] p-6">
+        <p className="text-red-500">Error loading user statistics</p>
+      </div>
+    );
+  }
+
+  if (!userStats) {
+    return (
+      <div className="bg-white dark:bg-[#15171E] w-full rounded-[20px] p-6">
+        <p className="text-gray-500">No user statistics available</p>
+      </div>
+    );
+  }
 
   // Map stats to categories in the same order as labels
   const series: number[] = [
@@ -22,12 +38,7 @@ const TransactionChart: React.FC = () => {
       type: "donut",
     },
     colors: ["#A78BFA", "#38BDF8", "#F472B6", "#4ADE80", "#FBBF24"],
-    labels: [
-      "General User",
-      "Creator",
-      "Student",
-      "Institution",
-    ],
+    labels: ["General User", "Creator", "Student", "Institution"],
     plotOptions: {
       pie: {
         donut: {

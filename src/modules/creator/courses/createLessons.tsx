@@ -5,7 +5,7 @@ import Button from "../../../components/ui/Button";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { useMutation } from "@tanstack/react-query";
-import { createLessons } from "../../../api";
+import { createLesson } from "../../../api";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import DropZone from "../../../components/DropZone";
@@ -58,7 +58,7 @@ const CreateLessons = () => {
   };
 
   const mutation = useMutation({
-    mutationFn: createLessons,
+    mutationFn: createLesson,
     onSuccess: (data: any) => {
       toast.success(data.message);
       setIsBusy(false); // Hide loader
@@ -95,7 +95,7 @@ const CreateLessons = () => {
           return node.children
             .map(
               (listItem: { children: any[] }) =>
-                `- ${extractFormattedText(listItem.children)}`
+                `- ${extractFormattedText(listItem.children)}`,
             )
             .join("\n");
         }
@@ -103,7 +103,7 @@ const CreateLessons = () => {
           return node.children
             .map(
               (listItem: { children: any[] }, index: number) =>
-                `${index + 1}. ${extractFormattedText(listItem.children)}`
+                `${index + 1}. ${extractFormattedText(listItem.children)}`,
             )
             .join("\n");
         }

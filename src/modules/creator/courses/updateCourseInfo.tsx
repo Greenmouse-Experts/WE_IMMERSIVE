@@ -5,7 +5,7 @@ import Button from "../../../components/ui/Button";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCourseBasic } from "../../../api";
+import { createBasicCourse } from "../../../api";
 import { toast } from "react-toastify";
 import { ICourse } from "../../../types/course.types";
 
@@ -55,7 +55,7 @@ const UpdateCourseInfo = ({
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: createCourseBasic,
+    mutationFn: createBasicCourse,
     onSuccess: (data: any) => {
       toast.success(data.message);
       setIsBusy(false);

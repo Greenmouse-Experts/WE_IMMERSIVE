@@ -3,7 +3,7 @@ import { useGetData } from "../../hooks/useGetData";
 import { useEffect, useState } from "react";
 import Loader from "../../components/reusables/loader";
 import { dateFormat } from "../../helpers/dateHelper";
-import { courseThumbnail, getAllCreatorCourses } from "../../api";
+import { courseThumbnail, getCreatorCourses } from "../../api";
 import Button from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 import {
@@ -33,7 +33,7 @@ import Publish from "../../components/reusables/Publish";
 const CreatorCoursesScreen = () => {
   const queryClient = useQueryClient();
   // Fetch data for each group
-  const creatorCoursesQuery = useGetData(["courses"], getAllCreatorCourses);
+  const creatorCoursesQuery = useGetData(["courses"], getCreatorCourses);
 
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -262,7 +262,7 @@ const CreatorCoursesScreen = () => {
                                         navigate(`create/modules`),
                                         localStorage.setItem(
                                           "courseId",
-                                          JSON.stringify(item.id)
+                                          JSON.stringify(item.id),
                                         ),
                                       ]}
                                     >
@@ -343,7 +343,11 @@ const CreatorCoursesScreen = () => {
           </div>
         </DialogFooter>
       </Dialog>
-      <Dialog open={openCourseInfo} handler={handleCloseCourseInfo} className=" dark:bg-darkMode">
+      <Dialog
+        open={openCourseInfo}
+        handler={handleCloseCourseInfo}
+        className=" dark:bg-darkMode"
+      >
         <DialogBody className="">
           <p className="unbound w-full text-center p-2">
             Are you sure you want to publish this course?
@@ -357,7 +361,11 @@ const CreatorCoursesScreen = () => {
         </div>
       </Dialog>
 
-      <Dialog className="dark:bg-darkMode" open={openThumbnail} handler={handleOpenThumbnail}>
+      <Dialog
+        className="dark:bg-darkMode"
+        open={openThumbnail}
+        handler={handleOpenThumbnail}
+      >
         <DialogBody>
           <div className="w-full flex flex-col items-center justify-center">
             <div className="grid gap-4 w-full max-w-md">

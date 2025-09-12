@@ -94,7 +94,6 @@ const App = () => {
     };
   }, [router]);
 
-
   return (
     <>
       <RouterProvider router={router} />

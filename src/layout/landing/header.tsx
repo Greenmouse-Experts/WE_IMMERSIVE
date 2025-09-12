@@ -45,16 +45,53 @@ const LandingHeader = () => {
   };
 
   const openDashboard = (accountType: any) => {
-    if (accountType === "user") {
+    console.log("🚀 DASHBOARD BUTTON CLICKED - DEBUG INFO:");
+    console.log("📊 Current Redux User State:", JSON.stringify(user, null, 2));
+    console.log("🔍 Account Type Parameter:", accountType);
+    console.log("🔍 Account Type Type:", typeof accountType);
+    console.log(
+      "🔍 User Object Keys:",
+      user ? Object.keys(user) : "No user object",
+    );
+    console.log(
+      "🔍 localStorage Token:",
+      localStorage.getItem("we-immersiveUser") ? "Present" : "Missing",
+    );
+
+    if (!user) {
+      console.error("❌ No user data in Redux - redirecting to login");
+      navigate("/auth/login");
+      return;
+    }
+
+    // Convert to lowercase for case-insensitive comparison
+    const normalizedAccountType = accountType?.toLowerCase();
+    console.log("🔧 Normalized Account Type:", normalizedAccountType);
+
+    if (normalizedAccountType === "user") {
+      console.log("✅ Navigating to /user dashboard");
       navigate("/user");
-    } else if (accountType === "creator") {
+    } else if (normalizedAccountType === "creator") {
+      console.log("✅ Navigating to /creator dashboard");
       navigate("/creator");
-    } else if (accountType === "student") {
+    } else if (normalizedAccountType === "student") {
+      console.log("✅ Navigating to /students dashboard");
       navigate("/students");
-    } else if (accountType === "institution") {
+    } else if (normalizedAccountType === "institution") {
+      console.log("✅ Navigating to /institution dashboard");
       navigate("/institution");
     } else {
-      navigate("/super-admin");
+      console.warn(
+        "⚠️ Unknown account type - redirecting to user dashboard instead of admin:",
+        accountType,
+        "normalized:",
+        normalizedAccountType,
+      );
+      console.warn(
+        "🔍 Expected values: 'user', 'creator', 'student', 'institution'",
+      );
+      // Safety fallback: redirect to user dashboard instead of admin
+      navigate("/user");
     }
   };
 
