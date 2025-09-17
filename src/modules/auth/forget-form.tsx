@@ -7,11 +7,11 @@ import { GoMail } from "react-icons/go";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { forgotPassword, verifyCode } from "../../api";
-
+import { useNavigate } from "react-router-dom";
 const ForgetForm = () => {
   const [status, setStatus] = useState<"email" | "code">("email");
   const [email, setEmail] = useState<string>("");
-
+  const navigate = useNavigate();
   // Email form
   const {
     control,
@@ -58,7 +58,7 @@ const ForgetForm = () => {
     onSuccess: (data: any) => {
       toast.success(data.message || "Code verified successfully");
       // Add your redirect logic here, e.g.:
-      // navigate('/reset-password');
+      navigate("/auth/login");
     },
     onError: (error: any) => {
       toast.error(error.message || "Failed to verify code");
@@ -80,7 +80,7 @@ const ForgetForm = () => {
     // Make sure both email and code are passed to the API
     verifyCodeMutation.mutate({
       email: email,
-      code: data.code,
+      otpCode: data.code,
     });
   };
 
@@ -177,7 +177,7 @@ const ForgetForm = () => {
                   />
                 )}
               />
-              <div className="flex gap-2 mt-4">
+              <div className="flex mt-4 gap-2">
                 <Button
                   title="Back"
                   altClassName="bg-gray-400 w-full rounded-lg py-3"
