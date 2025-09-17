@@ -57,7 +57,6 @@ const ForgetForm = () => {
     mutationFn: verifyCode,
     onSuccess: (data: any) => {
       toast.success(data.message || "Code verified successfully");
-      // Add your redirect logic here, e.g.:
       navigate("/auth/login");
     },
     onError: (error: any) => {
