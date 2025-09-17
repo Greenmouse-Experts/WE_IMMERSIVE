@@ -10,8 +10,19 @@ import { Dialog } from "@material-tailwind/react";
 import Publish from "../../components/reusables/Publish";
 import { deleteCreatorJob } from "../../api/creator";
 
+// Define types for job and props
+type Job = {
+  id: string | number;
+  // Add other job properties as needed
+  [key: string]: unknown;
+};
+
+type EmptyJobsStateProps = {
+  onCreateJob: () => void;
+};
+
 // Empty State Component
-const EmptyJobsState = ({ onCreateJob }) => {
+const EmptyJobsState = ({ onCreateJob }: EmptyJobsStateProps) => {
   return (
     <div className="flex flex-col items-center justify-center py-16 px-6">
       <div className="w-24 h-24 bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-full flex items-center justify-center mb-6">
@@ -91,7 +102,7 @@ const EmptyJobsState = ({ onCreateJob }) => {
 const JobsScreen = () => {
   const navigate = useNavigate();
 
-  const [selected, setSelected] = useState<any>(null);
+  const [selected, setSelected] = useState<Job | null>(null);
   const [open, setOpen] = useState(false);
 
   const [deleteDialog, setShowDeleteDialog] = useState<boolean>(false);
@@ -101,10 +112,10 @@ const JobsScreen = () => {
 
   const jobsData = useGetData(["creatorJobs"], getCreatorJobs);
 
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const openDelete = (job: any) => {
+  const openDelete = (job: Job) => {
     setSelected(job);
     setShowDeleteDialog(true);
   };
@@ -112,6 +123,7 @@ const JobsScreen = () => {
   const { mutate: deleteAsset, isPending: isDeleting } = deleteCreatorJob();
 
   const handleDelete = () => {
+    if (!selected) return;
     deleteAsset(selected.id, {
       onSuccess: () => {
         setShowDeleteDialog(false);
@@ -126,7 +138,7 @@ const JobsScreen = () => {
   useEffect(() => {
     // Check if all data is available before merging
     if (jobsData.data) {
-      setData(jobsData.data.data);
+      setData(jobsData.data.data as Job[]);
       setLoading(false);
     }
   }, [jobsData.data]); // Dependency array ensures this runs when data updates
@@ -185,7 +197,7 @@ const JobsScreen = () => {
         <Loader />
       ) : hasJobs ? (
         <div className=" grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-x-6 gap-y-10">
-          {data.map((item: any, i: any) => (
+          {data.map((item, i) => (
             <JobItem
               handleDeleteModal={() => openDelete(item)}
               item={item}
