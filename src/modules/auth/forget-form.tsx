@@ -20,7 +20,7 @@ const ForgetForm = () => {
     control,
     handleSubmit,
     formState: { errors, isValid },
-    reset,
+    // reset,
     getValues,
   } = useForm({
     mode: "onChange",
@@ -239,7 +239,7 @@ const ForgetForm = () => {
                 <Button
                   title="Back"
                   altClassName="bg-gray-400 w-full rounded-lg py-3"
-                  type="button"
+                  type="normal"
                   onClick={handleBackToEmail}
                 />
                 <Button
@@ -335,7 +335,7 @@ const ForgetForm = () => {
                 <Button
                   title="Back"
                   altClassName="bg-gray-400 rounded-lg w-full py-3"
-                  type="button"
+                  type="normal"
                   onClick={handleBackToCode}
                 />
                 <Button

@@ -8,7 +8,7 @@ import { getStudents } from "../../api";
 import { BeatLoader } from "react-spinners";
 import AdminKycForm from "../../components/AdminKycForm";
 import { useParams } from "react-router-dom";
-import { getUserDetails } from "../../api/admin";
+import { useUserDetails } from "../../api/admin";
 
 interface DataItem {
   createdAt: string; // ISO 8601 date string
@@ -19,8 +19,10 @@ const UserDetails = () => {
   // Fetch data for each group
   const students = useGetData(["students"], getStudents);
 
-  const {userId} = useParams();
-  const {data:userDetails, isLoading:isGettingUser} =getUserDetails(userId!);
+  const { userId } = useParams();
+  const { data: userDetails, isLoading: isGettingUser } = useUserDetails(
+    userId!,
+  );
 
   console.log(userDetails);
 
@@ -34,7 +36,7 @@ const UserDetails = () => {
 
       const sortedData = mergedData.sort(
         (a: DataItem, b: DataItem) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
       );
       setData(sortedData);
       setLoading(false);
@@ -43,7 +45,7 @@ const UserDetails = () => {
 
   const isLoading = false;
 
-  if(isGettingUser) {
+  if (isGettingUser) {
     return <Loader />;
   }
 
@@ -75,9 +77,11 @@ const UserDetails = () => {
 
             <h2 className="unbound text-lg font-semibold my-2">
               {/* {userData?.name} */}
-             {userDetails?.name}
+              {userDetails?.name}
             </h2>
-            <p className="text-sm text-gray-500">{userDetails?.accountType} Account</p>
+            <p className="text-sm text-gray-500">
+              {userDetails?.accountType} Account
+            </p>
 
             <div className="flex gap-3 mt-4">
               <div className="text-center bg-[#E0C8FF] p-2 w-[70px] h-[70px] md:w-[65px] lg:w-[70px] xl:w-[92px] md:h-[75px] lg:h-[75px] rounded-md">
@@ -99,11 +103,22 @@ const UserDetails = () => {
           <nav className="space-y-2 cursor-pointer">
             <ul className="flex-col flex gap-6">
               <p className="text-[#515153]">Email : {userDetails?.email}</p>
-              <p className="text-[#515153]">Phone : {userDetails?.phoneNumber}</p>
-              <p className="text-[#515153]">Industry : {userDetails?.industry}</p>
-              <p className="text-[#515153]">Professional Skill : {userDetails?.professionalSkill}</p>
-              <p className="text-[#515153]">Account Type : {userDetails?.accountType}</p>
-              <p className="text-[#515153]">Registered On:   {dateFormat(userDetails?.createdAt, "dd-MM-yyyy")}</p>
+              <p className="text-[#515153]">
+                Phone : {userDetails?.phoneNumber}
+              </p>
+              <p className="text-[#515153]">
+                Industry : {userDetails?.industry}
+              </p>
+              <p className="text-[#515153]">
+                Professional Skill : {userDetails?.professionalSkill}
+              </p>
+              <p className="text-[#515153]">
+                Account Type : {userDetails?.accountType}
+              </p>
+              <p className="text-[#515153]">
+                Registered On:{" "}
+                {dateFormat(userDetails?.createdAt, "dd-MM-yyyy")}
+              </p>
             </ul>
           </nav>
         </aside>
@@ -148,7 +163,7 @@ const UserDetails = () => {
                     </thead>
                     <tbody>
                       {data?.length > 0
-                        ? [].map((item:any, i) => (
+                        ? [].map((item: any, i) => (
                             <tr
                               className="odd:bg-[#E9EBFB] odd:dark:bg-black"
                               key={i}
@@ -191,7 +206,7 @@ const UserDetails = () => {
             </div>
           </div>
           <div className="mt-10 ">
-            <AdminKycForm userDetails={userDetails!}/>
+            <AdminKycForm userDetails={userDetails!} />
           </div>
         </div>
       </div>

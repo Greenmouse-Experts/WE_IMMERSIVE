@@ -1,12 +1,16 @@
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import {  useState } from "react";
+import { useState } from "react";
 import Loader from "../../../components/reusables/loader";
 import { dateFormat } from "../../../helpers/dateHelper";
 import Button from "../../../components/ui/Button";
 import { Dialog } from "@material-tailwind/react";
 import AssetCategory from "./assetCategory";
 import { useNavigate } from "react-router-dom";
-import { deletePhysicalAsset, getAllAdminPhysicalAssets, publishPhysicalAsset } from "../../../api/admin";
+import {
+  deletePhysicalAsset,
+  useAllAdminPhysicalAssets,
+  publishPhysicalAsset,
+} from "../../../api/admin";
 import {
   Menu,
   MenuHandler,
@@ -23,7 +27,7 @@ const PhysicalAssets = () => {
 
   const navigate = useNavigate();
 
-  const { data, isLoading } = getAllAdminPhysicalAssets();
+  const { data, isLoading } = useAllAdminPhysicalAssets();
   const [selected, setSelected] = useState<any>(null);
   const [open, setOpen] = useState(false);
   const { Dialog: PublishedDialog, setShowDialog } = useDialog();
@@ -40,7 +44,7 @@ const PhysicalAssets = () => {
   };
 
   const { mutate: publishAsset, isPending } = publishPhysicalAsset();
-  const { mutate: deleteAsset, isPending:isDeleting } = deletePhysicalAsset();
+  const { mutate: deleteAsset, isPending: isDeleting } = deletePhysicalAsset();
 
   const handlePublish = () => {
     publishAsset(
@@ -53,7 +57,7 @@ const PhysicalAssets = () => {
         onSuccess() {
           setShowDialog(false);
         },
-      }
+      },
     );
   };
   const handleDelete = () => {
@@ -65,7 +69,6 @@ const PhysicalAssets = () => {
   };
 
   if (isLoading) return <Loader />;
-
 
   // useEffect(() => {
   //   // Check if all data is available before merging
@@ -114,7 +117,9 @@ const PhysicalAssets = () => {
             <div className="flex items-center gap-x-1 px-2 py-1">
               <Button
                 size={14}
-                onClick={() => navigate("/super-admin/assets/create?slug=physical")}
+                onClick={() =>
+                  navigate("/super-admin/assets/create?slug=physical")
+                }
                 title="Create New Asset"
                 altClassName="btn-primary px-2 py-1 flex flex-grow whitespace-nowrap"
               />
@@ -151,7 +156,7 @@ const PhysicalAssets = () => {
                 </thead>
                 <tbody>
                   {data?.length > 0
-                    ? data.map((item:IAsset, i:number) => (
+                    ? data.map((item: IAsset, i: number) => (
                         <tr
                           className="odd:bg-[#E9EBFB] odd:dark:bg-black"
                           key={i}
@@ -171,7 +176,9 @@ const PhysicalAssets = () => {
                             {dateFormat(item?.createdAt, "dd-MM-yyyy")}
                           </td>
                           <td className="p-2 py-4 capitalize">---</td>
-                          <td className="p-2 py-4 capitalize">{item?.status}</td>
+                          <td className="p-2 py-4 capitalize">
+                            {item?.status}
+                          </td>
                           <td className="p-2 py-4">{item?.creatorName}</td>
                           <td className="p-2 py-4 pl-4">
                             <Menu placement="left">

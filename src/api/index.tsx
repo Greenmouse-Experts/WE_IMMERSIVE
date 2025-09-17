@@ -1,78 +1,82 @@
-import axios from "axios";
+import axios, { AxiosRequestHeaders } from "axios";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-const getToken = () => localStorage.getItem("we-immersiveUser");
+const getToken = (): string | null => localStorage.getItem("we-immersiveUser");
 
-export const registerUser = async (payload: any) => {
+// Define generic payload and headers types
+export type Payload = Record<string, unknown>;
+export type Headers = AxiosRequestHeaders;
+
+export const registerUser = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/register/user`, payload)
     .then((response) => response.data);
 };
 
-export const registerCreator = async (payload: any) => {
+export const registerCreator = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/register/creator`, payload)
     .then((response) => response.data);
 };
 
-export const registerStudent = async (payload: any) => {
+export const registerStudent = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/register/student`, payload)
     .then((response) => response.data);
 };
 
-export const registerInstitution = async (payload: any) => {
+export const registerInstitution = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/register/institution`, payload)
     .then((response) => response.data);
 };
 
-export const verifyEmail = async (payload: any) => {
+export const verifyEmail = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/verify/email`, payload)
     .then((response) => response.data);
 };
 
-export const resendOTP = async (payload: any) => {
+export const resendOTP = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/resend/verification/email`, payload)
     .then((response) => response.data);
 };
 
-export const login = async (payload: any) => {
+export const login = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/login`, payload)
     .then((response) => response.data);
 };
-export const forgotPassword = async (payload: any) => {
+export const forgotPassword = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/password/forgot`, payload)
     .then((response) => response.data);
 };
-export const verifyCode = async (payload: any) => {
+export const verifyCode = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/password/code/check`, payload)
     .then((response) => response.data);
 };
-export const resetPassword = async (payload: any) => {
+export const resetPassword = async (payload: Payload) => {
   return axios
     .post(`${baseURL}/auth/password/reset`, payload)
     .then((response) => response.data);
 };
-export const createDigitalAsset = async (payload: any, headers = {}) => {
+export const createDigitalAsset = async (payload: Payload) => {
   return axios
     .post(`/creator/digital/asset/create`, payload)
     .then((response) => response.data);
 };
 
-export const createPhysicalAsset = async (payload: any, headers = {}) => {
+export const createPhysicalAsset = async (payload: Payload) => {
   return axios
     .post(`/creator/physical/asset/create`, payload)
     .then((response) => response.data);
 };
 
-export const createAssetCategory = async (payload: any, headers = {}) => {
+export const createAssetCategory = async (payload: Payload) => {
   return axios
     .post(`/admin/asset/category/create`, payload)
     .then((response) => response.data);
@@ -88,82 +92,82 @@ export const getPhysicalAssets = async () => {
   return response.data;
 };
 
-export const loginAdmin = async (payload: any) => {
+export const loginAdmin = async (payload: Payload) => {
   return axios
     .post(`https://api.test.weimmersive.io/v1/api/auth/admin/login`, payload)
     .then((response) => response.data);
 };
 
-export const getGeneralUsers = async (headers = {}) => {
+export const getGeneralUsers = async () => {
   const response = await axios.get(`/admin/users`);
   return response.data;
 };
 
-export const getStudents = async (headers = {}) => {
+export const getStudents = async () => {
   const response = await axios.get(`/admin/students`);
   return response.data;
 };
 
-export const getCreators = async (headers = {}) => {
+export const getCreators = async () => {
   const response = await axios.get(`/admin/creators`);
   return response.data;
 };
 
-export const getInstitutions = async (headers = {}) => {
+export const getInstitutions = async () => {
   const response = await axios.get(`/admin/institutions`);
   return response.data;
 };
 
-export const createAdminDigitalAsset = async (payload: any, headers = {}) => {
+export const createAdminDigitalAsset = async (payload: Payload) => {
   return axios
     .post(`/admin/digital/asset/create`, payload)
     .then((response) => response.data);
 };
 
-export const createAdminPhysicalAsset = async (payload: any, headers = {}) => {
+export const createAdminPhysicalAsset = async (payload: Payload) => {
   return axios
     .post(`/admin/physical/asset/create`, payload)
     .then((response) => response.data);
 };
 
-export const getAssetCategory = async (headers = {}) => {
+export const getAssetCategory = async () => {
   const response = await axios.get(`/admin/asset/categories`);
   return response.data;
 };
 
-export const getCreatorDigitalAssets = async (headers = {}) => {
+export const getCreatorDigitalAssets = async () => {
   const response = await axios.get(`/creator/digital/assets`);
   return response.data;
 };
 
-export const getCreatorPhysicalAssets = async (headers = {}) => {
+export const getCreatorPhysicalAssets = async () => {
   const response = await axios.get(`/creator/physical/assets`);
   return response.data;
 };
 
-export const getJobCategory = async (headers = {}) => {
+export const getJobCategory = async () => {
   const response = await axios.get(`/creator/job/categories`);
   return response.data;
 };
 
-export const createJob = async (payload: any, headers = {}) => {
+export const createJob = async (payload: Payload) => {
   return axios
     .post(`/creator/job/add`, payload)
     .then((response) => response.data);
 };
 
-export const getCreatorJobs = async (headers = {}) => {
+export const getCreatorJobs = async () => {
   const response = await axios.get(`/creator/jobs`);
   return response.data;
 };
 
-export const editJob = async (payload: any, headers = {}) => {
+export const editJob = async (payload: Payload) => {
   return axios
     .put(`/creator/job/post`, payload)
     .then((response) => response.data);
 };
 
-export const getAllJobs = async (headers = {}) => {
+export const getAllJobs = async () => {
   const response = await axios.get(`/fetch/jobs`);
   return response.data;
 };
@@ -173,24 +177,24 @@ export const getSingleJob = async (id: string | undefined) => {
   return response.data;
 };
 
-export const getCourseCategory = async (headers = {}) => {
+export const getCourseCategory = async () => {
   const response = await axios.get(`/creator/course/categories`);
   return response.data;
 };
 
-export const createCourse = async (payload: any, headers = {}) => {
+export const createCourse = async (payload: Payload) => {
   return axios
     .post(`/creator/course/create`, payload)
     .then((response) => response.data);
 };
 
-export const createBasicCourse = async (payload: any, headers = {}) => {
+export const createBasicCourse = async (payload: Payload) => {
   return axios
     .post(`/creator/course/basic`, payload)
     .then((response) => response.data);
 };
 
-export const createCourseModule = async (payload: any, headers = {}) => {
+export const createCourseModule = async (payload: Payload) => {
   return axios
     .post(`/creator/course/module/create`, payload)
     .then((response) => response.data);
@@ -217,9 +221,8 @@ export const deleteLessonApi = async (id: string | undefined) => {
     .delete(`/creator/course/module/lesson/delete?lessonId=${id}`)
     .then((response) => response.data);
 };
-false;
 
-export const createLesson = async (payload: any, headers = {}) => {
+export const createLesson = async (payload: Payload) => {
   return axios
     .post(`/creator/course/module/lesson/create`, payload)
     .then((response) => response.data);
@@ -232,18 +235,18 @@ export const getModulesLesson = async (id: string | undefined) => {
   return response.data;
 };
 
-export const getCreatorCourses = async (headers = {}) => {
+export const getCreatorCourses = async () => {
   const response = await axios.get(`/creator/courses`);
   return response.data;
 };
-export const getAllCoursesGeneral = async (headers = {}) => {
+export const getAllCoursesGeneral = async () => {
   const response = await axios.get(`/general/courses`);
   return response.data;
 };
 
 export const publishCourseApi = async (
   id: string | undefined,
-  headers = {},
+  // headers: Headers = {},
 ) => {
   return axios
     .post(
@@ -251,7 +254,7 @@ export const publishCourseApi = async (
       {},
       {
         headers: {
-          ...headers,
+          // ...headers,
           Authorization: `Bearer ${getToken()}`,
           "Content-Type": "application/json",
         },
@@ -261,7 +264,7 @@ export const publishCourseApi = async (
 };
 export const unPublishCourseApi = async (
   id: string | undefined,
-  headers = {},
+  // headers: Headers = {},
 ) => {
   return axios
     .post(
@@ -269,7 +272,7 @@ export const unPublishCourseApi = async (
       {},
       {
         headers: {
-          ...headers, // Merge custom headers
+          // ...headers, // Merge custom headers
           Authorization: `Bearer ${getToken()}`, // Example for adding an Authorization token
           "Content-Type": "application/json", // Example for setting content type
         },
@@ -278,13 +281,13 @@ export const unPublishCourseApi = async (
     .then((response) => response.data);
 };
 
-export const courseThumbnail = async (payload: any, headers = {}) => {
+export const courseThumbnail = async (payload: Payload) => {
   return axios
     .post(`/creator/course/thumbnail`, payload)
     .then((response) => response.data);
 };
 
-const getBearerToken = () => {
+const getBearerToken = (): string | null => {
   const token = localStorage.getItem("we-immersiveUser");
   return token;
 };
@@ -303,7 +306,7 @@ axios.interceptors.request.use(
       headers: config.headers,
     });
 
-    if (token) {
+    if (token && config.headers) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;

@@ -4,8 +4,8 @@ import TextInput, { InputType } from "../../../components/ui/TextInput";
 import Button from "../../../components/ui/Button";
 import { BeatLoader } from "react-spinners";
 import {
-  addAdminAssetCategory,
-  editAdminAssetCategory,
+  useAddAdminAssetCategory,
+  useEditAdminAssetCategory,
 } from "../../../api/admin";
 import { ICourseCategory } from "../../../types/course.types";
 
@@ -16,9 +16,9 @@ const AssetCategoryModal = ({
   onClose: (status: boolean) => void;
   selected: ICourseCategory;
 }) => {
-  const { mutate: addCategory, isPending } = addAdminAssetCategory();
+  const { mutate: addCategory, isPending } = useAddAdminAssetCategory();
   const { mutate: editCategory, isPending: isEditting } =
-  editAdminAssetCategory();
+    useEditAdminAssetCategory();
 
   const {
     control,
@@ -39,7 +39,7 @@ const AssetCategoryModal = ({
           onSuccess: () => {
             onClose(false);
           },
-        }
+        },
       );
     } else {
       addCategory(formData, {

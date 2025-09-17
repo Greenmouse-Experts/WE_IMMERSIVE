@@ -1,7 +1,7 @@
 import { BeatLoader } from "react-spinners";
 import Button from "./ui/Button";
 import { UserAdminData } from "../types/userDetails.types";
-import { adminKycAction } from "../api/admin";
+import { useAdminKycAction } from "../api/admin";
 import { useState } from "react";
 import { Dialog } from "@material-tailwind/react";
 import TextInput, { InputType } from "./ui/TextInput";
@@ -13,8 +13,8 @@ const AdminKycForm = ({ userDetails }: { userDetails: UserAdminData }) => {
   const handleOpen = () => setOpen(!open);
   const [rejectReason, setRejectReason] = useState("");
 
-  const { mutate: acceptKyc, isPending: isAccepting } = adminKycAction();
-  const { mutate: rejectKyc, isPending: isRejecting } = adminKycAction();
+  const { mutate: acceptKyc, isPending: isAccepting } = useAdminKycAction();
+  const { mutate: rejectKyc, isPending: isRejecting } = useAdminKycAction();
 
   const handleReject = () => {
     if (rejectReason === "") {
@@ -36,7 +36,7 @@ const AdminKycForm = ({ userDetails }: { userDetails: UserAdminData }) => {
         onError: () => {
           handleOpen();
         },
-      }
+      },
     );
   };
 

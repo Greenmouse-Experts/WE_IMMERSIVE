@@ -7,66 +7,72 @@ import { IAdminNewUser } from "../types/dashboard.types";
 import { IBlog } from "../types/blog.types";
 import { IFaq } from "../types/faq.types";
 
-const baseURL = import.meta.env.VITE_BASE_URL;
-const getToken = () => localStorage.getItem("we-immersiveUser");
+// Removed unused baseURL and getToken
 
-export const getAdminDigitalAssets = async (headers = {}) => {
+// Removed unused headers parameter and fixed 'any' usage
+
+export const getAdminDigitalAssets = async () => {
   const response = await axios.get(`/admin/all/digital/assets`);
   return response.data;
 };
 
-export const getAdminPhysicalAssets = async (headers = {}) => {
+export const getAdminPhysicalAssets = async () => {
   const response = await axios.get(`/admin/all/physical/assets`);
   return response.data;
 };
 
-export const getApprovedDigitalAssets = async (headers = {}) => {
+export const getApprovedDigitalAssets = async () => {
   const response = await axios.get(`/fetch/digital/assets`);
   return response.data;
 };
 
-export const getApprovedPhysicalAssets = async (headers = {}) => {
+export const getApprovedPhysicalAssets = async () => {
   const response = await axios.get(`/admin/all/physical/assets`);
   return response.data;
 };
 
-export const createJobCategory = async (payload: any, headers = {}) => {
+export const createJobCategory = async (payload: Record<string, unknown>) => {
   return axios
     .post(`/admin/job/category/create`, payload)
     .then((response) => response.data);
 };
 
-export const getJobCategory = async (headers = {}) => {
+export const getJobCategory = async () => {
   const response = await axios.get(`/admin/job/categories`);
   return response.data;
 };
 
-export const createJob = async (payload: any, headers = {}) => {
+export const createJob = async (payload: Record<string, unknown>) => {
   return axios
     .post(`/creator/job/add`, payload)
     .then((response) => response.data);
 };
 
-export const createSubscription = async (payload: any, headers = {}) => {
+export const createSubscription = async (payload: Record<string, unknown>) => {
   return axios
     .post(`/admin/subscription/plan/create`, payload)
     .then((response) => response.data);
 };
 
-export const updateDigitalRequests = async (payload: any, headers = {}) => {
+export const updateDigitalRequests = async (
+  payload: Record<string, unknown>,
+) => {
   return axios
     .patch(`/admin/digital/asset/update/status`, payload)
     .then((response) => response.data);
 };
 
-export const updatePhysicalRequests = async (payload: any, headers = {}) => {
+export const updatePhysicalRequests = async (
+  payload: Record<string, unknown>,
+) => {
   return axios
     .patch(`/admin/physical/asset/update/status`, payload)
     .then((response) => response.data);
 };
 
-export function getUserDetails(userId: string) {
-  return useQuery({
+// Custom hooks must start with "use"
+export function useUserDetails(userId: string) {
+  return useQuery<UserAdminData>({
     queryFn: async () => {
       const response = await axios.get(`/admin/user-details/${userId}`);
       return response.data.data as UserAdminData;
@@ -74,14 +80,14 @@ export function getUserDetails(userId: string) {
     queryKey: ["users-details", userId],
   });
 }
-export function adminKycAction() {
+export function useAdminKycAction() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: Record<string, unknown>) => {
       const response = await axios.post(`/kyc/review`, data);
       return response.data;
     },
-    onSuccess: (res) => {
+    onSuccess: (res: any) => {
       console.log(res);
       toast.success(res.message);
       queryClient.invalidateQueries({
@@ -89,12 +95,12 @@ export function adminKycAction() {
       });
     },
     onError: (error: any) => {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     },
   });
 }
 
-export function getAllAdminDigitalAssets() {
+export function useAllAdminDigitalAssets() {
   return useQuery({
     queryKey: ["admin-digital-assets"],
     queryFn: async () => {
@@ -103,7 +109,7 @@ export function getAllAdminDigitalAssets() {
     },
   });
 }
-export function getAllAdminPhysicalAssets() {
+export function useAllAdminPhysicalAssets() {
   return useQuery({
     queryKey: ["admin-physical-assets"],
     queryFn: async () => {
@@ -113,14 +119,14 @@ export function getAllAdminPhysicalAssets() {
   });
 }
 
-export function addAdminAssetCategory() {
+export function useAddAdminAssetCategory() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: Record<string, unknown>) => {
       const response = await axios.post(`/admin/asset/category/create`, data);
       return response.data;
     },
-    onSuccess: (res) => {
+    onSuccess: (res: any) => {
       console.log(res);
       toast.success(res.message);
       queryClient.invalidateQueries({
@@ -128,12 +134,12 @@ export function addAdminAssetCategory() {
       });
     },
     onError: (error: any) => {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     },
   });
 }
 
-export function getAdminAssetCategory() {
+export function useAdminAssetCategory() {
   return useQuery({
     queryKey: ["admin-asset-category"],
     queryFn: async () => {
@@ -143,7 +149,7 @@ export function getAdminAssetCategory() {
   });
 }
 
-export function deleteAdminAssetCategory() {
+export function useDeleteAdminAssetCategory() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (categoryId: string) => {
@@ -152,7 +158,7 @@ export function deleteAdminAssetCategory() {
       );
       return response.data;
     },
-    onSuccess: (res) => {
+    onSuccess: (res: any) => {
       console.log(res);
       toast.success(res.message);
       queryClient.invalidateQueries({
@@ -160,19 +166,19 @@ export function deleteAdminAssetCategory() {
       });
     },
     onError: (error: any) => {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     },
   });
 }
 
-export function editAdminAssetCategory() {
+export function useEditAdminAssetCategory() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: Record<string, unknown>) => {
       const response = await axios.put(`/admin/asset/category/update`, data);
       return response.data;
     },
-    onSuccess: (res) => {
+    onSuccess: (res: any) => {
       console.log(res);
       toast.success(res.message);
       queryClient.invalidateQueries({

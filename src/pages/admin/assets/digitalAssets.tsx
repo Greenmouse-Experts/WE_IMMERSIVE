@@ -6,7 +6,7 @@ import AssetCategory from "./assetCategory";
 import { useNavigate } from "react-router-dom";
 import {
   deleteDigitalAsset,
-  getAllAdminDigitalAssets,
+  useAllAdminDigitalAssets,
   publishDigitalAsset,
 } from "../../../api/admin";
 import {
@@ -29,7 +29,7 @@ const DigitalAssets = () => {
   //   getApprovedDigitalAssets
   // );
   // const creators = useGetData(["creators"], getCreators);
-  const { data, isLoading } = getAllAdminDigitalAssets();
+  const { data, isLoading } = useAllAdminDigitalAssets();
   const navigate = useNavigate();
 
   // const [data, setData] = useState<any[]>([]);
@@ -48,7 +48,7 @@ const DigitalAssets = () => {
     setDeleteDialog(true);
   };
   const { mutate: publishAsset, isPending } = publishDigitalAsset();
-  const { mutate: deleteAsset, isPending:isDeleting } = deleteDigitalAsset();
+  const { mutate: deleteAsset, isPending: isDeleting } = deleteDigitalAsset();
   const handlePublish = () => {
     publishAsset(
       {
@@ -60,7 +60,7 @@ const DigitalAssets = () => {
         onSuccess() {
           setShowDialog(false);
         },
-      }
+      },
     );
   };
   const handleDelete = () => {

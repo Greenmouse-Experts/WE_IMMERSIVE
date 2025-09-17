@@ -3,8 +3,8 @@ import Loader from "../../../components/reusables/loader";
 import { dateFormat } from "../../../helpers/dateHelper";
 import Button from "../../../components/ui/Button";
 import {
-  deleteAdminAssetCategory,
-  getAdminAssetCategory,
+  useDeleteAdminAssetCategory,
+  useAdminAssetCategory,
 } from "../../../api/admin";
 import {
   Menu,
@@ -21,7 +21,7 @@ import AssetCategoryModal from "./assetCategoryModal";
 import { Link } from "react-router-dom";
 
 const AssetCategory = () => {
-  const { data: assetCategory, isLoading } = getAdminAssetCategory();
+  const { data: assetCategory, isLoading } = useAdminAssetCategory();
 
   const [selected, setSelected] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -44,17 +44,17 @@ const AssetCategory = () => {
     setShowDeleteDialog(true);
   };
   const { mutate: deleteAsset, isPending: isDeleting } =
-  deleteAdminAssetCategory();
+    useDeleteAdminAssetCategory();
 
   const handleDelete = () => {
     deleteAsset(selected.id, {
       onSuccess: () => {
         setShowDeleteDialog(false);
-        setShowDeleteDialog(false)
+        setShowDeleteDialog(false);
       },
 
       onError: () => {
-        setShowDeleteDialog(false)
+        setShowDeleteDialog(false);
       },
     });
   };
@@ -145,7 +145,11 @@ const AssetCategory = () => {
                                     className="cursor-pointer w-full"
                                     onClick={() => openDelete(item)}
                                   >
-                                  <Link to={`/super-admin/sub-category/${item.id}?type=asset`}>Sub categories</Link>
+                                    <Link
+                                      to={`/super-admin/sub-category/${item.id}?type=asset`}
+                                    >
+                                      Sub categories
+                                    </Link>
                                   </span>
                                 </MenuItem>
                               </MenuList>
