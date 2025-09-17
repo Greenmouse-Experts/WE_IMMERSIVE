@@ -157,7 +157,12 @@ export const createJob = async (payload: Payload) => {
 };
 
 export const getCreatorJobs = async () => {
-  const response = await axios.get(`/creator/jobs`);
+  const token = getToken();
+  const response = await axios.get(`/creator/jobs`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
