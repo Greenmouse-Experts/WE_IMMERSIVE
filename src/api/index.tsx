@@ -45,7 +45,16 @@ export const login = async (payload: any) => {
     .post(`${baseURL}/auth/login`, payload)
     .then((response) => response.data);
 };
-
+export const forgotPassword = async (payload: any) => {
+  return axios
+    .post(`${baseURL}/auth/password/forgot`, payload)
+    .then((response) => response.data);
+};
+export const verifyCode = async (payload: any) => {
+  return axios
+    .post(`${baseURL}/auth/password/code/check`, payload)
+    .then((response) => response.data);
+};
 export const createDigitalAsset = async (payload: any, headers = {}) => {
   return axios
     .post(`/creator/digital/asset/create`, payload)
@@ -203,6 +212,7 @@ export const deleteLessonApi = async (id: string | undefined) => {
     .delete(`/creator/course/module/lesson/delete?lessonId=${id}`)
     .then((response) => response.data);
 };
+false;
 
 export const createLesson = async (payload: any, headers = {}) => {
   return axios
