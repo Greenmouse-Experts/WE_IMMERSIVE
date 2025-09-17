@@ -111,9 +111,8 @@ const EditJob = () => {
     }
   };
 
-
   const handleThumbnailChange = async (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setLoading(true);
     setError(null);

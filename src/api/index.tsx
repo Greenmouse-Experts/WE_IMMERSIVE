@@ -55,6 +55,11 @@ export const verifyCode = async (payload: any) => {
     .post(`${baseURL}/auth/password/code/check`, payload)
     .then((response) => response.data);
 };
+export const resetPassword = async (payload: any) => {
+  return axios
+    .post(`${baseURL}/auth/password/reset`, payload)
+    .then((response) => response.data);
+};
 export const createDigitalAsset = async (payload: any, headers = {}) => {
   return axios
     .post(`/creator/digital/asset/create`, payload)
